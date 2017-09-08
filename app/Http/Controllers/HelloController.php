@@ -1,10 +1,10 @@
 <?php
-namespace App\Http\Controllers;
+namespace Laravel\Http\Controllers;
  
 use Illuminate\Http\Request;
  
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Laravel\Http\Requests;
+use Laravel\Http\Controllers\Controller;
 
 class helloController extends Controller
 {

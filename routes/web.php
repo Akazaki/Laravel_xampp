@@ -20,3 +20,7 @@ Route::get('/', function () {
 // });
 //Route::controller('hello', 'HelloController');
 Route::resource('hello', 'HelloController');
+
+Route::get('/contact', 'ContactController@form');
+Route::post('/contact/confirm', 'ContactController@confirm');
+Route::post('/contact/process', 'ContactController@process');
