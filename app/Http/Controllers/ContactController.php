@@ -1,9 +1,11 @@
 <?php
 
-namespace AppHttpControllers;
-
-use AppContact;
-use IlluminateHttpRequest;
+namespace Laravel\Http\Controllers;
+ 
+use Illuminate\Http\Request;
+ 
+use Laravel\Http\Requests;
+use Laravel\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
@@ -20,7 +22,7 @@ class ContactController extends Controller
 	        'message' => 'present',
 	    ]);
 
-	    $contact = new Contact($request->all());
+	    $contact = $request->all();
 
 	    return view('confirm', compact('contact'));
 	}
@@ -31,6 +33,7 @@ class ContactController extends Controller
         $action = $request->get('action', 'back');
         // 二つ目は初期値です。
         $input = $request->except('action');
+        
         // そして、入力内容からは取り除いておきます。
         if($action === 'submit') {
             // メール送信処理などを実装

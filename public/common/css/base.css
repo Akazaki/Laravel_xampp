@@ -1,0 +1,1964 @@
+@charset "Shift_JIS";
+
+html {
+	height:100%;
+}
+* html body {
+	behavior:url("common/js/csshover3.htc");
+}
+div#container {
+	width:100%;
+	min-width:940px;
+	margin: 0 auto;
+	font-size:small;
+}
+
+/* =ヘッダー ------------------------------------------------------------------------*/
+div#header {
+	width:100%;
+	height:67px;
+	background:url(../img/header_bg.gif) repeat-x top #515456;
+	position: fixed;
+	z-index: 100;
+	min-width:700px;
+}
+div#header div#topBox {
+	width:100%;
+	height:31px;
+}
+div#header div#topBox h1 {
+	float:left;
+	padding:9px 0 0 10px;
+}
+div#header div#topBox div#gpol {
+	float:right;
+	padding:8px 10px 0 0;
+}
+div#header div#topBox div#gpol p {
+	background:url(../img/header_arrow.gif) no-repeat right center;
+	font-size:10px;
+	white-space:nowrap;
+}
+div#header div#topBox div#gpol p a {
+	background:url(../img/header_arrow.gif) no-repeat right center;
+	padding:0 20px 0 0;
+	color:#EEE;
+	text-decoration:none;
+}
+div#header div#topBox div#gpol p a:hover {
+	background:url(../img/header_arrow_o.gif) no-repeat right center;
+	text-decoration:underline;
+}
+div#header div#bottomBox {
+	width:100%;
+	padding:5px 0 0 0;
+}
+div#header div#bottomBox ul {
+	list-style:none;
+	padding:0 0 0 10px;
+	float:left;
+}
+div#header div#bottomBox ul li {
+	float:left;
+	white-space:nowrap;
+}
+div#header div#bottomBox div#time_logout {
+	float:right;
+	padding:0 10px 0 0;
+}
+div#header div#bottomBox div#time_logout div#time {
+	float:left;
+	font-size:23px;
+	color:#b7b7b7;
+	height:20px;
+	padding:0 20px 0 0;
+	white-space:nowrap;
+	line-height:1;
+}
+div#header div#bottomBox div#time_logout div#account {
+	float:left;
+	font-size:13px;
+	color:#b7b7b7;
+	height:20px;
+	padding:7px 20px 0 0;
+	white-space:nowrap;
+	line-height:1;
+}
+div#header div#bottomBox div#time_logout div#time img {
+	vertical-align:middle;
+	margin:0 5px 0 0;
+}
+div#header div#bottomBox div#time_logout div#time span {
+	vertical-align:middle;
+}
+div#header div#bottomBox div#time_logout div#logout {
+	float:left;
+}
+
+
+/* =メイン ------------------------------------------------------------------------*/
+div#wrapper{
+	width:100%;
+	float:left;
+	margin:0;
+}
+
+#information {
+	background:url(../img/information.gif) 8px center no-repeat #fff6e6;
+	border:1px solid #f8dfaf;
+	padding:10px 10px 10px 40px;
+	margin:0 0 25px 0;
+}
+#information ul {
+	list-style:none;
+}
+#attention {
+	background:url(../img/attention.gif) 8px center no-repeat #fff6e6;
+	border:1px solid #f8dfaf;
+	padding:10px 10px 10px 40px;
+	margin:0 0 25px 0;
+}
+#attention ul {
+	list-style:none;
+}
+
+table#liquid {
+	width:100%;
+	border-collapse:collapse;
+}
+table#liquid td.mainColTop {
+	vertical-align:top;
+	padding-bottom: 25px;
+}
+table#liquid td.dashboard {
+	vertical-align:top;
+	padding-bottom: 100%;
+}
+#leftSide {
+	background: #f0f2f3;
+	width: 194px;
+	border-right: 1px solid #d6d6d6;
+	position: fixed;
+	top: 66px;
+	height: 100%;
+	z-index:9;
+}
+#leftSide ul {
+	list-style:none;
+}
+#leftSide ul li {
+	background:url(../img/arrow_right.png) no-repeat 170px 11px;
+	background-size: 16px auto;
+}
+#leftSide ul li a{
+	color:#333;
+}
+#leftSide ul li a:hover {
+	color: #3987df;
+}
+#leftSide ul li ul li a.current {
+	color: #3987df;
+}
+#leftSide ul li.open {
+	background:url(../img/arrow_down.png) no-repeat 170px 11px;
+	background-size: 16px auto;
+}
+/* 左navi */
+#leftSide ul li span.parent,#leftSide ul li a.parentNon {
+	display:block;
+	line-height: 37px;
+	text-indent: 3.2em;
+	font-weight:bold;
+	font-size:12px;
+	border-top:1px solid #ccc;
+	cursor:pointer;
+	text-decoration:none;
+}
+#leftSide ul li span.parent:hover {
+	color:#3987df;
+}
+/* MENUアイコンSTART  */
+#leftSide ul li a.icon00 {
+	background:url(../img/side_navi2_00.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon01 {
+	background:url(../img/side_navi2_01.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon02 {
+	background:url(../img/side_navi2_02.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon03 {
+	background:url(../img/side_navi2_03.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon04 {
+	background:url(../img/side_navi2_04.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon05 {
+	background:url(../img/side_navi2_05.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon06 {
+	background:url(../img/side_navi2_06.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon07 {
+	background:url(../img/side_navi2_07.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li a.icon08 {
+	background:url(../img/side_navi2_08.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon09 {
+	background:url(../img/side_navi2_09.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon10 {
+	background:url(../img/side_navi2_10.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon11 {
+	background:url(../img/side_navi2_11.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+#leftSide ul li span.icon12 {
+	background:url(../img/side_navi2_12.png) no-repeat 8px center;
+	background-size:25px 25px;
+}
+
+/* MENUアイコンEND  */
+
+#leftSide ul li.blue {
+	background-color: #edeff7;
+  color: #333;
+}
+#leftSide ul li.blue.open {
+	/*color: #f25388;*/
+}
+#leftSide ul li ul.open {
+	padding:0;
+	display:block;
+}
+#leftSide ul li ul {
+	display:none;
+}
+#leftSide ul li ul li {
+	padding: 0;
+	line-height: 2;
+	font-size:12px;
+}
+#leftSide ul li ul li a {
+	width: 100%;
+	background: url(../img/side_arrow.png) no-repeat 8px center;
+	background-size: 4px 6px;
+	background-color: #fff;
+	display: block;
+	padding: 6px 0 5px 18px;
+	border-top: 1px solid #ddd;
+	color: #333;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+#leftSide ul li ul.open li a:hover {
+	color: #3987df;
+	text-decoration: none;
+	background-color: #fff;
+}
+
+#rightSide {
+	background:#f0f2f3;
+	border-left:1px solid #d6d6d6;
+	width:25%;
+	padding:10px 20px 35px 10px;
+}
+#rightSide dl {
+	width:100%;
+	min-width:230px;
+	border:1px solid #d6d6d6;
+	background:#ffffff;
+	margin:0 0 9px 0;
+}
+#rightSide dl dt {
+	background:url(../img/side_title_bg.gif) repeat-x #e3e3e3;
+	font-weight:bold;
+	line-height:29px;
+	padding:0 8px;
+	border-bottom:1px solid #d6d6d6;
+	display:block;
+}
+#rightSide dl dt span.title {
+	padding:0 20px 0 0;
+	display:block;
+}
+#rightSide dl dt span.title:hover {
+	/*background:url(../img/side_hyphen_o.gif) right center no-repeat;*/
+}
+#rightSide dl dd.midoku {
+	font-size:10px;
+	padding:10px 8px 6px 8px;
+}
+#rightSide dl dd.midoku span {
+	font-weight:bold;
+	font-size:14px;
+	padding:0 4px;
+	color:#e33000;
+}
+#rightSide dl dd.link {
+}
+#rightSide dl dd.bLine {
+	border-bottom:1px solid #d6d6d6;
+}
+#rightSide dl dd.tLine {
+	border-top:1px solid #d6d6d6;
+}
+#rightSide dl dd.tbLine {
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+}
+#rightSide dl dd.list {
+	text-align:right;
+	padding:7px 8px;
+}
+#rightSide dl dd.list a {
+	background:url(../img/arrow.gif) right no-repeat;
+	padding:0 16px 0 0;
+	color:#333333;
+	text-decoration:none;
+}
+#rightSide dl dd.list a:hover {
+	background:url(../img/arrow_o.gif) right no-repeat;
+	color:#3987df;
+	text-decoration:underline;
+}
+#rightSide dl dd ul {
+	list-style:none;
+}
+#rightSide dl dd ul li {
+	padding:7px 8px;
+	display:block;
+	clear:both;
+}
+#rightSide dl dd ul li a {
+	display:block;
+}
+
+#rightSide dl dd ul li span.category {
+	width:8em;
+	float:left;
+}
+#rightSide dl dd ul li.line {
+	background:#f0f6fb;
+}
+
+#rightSide dl dd ul.oshirase {
+	font-size:10px;
+}
+#rightSide dl dd ul.oshirase strong {
+	font-size:12px;
+	display:block;
+}
+#rightSide dl dd ul.oshirase a {
+	display:inline;
+	margin:0 4px;
+}
+#rightSide dl dd ul li.dotline {
+	background:url(../img/dotline.gif) bottom repeat-x;
+	padding:7px 8px;
+}
+
+#rightSide dl dd ul li {
+	clear:both;
+}
+
+#rightSide dl dd ul li span.number {
+	width:2.5em;
+	display:block;
+	float:right;
+	text-align:center;
+	color:#55353;
+	font-weight:bold;
+	color:#e33000;
+}
+#main {
+	padding: 77px 10px 10px 204px;
+}
+#main dl.table {
+	margin:0 0 10px 0;
+	clear:both;
+}
+#main dl.table dt {
+	font-weight:bold;
+	margin:0 0 5px 0;
+}
+#main dl.table dd {
+}
+#main table.base {
+	clear:both;
+	border-collapse:collapse;
+	width:100%;
+}
+head~/* */body #main table.base {
+	width:99.99999%;
+}
+table.base th {
+	border:1px solid #d6d6d6;
+	font-weight:bold;
+	text-align:left;
+	padding:0 6px;
+	line-height:24px;
+}
+table.base:not(#myTable) tr.head th {
+	background: #edeff7;
+	white-space:nowrap;
+}
+#myTable tr.head th {
+	white-space:nowrap;
+}
+table.base:not(#myTable) tr.head th a {
+	color: #333;
+}
+table.base tr.head th.select {
+	padding:0;
+}
+table.base tr.head th.select:hover {
+	background:url(../img/title_bg_o.gif) repeat-x #b4b4b4;
+	white-space:nowrap;
+	cursor:pointer;
+}
+table.base tr.head th.selectOver {
+	background:url(../img/title_bg_o.gif) repeat-x #b4b4b4;
+	white-space:nowrap;
+	cursor:pointer;
+	padding:0;
+}
+table.base tr.head th.select span.rise {
+	background:url(../img/title_arrow_rise.gif) no-repeat right center;
+	padding:0 20px 0 6px;
+	display:block;
+}
+table.base tr.head th.selectOver span.rise {
+	background:url(../img/title_arrow_rise_o.gif) no-repeat right center;
+	padding:0 20px 0 6px;
+	display:block;
+}
+table.base tr.head th.select span.rise:hover {
+	background:url(../img/title_arrow_rise_o.gif) no-repeat right center;
+}
+table.base tr.head th.select span.out {
+	background:url(../img/title_arrow_out.gif) no-repeat right center;
+	padding:0 20px 0 6px;
+	display:block;
+}
+table.base tr.head th.selectOver span.out {
+	background:url(../img/title_arrow_out_o.gif) no-repeat right center;
+	padding:0 20px 0 6px;
+	display:block;
+}
+table.base tr.head th.select span.out:hover {
+	background:url(../img/title_arrow_out_o.gif) no-repeat right center;
+}
+table.base th.center {
+	text-align:center;
+}
+table.base td {
+	border-left:1px solid #d6d6d6;
+	border-right:1px solid #d6d6d6;
+	text-align:left;
+	padding:5px 6px;
+	vertical-align:top;
+}
+table.base td.f_file {
+	text-align:center;
+}
+
+/*jkoutlinemenu.js -- start -- */
+
+a#dropBtn, a#dropBtn2 {
+	cursor:pointer;
+	height:21px;
+	width:121px;
+	display:block;
+}
+
+.dropEditBox{
+	position: absolute; /*leave this alone*/
+	display: none; /*leave this alone*/
+	width: 121px; /*default width of menu*/
+	overflow-x: hidden;
+	padding:3px 0 3px 0;
+}
+
+.dropTop{
+	background:url(../img/drop_t_bg.gif) top center no-repeat;
+	padding:5px 0 0 0;
+	width:100%;
+	float:left;
+}
+.dropBottom{
+	background:url(../img/drop_u_bg.gif) bottom center no-repeat;
+	padding:0 0 5px 0;
+	width:100%;
+	float:left;
+}
+.dropEditBox ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.dropEditBox ul li {
+	background:url(../img/drop_w_bg.gif) repeat-y center;
+	float:left;
+	width:100%;
+}
+.dropEditBox ul li.line {
+	background:url(../img/drop_b_bg.gif) repeat-y center;
+}
+.dropEditBox ul li a{
+	padding: 6px  12px;
+	line-height: 1;
+	display: block;
+	width: auto;
+}
+/* Holly Hack for IE \*/
+* html .dropEditBox li {height: 1%; }
+* html .dropEditBox li a { height: 1%; }
+/* End */
+
+/*jkoutlinemenu.js -- end --*/
+
+
+table.sortBox {
+	clear:both;
+	border-collapse:collapse;
+	width:100%;
+}
+table.sortTop {
+	border-top:1px solid #d6d6d6;
+	border-left:1px solid #d6d6d6;
+	border-right:1px solid #d6d6d6;
+}
+table.sortBottom {
+	border-bottom:1px solid #d6d6d6;
+	border-left:1px solid #d6d6d6;
+	border-right:1px solid #d6d6d6;
+	margin:0 0 15px;
+}
+table.sortBox td {
+	background:#f7f5ed;
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+	border-left:none;
+	border-right:none;
+	height:34px;
+	padding:0;
+	vertical-align:middle;
+}
+table.sortBox td.sortLeft {
+	border-left:1px solid #d6d6d6;
+	padding:0 0 0 10px;
+	width:121px;
+}
+table.sortBox td.sortRight {
+	border-right:1px solid #d6d6d6;
+	padding:0 3px 0 0;
+	text-align:center;
+	width:79px;
+}
+table.sortBox td.sortCenter {
+	text-align:center;
+	vertical-align:middle;
+}
+table.sortBox td.sortCenter span {
+	vertical-align:middle;
+}
+table.sortBox td.sortCenter span.this {
+	margin:0 8px;
+	font-weight:bold;
+}
+table.sortBox td.sortCenter span.all {
+	margin:0 8px;
+}
+table.sortBox td.sortCenter img {
+	vertical-align:middle;
+	margin:0 3px;
+}
+table.base td.center {
+	text-align:center;
+}
+table.base td.right {
+	text-align:right;
+}
+table.base td.middle {
+	vertical-align:middle;
+}
+table.base tr.line td {
+	background:#f0f6fb;
+}
+table.base td.log {
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+	text-align:right;
+}
+table.base td.log a {
+	background:url(../img/arrow.gif) no-repeat right center;
+	padding:0 16px 0 0;
+	color:#333333;
+	text-decoration:none;
+}
+table.base td.log a:hover {
+	background:url(../img/arrow_o.gif) no-repeat right center;
+	text-decoration:underline;
+	color:#3987df;
+}
+table.base p.colBtn {
+	width:28px;
+	display:block;
+	padding:3px 0;
+	margin:0 auto;
+}
+table.base p.colBtn span.left {
+	float:left;
+}
+table.base p.colBtn span.right {
+	float:right;
+}
+table.base div.hoverEdit {
+/*	visibility: hidden; */
+	width:280px;
+	padding:3px 0;
+}
+/*
+* html table.base div.hoverEdit {
+	visibility:visible;
+}
+*/
+table.base div.hoverEdit p {
+	font-size:12px;
+	background:#eaeaea;
+	margin:0 1px 1px 0;
+	padding:0 10px;
+	float:left;
+}
+table.base div.hoverEdit p.left {
+	background:url(../img/hover_l_bg.gif) #eaeaea no-repeat left;
+}
+table.base div.hoverEdit p.right {
+	background:url(../img/hover_r_bg.gif) #eaeaea no-repeat right;
+}
+/*
+table.base tr:hover div.hoverEdit {
+	visibility:visible;
+	display:block;
+}
+*/
+
+/* =フッター ------------------------------------------------------------------------*/
+div#footer {
+	clear: both;
+	width: 100%;
+	border-top: 1px solid #d6d6d6;
+	padding: 5px 0 5px 0;
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	z-index:10;
+}
+div#footer div#footLeft {
+	float:left;
+	padding:0 0 0 10px;
+}
+div#footer div#footLeft img {
+	vertical-align:middle;
+	margin:0 5px 0;
+}
+div#footer div#footRight {
+	float:right;
+	padding:3px 10px 0 0;
+	white-space:nowrap;
+}
+div#footer div#footRight img {
+	margin:0 0 0 22px;
+}
+
+
+
+/* =共通パーツ ----------------------------------------------------------------------*/
+a:link {
+	color:#3987df;
+	text-decoration:underline;
+}
+a:visited {
+	color:#3987df;
+	text-decoration:underline;
+}
+a:hover {
+	color:#333333;
+	text-decoration:none;
+}
+a:active {
+	color:#3987df;
+	text-decoration:none;
+}
+
+/*廻り込み解除BOXここから*/
+	.clr:after {
+		content:".";
+		display:block;
+		height:0px;
+		clear:both;
+		visibility:hidden;
+		overflow:hidden;
+	}
+	.clr {
+		display:inline-table;
+		min-height:1%;
+	}
+	
+	* html .clr {
+		height:1px;/*Mac IE　には適用されない*/
+	}
+	.clr {
+		display:block;
+	}
+/*廻り込み解除BOXここまで*/
+
+.clear {
+	clear:both;
+}
+
+/* =ログイン画面
+------------------------------------------------------------------------*/
+
+body#login {
+	height:100%;
+	position: relative;
+}
+.scroll {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: url(../../img/bg_login.jpg) repeat-y;
+	background-size: cover;
+}
+body#login table {
+	width:100%;
+	height:100%;
+	border-collapse:collapse;
+	-moz-background-size:cover;
+	background-size:cover;
+}
+body#login table td table {
+	background:none;
+}
+body#login div#header,
+body#login td#cellHeader {
+	height:31px;
+	vertical-align:top;
+}
+body#login td#cellFooter {
+	height:50px;
+	vertical-align:bottom;
+}
+body#login div#footer {
+	padding: 12px 0 0;
+	height: 28px;
+}
+body#login div#header div#topBox h1 {
+	float:left;
+	padding:11px 0 0 10px;
+}
+body#login td#wrapper {
+	width:100%;
+	vertical-align: top;
+}
+body#login td#wrapper h2 {
+	text-align: center;
+	padding: 20px 0;
+	margin: 0px 0px 20px;
+}
+body#login div#loginInner {
+  width: 492px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -246px;
+  margin-top: -200px;
+	border-radius: 10px;
+	box-shadow:0px 0px 10px -1px #000;
+	-moz-box-shadow:0px 0px 10px -1px #000;
+	-webkit-box-shadow:0px 0px 10px -1px #000;
+}
+body#login div#loginInner .alice {
+	width: 492px;
+	height: 360px;
+	background: #fff;
+	border-radius: 10px;
+}
+body#login div.loginWidth {
+	width:374px;
+}
+body#login div#loginInner th {
+	width:290px;
+	text-align:center;
+}
+body#login div#loginInner h3 {
+  padding: 90px 0px 60px;
+  text-align: center;
+}
+body#login div#loginInner p.wowLogo {
+	position: absolute;
+	top: -41px;
+	left: 50%;
+	margin-left: -42px;
+}
+body#login div#loginInner div.form {
+	width: 398px;
+  margin: 0 auto;
+}
+body#login div#loginInner div.form img,
+body#login div#loginInner div.form input {
+	vertical-align:middle;
+}
+body#login div#loginInner div.form img {
+	margin:0 3px 0 0;
+	vertical-align:middle;
+}
+body#login div#loginInner div.form input {
+	vertical-align:middle;
+	width:157px;
+	height:16px;
+	line-height:16px;
+	color:#acacac;
+	font-weight:bold;
+	font-size:small;
+}
+body#login div#loginInner div.form input#password {
+	font-weight:normal;
+	color:#535353;
+}
+body#login div#loginInner div.form input.btn {
+	width:auto;
+}
+body#login div#loginInner p.err {
+	font-size: 12px;
+	clear: both;
+	text-align: center;
+	color: #e60013;
+	margin: 13px auto 0;
+	width: 280px;
+	position: relative;
+}
+body#login div#loginInner p.err:before {
+	content: "";
+	position: absolute;
+	top: -11px;
+	left: 129px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 10px 17px 10px;
+	border-color: transparent transparent #ffe6e6 transparent;
+}
+body#login div#loginInner p.err span {
+	display: table-cell;
+	width: 280px;
+	background: #ffe6e6;
+	vertical-align: middle;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow:0px 0px 6px -1px #bababa;
+	-moz-box-shadow:0px 0px 6px -1px #bababa;
+	-webkit-box-shadow:0px 0px 6px -1px #bababa;
+}
+/*body#login div#loginInner div.form button {
+	padding:0;
+	margin:0;
+	outline:none;
+	background:none;
+	border:none;
+	width:102px;
+	height:26px;
+	cursor:pointer;
+}*/
+body#login div#loginInner div.check {
+	font-size:small;
+	padding:5px 0 15px 0;
+}
+body#login div#loginInner div.check span {
+	vertical-align:middle;
+}
+body#login div#loginInner div.check input {
+	margin:0 5px 0 0;
+	vertical-align:middle;
+}
+body#login div#loginInner form {
+	display:inline;
+}
+body#login div#loginInner p {
+	font-size:small;
+}
+body#login div#loginInner p img {
+	vertical-align:middle;
+	margin:0 0 0 5px;
+}
+body#login div#loginInner p a {
+	background:url(../../img/arrow.png) right center no-repeat;
+	padding:0 20px 0 0;
+}
+body#login div#loginInner p a:hover {
+	background:url(../../img/arrow_o.png) right center no-repeat;
+}
+body#login div.timeoutWidth {
+	width:500px;
+}
+body#login h2.timeout {
+	margin:0 0 8px 0;
+}
+body#login p.timeout {
+	margin:0 0 20px 0;
+}
+body#login ul.error {
+	font-size: small;
+	margin: 12px 0;
+	list-style-type: none;
+	width: 300px;
+}
+body#login div#loginInner .idPass {
+	float: left;
+	margin-right: 6px;
+}
+body#login div#loginInner .idPass p {
+	margin: 3px 0 9px;
+}
+body#login div#loginInner div.form img {
+	margin: 0 3px 0 0;
+	vertical-align: middle;
+}
+body#login div#loginInner div.form input {
+	vertical-align: middle;
+	width: 157px;
+	height: 16px;
+	line-height: 16px;
+	color: #acacac;
+	font-weight: bold;
+	font-size: small;
+	padding: 3px;
+}
+
+/* =トップページ ------------------------------------------------------------------*/
+
+div#index {
+}
+div#index .welcome {
+	background:url(../img/icon01.jpg) no-repeat 5px top;
+	padding:15px 0 0 80px;
+	border-bottom:1px solid #d6d6d6;
+}
+div#index .welcome p {
+	margin:0 0 25px 0;
+}
+div#index .welcome p.catch {
+	margin:0 0 12px 0;
+}
+/*div#index .topNavi div.iconBox {
+	text-align:center;
+}
+div#index .topNavi div.iconBox img {
+	margin:0 20px 30px;
+}
+div#index .topNavi div.iconBox p {
+	background:url(../../img/text_boxL.gif) no-repeat left #f0f6fb;
+	padding:0 0 0 12px;
+	font-size:10px;
+	margin:0 auto;
+	display:inline;
+}
+div#index .topNavi div.iconBox p span {
+	background:url(../../img/text_boxR.gif) no-repeat right;
+	padding:0 12px 0 0;
+	height:18px;
+}*/
+div#index {
+	clear:both;
+}
+div#index div.listBox {
+	border-bottom: 1px solid #D6D6D6;
+	margin: 0px 0px 15px;
+	padding: 5px 0px;
+	clear: both;
+}
+div#index div.listBox p {
+	float: left;
+	padding: 0px 10px 0px 15px;
+	width: 125px;
+}
+div#index div.listBox p strong {
+	display: block;
+	margin: 0px 0px 4px;
+	padding: 0px 12px 0px 0px;
+}
+div#index div.listBox div.btnListBox {
+	margin:10px 0 0 150px;
+	min-width:500px;
+}
+div#index div.listBox div.btnListBox dl {
+	float: left;
+	margin: 0px 5px 5px 0px;
+	min-width: 118px;
+}
+div#index div.listBox div.btnListBox dl.border {
+	border: 1px solid #000;
+}
+div#index div.listBox div.btnListBox dl dt {
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+	background-color: #666;
+	color: #EEE;
+	font-size:12px;
+}
+div#index div.listBox div.btnListBox dl dd {
+	text-align: center;
+	padding: 10px 0px 5px;
+}
+div#index div.listBox div.btnListBox dl dd ul {
+	list-style:none;
+}
+div#index div.listBox div.btnListBox dl dd ul li {
+	background:url(../img/btn.gif) no-repeat center 0;
+	margin:0 auto 5px;
+	width:90px;
+	height:21px;
+}
+div#index div.listBox div.btnListBox dl dd ul li a {
+	background:url(../img/btn.gif) no-repeat center 0;
+	color:#FFF;
+	text-decoration:none;
+	display:block;
+	width:90px;
+	height:21px;
+	line-height:21px;
+}
+div#index div.listBox div.btnListBox dl dd ul li a:hover {
+	background:url(../img/btn_o.gif) no-repeat center 0;
+}
+div#index div.newBox {
+	clear:both;
+	margin:0 0 15px;
+}
+div#index div.newBox table {
+	clear:both;
+	margin:0 0 30px;
+	border:1px solid #D6D6D6;
+}
+#login #wrapper {
+	height: 100px;
+	text-align: center;
+}
+
+
+/* =記事投稿 ------------------------------------------------------------------*/
+
+div#contribute {
+}
+div#contribute #midashi {
+	/*background:url(../img/midashi_bg02.gif) repeat-x top;*/
+	background: #eee;
+	height:25px;
+	margin-bottom: 25px;
+	overflow: hidden;
+}
+div#contribute #midashi #midashiL {
+	/*background:url(../img/midashi_l_bg.gif) left top no-repeat;*/
+	height:25px;
+	float:left;
+}
+div#contribute #midashi #midashiL h2 {
+	/*background:url(../img/midashi_bg01.gif) repeat-x top;*/
+	background: #666;
+	padding:0 15px;
+	line-height:26px;
+	color:#ededed;
+}
+div#contribute #midashi #midashiL2 {
+	/*background:url(../img/midashi_bg03.gif) repeat-x top;*/
+	background: #aaa;
+	height:25px;
+	float:left;
+}
+div#contribute #midashi #midashiL2 + #midashiL2 {
+	background: #ccc;
+}
+div#contribute #midashi #midashiL2 h3 {
+	/*background:url(../img/midashi_arrow02.gif) left center no-repeat;*/
+	padding:0 15px;
+	line-height:26px;
+	color:#eee;
+}
+div#contribute #midashi #midashiR div:nth-of-type(3) h3 {
+	color:#535353;
+}
+div#contribute #midashi #midashiL3 {
+	background:url(../img/midashi_l_bg.gif) left top no-repeat;
+	padding:0 0 0 5px;
+	height:25px;
+	float:left;
+}
+div#contribute #midashi #midashiL3 h4 {
+	background:url(../img/midashi_bg01.gif) repeat-x top;
+	padding:0 35px 0 10px;
+	line-height:26px;
+	color:#ededed;
+}
+div#contribute #midashi #midashiR {
+	/*background:url(../img/midashi_r_bg.gif) right top no-repeat;*/
+	padding:0 5px 0 0;
+	height:25px;
+	line-height:26px;
+}
+div#contribute #midashi #midashiR p {
+	/*background:url(../img/midashi_arrow.gif) left center no-repeat;*/
+	padding:0 10px 0 15px;
+	float:left;
+}
+div#contribute #midashi #midashiR p.arrow {
+	/*background:url(../img/midashi_arrow03.gif) left center no-repeat;*/
+	padding:0 10px 0 15px;
+	float:left;
+}
+div#contribute .btnBox {
+	padding:0 0 25px 0;
+	min-width:760px;
+}
+div#contribute .btnBox02 {
+	background:#f7f5ed;
+	padding:8px 0;
+	text-align:center;
+	vertical-align:middle;
+	clear:both;
+}
+div#contribute .btnBox02 input {
+	vertical-align:middle;
+	margin:0 3px;
+}
+div#contribute .btnBox p {
+	float:left;
+}
+div#contribute #search {
+	float:right;
+}
+div#contribute #search #searchBox {
+	float:left;
+	margin:0 5px 0 0;
+	display:inline;
+}
+
+div#contribute #search #searchBox input.text {
+	background:url(../img/search_bg.gif) no-repeat transparent;
+	border:none;
+	width:105px;
+	height:15px;
+	line-height:15px;
+	padding:3px 15px 3px 25px;
+	text-align:left;
+	font-size:12px;
+/*	outline:none;*/
+}
+*html div#contribute #search #searchBox {
+	background:url(../img/search_bg.gif) no-repeat transparent;
+	padding:0 15px 0 25px;
+}
+*html div#contribute #search #searchBox input.text {
+	border:none;
+	line-height:15px;
+	padding:3px 0;
+	background:none;
+}
+html[lang*=""]>/* */body div#contribute #search #searchBox {
+	background:none;
+	padding:0;
+}
+html[lang*=""]>/* */body div#contribute #search #searchBox input.text {
+	width:145px;
+}
+div#contribute #inputBox {
+	border:1px solid #d6d6d6;
+}
+div#contribute #inputInner {
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+}
+div#contribute #inputInner .necessary {
+	padding:11px 16px;
+}
+div#contribute #inputInner img {
+	vertical-align:middle;
+	margin:0 3px 0 5px;
+}
+div#contribute #inputInner span {
+	vertical-align:middle;
+}
+div#contribute #inputInner span img {
+	vertical-align: top !important;
+}
+div#contribute #inputInner div.check span {
+	color:#a2a2a2;
+}
+div#contribute #inputInner span.red {
+	color:#ff0000;
+	font-weight:bold;
+}
+div#contribute #inputInner div.midashi {
+	float: left;
+	font-size: 120%;
+	padding-right: 8px;
+	margin-bottom: 5px;
+}
+div#contribute #inputInner #target0_datetime-div div.midashi,
+div#contribute #inputInner #display0_datetime-div div.midashi {
+	margin-bottom: 20px;
+}
+div#contribute #inputInner div.check {
+	float:left;
+	padding:0 20px 0 0;
+}
+div#contribute #inputInner div.error {
+	float:left;
+	padding:0 20px 0 0;
+}
+div#contribute #inputInner div.error2 {
+	padding:0 0 0 10px;
+}
+div#contribute #inputInner div.right {
+	float:right;
+	padding:0 0 0 20px;
+}
+div#contribute #inputInner div.inputBox {
+	clear:both;
+	padding:0;
+}
+div#contribute #inputInner p.check {
+	float: left;
+	padding: 0 20px 0 0;
+}
+div#contribute #inputInner p.right {
+	float: right;
+	padding: 0 0 0 20px;
+}
+div#contribute #inputInner #mainFormBox {
+	padding:0;
+	border-top:1px solid #d6d6d6;
+	border-bottom:1px solid #d6d6d6;
+}
+div#contribute #inputInner #mainFormBox.csvup {
+	height: 100%;
+}
+div#contribute #inputInner #mainFormBox div.item-div {
+	padding:0 16px 30px;
+	clear:both;
+	position:relative;
+}
+div#contribute #inputInner #mainFormBox div#template_textarea-div.item-div {
+	padding:0 16px 10px;
+}
+div#contribute #inputInner #mainFormBox div.item-div span.sText {
+	position:absolute;
+	left:16px;
+	top:29px;
+	font-size:12px;
+}
+div#contribute #inputInner #mainFormBox div.item-div span.eText {
+	position:absolute;
+	left:237px;
+	top:29px;
+	font-size:12px;
+}
+div#contribute #inputInner #mainFormBox div.item-div .midashi_sub {
+	background: #73beff;
+	display: inline-block;
+	padding: 4px 10px;
+	color: #fff;
+}
+div#contribute #inputInner #mainFormBox div.item-div.separator {
+	padding: 12px 15px;
+	clear: both;
+	font-size: 140%;
+	background: #CEE5F9;
+	margin: 0 0 15px;
+}
+div#contribute #inputInner #mainFormBox div.item-div.separator.best {
+	background: #e24579;
+	padding: 15px 15px;
+	margin: 0 0 0;
+}
+div#contribute #inputInner #mainFormBox div.item-div.separator .midashi {
+	color: #535353;
+	margin: 0;
+}
+div#contribute #inputInner #mainFormBox div .w80 {
+	width:80px;
+	height:20px;
+}
+div#contribute #inputInner #mainFormBox div .w160 {
+	width:160px;
+	height:20px;
+}
+div#contribute #inputInner #mainFormBox div .w640 {
+	width:640px;
+	height:20px;
+}
+div#contribute #inputInner #mainFormBox div .w640h100 {
+	width:640px;
+	height:100px;
+}
+div#contribute #inputInner #mainFormBox div .w640h200 {
+	width:640px;
+	height:200px;
+}
+
+div#contribute #inputInner #mainFormBox div .w250 {
+	width:250px;
+	height:20px;
+}
+div#contribute #inputInner #mainFormBox div input {
+	padding: 10px;
+	margin:0;
+	vertical-align:middle;
+}
+div#contribute #inputInner #target0_datetime-div  div input ,
+div#contribute #inputInner #display0_datetime-div div input {
+	padding: 0;
+}
+div#contribute div.inputBox input.hasDatepicker {
+	padding: 0!important;
+}
+div#contribute #inputInner #mainFormBox div input#target1_datetime,
+div#contribute #inputInner #mainFormBox div input#display1_datetime {
+	margin-left: 4px;
+}
+div#contribute #inputInner #mainFormBox div select {
+	padding:0;
+	margin:0 4px 0 8px;
+	vertical-align:middle;
+	width:200px;
+	height:20px;
+}
+div#contribute #inputInner #mainFormBox div textarea {
+	padding: 10px;
+	vertical-align:middle;
+	box-sizing: border-box;
+}
+div#contribute #inputInner #mainFormBox div img {
+	vertical-align: middle;
+}
+div#contribute #inputInner #mainFormBox div.file-cancel {
+	padding:4px 0 0 0;
+	margin:0;
+}
+div#contribute #inputInner #mainFormBox div.file-cancel div {
+	background:url(../img/upload_c_bg.gif) left center no-repeat #f0f0ef;
+	float: left;
+	line-height:21px;
+	padding:0;
+	margin:0;
+}
+div#contribute #inputInner #mainFormBox div.file-cancel div {
+	padding:0 8px;
+	margin:0;
+}
+div#contribute #inputInner #mainFormBox div.file-cancel a {
+	margin:0 0 0 -4px;
+}
+div#contribute #inputInner #mainFormBox hr {
+}
+div#contribute #inputInner #mainFormBox #idName {
+}
+div#contribute #inputInner #mainFormBox #time {
+}
+div#contribute #inputInner #mainFormBox #time input {
+	width:160px;
+	margin:0;
+	line-height:17px;
+	height:17px;
+}
+div#contribute #inputInner #mainFormBox #title {
+}
+div#contribute #inputInner #mainFormBox #title input {
+	width:595px;
+	margin:0 3px 0 0;
+	line-height:17px;
+	height:17px;
+}
+div#contribute #inputInner #mainFormBox #title input.url {
+	width:536px;
+	margin:0 3px 0 10px;
+}
+div#contribute #inputInner #mainFormBox #show {
+}
+div#contribute #inputInner #mainFormBox #show input {
+	margin:0 10px 0 0;
+}
+div#contribute #inputInner #mainFormBox #open, div#contribute #inputInner #mainFormBox #close {
+	float:left;
+	clear:none;
+	width:370px;
+	padding:0 10px 25px 16px;
+}
+div#contribute #inputInner #mainFormBox #open input, div#contribute #inputInner #mainFormBox #close input {
+	margin:0 5px 0 0;
+	width:160px;
+}
+div#contribute #inputInner #mainFormBox #close select,
+div#contribute #inputInner #mainFormBox #open select {
+	width:130px;
+}
+div#contribute #inputInner #mainFormBox #open a, div#contribute #inputInner #mainFormBox #close a {
+	margin:0 10px 0 0;
+}
+div#contribute #inputInner #mainFormBox .upImg {
+	float:left;
+	clear:none;
+	width:auto;
+	padding:0 30px 25px 16px;
+}
+div#contribute #inputInner #mainFormBox .upImg input {
+	margin:0 10px 0 0;
+}
+div#contribute #inputInner #mainFormBox #item {
+}
+div#contribute #inputInner #mainFormBox #item textarea {
+	margin:5px 0 0 0;
+	width:700px;
+}
+
+/*jkoutlinemenu.js -- start -- */
+
+div#contribute #inputInner #mainFormBox div.calenderEditBox div {
+	padding:0;
+	margin:0;
+	float:none;
+	width:auto;
+}
+
+a#calenderBtn, a#calenderBtn2 {
+	cursor:pointer;
+	height:21px;
+	width:22px;
+}
+
+div#contribute #inputInner #mainFormBox div.calenderEditBox {
+	position: absolute; /*leave this alone*/
+	display: none; /*leave this alone*/
+	width: 151px; /*default width of menu*/
+	overflow-x: hidden;
+	margin:0 0 0 -128px;
+	padding:10px 0 0 0;
+}
+*:first-child+html div#contribute #inputInner #mainFormBox div.calenderEditBox {
+	padding:2px 0 0 0;	
+}
+* html div#contribute #inputInner #mainFormBox div.calenderEditBox {
+	padding:2px 0 0 0;
+} 
+div#contribute #inputInner #mainFormBox div.calenderEditBox .inner {
+	background:url(../img/calendar_w_bg.gif) repeat-y center;
+	padding:0;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox .calenderBottom {
+	background:url(../img/calendar_u_bg.gif) bottom center no-repeat;
+	padding:0;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox .calenderBottom .calendertop {
+	background:url(../img/calendar_t_bg.gif) top center no-repeat;
+	padding:10px 5px 3px 5px;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox table {
+	width:100%;
+	border-collapse:collapse;
+	margin:0;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox table td,
+div#contribute #inputInner #mainFormBox div.calenderEditBox table th {
+	width:auto;
+	padding:5px 0;
+	text-align:center;
+	line-height: 1;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox table th {
+	font-weight:bold;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox div.month {
+	font-weight:bold;
+	text-align:center;
+	line-height:1;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox div.month span {
+	padding:0 5px;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox div.month img {
+	vertical-align:middle;
+}
+div#contribute #inputInner #mainFormBox div.calenderEditBox table tr.line {
+	background:#f0f6fb;
+}
+div#contribute #inputInner #mainFormBox #open div.calenderEditBox a,
+div#contribute #inputInner #mainFormBox #close div.calenderEditBox a{
+	line-height: 1;
+	width: auto;
+	padding:0;
+	margin:0;
+}
+
+/* Holly Hack for IE \*/
+* html div#contribute #inputInner #mainFormBox div.calenderEditBox table td {
+	height: 1%;
+}
+* html div#contribute #inputInner #mainFormBox div.calenderEditBox table td a {
+	height: 1%;
+}
+/* End */
+
+/*jkoutlinemenu.js -- end --*/
+
+
+/*form*/
+input[type=radio],
+input[type=checkbox] {
+    display: inline-block;
+    margin-right: 6px;
+}
+input[type=radio] + label,
+input[type=checkbox] + label {
+    position: relative;
+    display: inline-block;
+    margin-right: 12px;
+    font-size: 14px;
+    line-height: 30px;
+    cursor: pointer;
+}
+#myTable input[type=checkbox] + label,
+#myTable input[type=radio] + label {
+	display: block;
+	margin: 10px 0px 0px 6px;
+}
+ 
+@media (min-width: 1px) {
+    input[type=radio],
+    input[type=checkbox] {
+        display: none;
+        margin: 0;
+    }
+    input[type=radio] + label,
+    input[type=checkbox] + label {
+        padding: 0 0 0 24px;
+        //padding: 58px 0px 0px 7px;
+    }
+    input[type=checkbox] + label.checklist {
+        padding: 0px 0px 22px 8px;
+    }
+    input[type=radio] + label::before,
+    input[type=checkbox] + label::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+         
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin-top: -9px;
+         
+        background: #FFF;
+    }
+    input[type=radio] + label::before {
+        border: 2px solid #ccc;
+        border-radius: 30px;
+    }
+    input[type=checkbox] + label::before {
+        border: 2px solid #ccc;
+    }
+    input[type=radio]:checked + label::after,
+    input[type=checkbox]:checked + label::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+         
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+    }
+    input[type=radio]:checked + label::after {
+        left: 5px;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;  
+        background: #2489c5;
+        border-radius: 8px;
+    }
+    input[type=checkbox]:checked + label::after {
+        left: 4px;
+    		width: 10px;
+    		height: 7px;
+    		margin-top: -5px; 
+        border-left: 3px solid #2489c5;
+        border-bottom: 3px solid #2489c5;
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
+.loading {
+	text-align: center;
+	margin-top: 20px;
+}
+.tmpdata .loading {
+	text-align: left;
+	margin-left: 10px;
+}
+.push_shop {
+	text-align: center;
+	margin-bottom: 60px;
+}
+/*
+.push_shop a {
+	background-color:#3987DF;
+	color:#fff;
+	font-size:15px;
+	padding:6px 16px;
+	border-radius:8px;
+	text-decoration:none;
+	font-weight:bold;
+}
+*/
+.push_shop a:hover {
+	opacity:0.8;
+}
+#shop_list, 
+#excludeshop_list {
+	//margin-bottom: 40px;
+}
+#shop_list table,
+#excludeshop_list table {
+	border: aliceblue;
+	margin: 0 0 12px;
+}
+#shop_list table.last,
+#excludeshop_list table.last {
+	margin-bottom: 40px;
+}
+#shop_list table tr,
+#excludeshop_list table tr {
+	background:#EAF6FD;
+}
+#shop_list table tr:nth-child(2n-1),
+#excludeshop_list table tr:nth-child(2n-1) {
+	background:#FFF;
+}
+#shop_list td,
+#excludeshop_list td {
+	border: 1px #444 solid;
+	padding-left: 5px;
+	//background-color:#FFFFFF;
+}
+#shop_list table thead tr td strong,
+#excludeshop_list table thead tr td strong {
+	//font-color:#666666;
+	color: #DDD;
+}
+.mt20 {
+	margin-top: 20px;
+}
+#shop_text_dele, #excludeshop_text_dele {
+/*
+	margin-left: 207px;
+*/
+}
+
+/* 店舗CSV取り込み ここから */
+.fileUploder{
+	position:relative;
+	width: 480px;
+	height:31px;
+	overflow:hidden;
+	padding-left: 10px;
+}
+.fileUploder .txt{
+	padding:6px 10px;
+	vertical-align:top;
+	border:1px solid #cbcbcb;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	box-shadow:inset 2px 2px 2px 0 #eeeeee;
+	-moz-box-shadow:inset 2px 2px 2px 0 #eeeeee;
+	-webkit-box-shadow:inset 2px 2px 2px 0 #eeeeee;
+	width: 284px;
+	height: 9px;
+}
+.fileUploder .btn{
+	position:absolute;
+	top:0;
+	left:177px;
+	z-index:1;
+	display:block;
+	width:138px;
+	height:31px;
+	text-indent:-99999px;
+	overflow:hidden;
+	border:none;
+	background:url(../img/csvupload_btn.gif) no-repeat 0 0;
+	margin-left: 150px;
+}
+div.tmpdata {
+	margin: 25px 0px 40px 0px;
+}
+.inputBox div.tmpdata {
+	margin: 25px 0px 40px 10px;
+}
+.tmpdata a.tmp_btn{
+	background-color: #3987DF;
+	color: #FFF;
+	font-size: 17px;
+	text-decoration: none;
+	padding: 8px 17px 6px 15px;
+	border-radius: 4px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.tmpdata_history table.tmpData tbody td.photoCount {
+	text-align:right;
+}
+.tmpdata a.reflection_btn{
+	background-color: #FF8C00;
+	color: #FFF;
+	font-size: 17px;
+	text-decoration: none;
+	padding: 8px 17px 6px 15px;
+	border-radius: 4px;
+	font-weight: bold;
+	cursor: pointer;
+}
+a.check_btn{
+	background-color: #5197E6;
+	color: #FFF;
+	font-size: 14px;
+	text-decoration: none;
+	padding: 3px 6px 3px 6px;
+	border-radius: 4px;
+	font-weight: normal;
+	cursor: pointer;
+	margin-left:15px;
+}
+
+.fileUploder .reflection_btn{
+	position:absolute;
+	top:0;
+	left:177px;
+	z-index:1;
+	display:block;
+	width:138px;
+	height:31px;
+	text-indent:-99999px;
+	overflow:hidden;
+	border:none;
+	background:url(../img/data_upload_btn.gif) no-repeat 0 0;
+	margin-left: 150px;
+}
+.fileUploder .uploader{
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:99;
+	width:100%;
+	height:100%;
+	font-size:315px;
+	opacity:0;
+	filter:alpha(opacity=0);
+	-ms-filter:"alpha(opacity=0)";
+}
+/* CSV取り込み ここまで */
+
+.tmpdata_history {
+	margin: 0px 0px 0px 8px;
+	font-size: 1.1em;
+	padding-top: 20px;
+}
+.tmpdata_history p {
+	font-weight: bold;
+	color: red;
+}
+.tmpdata_history table th,
+.tmpdata_history table td {
+	border:1px solid #333333;
+	text-align: center;
+} 
+/* 一覧のボタン */
+p.dlButton {
+	margin-left:5px;
+}
+p.dlButton a {
+	color:#fff;
+	text-decoration:none;
+	background-image: linear-gradient(180deg, #6eabf0, #3b88df 50.0%);
+	border-radius:3px;
+	padding:5px 13px;
+	font-size: 12px;
+}
+p.dlButton:hover {
+	opacity:0.8;
+}
+/* 編集画面のボタン（追加版）  */
+a.Button {
+	text-decoration:none;
+	padding:3px 13px;
+	border-radius:3px;
+	color:#fff;
+	font-size:12px;
+}
+a.Button:hover {
+	opacity:0.8;
+}
+a.color1 {
+	background-image: linear-gradient(180deg, #6eabf0, #3b88df 50.0%);
+	border: 1px solid #457dbb;
+}
+a.color2 {
+	background-color:#333333;
+	color:#ffffff;
+	font-size:14px;
+}
+/* 一部CSVダウンロードメニュー用 */
+.period {
+	float:left;
+	padding:4px 13px 4px 13px;
+	margin-top:-10px;
+	border:2px solid #ccc;
+	border-radius:8px 8px 8px 8px;
+	margin-bottom:-10px;
+}
+.period ul {
+	display:table;
+}
+.period ul li {
+	display:table-cell;
+	padding:0 0 0 5px;
+	
+}
+.period ul li span.fwb {
+	font-weight:bold;
+	border:2px solid #3987df;
+	font-size:12px;
+	padding:1px;
+	color:#3987df;
+}
+.period .alert {
+	font-size:11px;
+}
+div#contribute #inputInner #mainFormBox div #queue {
+	width:4em;
+}
+/* セパレーター用見出し */
+div.separator div.midashi span {
+	margin-left:15px;
+	font-size:14px;
+	font-weight:bold;
+}
+
+/* 並び替えの画像下タイトル */
+span.name {
+	display:block;
+	margin-top:10px;
+}
+/* 管理一覧注釈 */
+span.listalert {
+    color: #EC9898;
+    vertical-align: bottom;
+    margin-left: 15px;
+}
+
+
+/* タグNKO */
+.ml0  { margin-left: 0 !important; }
+.ml5  { margin-left: 5px !important; }
+.ml10 { margin-left:10px !important; }
+.ml15 { margin-left:15px !important; }
+.ml20 { margin-left:20px !important; }
+.ml25 { margin-left:25px !important; }
+.ml30 { margin-left:30px !important; }
+.ml35 { margin-left:35px !important; }
+.ml40 { margin-left:40px !important; }
+.ml45 { margin-left:45px !important; }
+.ml50 { margin-left:50px !important; }
+.mr0  { margin-right: 0 !important; }
+.mr5  { margin-right: 5px !important; }
+.mr10 { margin-right:10px !important; }
+.mr15 { margin-right:15px !important; }
+.mr20 { margin-right:20px !important; }
+.mr25 { margin-right:25px !important; }
+.mr30 { margin-right:30px !important; }
+.mr35 { margin-right:35px !important; }
+.mr40 { margin-right:40px !important; }
+.mr45 { margin-right:45px !important; }
+.mr50 { margin-right:50px !important; }
+.mb0  { margin-bottom: 0 !important; }
+.mb5  { margin-bottom: 5px !important; }
+.mb10 { margin-bottom:10px !important; }
+.mb15 { margin-bottom:15px !important; }
+.mb20 { margin-bottom:20px !important; }
+.mb25 { margin-bottom:25px !important; }
+.mb30 { margin-bottom:30px !important; }
+.mb35 { margin-bottom:35px !important; }
+.mb40 { margin-bottom:40px !important; }
+.mb45 { margin-bottom:45px !important; }
+.mb50 { margin-bottom:50px !important; }
+.mt0  { margin-top: 0 !important; }
+.mt5  { margin-top: 5px !important; }
+.mt10 { margin-top:10px !important; }
+.mt15 { margin-top:15px !important; }
+.mt20 { margin-top:20px !important; }
+.mt25 { margin-top:25px !important; }
+.mt30 { margin-top:30px !important; }
+.mt35 { margin-top:35px !important; }
+.mt40 { margin-top:40px !important; }
+.mt45 { margin-top:45px !important; }
+.mt50 { margin-top:50px !important; }
+
+.dirred {
+	color:#ff0000 !important;
+}
+
+.uploadDir dl {
+	margin-left:8px;
+	padding:20px 0;
+}
+
+/* 取込ファイル結果テーブル */
+.tmpdata_history table.tmpData {
+    border-collapse: collapse;
+	border:1px solid #cccccc;
+	background-color:#2b2b2b;
+	width:450px;
+	padding:0;
+}
+.tmpdata_history table.tmpData thead th {
+	background-color:#2b2b2b;
+	color:#ffffff;
+	text-align:center;
+	width:50%;
+}
+.tmpdata_history table.tmpData tbody td {
+	background-color:#fff;
+	border:1px solid #cccccc;
+	text-align:left;
+	padding:5px;
+}
+

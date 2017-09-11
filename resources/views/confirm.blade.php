@@ -1,16 +1,16 @@
 <form action="{{action('ContactController@process')}}" method="post">
 
-{{$contact->name}}
+{{$contact['name']}}
 
-{{$contact->email}}
+{{$contact['email']}}
 
-{{$contact->message}}
+{{$contact['message']}}
 
 <input type="submit" name="action" value="back">
 
 <input type="submit" name="action" value="submit">
 
-@foreach($contact->getAttributes() as $key => $value)
+@foreach($contact as $key => $value)
 <input type="hidden" name="{{$key}}" value="{{$value}}">
 @endforeach
 </form>

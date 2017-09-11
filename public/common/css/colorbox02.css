@@ -1,0 +1,114 @@
+/*
+    ColorBox Core Style
+    The following rules are the styles that are consistant between all ColorBox themes
+*/
+#colorbox, #cboxOverlay{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:9999;
+	overflow:hidden;
+	background-color: #FFF;
+	padding:0;
+}
+#colorbox{
+	border: 4px solid #d6d6d6;
+	
+		}
+/*-----ここからIE7用記述-----*/
+*:first-child+html #colorbox
+{
+
+}
+ /*-----IE7用記述ここまで-----*/
+#cboxWrapper{
+	top:0;
+	left:0;
+	z-index:9999;
+	overflow:hidden;
+	background-color: #FFF;
+
+	background-color: #515456;
+	padding:0;
+}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative; overflow:visible;}
+#cboxLoadedContent{overflow:auto;}
+
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+
+/* 
+	ColorBox example user style
+	These rules are ordered and tabbed in a way that represents the order/nesting of the generated HTML, 
+	in hope that this will make the relationship easier to understand. Thanks, jack@colorpowered.com
+*/
+#cboxOverlay{background:#000;}
+
+#colorbox{
+	padding:0;
+	margin:0;
+	}
+	#cboxContent{
+		margin:30px 0 0 0;
+		_margin:10px 0 0 0;
+		}
+	/*-----ここからIE7用記述-----*/
+*:first-child+html #cboxContent
+{
+	margin:10px 0 0 0;
+}
+ /*-----IE7用記述ここまで-----*/
+
+	
+#cboxLoadedContent{
+	background:#fff;
+	padding:10px;
+	float:left;
+}
+#cboxLoadedContent img{
+	max-width:100% !important;
+	height:auto !important;
+}
+
+#cboxLoadingGraphic{
+	background:url(images/loading.gif) center center no-repeat;
+}
+#cboxLoadingOverlay{
+	background:#000;
+}
+#cboxTitle{
+	position:absolute;
+	top:-25px;
+	left:10px;
+	font-weight: bold;
+	color: #efefef;
+}
+#cboxCurrent{
+	position:absolute;
+	top:0;
+	right:205px;
+	text-indent:-9999px;
+}
+                
+               
+#cboxSlideshow, #cboxPrevious, #cboxNext{
+	display:none;
+	position:absolute;
+}
+#cboxClose{
+	text-indent:-9999px;
+	width:20px;
+	height:20px;
+	position:absolute;
+	top:-25px;
+	right: 5px;
+}
+#cboxClose:hover {
+}
+
+                
+
+                

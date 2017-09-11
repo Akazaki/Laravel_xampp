@@ -1,0 +1,12 @@
+@charset "Shift_JIS";
+
+
+/* @importに対応してないWIN IE4をはじく */
+
+
+/* MacIE5はじくハック \*/
+@import "default.css";
+@import "base.css";
+/* MacIE5適用されないEND */
+
+/* base.cssは長居と同ファイル */

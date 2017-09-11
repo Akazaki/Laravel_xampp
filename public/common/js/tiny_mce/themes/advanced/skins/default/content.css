@@ -1,0 +1,239 @@
+
+
+/*廻り込み解除BOXここから*/
+	.clr:after {
+		content:".";
+		display:block;
+		height:0px;
+		clear:both;
+		visibility:hidden;
+	}
+	.clr {
+		display:inline-table;
+		min-height:1%;
+	}
+	
+	* html .clr {
+		height:1px;/*Mac IE　には適用されない*/
+	}
+	.clr {
+		display:block;
+	}
+/*廻り込み解除BOXここまで*/
+
+
+
+
+
+/* =調べる スポーツ施設検索 --------------------------------------------------------*/
+
+table.area {
+	width:415px;
+	float:left;
+	display:inline;
+	margin:0 0 35px 10px;
+	border-collapse:collapse;
+}
+table.area th {
+	vertical-align:top;
+	text-align:left;
+	line-height:1.8;
+	padding:5px;
+}
+table.area th img {
+	vertical-align:middle;
+}
+table.area td {
+	vertical-align:top;
+	width:280px;
+	line-height:1.8;
+	padding:5px;
+}
+table.area tr.line th , #database_local table.area tr.line td {
+		border-bottom:1px solid #c7c7c7;
+}
+table.area input {
+	vertical-align:middle;
+	margin:0 4px 0 10px;
+}
+table.area td input.btn {
+	width:100px;
+}
+table.area td.searchBtn {
+	background:#e6f3f5;
+	padding:10px 0;
+	text-align:center;
+}
+img.map {
+	float:right;
+	display:inline;
+	margin:0 10px 35px 0;
+}
+table.sports {
+	margin:0 auto 35px auto;
+	width:665px;
+	border-collapse:collapse;
+	border:1px solid #9fcad0;
+}
+table.sports th {
+	vertical-align:top;
+	text-align:left;
+	background:#cbe6ea;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px;
+}
+table.sports td {
+	background:#e6f3f5;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px;
+	vertical-align:top;
+}
+table.sports th input, #database_local table.sports td input {
+	vertical-align:middle;
+	margin:0 4px 0 8px;
+}
+table.sports td.searchBtn {
+	background:#9fcad0;
+	padding:10px 0;
+	border:1px solid #9fcad0;
+	text-align:center;
+}
+table.sports td input.btn {
+	width:100px;
+}
+#database_local div.invitation {
+	margin:0 auto 35px auto;
+}
+#database_local div.invitation p.select {
+	margin:0 10px 10px 10px;
+}
+#database_local div.invitation p.select input {
+	vertical-align:middle;
+	margin:0 4px 0 10px;
+}
+#database_local div.invitation p.submit {
+	background:#e6f3f5;
+	padding:10px 0;
+	text-align:center;
+	width:
+}
+#database_local div.invitation input.btn {
+	width:100px;
+}
+#database_local p.result {
+	text-align:center;
+	margin:20px 15px;
+}
+#database_local p.result img {
+	vertical-align:middle;
+	margin:0 5px;
+}
+table.resultList {
+	margin:0 auto;
+	width:665px;
+	border-collapse:collapse;
+	border:1px solid #9fcad0;
+}
+table.resultList th {
+	vertical-align:top;
+	text-align:left;
+	background:#cbe6ea;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px;
+}
+table.resultList th.btnLine {
+	width:63px;
+}
+table.resultList td {
+	background:#e6f3f5;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px;
+	vertical-align:top;
+}
+
+table {
+	margin:0 auto;
+	width:665px;
+	border-collapse:collapse;
+}
+
+table th {
+	vertical-align:top;
+	text-align:left;
+	background:#cbe6ea;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px 10px;
+	width:100px;
+}
+
+table td {
+	background:#e6f3f5;
+	border:1px solid #9fcad0;
+	line-height:1.8;
+	padding:5px 10px;
+	vertical-align:top;
+}
+table td.icon img {
+	margin:0 10px 0 0;
+}
+table td dl {
+}
+table td dl dt {
+	font-weight:bold;
+}
+table td dl dt span {
+	display:block;
+	font-weight:normal;
+}
+table td table.innerTable01 {
+	border:none;
+	margin:0 0 15px 15px;
+	width:auto;
+}
+table td table.innerTable01 th {
+	background:none;
+	border:none;
+	border-bottom:1px solid #9fcad0;
+	padding:0;
+}
+table td table.innerTable01 td {
+	background:none;
+	border:none;
+	border-bottom:1px solid #9fcad0;
+	padding:0 0 0 100px;
+}
+table td table.innerTable01 td.etc {
+	border:none;
+	text-align:right;
+	padding:3px 0;
+}
+table td table.innerTable02 {
+	width:auto;
+	margin:0 0 15px 15px;
+}
+table td table.innerTable02 th {
+	width:auto;
+}
+table td table.innerTable02 td.google {
+	width:130px;
+}
+table.left {
+	width:390px;
+	float:left;
+	margin:0 0 0 10px;
+	display:inline;
+}
+table.left td {
+	width:250px;
+}
+
+
+
+
+
+

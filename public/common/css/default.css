@@ -1,0 +1,76 @@
+@charset "Shift_JIS";
+/*-----------------------------------------------------------------------------
+=CSS‰Šú‰»
+-----------------------------------------------------------------------------*/
+
+* {
+	font-family:"ƒƒCƒŠƒI", Meiryo,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"‚l‚r ‚oƒSƒVƒbƒN", "MS P Gothic",sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	font-family:"ƒƒCƒŠƒI", Meiryo,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"‚l‚r ‚oƒSƒVƒbƒN", "MS P Gothic",sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	color:#535353;
+	line-height:1.5;
+}
+
+
+h1, h2, h3, h4, h5, h6, address, div, blockquote, p, pre, ul, ol, li, dl, dt, dd, hr {
+	font-family:"ƒƒCƒŠƒI", Meiryo,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"‚l‚r ‚oƒSƒVƒbƒN", "MS P Gothic",sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 100%;
+}
+
+table, caption, th, td {
+	font-family:"ƒƒCƒŠƒI", Meiryo,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"‚l‚r ‚oƒSƒVƒbƒN", "MS P Gothic",sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 100%;
+}
+
+span, em, strong, dfn, code, samp, kbd, var, cite, abbr, acronym, sub,
+sup, q, br, ins, del, a, img, object, iframe {
+	font-family:"ƒƒCƒŠƒI", Meiryo,"ƒqƒ‰ƒMƒmŠpƒS Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"‚l‚r ‚oƒSƒVƒbƒN", "MS P Gothic",sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style: normal;
+	font-weight: inherit;
+	font-size: 100%;
+}
+
+img {
+	vertical-align:top;
+	border:none;
+	}
+
+strong {
+	font-weight:bold;
+	}
+
+select option {
+	padding: 0 5px;
+	}
+sup {
+	font-size:xx-small;
+	line-height:1.4;
+}
+a {
+	outline:none;
+	border:none;
+    word-break: break-all;
+}
+
+
+
