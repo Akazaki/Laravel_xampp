@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 
+use Laravel\Http\Requests\ContactRequest;
+
 class ContactController extends Controller
 {
     public function form()
@@ -14,20 +16,14 @@ class ContactController extends Controller
         return view('form');
     }
 
-	public function confirm(Request $request)
+	public function confirm(ContactRequest $request)
 	{
-	    $this->validate($request, [
-	        'name'  => 'required',
-	        'email' => 'required|email',
-	        'message' => 'present',
-	    ]);
-
 	    $contact = $request->all();
 
 	    return view('confirm', compact('contact'));
 	}
     
-	public function process(Request $request)
+	public function complete(Request $request)
 	{
         // ※要バリデーション
         $action = $request->get('action', 'back');

@@ -10,11 +10,11 @@ Route::get('/', function () {
 //Route::controller('hello', 'HelloController');
 // Route::resource('hello', 'HelloController');
 
-// Route::get('/contact', 'ContactController@form');
-// Route::post('/contact/confirm', 'ContactController@confirm');
-// Route::post('/contact/process', 'ContactController@process');
+Route::get('/contact', 'ContactController@form');
+Route::post('/contact/confirm', 'ContactController@confirm');
+Route::post('/contact/process', 'ContactController@complete');
 
-Route::resource('/wow', 'WowController');
+//Route::resource('/wow', 'WowController');
 
 /* ログイン画面の表示 */
 // Route::get('wow/login', 'Auth/AuthController@getLogin');

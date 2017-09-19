@@ -1,16 +1,44 @@
-<form action="{{action('ContactController@process')}}" method="post">
+@extends('layouts.app')
 
-{{$contact['name']}}
+@section('content')
+<div id="Form_box">
+	<form action="{{action('ContactController@complete')}}" method="post">
+		<dl>
+			<dt>
+				<label for="name">お名前</label>
+			</dt>
+			<dd >
+				{{$contact['name']}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="name">メールアドレス</label>
+			</dt>
+			<dd >
+				{{$contact['email']}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="name">メッセージ</label>
+			</dt>
+			<dd >
+				{{$contact['message']}}
+			</dd>
+		</dl>
 
-{{$contact['email']}}
+		<div class="submit_btn">
+			<input type="submit" name="action" value="back">
+		</div>
 
-{{$contact['message']}}
+		<div class="submit_btn">
+			<input type="submit" name="action" value="submit">
+		</div>
 
-<input type="submit" name="action" value="back">
-
-<input type="submit" name="action" value="submit">
-
-@foreach($contact as $key => $value)
-<input type="hidden" name="{{$key}}" value="{{$value}}">
-@endforeach
-</form>
+		@foreach($contact as $key => $value)
+		<input type="hidden" name="{{$key}}" value="{{$value}}">
+		@endforeach
+	</form>
+</div>
+@endsection
