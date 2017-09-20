@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/contact', 'ContactController@form');
 Route::post('/contact/confirm', 'ContactController@confirm');
-Route::post('/contact/process', 'ContactController@complete');
+Route::post('/contact/complete', 'ContactController@complete');
 
 //Route::resource('/wow', 'WowController');
 
