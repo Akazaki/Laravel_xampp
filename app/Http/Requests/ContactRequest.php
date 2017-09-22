@@ -6,6 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
 {
+     /**
+     * 戻り先のコントローラーのアクション名
+        
+    $redirect – URIでの指定
+    $redirectRoute – 名前付きルートの名前での指定
+    $redirectAction – コントローラーのアクションでの指定
+
+     *
+     * @var string
+     */
+    protected $redirectAction = 'ContactController@form';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +39,7 @@ class ContactRequest extends FormRequest
             'name'  => 'required|max:50',
             'email' => 'required|email',
             'age' => 'required|array|in:1,2,3',
-            'tel' => 'required|japan_tel',
+            'tel' => 'required|japantel',
             'zip' => 'required|zip',
             'prefecture' => 'required|numeric|between:1,47',
             'address' => 'required|max:100',

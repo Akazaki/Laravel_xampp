@@ -176,7 +176,7 @@ return [
         // Laravel\Providers\BroadcastServiceProvider::class,
         Laravel\Providers\EventServiceProvider::class,
         Laravel\Providers\RouteServiceProvider::class,
-
+        Laravel\Providers\ValidatorServiceProvider::class,
     ],
 
     /*

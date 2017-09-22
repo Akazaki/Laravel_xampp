@@ -73,20 +73,35 @@ class ContactController extends Controller
         'Swimming'
     ];
 
+    /**
+     * 入力画面
+     *
+     */
     public function form()
     {
         $prefecture_master = $this->prefecture_master;
         return view('form', compact('prefecture_master'));
     }
 
+    /**
+     * 確認画面
+     *
+     * @param  ContactRequest  $request
+     */
 	public function confirm(ContactRequest $request)
 	{
+        $request->validate([
+            'name' => 'required|unique:posts|zip'
+        ]);
+
 	    $contact = $request->all();
 
-        dd($contact);
-
         // checkboxとradioマスター参照
+        // 年齢
         $contact['age_text'] = $this->age_master[(int)$contact['age']];
+        // 住所
+        $contact['prefecture_text'] = $this->prefecture_master[(int)$contact['prefecture']];
+        // 趣味
         foreach ($contact['hobby'] as $key => $value) {
             $contact['hobby_text'][$key] = $this->hobby_master[(int)$contact['hobby'][$key]];
         }
@@ -94,7 +109,12 @@ class ContactController extends Controller
 	    return view('confirm', compact('contact'));
 	}
     
-	public function complete(Request $request)
+    /**
+     * 完了画面
+     *
+     * @param  Request  $request
+     */
+	public function complete(ContactRequest $request)
 	{
         // ※要バリデーション
         $action = $request->get('action', 'back');

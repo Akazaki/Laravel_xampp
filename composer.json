@@ -23,7 +23,8 @@
             "database/factories"
         ],
         "psr-4": {
-            "Laravel\\": "app/"
+            "Laravel\\": "app/",
+            "Validation\\": "app/Validation/"
         }
     },
     "autoload-dev": {

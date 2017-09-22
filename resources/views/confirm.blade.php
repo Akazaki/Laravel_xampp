@@ -29,6 +29,30 @@
 		</dl>
 		<dl>
 			<dt>
+				<label>郵便番号</label>
+			</dt>
+			<dd >
+				{{$contact['zip']}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label>都道府県</label>
+			</dt>
+			<dd >
+				{{$contact['prefecture_text']}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label>住所</label>
+			</dt>
+			<dd >
+				{{$contact['address']}}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
 				<label>年齢</label>
 			</dt>
 			<dd >
