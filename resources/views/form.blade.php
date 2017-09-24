@@ -105,6 +105,15 @@
 				</dl>
 				<dl>
 					<dt>
+						<label for="email">画像アップロード<span>必須</span></label>
+					</dt>
+					<dd>
+						<input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
+						<span class="error_text">{{$errors->first('upfile')}}</span>
+					</dd>
+				</dl>
+				<dl>
+					<dt>
 						<label for="message">メッセージ</label>
 					</dt>
 					<dd >

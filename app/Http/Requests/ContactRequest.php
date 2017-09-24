@@ -46,6 +46,7 @@ class ContactRequest extends FormRequest
             'hobby.*' => 'in:1,2,3',
             'hobby' => 'required|array',
             'hobby.*' => 'in:1,2,3',
+            'upfile' => 'image|size:20000',
             'message' => 'present|max:1000',
         ];
 
