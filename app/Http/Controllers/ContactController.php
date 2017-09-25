@@ -8,6 +8,7 @@ use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 
 use Laravel\Http\Requests\ContactRequest;
+use Intervention\Image\Facades\Image;
 
 class ContactController extends Controller
 {
@@ -96,15 +97,25 @@ class ContactController extends Controller
 
 	    $contact = $request->all();
 
-        // checkboxとradioマスター参照
-        // 年齢
+        // 年齢のマスター参照
         $contact['age_text'] = $this->age_master[(int)$contact['age']];
-        // 住所
+
+        // 住所のマスター参照
         $contact['prefecture_text'] = $this->prefecture_master[(int)$contact['prefecture']];
-        // 趣味
+
+        // 趣味のマスター参照
         foreach ($contact['hobby'] as $key => $value) {
             $contact['hobby_text'][$key] = $this->hobby_master[(int)$contact['hobby'][$key]];
         }
+
+//getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
+$upfile = $contact['upfile']->getClientOriginalName();
+//getRealPath():アップロードしたファイルのパスを取得します。
+$image = Image::make($contact['upfile']->getRealPath());
+//画像を保存する
+$image->save(public_path().'/tmpfile/'.$upfile);
+//パス
+$contact['img_path'] = 'tmpfile/'.$upfile;
 
 	    return view('confirm', compact('contact'));
 	}

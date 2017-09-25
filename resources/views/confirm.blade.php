@@ -73,6 +73,16 @@
 		</dl>
 		<dl>
 			<dt>
+				<label>画像</label>
+			</dt>
+			<dd >
+				<ul>
+					<img src="{{$contact['upfile']}}" alt="">
+				</ul>
+			</dd>
+		</dl>
+		<dl>
+			<dt>
 				<label>メッセージ</label>
 			</dt>
 			<dd >

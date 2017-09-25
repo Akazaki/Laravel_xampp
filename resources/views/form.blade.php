@@ -10,7 +10,7 @@
 	        </ul>
 		@endif -->
 
-		<form action="{{action('ContactController@confirm')}}" method="post">
+		<form action="{{action('ContactController@confirm')}}" method="post" enctype="multipart/form-data">
 
 			{{csrf_field()}}
 
@@ -18,43 +18,43 @@
 				<p class="form_title">お問い合わせフォーム</p>
 				<dl>
 					<dt>
-						<label for="name">お名前<span>必須</span></label>
+						<label>お名前<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="name" value="{{old('name')}}" placeholder="ヤマダ タロウ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ヤマダ タロウ'">
+						<input type="text" name="name" value="{{old('name')}}" placeholder="例)ヤマダ タロウ" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)ヤマダ タロウ'">
 						<span class="error_text">{{$errors->first('name')}}</span>
 					</dd>
 				</dl>
 				<dl>
 					<dt>
-						<label for="email">メールアドレス<span>必須</span></label>
+						<label>メールアドレス<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="email" value="{{old('email')}}" placeholder="test@gpol.co.jp" onfocus="this.placeholder = ''" onblur="this.placeholder = 'test@gpol.co.jp'">
+						<input type="text" name="email" value="{{old('email')}}" placeholder="例)test@gpol.co.jp" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)test@gpol.co.jp'">
 						<span class="error_text">{{$errors->first('email')}}</span>
 					</dd>
 				</dl>
 				<dl>
 					<dt>
-						<label for="tel">電話番号<span>必須</span></label>
+						<label>電話番号<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="tel" name="tel" value="{{old('tel')}}" placeholder="090-0000-0000" onfocus="this.placeholder = ''" onblur="this.placeholder = '090-0000-0000'">
+						<input type="tel" name="tel" value="{{old('tel')}}" placeholder="例)090-0000-0000" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)090-0000-0000'">
 						<span class="error_text">{{$errors->first('tel')}}</span>
 					</dd>
 				</dl>
 				<dl>
 					<dt>
-						<label for="zip">郵便番号<span>必須</span></label>
+						<label>郵便番号<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="zip" id="zip" value="{{old('zip')}}"　placeholder="5530003" onfocus="this.placeholder = ''" onblur="this.placeholder = '5530003'" style="font-family: ts-unused;">
+						<input type="text" name="zip" id="zip" value="{{old('zip')}}"　placeholder="例)5530003" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)5530003'" style="font-family: ts-unused;">
 						<span class="error_text">{{$errors->first('zip')}}</span>
 					</dd>
 				</dl>
 				<dl>
 					<dt>
-						<label for="tel">都道府県<span>必須</span></label>
+						<label>都道府県<span>必須</span></label>
 					</dt>
 					<dd >
 						<select class="select_box" name="prefecture">
@@ -68,16 +68,16 @@
 				</dl>
 				<dl>
 					<dt>
-						<label for="tel">住所<span>必須</span></label>
+						<label>住所<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="address" size="60" value="{{old('address')}}" placeholder="大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル" onfocus="this.placeholder = ''" onblur="this.placeholder = '大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル'">
+						<input type="text" name="address" size="60" value="{{old('address')}}" placeholder="例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル'">
 						<span class="error_text">{{$errors->first('address')}}</span>
 					</dd>
 				</dl>
 				<dl>
 					<dt>
-						<label for="age">年齢<span>必須</span></label>
+						<label>年齢<span>必須</span></label>
 					</dt>
 					<dd class="radio_box">
 			            <input id="age1" type="radio" name="age[]" value="1" @if(is_array(old('age')) && in_array(1, old('age'))) checked @endif>
@@ -91,7 +91,7 @@
 				</dl>
 				<dl>
 					<dt>
-						<label for="email">趣味（複数）<span>必須</span></label>
+						<label>趣味（複数）<span>必須</span></label>
 					</dt>
 					<dd class="check_box">
 			            <input id="hobby1" class="form_check_input" type="checkbox" name="hobby[]" value="1" @if(is_array(old('hobby')) && in_array(1, old('hobby'))) checked @endif>
@@ -105,9 +105,12 @@
 				</dl>
 				<dl>
 					<dt>
-						<label for="email">画像アップロード<span>必須</span></label>
+						<label>画像</label>
 					</dt>
-					<dd>
+					<dd class="file_box">
+						<label for="upfile">
+							+写真を選択
+						</label>
 						<input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
 						<span class="error_text">{{$errors->first('upfile')}}</span>
 					</dd>
