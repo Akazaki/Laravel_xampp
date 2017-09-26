@@ -118,9 +118,8 @@ ul {
   border: none;
   font-weight: bold;
 }
-#Form_box dl .file_box label {
-  background: #eff1f3;
-  padding: 9px 11px;
+#Form_box dl .file_box input {
+  background: none;
 }
 #Form_box .submit_btn {
   margin: 0 auto;

@@ -91,9 +91,9 @@ class ContactController extends Controller
      */
 	public function confirm(ContactRequest $request)
 	{
-        $request->validate([
-            'name' => 'required|unique:posts|zip'
-        ]);
+        // $request->validate($request, [
+        //     'name' => 'required|unique:posts|zip'
+        // ]);
 
 	    $contact = $request->all();
 
@@ -108,14 +108,20 @@ class ContactController extends Controller
             $contact['hobby_text'][$key] = $this->hobby_master[(int)$contact['hobby'][$key]];
         }
 
-//getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
-$upfile = $contact['upfile']->getClientOriginalName();
-//getRealPath():アップロードしたファイルのパスを取得します。
-$image = Image::make($contact['upfile']->getRealPath());
-//画像を保存する
-$image->save(public_path().'/tmpfile/'.$upfile);
-//パス
-$contact['img_path'] = 'tmpfile/'.$upfile;
+// if(!empty($contact['upfile'])){
+//     //getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
+//     $upfile = str_shuffle(time().$contact['upfile']->getClientOriginalName()). '.' . $contact['upfile']->getClientOriginalExtension();
+//     //$upfile =  $contact['upfile']->getClientOriginalName();
+//     //getRealPath():アップロードしたファイルのパスを取得します。
+//     $image = Image::make($contact['upfile']->getRealPath());
+//     //画像を保存する
+//     $image->save(public_path().'/tmpfile/'.$upfile);
+//     //パス
+//     $contact['img_path'] = '/public/tmpfile/'.$upfile;
+// }else if(!empty($contact['img'])){
+//     //パス
+//     $contact['img_path'] = $contact['img'];
+// }
 
 	    return view('confirm', compact('contact'));
 	}

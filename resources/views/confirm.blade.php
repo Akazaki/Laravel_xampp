@@ -77,7 +77,7 @@
 			</dt>
 			<dd >
 				<ul>
-					<img src="{{$contact['upfile']}}" alt="">
+					<img src="{{$contact['img_path']}}" width="200" alt="">
 				</ul>
 			</dd>
 		</dl>

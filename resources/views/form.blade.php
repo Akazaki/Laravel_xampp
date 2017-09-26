@@ -21,7 +21,7 @@
 						<label>お名前<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="name" value="{{old('name')}}" placeholder="例)ヤマダ タロウ" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)ヤマダ タロウ'">
+						<input type="text" name="name" value="{{ old('name') ? old('name') : 'ヤマダ タロウ' }}" placeholder="例)ヤマダ タロウ" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)ヤマダ タロウ'">
 						<span class="error_text">{{$errors->first('name')}}</span>
 					</dd>
 				</dl>
@@ -30,7 +30,7 @@
 						<label>メールアドレス<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="email" value="{{old('email')}}" placeholder="例)test@gpol.co.jp" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)test@gpol.co.jp'">
+						<input type="text" name="email" value="{{ old('email') ? old('email') : 'test@gpol.co.jp' }}" placeholder="例)test@gpol.co.jp" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)test@gpol.co.jp'">
 						<span class="error_text">{{$errors->first('email')}}</span>
 					</dd>
 				</dl>
@@ -39,7 +39,7 @@
 						<label>電話番号<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="tel" name="tel" value="{{old('tel')}}" placeholder="例)090-0000-0000" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)090-0000-0000'">
+						<input type="tel" name="tel" value="{{ old('tel') ? old('tel') : '090-0000-0000' }}" placeholder="例)090-0000-0000" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)090-0000-0000'">
 						<span class="error_text">{{$errors->first('tel')}}</span>
 					</dd>
 				</dl>
@@ -48,7 +48,7 @@
 						<label>郵便番号<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="zip" id="zip" value="{{old('zip')}}"　placeholder="例)5530003" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)5530003'" style="font-family: ts-unused;">
+						<input type="text" name="zip" id="zip" value="{{ old('zip') ? old('zip') : '553-0003' }}"　placeholder="例)553-0003" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)553-0003'" style="font-family: ts-unused;">
 						<span class="error_text">{{$errors->first('zip')}}</span>
 					</dd>
 				</dl>
@@ -71,7 +71,7 @@
 						<label>住所<span>必須</span></label>
 					</dt>
 					<dd >
-						<input type="text" name="address" size="60" value="{{old('address')}}" placeholder="例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル'">
+						<input type="text" name="address" size="60" value="{{ old('address') ? old('address') : '大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル' }}" placeholder="例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル" onfocus="this.placeholder = ''" onblur="this.placeholder = '例)大阪府大阪市北区堂島浜2-2-28 堂島アクシスビル'">
 						<span class="error_text">{{$errors->first('address')}}</span>
 					</dd>
 				</dl>
@@ -108,11 +108,14 @@
 						<label>画像</label>
 					</dt>
 					<dd class="file_box">
-						<label for="upfile">
-							+写真を選択
-						</label>
-						<input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" />
-						<span class="error_text">{{$errors->first('upfile')}}</span>
+@if(old('img_path') || old('upfile'))
+	<img src="{{old('img_path')}}" width="200" alt="">
+	<input name="img" id="img" type="hidden" value="{{old('img_path')}}" />
+	<input name="deletefile" id="deletefile" type="button" value="画像を削除" onclick="swapFileupload('input');" />
+@else
+	<input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" value="{{old('upfile')}}" />
+@endif
+						<span class="error_text">{{$errors->first('img')}}</span>
 					</dd>
 				</dl>
 				<dl>
