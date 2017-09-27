@@ -7,34 +7,62 @@ use Illuminate\Http\Request;
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 
-use Laravel\Http\Requests\ContactRequest;
+use Laravel\Http\Requests\FileupRequest;
 use Intervention\Image\Facades\Image;
 
 class FileupController extends Controller
 {
+    function __construct(){
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ContactRequest $request)
+    public function index(Request $request)
     {
-        //if(!empty($contact['upfile'])){
-//     //getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
-//     $upfile = str_shuffle(time().$contact['upfile']->getClientOriginalName()). '.' . $contact['upfile']->getClientOriginalExtension();
-//     //$upfile =  $contact['upfile']->getClientOriginalName();
-//     //getRealPath():アップロードしたファイルのパスを取得します。
-//     $image = Image::make($contact['upfile']->getRealPath());
-//     //画像を保存する
-//     $image->save(public_path().'/tmpfile/'.$upfile);
-//     //パス
-//     $contact['img_path'] = '/public/tmpfile/'.$upfile;
-// }else if(!empty($contact['img'])){
-//     //パス
-//     $contact['img_path'] = $contact['img'];
-// }
+
+        $request->validate([
+            'body' => 'required',
+            'image' => 'image|max:3',
+        ]);
+
+        $messages = [
+            'image'    => 'The :attribute and :other must match.'
+        ];
+
+        //$validator = Validator::make($input, $rules, $messages);
+
+        // $rules = [
+        //     'image' => 'image|max:3000',
+        // ];
+        // //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)にしないといけません。
+        // //3000Kb以下のファイルにする必要です。
+
+        // // バリデーターにルールとインプットを入れる
+        // $validation = Validator::make($request, $rules);
+
+        // バリデーションチェックを行う
+        // if ($validation->fails()) {
+        //     return redirect('/')->with('message', 'ファイルを確認してください！');
+        // }
+        $file = $request->file('image');
+
+        $reasult = [];
+        if(!empty($request->file('image'))){
+            //getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
+            $upfile = str_shuffle(time().$request->file('image')->getClientOriginalName()). '.' . $request->file('image')->getClientOriginalExtension();
+            //$upfile =  $request->file('image')->getClientOriginalName();
+            //getRealPath():アップロードしたファイルのパスを取得します。
+            $image = Image::make($request->file('image')->getRealPath());
+            //画像を保存する
+            $image->save(public_path().'/tmpfile/'.$upfile);
+            //パス
+            $reasult['img_path'] = '/public/tmpfile/'.$upfile;
+        }
+
         //
-        return response()->json(['status' => 'successful']);
+        return response()->json($reasult);
     }
 
     /**

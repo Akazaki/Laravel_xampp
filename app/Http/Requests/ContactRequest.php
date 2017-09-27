@@ -36,19 +36,19 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            // 'name'  => 'required|max:50',
-            // 'email' => 'required|email',
-            // 'age' => 'required|array|in:1,2,3',
-            // 'tel' => 'required|japantel',
-            // 'zip' => 'required|zip',
-            // 'prefecture' => 'required|numeric|between:1,47',
-            // 'address' => 'required|max:100',
-            // 'hobby.*' => 'in:1,2,3',
-            // 'hobby' => 'required|array',
-            // 'hobby.*' => 'in:1,2,3',
+            'name'  => 'required|max:50',
+            'email' => 'required|email',
+            'age' => 'required|array|in:1,2,3',
+            'tel' => 'required|japantel',
+            'zip' => 'required|zip',
+            'prefecture' => 'required|numeric|between:1,47',
+            'address' => 'required|max:100',
+            'hobby.*' => 'in:1,2,3',
+            'hobby' => 'required|array',
+            'hobby.*' => 'in:1,2,3',
             // // 'upfile' => 'file|dimensions:min_width=10,min_height=10,max_width=4000,max_height=4000',
             // // 'img' => 'file|dimensions:min_width=10,min_height=10,max_width=4000,max_height=4000',
-            // 'message' => 'present|max:1000',
+            'message' => 'present|max:1000',
         ];
 
         return $rules;

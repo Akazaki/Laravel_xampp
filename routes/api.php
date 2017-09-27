@@ -18,3 +18,4 @@ use Illuminate\Http\Request;
 // });
 
 Route::resource('fileup', 'FileupController');
+Route::post('fileup', 'FileupController@index');
