@@ -19,33 +19,8 @@ class FileupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(FileupRequest $request)
     {
-
-        $request->validate([
-            'body' => 'required',
-            'image' => 'image|max:3',
-        ]);
-
-        $messages = [
-            'image'    => 'The :attribute and :other must match.'
-        ];
-
-        //$validator = Validator::make($input, $rules, $messages);
-
-        // $rules = [
-        //     'image' => 'image|max:3000',
-        // ];
-        // //バリデーションされているファイルは (jpeg, png, bmp, gif, or svg)にしないといけません。
-        // //3000Kb以下のファイルにする必要です。
-
-        // // バリデーターにルールとインプットを入れる
-        // $validation = Validator::make($request, $rules);
-
-        // バリデーションチェックを行う
-        // if ($validation->fails()) {
-        //     return redirect('/')->with('message', 'ファイルを確認してください！');
-        // }
         $file = $request->file('image');
 
         $reasult = [];
@@ -59,6 +34,8 @@ class FileupController extends Controller
             $image->save(public_path().'/tmpfile/'.$upfile);
             //パス
             $reasult['img_path'] = '/public/tmpfile/'.$upfile;
+            //name
+            $reasult['img_name'] = $upfile;
         }
 
         //

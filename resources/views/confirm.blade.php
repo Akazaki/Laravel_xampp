@@ -71,24 +71,28 @@
 				</ul>
 			</dd>
 		</dl>
-		<dl>
-			<dt>
-				<label>画像</label>
-			</dt>
-			<dd >
-				<ul>
-					<img src="{{$contact['img_path']}}" width="200" alt="">
-				</ul>
-			</dd>
-		</dl>
-		<dl>
-			<dt>
-				<label>メッセージ</label>
-			</dt>
-			<dd >
-				{{$contact['message']}}
-			</dd>
-		</dl>
+		@if(!empty($contact['img_path']))
+			<dl>
+				<dt>
+					<label>画像</label>
+				</dt>
+				<dd >
+					<ul>
+						<img src="{{$contact['img_path']}}" width="200" alt="">
+					</ul>
+				</dd>
+			</dl>
+		@endif
+		@if(!empty($contact['message']))
+			<dl>
+				<dt>
+					<label>メッセージ</label>
+				</dt>
+				<dd >
+					{{$contact['message']}}
+				</dd>
+			</dl>
+		@endif
 
 		<div class="submit_btn">
 			<input type="submit" name="action" value="back">

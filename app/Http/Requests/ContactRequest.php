@@ -46,8 +46,7 @@ class ContactRequest extends FormRequest
             'hobby.*' => 'in:1,2,3',
             'hobby' => 'required|array',
             'hobby.*' => 'in:1,2,3',
-            // // 'upfile' => 'file|dimensions:min_width=10,min_height=10,max_width=4000,max_height=4000',
-            // // 'img' => 'file|dimensions:min_width=10,min_height=10,max_width=4000,max_height=4000',
+            // 'img_name' => 'present|string',
             'message' => 'present|max:1000',
         ];
 
@@ -72,6 +71,7 @@ class ContactRequest extends FormRequest
             'age.required'  => ':attributeを選択してください',
             'hobby.required'  => ':attributeを選択してください',
             'hobby.*.in' => '趣味を正しく選択してください',
+            // 'img_name.string' => '無効な形式です',
             'message.max'  => ':attributeは:max文字以内で入力してください',
         ];
 

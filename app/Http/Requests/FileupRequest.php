@@ -35,7 +35,7 @@ class FileupRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'image' => 'image|max:3',
+            'image' => 'image|max:30000',
         ];
 
         return $rules;
@@ -44,7 +44,7 @@ class FileupRequest extends FormRequest
     public function messages()
     {
         $messages = [
-            'image' => 'The :attribute and :other must match.'
+            //'image.image'    => '画像をアップしてください',
         ];
 
         return $messages;

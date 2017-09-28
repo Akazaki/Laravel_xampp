@@ -116,16 +116,17 @@
 	<input type="file" name="upfile" id="upfile" accept="image/*" capture="camera" value="{{old('upfile')}}" />
 @endif -->
 
-写真1:<input type="file" id="imageUpload"  name="imageUpload" size="20"><br>
-<!-- ↓に上記参照ボタンで選んだ画像ファイルが表示される。 -->
-<div  class="preview">
-	<img id="thumb" width="320px" height="240px"  class="no_display" >
-	<!-- 参照ボタンで画像選択時に、アップロードされた画像パスを保持し、メインのフォーム先に送信 -->
-	<input type="hidden" id="imagefilename" name="imagefilename" >
-</div>
-<!-- デバッグ用。Ajaxで返された値を表示 -->
-<div id="res"></div>
-<span class="error_text"></span>
+						<input type="file" name="file_images" id="file_images">
+						<!-- ↓に上記参照ボタンで選んだ画像ファイルが表示される。 -->
+						<div  class="preview">
+							<img class="uploaded_images" width="200" src="{{old('img_path')}}" >
+							<!-- 参照ボタンで画像選択時に、アップロードされた画像パスを保持し、メインのフォーム先に送信 -->
+							<input type="hidden" id="img_path" name="img_path" value="{{old('img_path')}}">
+							<input type="hidden" id="img_name" name="img_name" value="{{old('img_name')}}">
+						</div>
+
+						<span id="file_error_text" class="error_text"></span>
+						<span class="error_text">{{$errors->first('img_name')}}</span>
 
 					</dd>
 				</dl>
@@ -145,91 +146,7 @@
 			</div>
 		</form>
 
-<form id="newHotnessForm" action="{{action('FileupController@index')}}" method="post" files="true" enctype="multipart/form-data">
-	{{csrf_field()}}
-</form>
-
-<button class="dddon">ssss</button>
-
+		<script data-main="./js/form.js" src="./js/require.js"></script>
 	</div>
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/ajaxupload.js"></script>
-	<script>
-		$(function(){
-			//サムネイル表示するimgタグを ID 名で指定(jQueryを使ったセレクタ)
-			var thumb = $('img#thumb');
-			var imagefilename = $("#imagefilename");
-			var csrf = $('input[name="_token"]').val();
-
-			//AjaxUploadクラスを生成し、参照ボタン押下時の処理を定義。第一引数は参照ボタンのID名。
-
-			// $('form').submit(function(e) {
-			// 	e.preventDefault();
-			 
-			var fd = new FormData($(this)[0]);
-			// 個別にパラメータ指定する場合は以下のようにする
-			var fd = new FormData();
-			fd.append('name', $(this).find(':text[name="name"]').val());
-			//fd.append('profile', $(this).find(':file[name="profile"]')[0].files[0]);
-
-			$('.dddon').on('click', function() {
-				console.log("a");
-				$.ajax('./api/fileup', {
-					method: "POST",
-					processData: false,
-					contentType: false,
-					data: fd,
-					dataType: 'json',
-					success: function(json) {
-						var img = $('<img>').attr('src', json.profile_url);
-						$('#profile').append(img);
-						$('form').find(':submit').attr('disabled', true);
-					},
-					error: function(json) {
-						alert('エラーが発生しました');
-					}
-				});
-			});
-
-			// new AjaxUpload('imageUpload', {
-			//     //formタグのID名 newHotnessForm を実行
-			//     action: $('form#newHotnessForm').attr('action'),
-			//     name: 'image',
-			//     data: {
-			//     	'_token': csrf
-			//     },
-			//     //アップロード中は loading スタイルシートを利用
-			//     onSubmit: function(file, extension) {
-			//         $('div.preview').addClass('loading');
-			//     },
-			//     //アップロード完了時の処理
-			//     onComplete: function(file, response) {
-			//         thumb.load(function(){
-			//             $('div.preview').removeClass('loading');
-			//             thumb.unbind();
-			//         });
-
-			//         thumb.attr('src', response);
-
-			//         //img要素表示
-			//         thumb.css("display", "inline");
-
-			//         //hiddenに画像パス指定
-			//         $("#imagefilename").attr("value" , response);
-
-			//        /*デバッグ。Ajaxで返された値を表示。*/
-			//         $("#res").html(response);
-			//     }
-
-			// });
-
-			// ↓クリアボタン押下時の設定
-			$("#pic1_clear").click(function(){
-				thumb.removeAttr('src');
-				thumb.css("display", "none");
-				imagefilename.attr("value" , "");
-			});
-		});
-	</script>
 @endsection
