@@ -7,59 +7,14 @@ use Illuminate\Http\Request;
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 
-use Laravel\Http\Requests\ContactRequest;
-use Intervention\Image\Facades\Image;
+use Laravel\Http\Requests\ContactRequest;// バリデート
+use Intervention\Image\Facades\Image;// 画像処理
+use Laravel\Contact;// Model
 
 class ContactController extends Controller
 {
     public $prefecture_master = [
-        1 => '北海道', 
-        '青森県', 
-        '岩手県', 
-        '宮城県',
-        '秋田県', 
-        '山形県', 
-        '福島県', 
-        '茨城県',
-        '栃木県', 
-        '群馬県', 
-        '埼玉県', 
-        '千葉県',
-        '東京都', 
-        '神奈川県', 
-        '新潟県', 
-        '富山県',
-        '石川県', 
-        '福井県', 
-        '山梨県', 
-        '長野県', 
-        '岐阜県', 
-        '静岡県', 
-        '愛知県', 
-        '三重県',
-        '滋賀県', 
-        '京都府', 
-        '大阪府', 
-        '兵庫県',
-        '奈良県', 
-        '和歌山県', 
-        '鳥取県', 
-        '島根県',
-        '岡山県', 
-        '広島県', 
-        '山口県', 
-        '徳島県',
-        '香川県',
-        '愛媛県',
-        '高知県', 
-        '福岡県',
-        '佐賀県', 
-        '長崎県', 
-        '熊本県', 
-        '大分県',
-        '宮崎県', 
-        '鹿児島県', 
-        '沖縄県'
+        1 => '北海道', '青森県', '岩手県', '宮城県','秋田県', '山形県', '福島県', '茨城県','栃木県', '群馬県', '埼玉県', '千葉県','東京都', '神奈川県', '新潟県', '富山県','石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県','滋賀県', '京都府', '大阪府', '兵庫県','奈良県', '和歌山県', '鳥取県', '島根県','岡山県', '広島県', '山口県', '徳島県','香川県','愛媛県','高知県', '福岡県','佐賀県', '長崎県', '熊本県', '大分県','宮崎県', '鹿児島県', '沖縄県'
     ];
 
     public $age_master = [
@@ -108,21 +63,6 @@ class ContactController extends Controller
             $contact['hobby_text'][$key] = $this->hobby_master[(int)$contact['hobby'][$key]];
         }
 
-// if(!empty($contact['upfile'])){
-//     //getClientOriginalName():アップロードしたファイルのオリジナル名を取得します
-//     $upfile = str_shuffle(time().$contact['upfile']->getClientOriginalName()). '.' . $contact['upfile']->getClientOriginalExtension();
-//     //$upfile =  $contact['upfile']->getClientOriginalName();
-//     //getRealPath():アップロードしたファイルのパスを取得します。
-//     $image = Image::make($contact['upfile']->getRealPath());
-//     //画像を保存する
-//     $image->save(public_path().'/tmpfile/'.$upfile);
-//     //パス
-//     $contact['img_path'] = '/public/tmpfile/'.$upfile;
-// }else if(!empty($contact['img'])){
-//     //パス
-//     $contact['img_path'] = $contact['img'];
-// }
-
 	    return view('confirm', compact('contact'));
 	}
     
@@ -137,14 +77,44 @@ class ContactController extends Controller
         $action = $request->get('action', 'back');
         // 二つ目は初期値です。
         $input = $request->except('action');
-        
-        // そして、入力内容からは取り除いておきます。
+       
         if($action === 'submit') {
-            // メール送信処理などを実装
+
+//$data = $request->all();
+$hobby = array_sum($request->get('hobby'));//配列の値の合計
+
+//DB保存
+$data = [
+  "name" => $request->get('name'),
+  "email" => $request->get('email'),
+  "tel" => $request->get('tel'),
+  "zip" => $request->get('zip'),
+  "prefecture" => $request->get('prefecture'),
+  "address" => $request->get('address'),
+  "age" => $request->get('age')[0],
+  "hobby" => $hobby,
+  "upfile" => $request->get('img_name'),
+  "message" => $request->get('message'),
+];
+
+$contact = new Contact;
+
+$contact->fill($data)->save();
+//$contact->fill($request->all())->save();
+
+//$contact['name'] = $request->get('name');
+//$user->where('id', $id)->update(array('status' => $status));
+// $contact->fill($data);
+// //$contact->name = $request->get('name');
+// // $contact->email = $request->get('email');
+// $contact->save();
+
 			return view('complete');
         } else {
             // 戻る
 			return redirect()->action('ContactController@form')->withInput($input);
 	    }
 	}
+
+
 }

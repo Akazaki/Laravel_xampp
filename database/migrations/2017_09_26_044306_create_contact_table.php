@@ -23,7 +23,7 @@ class CreateContactTable extends Migration
             $table->string('address');
             $table->unsignedInteger('age');
             $table->unsignedInteger('hobby');
-            $table->binary('upfile');
+            $table->string('upfile');
             $table->text('message');
             $table->timestamps();
         });

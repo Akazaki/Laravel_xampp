@@ -61,8 +61,10 @@ require(['jquery'], function($) {
 			        if(data.responseJSON.errors){
 			        	var message = data.responseJSON.errors.image[0];
 				        $error_text.text(message);
+				        $uploaded_images.attr('src', '');
 					}else{
 						$error_text.text('エラーが発生しました');
+				        $uploaded_images.attr('src', '');
 					}
 			    }).done(function(data) {
 			        // 成功処理
@@ -76,6 +78,7 @@ require(['jquery'], function($) {
 			        	$uploaded_images.attr('src', img_path);
 			        }else{
 						$error_text.text('エラーが発生しました');
+				        $uploaded_images.attr('src', '');
 					}
 			    });
 			}
