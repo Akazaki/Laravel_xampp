@@ -65,13 +65,13 @@ $(document).ready(function () {
 					</div>
 				<input type="image" src="img/login_btn.png" name="doneConfirmLogin" class="tremble" style="width:187px; height:61px;" onmouseover="this.src='img/login_btn_o.png'" onmouseout="this.src='img/login_btn.png'" />
 			</div>
-			{{if $errors}}
+			<!-- {{if $errors}}
 			<p class="err"><span>
 			{{foreach from=$errors item=error}}
 				{{$error|escape}}<br >
 			{{/foreach}}
 			</span></p>
-			{{/if}}
+			{{/if}} -->
 			<div class="check">
 <!--
                 <input name="" type="checkbox" value="">

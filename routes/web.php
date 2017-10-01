@@ -8,13 +8,16 @@ Route::get('/', function () {
 //     return view('helo',['message' => 'Hello!']);
 // });
 //Route::controller('hello', 'HelloController');
-// Route::resource('hello', 'HelloController');
 
+// お問い合わせフォーム
 Route::get('/contact', 'ContactController@form');
 Route::post('/contact/confirm', 'ContactController@confirm');
 Route::post('/contact/complete', 'ContactController@complete');
 
-//Route::resource('/wow', 'WowController');
+// WOW
+Route::get('/wow', 'WowController@index');
+Route::get('/wow/dashboard', 'WowController@dashboard');
+Route::get('/wow/login', 'WowController@login');
 
 /* ログイン画面の表示 */
 // Route::get('wow/login', 'Auth/AuthController@getLogin');

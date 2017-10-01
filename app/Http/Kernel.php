@@ -57,5 +57,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Laravel\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'wowauth' => \Laravel\Http\Middleware\WowAuth::class,
+        'ajaxOnly' => \App\Http\Middleware\AjaxOnlyMiddleware::class,
     ];
 }
