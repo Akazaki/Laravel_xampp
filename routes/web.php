@@ -1,13 +1,8 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/helo', function () {
-//     return view('helo',['message' => 'Hello!']);
+// Route::get('/', function () {
+//     return view('welcome');
 // });
-//Route::controller('hello', 'HelloController');
 
 // お問い合わせフォーム
 Route::get('/contact', 'ContactController@form');
@@ -15,21 +10,14 @@ Route::post('/contact/confirm', 'ContactController@confirm');
 Route::post('/contact/complete', 'ContactController@complete');
 
 // WOW
-Route::get('/wow', 'WowController@index');
-Route::get('/wow/dashboard', 'WowController@dashboard');
-Route::get('/wow/login', 'WowController@login');
-
-/* ログイン画面の表示 */
-// Route::get('wow/login', 'Auth/AuthController@getLogin');
-// /* ログイン処理 */
-// Route::post('wow/login', 'Auth/AuthController@postLogin');
-// /* ログアウト */
-// Route::get('wow/logout', 'Auth/AuthController@getLogout');
-// /* ユーザー登録画面の表示 */
-// Route::get('wow/register', 'Auth/AuthController@getRegister');
-// /* ユーザー登録処理 */
-// Route::post('wow/register', 'Auth/AuthController@postRegister');
+Route::get('/wow/login', 'WowController@login');// ログインページ
+Route::post('/wow/signin', 'WowController@signin');// ログイン
+Route::group(['middleware' => 'wowauth'], function(){// ログインチェックMiddleware
+	Route::get('/wow', 'WowController@index');// トップ
+	Route::get('/wow/dashboard', 'WowController@dashboard');// トップ
+	Route::get('/wow/signout', 'WowController@signout');// ログアウト
+	Route::get('/wow/register', 'WowController@register');// ユーザーページ
+	Route::post('/wow/signup', 'WowController@signup');// ユーザー登録
+});
 
 // Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');

@@ -3,10 +3,14 @@
 namespace Laravel;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+
+class Admins extends \Eloquent implements Authenticatable
 {
+    use AuthenticableTrait;
     use Notifiable;
 
     /**
@@ -14,8 +18,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'label_text', 'email_text', 'password',
     ];
 
     /**
