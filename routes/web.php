@@ -12,12 +12,13 @@ Route::post('/contact/complete', 'ContactController@complete');
 // WOW
 Route::get('/wow/login', 'WowController@login');// ログインページ
 Route::post('/wow/signin', 'WowController@signin');// ログイン
+Route::get('/wow/register', 'WowController@register');// ユーザー登録ページ
+Route::post('/wow/signup', 'WowController@signup');// ユーザー登録
+
 Route::group(['middleware' => 'wowauth'], function(){// ログインチェックMiddleware
 	Route::get('/wow', 'WowController@index');// トップ
 	Route::get('/wow/dashboard', 'WowController@dashboard');// トップ
 	Route::get('/wow/signout', 'WowController@signout');// ログアウト
-	Route::get('/wow/register', 'WowController@register');// ユーザーページ
-	Route::post('/wow/signup', 'WowController@signup');// ユーザー登録
 });
 
 // Auth::routes();
