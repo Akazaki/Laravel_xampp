@@ -83,61 +83,61 @@ class Controller extends BaseController
 		// $this->SCRIPT_FROM_DOCUMENT_ROOT = str_replace(wowConst('HTTP_DOCUMENT_ROOT') , '', $_SERVER['PHP_SELF']);
 	}
 
-	/*
-	 * パスを調整する
-	 *
-	 * @param string $path : 
-	 */
-	function _adjustPath(&$path)
-	{
-		if(is_dir($path) === FALSE && is_file($path) === FALSE){
-			$path = dirname(__FILE__) . '/' . $path;
-		}
-	}
+	// /*
+	//  * パスを調整する
+	//  *
+	//  * @param string $path : 
+	//  */
+	// function _adjustPath(&$path)
+	// {
+	// 	if(is_dir($path) === FALSE && is_file($path) === FALSE){
+	// 		$path = dirname(__FILE__) . '/' . $path;
+	// 	}
+	// }
 
-	/*
-	 * POST値からパラメータを取得するようにセットする
-	 *
-	 * @param array $params : 
-	 */
-	function _setParams($params)
-	{
-		if(count($params) > 0){
-			foreach($params as $c){
-				if(array_key_exists($c, $this->_gw_params)){
-					$this->$c = $this->_gw_params[$c];
-				}else{
-					$this->$c = '';
-				}
-			}
-		}
-	}
+	// /*
+	//  * POST値からパラメータを取得するようにセットする
+	//  *
+	//  * @param array $params : 
+	//  */
+	// function _setParams($params)
+	// {
+	// 	if(count($params) > 0){
+	// 		foreach($params as $c){
+	// 			if(array_key_exists($c, $this->_gw_params)){
+	// 				$this->$c = $this->_gw_params[$c];
+	// 			}else{
+	// 				$this->$c = '';
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	/*
-	 * パラメータを配列で取得する
-	 *
-	 * @param array $items : 
-	 */
-	function _getParams(& $items){
-		$tArray = array();
-		foreach($items as $i){
-			if(isset($this->{$i})){
-				$tArray[$i] = $this->{$i};
-			}
-		}
-		return $tArray;
-	}
+	// /*
+	//  * パラメータを配列で取得する
+	//  *
+	//  * @param array $items : 
+	//  */
+	// function _getParams(& $items){
+	// 	$tArray = array();
+	// 	foreach($items as $i){
+	// 		if(isset($this->{$i})){
+	// 			$tArray[$i] = $this->{$i};
+	// 		}
+	// 	}
+	// 	return $tArray;
+	// }
 
-	/**
-	 * ＤＢを使用する準備
-	 *
-	 * @return DB object
-	 */
-	function _useDb(){
-		require_once dirname(__FILE__) . '/Guesswork/DB.php';
-		$db = new DB();
-		return $db->connect();
-	}
+	// /**
+	//  * ＤＢを使用する準備
+	//  *
+	//  * @return DB object
+	//  */
+	// function _useDb(){
+	// 	require_once dirname(__FILE__) . '/Guesswork/DB.php';
+	// 	$db = new DB();
+	// 	return $db->connect();
+	// }
 
 	/**
 	 * マスターテーブルを取得する
@@ -159,6 +159,7 @@ class Controller extends BaseController
 
 		return $master;
 	}
+	
 	/**
 	 * マスター配列からセレクタHTMLまたは表示HTMLを作成する
 	 *
@@ -249,32 +250,32 @@ class Controller extends BaseController
 		return $val;
 	}
 
-	/**
-	 * ファイルポインタから行を取得し、CSVフィールドを処理する
-	 *
-	 * @param resource handle
-	 * @param int length
-	 * @param string delimiter
-	 * @param string enclosure
-	 * @return ファイルの終端に達した場合を含み、エラー時にFALSEを返します。
-	 */
-	function fgetcsv_reg (&$handle, $length = null, $d = ',', $e = '"') {
-		$d = preg_quote($d);
-		$e = preg_quote($e);
-		$_line = "";
-		while ($eof != true) {
-			$_line .= (empty($length) ? fgets($handle) : fgets($handle, $length));
-			$itemcnt = preg_match_all('/'.$e.'/', $_line, $dummy);
-			if ($itemcnt % 2 == 0) $eof = true;
-		}
-		$_csv_line = preg_replace('/(?:\r\n|[\r\n])?$/', $d, trim($_line));
-		$_csv_pattern = '/('.$e.'[^'.$e.']*(?:'.$e.$e.'[^'.$e.']*)*'.$e.'|[^'.$d.']*)'.$d.'/';
-		preg_match_all($_csv_pattern, $_csv_line, $_csv_matches);
-		$_csv_data = $_csv_matches[1];
-		for($_csv_i=0;$_csv_i<count($_csv_data);$_csv_i++){
-			$_csv_data[$_csv_i]=preg_replace('/^'.$e.'(.*)'.$e.'$/s','$1',$_csv_data[$_csv_i]);
-			$_csv_data[$_csv_i]=str_replace($e.$e, $e, $_csv_data[$_csv_i]);
-		}
-		return empty($_line) ? false : $_csv_data;
-	}
+	// /**
+	//  * ファイルポインタから行を取得し、CSVフィールドを処理する
+	//  *
+	//  * @param resource handle
+	//  * @param int length
+	//  * @param string delimiter
+	//  * @param string enclosure
+	//  * @return ファイルの終端に達した場合を含み、エラー時にFALSEを返します。
+	//  */
+	// function fgetcsv_reg (&$handle, $length = null, $d = ',', $e = '"') {
+	// 	$d = preg_quote($d);
+	// 	$e = preg_quote($e);
+	// 	$_line = "";
+	// 	while ($eof != true) {
+	// 		$_line .= (empty($length) ? fgets($handle) : fgets($handle, $length));
+	// 		$itemcnt = preg_match_all('/'.$e.'/', $_line, $dummy);
+	// 		if ($itemcnt % 2 == 0) $eof = true;
+	// 	}
+	// 	$_csv_line = preg_replace('/(?:\r\n|[\r\n])?$/', $d, trim($_line));
+	// 	$_csv_pattern = '/('.$e.'[^'.$e.']*(?:'.$e.$e.'[^'.$e.']*)*'.$e.'|[^'.$d.']*)'.$d.'/';
+	// 	preg_match_all($_csv_pattern, $_csv_line, $_csv_matches);
+	// 	$_csv_data = $_csv_matches[1];
+	// 	for($_csv_i=0;$_csv_i<count($_csv_data);$_csv_i++){
+	// 		$_csv_data[$_csv_i]=preg_replace('/^'.$e.'(.*)'.$e.'$/s','$1',$_csv_data[$_csv_i]);
+	// 		$_csv_data[$_csv_i]=str_replace($e.$e, $e, $_csv_data[$_csv_i]);
+	// 	}
+	// 	return empty($_line) ? false : $_csv_data;
+	// }
 }

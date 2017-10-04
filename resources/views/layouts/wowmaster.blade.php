@@ -19,7 +19,7 @@
     <div class="container">
     <div id="header">
     <div id="topBox">
-    <h1><a href="dashboard.php"><img src="/public/wow/common/img/header_logo.gif" alt="Contents Management Flamework WOW" width="81" height="14" /></a></h1>
+    <h1><a href="./dashboard"><img src="/public/wow/common/img/header_logo.gif" alt="Contents Management Flamework WOW" width="81" height="14" /></a></h1>
     <div id="gpol">
     <p><a href="/" target="_blank">Webサイトへ</a></p>
     @if(Auth::check())
@@ -36,7 +36,7 @@
     </ul>
     <div id="time_logout">
     <div id="time"><img src="/public/wow/common/img/time.gif" alt="現在の時刻" width="15" height="15" /><span data-offset="9">19:14:34</span></div>
-    <div id="account"><img src="/public/wow/common/img/account.gif" alt="アカウント" width="1" height="15" /><span>ログイン名：admin</span></div>
+    <div id="account"><img src="/public/wow/common/img/account.gif" alt="アカウント" width="1" height="15" /><span>ログイン名：{{ Auth::user()->label_text }}</span></div>
     <div id="logout"><a href="/wow/signout"><img src="/public/wow/common/img/logout.gif" alt="ログアウト" width="68" height="25" border="0" class="imgover" /></a></div>
     </div>
     </div>

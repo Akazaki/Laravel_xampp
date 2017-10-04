@@ -12,8 +12,6 @@ class WowController extends Controller
 {   
 	function __construct(Request $request)
 	{
-		// loginチェック
-		//$this->middleware('wowauth');
 	}
 
 	public function index(Request $request)
@@ -31,7 +29,7 @@ class WowController extends Controller
 		return view('wow/dashboard');
 	}
 
-	public function signin(Request $request)
+	public function signIn(Request $request)
 	{
 		$this->validate($request,[
 			'email_text' => 'email|required',
@@ -50,7 +48,7 @@ class WowController extends Controller
 		return view('wow/register');
 	}
 
-	public function signup(Request $request)
+	public function signUp(Request $request)
 	{
 		// バリデーション
 		$this->validate($request,[
@@ -68,13 +66,19 @@ class WowController extends Controller
 	 
 		// 保存
 		$user->save();
-	 
-		// リダイレクト
-		return redirect('wow');
+
+		if(Auth::attempt(['email_text' => $request->input('email_text'), 'password' => $request->input('password')])){
+			return redirect('wow');
+		}
 	}
 
-	public function signout(){
+	public function signOut(){
 		Auth::logout();
 		return redirect('wow/login');
+	}
+
+	public function postList($table){
+		dd($table);
+		return view('wow/postlist');
 	}
 }
