@@ -53,14 +53,14 @@ $(document).ready(function () {
 		<p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p>
 		<h3><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" height="79" class="png"></h3>
 			
-			<form action="{{action('WowController@signin')}}" method="post">
+			<form action="{{action('WowController@signIn')}}" method="post">
 
 				{{ csrf_field() }}
 
 				<div class="form clr">
 					<div class="idPass">
 						<p><img src="/public/wow/img/id_img.png" alt="" width="21" height="20" class="icon png">
-						<input name="email_text" type="text" value="ユーザーID" onFocus="cText(this)" onBlur="sText(this)"></p>
+						<input name="email_text" type="text" value="{{ old('email_text') ? old('email_text') : '' }}" onFocus="cText(this)" onBlur="sText(this)"></p>
 						<p><img src="/public/wow/img/pass_img.png" alt="" width="21" height="20" class="icon png">
 						<input type="text" value="パスワード" id="password-dummy" onfocus="dummyFocus('password')" />
 						<input type="password" value="" id="password" name="password" onblur="passwordBlur('password')" style="display: none;" /></p>

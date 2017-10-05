@@ -23,7 +23,7 @@
     <div id="gpol">
     <p><a href="/" target="_blank">Webサイトへ</a></p>
     @if(Auth::check())
-        <div><a href="{{action('WowController@signout')}}">ログアウト</a></div>
+        <div><a href="{{action('WowController@signOut')}}">ログアウト</a></div>
     @else
         <div><a href="{{action('WowController@register')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 新規登録</a></div>
         <div><a href="{{action('WowController@login')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ログイン</a></div>
