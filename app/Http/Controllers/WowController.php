@@ -16,7 +16,13 @@ class WowController extends Controller
 
 	public function index(Request $request)
 	{
-		return view('/wow/dashboard');
+		$articles = [
+			[
+			'id' => 1,
+			'title' => 'タイトル'
+			]
+		];
+        return $articles;
 	}
 
 	public function login(Request $request)

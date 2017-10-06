@@ -17,5 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::resource('fileup', 'FileupController');
-Route::post('fileup', 'FileupController@index');
+// Route::resource('fileup', 'FileupController');
+// Route::post('fileup', 'FileupController@index');
+
+Route::post('wow', 'WowController@index');

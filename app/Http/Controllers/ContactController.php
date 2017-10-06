@@ -89,7 +89,7 @@ class ContactController extends Controller
 			//画像uploadsにcopy
 			if($request->get('img_path')){
 				$img_path = base_path().$request->get('img_path');
-				if(file_exists($img_path)){
+				if(file_exists($img_path) && exif_imagetype($img_path)){
 					$file_info = pathinfo($img_path);
 					$img_extension = strtolower($file_info['extension']);
 					$uploads_file = base_path().$this->uploads_path.md5(sha1(uniqid(mt_rand(), true))).'.'.$img_extension;
