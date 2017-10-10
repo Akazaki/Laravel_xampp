@@ -179,6 +179,8 @@ return [
         Laravel\Providers\ValidatorServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 
     /*
@@ -229,6 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         'Image' => Intervention\Image\Facades\Image::class,
+        
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 

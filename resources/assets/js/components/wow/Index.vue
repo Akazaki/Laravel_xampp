@@ -1,11 +1,13 @@
 <template>
-    <div v-for="article in articles">
-        <h1>
-            <router-link :to="'/articles/' + article.id">{{ article.title }}</router-link>
-        </h1>
-        <p>
-            {{ article.content }}
-        </p>
+	<div>
+	    <div v-for="article in articles">
+	        <h1>
+	            <router-link :to="'/articles/' + article.id">{{ article.title }}</router-link>
+	        </h1>
+	        <p>
+	            {{ article.content }}
+	        </p>
+	    </div>
     </div>
 </template>
 
@@ -21,7 +23,7 @@
         },
         methods: {
             fetchArticles() {
-                this.$http.get('/api/wow')
+                this.$http.post('/api/wow')
                 .then(res =>  {
                     this.articles = res.data
                 })
