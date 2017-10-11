@@ -115,10 +115,8 @@ class WowController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        $user = Admins::where('email_text', $request->email_text)->first();
-
         // all good so return the token
-        return response()->json(compact('user', 'token'));
+        return response()->json(compact('user', 'token'), 200);
     }
 
     // ログインチェック

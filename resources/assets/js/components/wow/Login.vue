@@ -59,6 +59,8 @@
 <script type="text/javascript" src="/public/wow/common/js/jquery.montage.min.js"></script> -->
 
 <script>
+  import userStore from '../../stores/userStore'
+
     export default {
 		data() {
 			return {
@@ -69,17 +71,15 @@
 			}
 		},
 		methods: {
-			wowLogin() {
-				var login_param = {email_text: this.email_text, password: this.password}
-				axios.post('/api/wow/signin', login_param)
-				.then(res =>  {
-					this.state.user = res.data.user
-					this.state.authenticated = true
-					console.log(res.data);
+			wowLogin () {
+				userStore.login(this.email_text, this.password, res => {
+					console.log(res)
+					router.push('/')
+					// this.$router.push('/')
 				}, error => {
-					console.log(error.data);
+					console.log('error')
 					this.showAlert = true
-					this.alertMessage = 'Wrong email or password.'
+					this.alertMessage = 'Wrong email or passworddddddd.'
 				})
 			},
 		}

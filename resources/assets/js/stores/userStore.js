@@ -1,3 +1,7 @@
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
 export default {
 	debug: true,
 	state: {
@@ -5,25 +9,35 @@ export default {
 		authenticated: false,
 	},
 
-	// login (email_text, password, successCb = null, errorCb = null) {
-	// 	var login_param = {email_text: email_text, password: password}
+	//ログイン成功するとstateに保持
+	login (email_text, password, successCb = null, errorCb = null) {
+		var login_param = {email_text: email_text, password: password}
 
-	// 	axios.post('/api/authenticate')
-	// 	.then(login_param, res =>	{
-	// 			this.state.user = res.data.user
-	// 			this.state.authenticated = true
-	// 			successCb()
-	// 	}, error => {
-	// 			errorCb()
-	// 	})
-	// },
+		axios.post('/api/wow/signin', login_param)
+		.then(login_param, res =>	{
+			this.state.user = res.data.user
+			this.state.authenticated = true
+			return successCb()
+		}, error => {
+			return errorCb()
+		})
+	},
+
+	// To log out, we just need to remove the token
+	logout (successCb = null, errorCb = null) {
+		axios.get('logout', () => {
+			localStorage.removeItem('jwt-token')
+			this.state.authenticated = false
+			successCb()
+		}, errorCb)
+	},
 
 	setCurrentUser () {
 		axios.post('/api/wow/authcheck')
 		.then(res => {
-			console.log(res.data)
-			// this.state.user = res.data.user
-			// this.state.authenticated = true
+			this.state.user = res.data
+			this.state.authenticated = true
+			router.push('/')
 		})
 	},
 
@@ -51,7 +65,6 @@ export default {
 			return response
 		}, error => {
 			// Also, if we receive a Bad Request / Unauthorized error
-			console.log(error)
 			return Promise.reject(error)
 		})
 	
