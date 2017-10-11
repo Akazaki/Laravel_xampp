@@ -1,6 +1,5 @@
 <template>
 	<div>
-		{{ userState.user.name }}
 		<router-link to="about">about</router-link>
 		<router-link to="wow/login">login</router-link>
 		<div v-for="article in articles">
@@ -15,6 +14,7 @@
 </template>
 
 <script>
+	import userStore from '../stores/userStore'
 	export default {
 		created() {
 			this.fetchArticles()

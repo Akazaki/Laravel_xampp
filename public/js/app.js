@@ -13625,11 +13625,6 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(12);
-
-
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
-
 /* harmony default export */ __webpack_exports__["a"] = ({
 	debug: true,
 	state: {
@@ -13649,6 +13644,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 		axios.post('/api/wow/signin', login_param).then(login_param, function (res) {
 			_this.state.user = res.data.user;
 			_this.state.authenticated = true;
+			router.push('/');
 			return successCb();
 		}, function (error) {
 			return errorCb();
@@ -13675,7 +13671,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 		axios.post('/api/wow/authcheck').then(function (res) {
 			_this3.state.user = res.data;
 			_this3.state.authenticated = true;
-			router.push('/');
+			//router.push('/')
 		});
 	},
 
@@ -44729,6 +44725,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(13);
 //
 //
 //
@@ -44744,7 +44741,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	created: function created() {
@@ -44778,7 +44775,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._v("\n\t" + _vm._s(_vm.userState.user.name) + "\n\t"),
       _c("router-link", { attrs: { to: "about" } }, [_vm._v("about")]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "wow/login" } }, [_vm._v("login")]),
@@ -44931,6 +44927,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(12);
 //
 //
 //
@@ -44993,8 +44990,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	created: function created() {
+		// this.$router.push('/')
+	},
 	data: function data() {
 		return {
 			email_text: '',
@@ -45009,11 +45011,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			__WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].login(this.email_text, this.password, function (res) {
-				console.log(res);
-				router.push('/');
-				// this.$router.push('/')
+				_this.$router.push('/');
 			}, function (error) {
-				console.log('error');
 				_this.showAlert = true;
 				_this.alertMessage = 'Wrong email or passworddddddd.';
 			});

@@ -59,9 +59,14 @@
 <script type="text/javascript" src="/public/wow/common/js/jquery.montage.min.js"></script> -->
 
 <script>
-  import userStore from '../../stores/userStore'
+import userStore from '../../stores/userStore'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
     export default {
+		created () {
+			// this.$router.push('/')
+		},
 		data() {
 			return {
 				email_text : '',
@@ -73,11 +78,8 @@
 		methods: {
 			wowLogin () {
 				userStore.login(this.email_text, this.password, res => {
-					console.log(res)
-					router.push('/')
-					// this.$router.push('/')
+					this.$router.push('/')
 				}, error => {
-					console.log('error')
 					this.showAlert = true
 					this.alertMessage = 'Wrong email or passworddddddd.'
 				})

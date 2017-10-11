@@ -1,7 +1,3 @@
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
 export default {
 	debug: true,
 	state: {
@@ -17,6 +13,7 @@ export default {
 		.then(login_param, res =>	{
 			this.state.user = res.data.user
 			this.state.authenticated = true
+			router.push('/')
 			return successCb()
 		}, error => {
 			return errorCb()
@@ -37,7 +34,7 @@ export default {
 		.then(res => {
 			this.state.user = res.data
 			this.state.authenticated = true
-			router.push('/')
+			//router.push('/')
 		})
 	},
 
