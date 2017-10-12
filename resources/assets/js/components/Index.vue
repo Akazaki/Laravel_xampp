@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<router-link to="about">about</router-link>
-		<router-link to="wow/login">login</router-link>
 		<div v-for="article in articles">
 			<h1>
 				<router-link :to="'/articles/' + article.id">{{ article.title }}</router-link>

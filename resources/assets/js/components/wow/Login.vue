@@ -36,6 +36,9 @@
 
 								<p class="err">
 									<!-- <span>{{ alertMessage }}</span> -->
+									<span class="alert alert-danger" role="alert" v-if="showAlert">
+						            	{{ alertMessage }}
+									</span>
 								</p>
 
 								<div class="check"></div>
@@ -60,12 +63,16 @@
 
 <script>
 import userStore from '../../stores/userStore'
+import http from '../../services/http'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
     export default {
 		created () {
-			// this.$router.push('/')
+			// ログイン判定
+			if(userStore.state.authenticated){
+				this.$router.push('/')
+			}
 		},
 		data() {
 			return {

@@ -21,6 +21,7 @@ const router = new VueRouter({
 const app = new Vue({
 	router,
 	el: '#app',
+	// render: h => h(require('./components/index.vue')),
 	created () {
 		userStore.init()
 	}
