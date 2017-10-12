@@ -91,8 +91,7 @@ class WowController extends Controller
 	}
 
 	public function postList($table){
-		dd($table);
-		return view('wow/postlist');
+        return response()->json(['status' => 'success'], 200);
 	}
 
     public function signIn(Request $request)
@@ -122,7 +121,7 @@ class WowController extends Controller
     }
 
     // ログインチェック
-    public function authCheck(Request $request)
+    public function getCurrentUser(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
         return response()->json(compact('user'));

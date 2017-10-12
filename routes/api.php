@@ -19,21 +19,22 @@ use Illuminate\Http\Request;
 
 // Route::resource('fileup', 'FileupController');
 // Route::post('fileup', 'FileupController@index');
+//Route::group(['middleware' => 'ajaxOnly'], function () {
+	// WOW
+	//Route::post('wow', 'WowController@index');
 
-// WOW
-Route::post('wow', 'WowController@index');
+	// Route::get('/wow/login', 'WowController@login');// ログインページ
+	Route::post('/wow/signin', 'WowController@signIn');// ログイン
+	//Route::get('/wow/register', 'WowController@register');// ユーザー登録ページ
+	Route::post('/wow/signup', 'WowController@signUp');// ユーザー登録
+	Route::get('/wow/getcurrentuser',  'WowController@getCurrentUser');
 
-Route::get('/wow/login', 'WowController@login');// ログインページ
-Route::post('/wow/signin', 'WowController@signIn');// ログイン
-Route::get('/wow/register', 'WowController@register');// ユーザー登録ページ
-Route::post('/wow/signup', 'WowController@signUp');// ユーザー登録
-Route::get('/wow/authcheck',  'WowController@authCheck');
+	Route::group(['middleware' => 'jwt.auth'], function(){// ログインチェックMiddleware
+		// Route::get('/wow', 'WowController@index');// トップ
+		// Route::get('/wow/dashboard', 'WowController@dashboard');// トップ
+		Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
 
-//Route::group(['middleware' => 'wowauth'], function(){// ログインチェックMiddleware
-	Route::get('/wow', 'WowController@index');// トップ
-	Route::get('/wow/dashboard', 'WowController@dashboard');// トップ
-	Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
-
-	//記事一覧
-	Route::get('/wow/list/{table}', 'WowController@postList');
+		//記事一覧
+		Route::get('/wow/postList/', 'WowController@postList');
+	});
 //});

@@ -8,6 +8,7 @@
 		<title>Vue TODO</title>
 
 		<link rel="stylesheet" href="/public/css/app.css">
+		<link rel="stylesheet" href="/public/css/style.css">
 
 		<script>
 			window.Laravel = {};
@@ -17,8 +18,7 @@
 	<body>
 		<navbar></navbar>
 		<div id="app">
-			<navbar></navbar>
-			<div class="container">
+			<div>
 				<router-view></router-view>
 			</div>
 		</div>

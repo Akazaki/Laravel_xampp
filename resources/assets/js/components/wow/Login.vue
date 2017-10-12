@@ -1,52 +1,44 @@
 <template>
 	<div>
-		<div id="login">
-			<div class="scroll"></div>
-			<table>
-				<tr>
-					<td id="cellHeader">
-						<div id="header">
-							<div id="topBox">
-								<h1><img src="/public/wow/img/header_logo.gif" alt="ようこそ Contents Management Flamework WOW" width="251" height="12"></h1>
-								<div id="gpol"></div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td id="wrapper">
-						<div id="loginInner" class="loginWidth">
-							<div class="alice clr">
-								<p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p>
-								<h3><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" height="79" class="png"></h3>
-								
-								<div class="form clr">
-									<div class="idPass">
-										<p>
-											<img src="/public/wow/img/id_img.png" alt="" width="21" height="20" class="icon png">
-											<input name="email_text" type="text" value="" v-model="email_text" required autofocus>
-										</p>
-										<p>
-											<img src="/public/wow/img/pass_img.png" alt="" width="21" height="20" class="icon png">
-											<input type="password" value="" name="password" id="password" v-model="password" required autofocus>
-										</p>
-									</div>
-									<input @click="wowLogin" type="image" src="/public/wow/img/login_btn.png" name="doneConfirmLogin" class="tremble doneConfirmLogin" style="width:187px; height:61px;" onmouseover="this.src='/public/wow/img/login_btn_o.png'" onmouseout="this.src='/public/wow/img/login_btn.png'" />
-								</div>
+		<div ID="Header_line">ようこそ、Contents Management Flamework WOWへ</div>
+		<div class="wrapper">
+			<div id="login">
+				<div id="loginInner" class="loginWidth">
+					<div class="alice clr">
+						<!-- <p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p> -->
+						<h3 class="logo_gp"><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" height="79" class="png"></h3>
 
-								<p class="err">
-									<!-- <span>{{ alertMessage }}</span> -->
-									<span class="alert alert-danger" role="alert" v-if="showAlert">
-						            	{{ alertMessage }}
-									</span>
-								</p>
+						<div class="form login">
 
-								<div class="check"></div>
+							<div class="form__field">
+								<label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">Username</span></label>
+								<input id="login__username" type="text" name="email_text" v-model="email_text" class="form__input" placeholder="email" required>
 							</div>
+
+							<div class="form__field">
+								<label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Password</span></label>
+								<input id="login__password" type="password" name="password" v-model="password" class="form__input" placeholder="Password" required>
+							</div>
+
+							<div class="form__field">
+								<input @click="wowLogin" type="submit" value="Sign In">
+							</div>
+
+							<svg xmlns="http://www.w3.org/2000/svg" class="icons"><symbol id="arrow-right" viewBox="0 0 1792 1792"><path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z"/></symbol><symbol id="lock" viewBox="0 0 1792 1792"><path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z"/></symbol><symbol id="user" viewBox="0 0 1792 1792"><path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z"/></symbol></svg>
+
 						</div>
-					</td>
-				</tr>
-			</table>
+						
+						<p class="err">
+							<!-- <span>{{ alertMessage }}</span> -->
+							<span class="alert alert-danger" role="alert" v-if="showAlert">
+								{{ alertMessage }}
+							</span>
+						</p>
+
+						<div class="check"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -62,18 +54,12 @@
 <script type="text/javascript" src="/public/wow/common/js/jquery.montage.min.js"></script> -->
 
 <script>
-import userStore from '../../stores/userStore'
+// import userStore from '../../stores/userStore'
 import http from '../../services/http'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-    export default {
-		created () {
-			// ログイン判定
-			if(userStore.state.authenticated){
-				this.$router.push('/')
-			}
-		},
+	export default {
 		data() {
 			return {
 				email_text : '',
@@ -82,13 +68,19 @@ Vue.use(VueRouter)
 				alertMessage: '',
 			}
 		},
+		created () {
+			console.log(this.$store.state.authenticated)
+			// if(this.state.authenticated){
+			// 	this.$router.push('/wow')
+			// }
+		},
 		methods: {
 			wowLogin () {
 				userStore.login(this.email_text, this.password, res => {
-					this.$router.push('/')
+					this.$router.push('/wow')
 				}, error => {
 					this.showAlert = true
-					this.alertMessage = 'Wrong email or passworddddddd.'
+					this.alertMessage = 'Wrong email or password.'
 				})
 			},
 		}

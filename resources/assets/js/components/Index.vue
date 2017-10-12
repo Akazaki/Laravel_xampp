@@ -1,4 +1,5 @@
 <template>
+			<!-- <navbar></navbar> -->
 	<div>
 		<div v-for="article in articles">
 			<h1>

@@ -32,7 +32,7 @@ export default {
 	 * Init the service.
 	 */
 	init () {
-		axios.defaults.baseURL = '/api'
+		axios.defaults.baseURL = '/'
 
 		// Intercept the request to make sure the token is injected into the header.
 		axios.interceptors.request.use(config => {
@@ -48,7 +48,7 @@ export default {
 			// ...get the token from the header or response data if exists, and save it.
 			const token = response.headers['Authorization'] || response.data['token']
 			if (token) {
-			localStorage.setItem('jwt-token', token)
+				localStorage.setItem('jwt-token', token)
 			}
 
 			return response

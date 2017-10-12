@@ -1,143 +1,245 @@
-li {
-  list-style: none;
+label {
+  margin: 0;
 }
-ul {
-  padding: 0;
+/*-------------------WOW--------------------------*/
+:root {
+  --htmlFontSize: 100%;
+  --bodyBackgroundColor: #2c3338;
+  --bodyColor: var(--baseColor);
+  --bodyFontFamily: 'Open Sans';
+  --bodyFontFamilyFallback: sans-serif;
+  --bodyFontSize: 0.875rem;
+  --bodyFontWeight: 400;
+  --bodyLineHeight: 1.5;
 }
-#Form_box {
-  margin: 30px auto 60px;
+:root {
+  --loginBorderRadus: 0.25rem;
+  --loginColor: #eee;
+  --loginInputBackgroundColor: #3b4148;
+  --loginInputHoverBackgroundColor: #434a52;
+  --loginLabelBackgroundColor: #363b41;
+  --loginSubmitBackgroundColor: #ea4c88;
+  --loginSubmitColor: #eee;
+  --loginSubmitHoverBackgroundColor: #d44179;
+}
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: var(--htmlFontSize);
+  height: 100%;
+}
+body {
+  background-color: #ececec;
+  color: var(--bodyColor);
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--bodyFontSize);
+  font-weight: var(--bodyFontWeight);
+  height: 100%;
+  line-height: var(--bodyLineHeight);
+  margin: 0;
+  min-height: 100%;
+}
+#Header_line {
+  background: var(--bodyBackgroundColor);
+  padding: 10px;
+  width: 100%;
+  font-size: 5%;
+  color: #FFF;
+  position: relative;
+  z-index: 9999;
+}
+#Navbar {
+  background: var(--bodyBackgroundColor);
+}
+#login {
   width: 1000px;
-  padding: 25px;
-  border: 2px solid #ddd;
   background-color: #FFF;
-}
-#Form_box .form_title {
-  margin-bottom: 15px;
-  font-size: 120%;
-  text-align: center;
-  font-weight: bold;
-}
-#Form_box dl {
-  display: table;
-  width: 100%;
-}
-#Form_box dl dt {
-  display: table-cell;
-  width: 30%;
-  padding: 20px 3% 20px 0;
-  text-align: right;
-  vertical-align: top;
-}
-#Form_box dl dt label span {
-  background: #ffe100;
-  font-size: 80%;
-  line-height: 1;
-  padding: 2px 4px;
-  margin-left: 10px;
-}
-#Form_box dl dd {
-  display: table-cell;
-  padding: 12px 0;
-}
-#Form_box dl dd input {
-  background: #eff1f3;
-  border: none;
-  padding: 10px;
-  font-family: "\3053\3076\308A\306A\30B4\30B7\30C3\30AF   W3 JIS2004", "\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3", "HIragino Kaku Gothic Pro W3", "HIragino Kaku Gothic Pro", sans-serif !important;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  color: #000;
-}
-#Form_box dl dd textarea {
-  width: 80%;
-  background: #eff1f3;
-  border: none;
-  padding: 10px;
-  font-family: "\3053\3076\308A\306A\30B4\30B7\30C3\30AF   W3 JIS2004", "\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3", "HIragino Kaku Gothic Pro W3", "HIragino Kaku Gothic Pro", sans-serif !important;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  color: #000;
-  resize: none;
-}
-#Form_box dl dd .error_text {
-  display: block;
-  color: #ff0000;
-  font-size: 13px;
-}
-#Form_box dl .check_box input {
-  display: none;
-}
-#Form_box dl .check_box label {
-  position: relative;
-  padding: 2px 0 2px 27px;
-  cursor: pointer;
-  width: 100%;
-}
-#Form_box dl .check_box label:before {
-  content: "";
-  display: block;
-  height: 20px;
-  width: 20px;
-  background: url(/public/img/checkbox.png) no-repeat left top;
-  background-size: 20px;
-  position: absolute;
-  top: 2px;
-  left: 0;
-}
-#Form_box dl .check_box input:checked + label:before {
-  background: url(/public/img/checkbox.png) no-repeat left bottom;
-  background-size: 20px;
-}
-#Form_box dl .radio_box input {
-  display: none;
-}
-#Form_box dl .radio_box label {
-  position: relative;
-  padding: 2px 0 2px 27px;
-  cursor: pointer;
-  width: 100%;
-}
-#Form_box dl .radio_box label:before {
-  content: "";
-  display: block;
-  height: 20px;
-  width: 20px;
-  background: url(/public/img/radiobutton.png) no-repeat left top;
-  background-size: 20px;
-  position: absolute;
-  top: 2px;
-  left: 0;
-}
-#Form_box dl .radio_box input:checked + label:before {
-  background: url(/public/img/radiobutton.png) no-repeat left bottom;
-  background-size: 20px;
-}
-#Form_box dl .select_box {
-  padding: 9px;
-  background: #eff1f3;
-  border: none;
-  font-weight: bold;
-}
-#Form_box dl .file_box input {
-  background: none;
-}
-#Form_box .submit_btn {
   margin: 0 auto;
-  width: 120px;
-  margin-bottom: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* helpers/hidden.css */
+  /* helpers/icon.css */
+  /* layout/base.css */
+  /* modules/anchor.css */
+  /* modules/form.css */
+  /* modules/login.css */
+  /* modules/text.css */
 }
-#Form_box .submit_btn input {
-  border: none;
-  width: 100%;
-  padding: 10px;
-  background: #ffe100;
-  text-align: center;
-  color: #000;
-  cursor: pointer;
-  border-radius: 4px;
+#login #loginInner {
+  background-color: #FFF;
+  width: 450px;
+  margin: 40px auto auto;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 0px 70px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -214px;
+  margin-top: -220px;
 }
-#Error_box li {
-  margin-bottom: 10px;
+#login .wowLogo {
+  position: absolute;
+  left: 40%;
+  top: -47px;
+}
+#login .logo_gp {
+  margin: 50px 0;
+}
+#login .logo_gp img {
   display: block;
-  color: #ff0000;
+  margin: 0 auto;
 }
+#login .grid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--gridMaxWidth);
+  width: var(--gridWidth);
+}
+#login .hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+#login :root {
+  --iconFill: var(--baseColor);
+}
+#login .icons {
+  display: none;
+}
+#login .icon {
+  display: inline-block;
+  fill: var(--iconFill);
+  font-size: 1rem;
+  height: 1em;
+  vertical-align: middle;
+  width: 1em;
+}
+#login :root {
+  --htmlFontSize: 100%;
+  --bodyBackgroundColor: #2c3338;
+  --bodyColor: var(--baseColor);
+  --bodyFontFamily: 'Open Sans';
+  --bodyFontFamilyFallback: sans-serif;
+  --bodyFontSize: 0.875rem;
+  --bodyFontWeight: 400;
+  --bodyLineHeight: 1.5;
+}
+#login * {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+#login :root {
+  --anchorColor: #eee;
+}
+#login a {
+  color: var(--anchorColor);
+  outline: 0;
+  text-decoration: none;
+}
+#login a:focus,
+#login a:hover {
+  text-decoration: underline;
+}
+#login :root {
+  --formFieldMargin: 0.875rem;
+}
+#login input {
+  background-image: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+#login input[type='submit'] {
+  cursor: pointer;
+}
+#login .form input[type='password'],
+#login .form input[type='text'],
+#login .form input[type='submit'] {
+  width: 100%;
+}
+#login .form__field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: var(--formFieldMargin);
+}
+#login .form__field label {
+  margin-bottom: 15px;
+}
+#login .form__field input {
+  margin-bottom: 15px;
+}
+#login .form__input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+#login .login {
+  margin-bottom: 50px;
+  color: var(--loginColor);
+}
+#login .login label,
+#login .login input[type='text'],
+#login .login input[type='password'],
+#login .login input[type='submit'] {
+  border-radius: var(--loginBorderRadus);
+  padding: 1rem;
+}
+#login .login label {
+  background-color: var(--loginLabelBackgroundColor);
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+#login .login input[type='password'],
+#login .login input[type='text'] {
+  background-color: var(--loginInputBackgroundColor);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+#login .login input[type='password']:focus,
+#login .login input[type='password']:hover,
+#login .login input[type='text']:focus,
+#login .login input[type='text']:hover {
+  background-color: var(--loginInputHoverBackgroundColor);
+}
+#login .login input[type='submit'] {
+  background-color: #41b883;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#login .login input[type='submit']:focus,
+#login .login input[type='submit']:hover {
+  background-color: #59ce99;
+}
+#login :root {
+  --paragraphMarginBottom: 1.5rem;
+  --paragraphMarginTop: 1.5rem;
+}
+#login p {
+  margin-bottom: var(--paragraphMarginBottom);
+  margin-top: var(--paragraphMarginTop);
+}
+#login .text--center {
+  text-align: center;
+}
+#Navbar {
+  overflow: hidden;
+  background-color: #3c3d3f;
+}
+/*-------------------WOWここまで--------------------------*/
+/*-------------------お問い合わせフォーム--------------------------*/
+/*-------------------お問い合わせフォームここまで--------------------------*/
