@@ -68,20 +68,23 @@ Vue.use(VueRouter)
 				alertMessage: '',
 			}
 		},
-		created () {
+		// created () {
+		// 	console.log(this.$store.state.authenticated)
+		// 	// if(this.state.authenticated){
+		// 	// 	this.$router.push('/wow')
+		// 	// }
+		// },
+		created() {
 			console.log(this.$store.state.authenticated)
-			// if(this.state.authenticated){
-			// 	this.$router.push('/wow')
-			// }
 		},
 		methods: {
 			wowLogin () {
-				userStore.login(this.email_text, this.password, res => {
-					this.$router.push('/wow')
-				}, error => {
-					this.showAlert = true
-					this.alertMessage = 'Wrong email or password.'
-				})
+				// userStore.login(this.email_text, this.password, res => {
+				// 	this.$router.push('/wow')
+				// }, error => {
+				// 	this.showAlert = true
+				// 	this.alertMessage = 'Wrong email or password.'
+				// })
 			},
 		}
 	}

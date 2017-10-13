@@ -10,26 +10,26 @@ require('./bootstrap')
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-var store = new Vuex.Store({
+const store = new Vuex.Store({
 	state: {
 		user: {},
 		authenticated: false,
 	},
 	mutations: {
-		// メッセージの書き換え
+		// Userの書き換え
 		setUser: function (state, payload) {
 			state.user = payload,
 			state.authenticated = true
 		}
 	},
 	actions: {
-		// メッセージを API から取得
-		getUser: function (commit) {
+		// User情報をAPIから取得
+		GET_USER: function (commit) {
 			axios.get('/api/wow/getcurrentuser').then(function (res) {
-			// ここからコミット 引数の commit を使う
-			console.log('get!'+res.data.user)
-			commit('setUser', res.data.user)
-			})
+				// ここからコミット 引数の commit を使う
+				console.log('get!'+res.data.user)
+				commit('setUser', res.data.user)
+			}).catch(errorCb)
 		}
 	},
 	getters: {
@@ -52,10 +52,10 @@ const app = new Vue({
 	store: store,
 	router,
 	el: '#app',
-	//methods: Vuex.mapActions(['getUser'])
-	// created () {
- //  //   	http.init()
-	// 	// userStore.init()
-	// },
+	created () {
+		store.dispatch('GET_USER')
+  //   	http.init()
+		// userStore.init()
+	},
 	// render: h => h(require('./components/index.vue')),
 })
