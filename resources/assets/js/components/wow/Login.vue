@@ -68,24 +68,48 @@ Vue.use(VueRouter)
 				alertMessage: '',
 			}
 		},
-		// created () {
-		// 	console.log(this.$store.state.authenticated)
-		// 	// if(this.state.authenticated){
-		// 	// 	this.$router.push('/wow')
-		// 	// }
+		// computed: {
+		//   items: function () {
+		//	 return this.$store.getters.items
+		//   },
+		//   // 直接書き換える事はできない＠セッターを使うとシンプルに書ける
+		//   categoryName: {
+		//	 get: function () { return this.$store.getters.categoryName },
+		//	 set: function (val) { this.$store.commit('updateCategoryName', val) }
+		//   }
 		// },
 		created() {
-			console.log(this.$store.state.authenticated)
+			this.$store.dispatch('GET_USER').then(res => {
+				console.log(res)
+				if(res.status == 200){
+					this.$router.push('/wow')
+				}
+			})
+			// if(this.$store.getters.authenticated){
+			// 	this.$router.push('/wow')
+			// }
+		},
+		updated(){
+			this.showAlert = false
 		},
 		methods: {
 			wowLogin () {
-				// userStore.login(this.email_text, this.password, res => {
-				// 	this.$router.push('/wow')
-				// }, error => {
-				// 	this.showAlert = true
-				// 	this.alertMessage = 'Wrong email or password.'
-				// })
+				var login_param = {email_text: this.email_text, password: this.password}
+
+				this.$store.dispatch('LOGIN', login_param).then(res => {
+				   	//ログイン成功
+					if(res.status == 200){
+						this.$router.push('/wow')
+					}
+				}, error => {
+					this.errorText();
+					return false
+				})
 			},
+			errorText(){
+				this.showAlert = true
+				this.alertMessage = 'メールアドレスかパスワードが違います'
+			}
 		}
 	}
 </script>

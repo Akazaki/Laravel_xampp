@@ -24,20 +24,20 @@
 </template>
 
 <script>
-import userStore from '../../stores/userStore'
+// import userStore from '../../stores/userStore'
 
 export default {
 	data (){
 		return {
-			userState: userStore.state
+			userState: this.$store
 		}
 	},
 	methods: {
-		logout() {
-			userStore.logout( () => {
-				this.$router.push('/wow/login')
-			})
-		}
+		// logout() {
+		// 	userStore.logout( () => {
+		// 		this.$router.push('/wow/login')
+		// 	})
+		// }
 	}
 }
 </script>

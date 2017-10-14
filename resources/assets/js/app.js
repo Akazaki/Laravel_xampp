@@ -12,29 +12,38 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		user: {},
-		authenticated: false,
+		user: {},//ログインユーザー
+		authenticated: false,//ログイン状態
 	},
 	mutations: {
 		// Userの書き換え
 		setUser: function (state, payload) {
 			state.user = payload,
-			state.authenticated = true
-		}
+			state.authenticated = true;
+		},
 	},
 	actions: {
 		// User情報をAPIから取得
 		GET_USER: function (commit) {
-			axios.get('/api/wow/getcurrentuser').then(function (res) {
+			return axios.get('/api/wow/getcurrentuser', res => {
 				// ここからコミット 引数の commit を使う
-				console.log('get!'+res.data.user)
+				commit('setUser', "res.data.user")
+			}, error => {
+			})
+		},
+		//ログイン成功するとstateに保持
+		LOGIN: function(commit, login_param) {
+			return axios.post('/api/wow/signin', login_param, res => {
 				commit('setUser', res.data.user)
-			}).catch(errorCb)
+			}, error => {
+				//console.log(res)
+			})
 		}
 	},
 	getters: {
 		// User をそのまま使用
-		User: function (state) { return state.user }
+		User: function (state) { return state.user },
+		authenticated: function (state) { return state.authenticated }
 	}
 })
 
@@ -53,8 +62,7 @@ const app = new Vue({
 	router,
 	el: '#app',
 	created () {
-		store.dispatch('GET_USER')
-  //   	http.init()
+		http.init()
 		// userStore.init()
 	},
 	// render: h => h(require('./components/index.vue')),
