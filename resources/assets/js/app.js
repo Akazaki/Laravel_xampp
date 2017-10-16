@@ -4,12 +4,11 @@ window.Vue = Vue;
 import VueRouter from 'vue-router'
 // import store from './stores/userStore'
 import http from './services/http'
-
 require('./bootstrap')
-
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
+//状態管理
 const store = new Vuex.Store({
 	state: {
 		user: {},//ログインユーザー
@@ -18,16 +17,19 @@ const store = new Vuex.Store({
 	mutations: {
 		// Userの書き換え
 		setUser: function (state, payload) {
-			state.user = payload,
+			state.user = payload.data.user,
 			state.authenticated = true;
 		},
+		setUserLogout: function (state) {
+			state.authenticated = false;
+		}
 	},
 	actions: {
 		// User情報をAPIから取得
 		GET_USER: function (commit) {
 			return axios.get('/api/wow/getcurrentuser', res => {
 				// ここからコミット 引数の commit を使う
-				commit('setUser', "res.data.user")
+				commit('setUser')
 			}, error => {
 			})
 		},
@@ -38,15 +40,20 @@ const store = new Vuex.Store({
 			}, error => {
 				//console.log(res)
 			})
+		},
+		LOGOUT: function (commit) {
+			localStorage.removeItem('jwt-token')
+			commit('setUserLogout')
 		}
 	},
 	getters: {
 		// User をそのまま使用
-		User: function (state) { return state.user },
+		user: function (state) { return state.user },
 		authenticated: function (state) { return state.authenticated }
 	}
 })
 
+//ルーティング
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
@@ -64,6 +71,5 @@ const app = new Vue({
 	created () {
 		http.init()
 		// userStore.init()
-	},
-	// render: h => h(require('./components/index.vue')),
+	}
 })

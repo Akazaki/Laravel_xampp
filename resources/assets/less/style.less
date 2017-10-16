@@ -1,8 +1,11 @@
 @bgGray: #eff1f3;
 @bgDark: #3c3d3f;
+@bgDark2: #434a52;
 @offWhite: #ececec;
 @vueGreen: #41b883;
 @vueGreen_hover: #59ce99;
+@textColor: #64697a;
+@wowBlack: #2c3338;
 
 label {
 	margin: 0;
@@ -53,9 +56,22 @@ body {
 	margin: 0;
 	min-height: 100%;
 }
-	
+
+a {
+	color: @textColor;
+}
+
+li {
+	list-style: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
 #Header_line {
-	background: var(--bodyBackgroundColor);
+	background: @wowBlack;
 	padding: 10px;
 	width: 100%;
 	font-size: 5%;
@@ -64,8 +80,166 @@ body {
 	z-index: 9999;
 }
 
+#Wrapper {
+	overflow: hidden;
+}
+
 #Navbar {
-	background: var(--bodyBackgroundColor);
+	overflow: hidden;
+	background-color: @wowBlack;
+	
+	.header_logo {
+		width: 240px;
+		margin: 12px auto;
+		
+		img {
+			max-width: 100%;
+		}
+	}
+}
+
+
+#Sidebar {
+	background-color: @bgDark2;
+	width: 16%;
+	height: 800px;
+}
+
+#Postlist {
+	width: 80%;
+	float: right;
+	margin: 2% 2%;
+
+	#table-content {
+	  background: #fff;
+	  width: auto;
+	  height: 90%;
+	  margin-top: 20px;
+	  box-shadow: #dcdee3 0px 0px 10px;
+	}
+
+	#table-content table {
+	  width: 100%;
+	}
+
+	#table-content thead {
+	  background: @vueGreen;
+	}
+
+	#table-content thead tr td {
+	  color: #757e92;
+	  font-size: 10px;
+	  text-transform: uppercase;
+	  padding: 14px 10px;
+	}
+
+	#table-content tbody tr td {
+	  padding: 14px 10px;
+	  border-bottom: #eaecee solid 1px;
+	}
+
+	#table-content tbody tr:hover {
+	  background: #fefaf2;
+	}
+
+	.name-td {
+	  font-size: 13px;
+	  font-weight: 600;
+	}
+
+	.desc-td {
+	  font-size: 13px;
+	  color: #64697a;
+	}
+
+	.date-td {
+	  text-align: right;
+	  font-size: 9px;
+	}
+
+	.checked {
+	  background: #fefaf2;
+	}
+
+	#credit {
+	  color: #76838c;
+	  width: 300px;
+	  margin: 0 auto;
+	  font-size: 12px;
+	  text-align: center;
+	}
+}
+
+.button_box {
+	overflow: hidden;
+	
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+}
+
+.button_green a{
+	border-radius: 51px;
+    background-color: #41b883;
+    color: #FFF;
+    padding: 10px;
+    width: 102px;
+    text-align: center;
+    font-size: 80%;
+    display: block;
+}
+
+.search_button {
+    font-size: 80%;
+    
+	input {
+		outline: none;
+	}
+	input[type=search] {
+		-webkit-appearance: textfield;
+		-webkit-box-sizing: content-box;
+		font-family: inherit;
+		font-size: 100%;
+	}
+	input::-webkit-search-decoration,
+	input::-webkit-search-cancel-button {
+		display: none; 
+	}
+
+	input[type=search] {
+		background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+		border: solid 1px #ccc;
+		padding: 7px 20px 7px 36px;
+		width: 55px;
+		
+		-webkit-border-radius: 10em;
+		-moz-border-radius: 10em;
+		border-radius: 10em;
+		
+		-webkit-transition: all .5s;
+		-moz-transition: all .5s;
+		transition: all .5s;
+	}
+	input[type=search]:focus {
+		width: 130px;
+		background-color: #fff;
+		border-color: #66CC75;
+		
+		-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		box-shadow: 0 0 5px rgba(109,207,246,.5);
+	}
+
+	input:-moz-placeholder {
+		color: #999;
+	}
+	input::-webkit-input-placeholder {
+		color: #999;
+	}
 }
 
 #login {
@@ -250,7 +424,7 @@ body {
 	.login input[type='password']:hover,
 	.login input[type='text']:focus,
 	.login input[type='text']:hover {
-		background-color: var(--loginInputHoverBackgroundColor);
+		background-color: @bgDark2;
 	}
 
 	.login input[type='submit'] {
@@ -281,12 +455,6 @@ body {
 		text-align: center;
 	}
 }
-
-#Navbar {
-	overflow: hidden;
-	background-color: @bgDark;
-}
-
 
 
 /*-------------------WOWここまで--------------------------*/

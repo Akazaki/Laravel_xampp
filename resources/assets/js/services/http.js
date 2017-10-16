@@ -32,6 +32,7 @@ export default {
 	 * Init the service.
 	 */
 	init () {
+
 		axios.defaults.baseURL = '/'
 
 		// Intercept the request to make sure the token is injected into the header.

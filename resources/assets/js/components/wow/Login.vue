@@ -42,16 +42,6 @@
 		</div>
 	</div>
 </template>
-<!--css-->
-<!-- <link rel="stylesheet" href="/public/wow/common/css/import.css" type="text/css" media="all">
-<link rel="stylesheet" href="/public/wow/common/css/style.css" type="text/css" media="all"> -->
-<!--js-->
-<!-- <script type="text/javascript" src="/public/wow/common/js/jquery.js"></script>
-<script type="text/javascript" src="/public/wow/common/js/page-scroller.js"></script>
-<script type="text/javascript" src="/public/wow/common/js/iepngfix.js"></script>
-<script type="text/javascript" src="/public/wow/common/js/iepngrollover.js"></script>
-<script type="text/javascript" src="/public/wow/common/js/form_txt.js"></script>
-<script type="text/javascript" src="/public/wow/common/js/jquery.montage.min.js"></script> -->
 
 <script>
 // import userStore from '../../stores/userStore'
@@ -80,7 +70,6 @@ Vue.use(VueRouter)
 		// },
 		created() {
 			this.$store.dispatch('GET_USER').then(res => {
-				console.log(res)
 				if(res.status == 200){
 					this.$router.push('/wow')
 				}
