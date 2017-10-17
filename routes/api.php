@@ -35,6 +35,6 @@ use Illuminate\Http\Request;
 		Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
 
 		//記事一覧
-		Route::get('/wow/postList/', 'WowController@postList');
+		Route::post('/wow/postList/', 'WowController@postList');
 	});
 //});

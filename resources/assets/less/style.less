@@ -13,15 +13,15 @@ label {
 
 /*-------------------WOW--------------------------*/
 :root {
-  --htmlFontSize: 100%;
+	--htmlFontSize: 100%;
 
-  --bodyBackgroundColor: #2c3338;
-  --bodyColor: var(--baseColor);
-  --bodyFontFamily: 'Open Sans';
-  --bodyFontFamilyFallback: sans-serif;
-  --bodyFontSize: 0.875rem;
-  --bodyFontWeight: 400;
-  --bodyLineHeight: 1.5;
+	--bodyBackgroundColor: #2c3338;
+	--bodyColor: var(--baseColor);
+	--bodyFontFamily: 'Open Sans';
+	--bodyFontFamilyFallback: sans-serif;
+	--bodyFontSize: 0.875rem;
+	--bodyFontWeight: 400;
+	--bodyLineHeight: 1.5;
 }
 
 :root {
@@ -84,6 +84,80 @@ ul {
 	overflow: hidden;
 }
 
+#Breadcrumb {
+	background: @wowBlack;
+	padding: 3px;
+	color: @offWhite;
+	
+	.breadcrumb {
+		list-style-type: none;	
+	}
+
+	// v1
+	.v1 .breadcrumb-level {
+		&::before,
+		&::after{
+			content: '';
+			position: absolute;
+			left: 0;
+			height: 50%;
+			width: 100%;
+			background: @bgDark;
+			z-index: -1;
+		}
+		
+		&::before {
+			top: 0;
+			transform: skew(20deg);
+		}
+		
+		&::after {
+			bottom: 0;
+			transform: skew(-20deg);
+		}
+	}
+
+	// Breadcrumb Level
+	.breadcrumb-level {
+		display: inline-block;
+		position: relative;
+		
+		// Last child
+		&:last-child {
+			a {
+				cursor: default;
+			}
+			
+			// &::before,
+			// &::after {
+			// 	background: lighten(@vueGreen, 10%);
+			// }
+		}
+		
+		// :Hover
+		// &:not(:last-child):hover {
+		// 	&::before,
+		// 	&::after {
+		// 		background: darken(@vueGreen, 10%);
+		// 	}
+		// }
+	}
+
+	// Breadcrumb Level a
+	.breadcrumb-level a {
+		display: inline-block;
+		position: relative;
+		line-height: 2.5;
+		padding: 0 20px;
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.breadcrumb.v1 {
+		margin-bottom: 50px;
+	}
+}
+
 #Navbar {
 	overflow: hidden;
 	background-color: @wowBlack;
@@ -96,77 +170,234 @@ ul {
 			max-width: 100%;
 		}
 	}
+
+	.icon {
+		display: inline-block;
+		fill: var(--iconFill);
+		font-size: 2rem;
+		height: 20px;
+		vertical-align: middle;
+		width: 1em;
+	}
+
+	.icons {
+		display: none;
+	}
+
+	.navbar-right {
+		margin-right: 0;
+		
+		.auther {
+			margin-right: 40px;
+		}
+
+		li {
+			float: left;
+			height: 64px;
+			color: @offWhite;
+			padding-top: 20px;
+			margin: 0 10px;
+			
+			a {
+				height: 64px;
+				padding-top: 20px;
+				color: @offWhite;
+			}
+		}
+	}
 }
 
 
 #Sidebar {
 	background-color: @bgDark2;
 	width: 16%;
-	height: 800px;
+	min-height: 800px;
+	padding: 0;
+	height: auto;
+
+	.sidebar {
+		position: absolute;
+		width: 100%;
+	}
+
+	.content {
+		flex: 1;
+		padding: 30px;
+		background: #eee;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+		transform: translate3d(0, 0, 0);
+		transition: transform 0.3s;
+	}
+
+	.content.isOpen {
+		transform: translate3d(220px, 0, 0);
+	}
+
+	.button {
+		cursor: pointer;
+	}
+
+	.button:before {
+		content: "\f0c9";
+		font: 42px fontawesome;
+	}
+
+	/* Demo Navigation */
+
+	.title {
+		font-size: 16px;
+		line-height: 50px;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 7px;
+		color: #eee;
+		border-bottom: 1px solid #222;
+		background: #2a2a2a;
+	}
+
+	.nav li a {
+		position: relative;
+		display: block;
+		padding: 20px 0 20px 50px;
+		font-size: 12px;
+		color: #eee;
+		border-bottom: 1px solid #222;
+	}
+
+	.nav li a:before {
+		font: 14px fontawesome;
+		position: absolute;
+		top: 19px;
+		left: 20px;
+	}
+
+	.nav li:nth-child(1) a:before {
+		content: "\f00a";
+	}
+	.nav li:nth-child(2) a:before {
+		content: "\f012";
+	}
+	.nav li:nth-child(3) a:before {
+		content: "\f0e8";
+	}
+	.nav li:nth-child(4) a:before {
+		content: "\f0c3";
+	}
+	.nav li:nth-child(5) a:before {
+		content: "\f022";
+	}
+	.nav li:nth-child(6) a:before {
+		content: "\f115";
+	}
+	.nav li:nth-child(7) a:before {
+		content: "\f085";
+	}
+	.nav li:nth-child(8) a:before {
+		content: "\f023";
+		left: 23px;
+	}
+
+	.nav li a:hover {
+		background: #444;
+	}
+
+	.nav li a.active {
+		box-shadow: inset 5px 0 0 @vueGreen, inset 6px 0 0 #222;
+		background: #444;
+	}
+
+	/* Demo Description */
+
+	h1 {
+		margin: 25px 0 15px;
+		font-size: 28px;
+		font-weight: 400;
+	}
+
+	h2 {
+		font-size: 18px;
+		font-weight: 400;
+		color: #999;
+	}
 }
 
 #Postlist {
 	width: 80%;
 	float: right;
 	margin: 2% 2%;
+	
+	#Post_title {
+		font-size: 110%;
+		padding: 5px;
+		font-weight: bold;
+		margin-bottom: 0;
+		margin-right: 10px;
+		border-bottom: 3px solid @vueGreen;
+	}
 
 	#table-content {
-	  background: #fff;
-	  width: auto;
-	  height: 90%;
-	  margin-top: 20px;
-	  box-shadow: #dcdee3 0px 0px 10px;
+		background: #fff;
+		width: auto;
+		height: 90%;
+		margin-top: 20px;
+		box-shadow: #dcdee3 0px 0px 10px;
+		
+		td {
+			a {
+				color: #000;
+			}
+		}
 	}
 
 	#table-content table {
-	  width: 100%;
+		width: 100%;
 	}
 
 	#table-content thead {
-	  background: @vueGreen;
+		background: @vueGreen;
 	}
 
 	#table-content thead tr td {
-	  color: #757e92;
-	  font-size: 10px;
-	  text-transform: uppercase;
-	  padding: 14px 10px;
+		color: #757e92;
+		font-size: 10px;
+		text-transform: uppercase;
+		padding: 14px 10px;
 	}
 
 	#table-content tbody tr td {
-	  padding: 14px 10px;
-	  border-bottom: #eaecee solid 1px;
+		padding: 14px 10px;
+		border-bottom: #eaecee solid 1px;
 	}
 
 	#table-content tbody tr:hover {
-	  background: #fefaf2;
+		background: #fefaf2;
 	}
 
 	.name-td {
-	  font-size: 13px;
-	  font-weight: 600;
+		font-size: 13px;
+		font-weight: 600;
 	}
 
 	.desc-td {
-	  font-size: 13px;
-	  color: #64697a;
+		font-size: 13px;
+		color: #64697a;
 	}
 
 	.date-td {
-	  text-align: right;
-	  font-size: 9px;
+		text-align: right;
+		font-size: 9px;
 	}
 
 	.checked {
-	  background: #fefaf2;
+		background: #fefaf2;
 	}
 
 	#credit {
-	  color: #76838c;
-	  width: 300px;
-	  margin: 0 auto;
-	  font-size: 12px;
-	  text-align: center;
+		color: #76838c;
+		width: 300px;
+		margin: 0 auto;
+		font-size: 12px;
+		text-align: center;
 	}
 }
 
@@ -184,18 +415,18 @@ ul {
 
 .button_green a{
 	border-radius: 51px;
-    background-color: #41b883;
-    color: #FFF;
-    padding: 10px;
-    width: 102px;
-    text-align: center;
-    font-size: 80%;
-    display: block;
+		background-color: #41b883;
+		color: #FFF;
+		padding: 10px;
+		width: 102px;
+		text-align: center;
+		font-size: 80%;
+		display: block;
 }
 
 .search_button {
-    font-size: 80%;
-    
+		font-size: 80%;
+		
 	input {
 		outline: none;
 	}

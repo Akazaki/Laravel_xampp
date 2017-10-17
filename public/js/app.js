@@ -45915,7 +45915,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 // import userStore from '../../stores/userStore'
 
@@ -45931,17 +45930,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 			alertMessage: ''
 		};
 	},
-
-	// computed: {
-	//   items: function () {
-	//	 return this.$store.getters.items
-	//   },
-	//   // 直接書き換える事はできない＠セッターを使うとシンプルに書ける
-	//   categoryName: {
-	//	 get: function () { return this.$store.getters.categoryName },
-	//	 set: function (val) { this.$store.commit('updateCategoryName', val) }
-	//   }
-	// },
 	created: function created() {
 		var _this = this;
 
@@ -45950,9 +45938,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 				_this.$router.push('/wow');
 			}
 		});
-		// if(this.$store.getters.authenticated){
-		// 	this.$router.push('/wow')
-		// }
 	},
 	updated: function updated() {
 		this.showAlert = false;
@@ -45968,6 +45953,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 				//ログイン成功
 				if (res.status == 200) {
 					_this2.$router.push('/wow');
+				} else {
+					_this2.errorText();
+					return false;
 				}
 			}, function (error) {
 				_this2.errorText();
@@ -46350,6 +46338,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import http from '../../services/http'
 
@@ -46361,11 +46370,19 @@ Vue.component('sidenav', __webpack_require__(52));
 	data: function data() {
 		return {
 			user: '',
-			loginStatus: false
+			loginStatus: false,
+			posts: {}
 		};
 	},
 	created: function created() {
 		var _this = this;
+
+		axios.post('/api/wow/postList', {}).then(function (res) {
+			_this.posts = res.data;
+			console.log(res);
+		}).catch(function (error) {
+			console.log(error);
+		});
 
 		this.$store.dispatch('GET_USER').then(function (res) {
 			_this.loginStatus = true;
@@ -46448,6 +46465,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 // import http from '../../services/http'
 // import VueRouter from 'vue-router'
@@ -46492,7 +46513,7 @@ var render = function() {
       "div",
       { staticClass: "collapse navbar-collapse", attrs: { id: "Navbar" } },
       [
-        _c("ul", { staticClass: "nav navbar-nav navbar-left" }, [
+        _c("ul", { staticClass: "navbar-nav navbar-left" }, [
           _c("li", [
             _c(
               "div",
@@ -46512,16 +46533,20 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
-          _c("li", [_vm._v(_vm._s(_vm.user))]),
+        _c("ul", { staticClass: "navbar-right" }, [
+          _c("li", { staticClass: "auther" }, [
+            _c("svg", { staticClass: "icon" }, [
+              _c("use", {
+                attrs: {
+                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                  "xlink:href": "#user"
+                }
+              })
+            ]),
+            _vm._v(_vm._s(_vm.user) + "\n\t\t\t")
+          ]),
           _vm._v(" "),
-          _c(
-            "li",
-            [_c("router-link", { attrs: { to: "/about" } }, [_vm._v("About")])],
-            1
-          ),
-          _vm._v(" "),
-          _c("li", [
+          _c("li", { staticClass: "button" }, [
             _c(
               "a",
               {
@@ -46532,10 +46557,48 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Log out")]
+              [_vm._v("LOGOUT")]
             )
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "svg",
+          {
+            staticClass: "icons",
+            attrs: { xmlns: "http://www.w3.org/2000/svg" }
+          },
+          [
+            _c(
+              "symbol",
+              { attrs: { id: "arrow-right", viewBox: "0 0 1792 1792" } },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z"
+                  }
+                })
+              ]
+            ),
+            _c("symbol", { attrs: { id: "lock", viewBox: "0 0 1792 1792" } }, [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z"
+                }
+              })
+            ]),
+            _c("symbol", { attrs: { id: "user", viewBox: "0 0 1792 1792" } }, [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z"
+                }
+              })
+            ])
+          ]
+        )
       ]
     )
   ])
@@ -46623,6 +46686,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import userStore from '../../stores/userStore'
 
@@ -46659,49 +46739,40 @@ var staticRenderFns = [
       "div",
       { staticClass: "col-xs-3 col-xs-2 sidebar", attrs: { id: "Sidebar" } },
       [
-        _c("ul", { staticClass: "nav nav-sidebar sidebar-nav" }, [
-          _c(
-            "li",
-            {
-              staticClass: "sidebar-brand",
-              attrs: { "data-toggle": "collapse", href: "#collapse-A" }
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("span", { staticClass: "caret" }),
-                _vm._v(" menu A")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "collapse", attrs: { id: "collapse-A" } }, [
-            _c("li", [_c("a", { attrs: { href: "A-1" } }, [_vm._v("A-1")])]),
+        _c("div", { staticClass: "sidebar" }, [
+          _c("ul", { staticClass: "nav" }, [
+            _c(
+              "li",
+              { attrs: { "data-toggle": "collapse", href: "#collapse-A" } },
+              [
+                _c("a", { staticClass: "active", attrs: { href: "#" } }, [
+                  _c("span", { staticClass: "caret" }),
+                  _vm._v(" menu A")
+                ])
+              ]
+            ),
             _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "A-2" } }, [_vm._v("A-2")])]),
+            _c("ul", { attrs: { id: "collapse-A" } }, [
+              _c("li", [_c("a", { attrs: { href: "A-1" } }, [_vm._v("A-1")])]),
+              _vm._v(" "),
+              _c("li", [_c("a", { attrs: { href: "A-2" } }, [_vm._v("A-2")])]),
+              _vm._v(" "),
+              _c("li", [_c("a", { attrs: { href: "A-3" } }, [_vm._v("A-3")])])
+            ]),
             _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "A-3" } }, [_vm._v("A-3")])])
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "sidebar-brand",
-              attrs: { "data-toggle": "collapse", href: "#collapse-B" }
-            },
-            [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("span", { staticClass: "caret" }),
-                _vm._v(" menu B")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("ul", { staticClass: "collapse", attrs: { id: "collapse-B" } }, [
-            _c("li", [_c("a", { attrs: { href: "B-1" } }, [_vm._v("B-1")])]),
+            _c("li", [_c("a", [_vm._v("Statistics")])]),
             _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "B-2" } }, [_vm._v("B-2")])]),
+            _c("li", [_c("a", [_vm._v("Milestones")])]),
             _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "B-3" } }, [_vm._v("B-3")])])
+            _c("li", [_c("a", [_vm._v("Experiments")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", [_vm._v("Previews")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", [_vm._v("Assets")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", [_vm._v("Settings")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", [_vm._v("Logout")])])
           ])
         ])
       ]
@@ -46733,7 +46804,222 @@ var render = function() {
       _vm._v(" "),
       _c("sidenav"),
       _vm._v(" "),
-      _vm.loginStatus ? _c("div", [_vm._m(0)]) : _vm._e()
+      _vm.loginStatus
+        ? _c("div", [
+            _c("div", { attrs: { id: "Postlist" } }, [
+              _c("ul", { staticClass: "button_box" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("li", { staticClass: "left" }, [
+                  _c(
+                    "div",
+                    { staticClass: "button_green" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("\n\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t")
+                      ])
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "demo1" } }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.posts, function(post) {
+                    return _c("li", [_vm._v(_vm._s(post.label_text))])
+                  })
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "table-content" } }, [
+                _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm._m(9),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("001")]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "name-td" },
+                        [
+                          _c("router-link", { attrs: { to: "/" } }, [
+                            _vm._v("テスト投稿テスト投稿テスト投稿")
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "desc-td" }, [
+                        _vm._v("2017-08-31 20:30:50")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                      _vm._v(" "),
+                      _c("td")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        : _vm._e()
     ],
     1
   )
@@ -46743,241 +47029,83 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "Postlist" } }, [
-      _c("ul", { staticClass: "button_box" }, [
-        _c("li", { staticClass: "left" }, [
-          _c("div", { staticClass: "button_green" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _vm._v("\n\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "right" }, [
-          _c("div", { staticClass: "search_button" }, [
-            _c("form", [
-              _c("input", { attrs: { type: "search", placeholder: "検索" } })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "table-content" } }, [
-        _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
-          _c("thead", [
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Name")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Description")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Date Created")]),
-              _vm._v(" "),
-              _c("td")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("Last quarter revenue")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v(
-                  "Revenue for last quarter in state America for year 2013, with ..."
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("6 minutes ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", { staticClass: "checked" }, [
-              _c("td", [
-                _c("input", { attrs: { type: "checkbox", checked: "checked" } })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("Expenses in 2013")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("2 hours ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [_vm._v("Accounting")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v("Lorem ipsum dolor sit amet.")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("5 hours ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("Starbucks orders")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v(
-                  "Ut euismod augue ut nulla aliquam, eu congue ipsum euismod."
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("12 hours ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("East coast customers in 2012")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("yesterday "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("Last quarter expenses")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v("Lorem ipsum dolor sit amet.")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("2 days ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("HR 2013 worksheet")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v("Nulla aliquam, eu congue ipsum euismod.")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("2 days ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [
-                _vm._v("Salaries last quarter")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v("Lorem ipsum dolor sit amet.")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("1 week ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-              _vm._v(" "),
-              _c("td", { staticClass: "name-td" }, [_vm._v("Accounting")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "desc-td" }, [
-                _vm._v("Lorem ipsum dolor sit amet.")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "date-td" }, [
-                _vm._v("5 hours ago "),
-                _c("i", {
-                  staticClass: "fa fa-clock-o",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td")
-            ])
-          ])
+    return _c("li", { staticClass: "left" }, [
+      _c("p", { attrs: { id: "Post_title" } }, [_vm._v("投稿")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "right" }, [
+      _c("div", { staticClass: "search_button" }, [
+        _c("form", [
+          _c("input", { attrs: { type: "search", placeholder: "検索" } })
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
+        _vm._v(" "),
+        _c("td", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("タイトル")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("公開日")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("ステータス")]),
+        _vm._v(" "),
+        _c("td")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
   }
 ]
 render._withStripped = true

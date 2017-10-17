@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // 'wowauth' => \Laravel\Http\Middleware\WowAuth::class,
         'ajaxOnly' => \Laravel\Http\Middleware\AjaxOnlyMiddleware::class,
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        // 'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class、
     ];
 }

@@ -18,6 +18,7 @@ class PostsTable extends Migration
             $table->unsignedInteger('acknowledge');
             $table->string('permission');
             $table->string('label_text');
+            $table->string('detail_richtext');
             $table->string('main_file');
             $table->unsignedInteger('menulevel_radio');//メニュー階層
             $table->unsignedInteger('parentmenuid_check');//親階層のID

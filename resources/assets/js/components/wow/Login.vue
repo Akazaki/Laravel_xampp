@@ -29,7 +29,6 @@
 						</div>
 						
 						<p class="err">
-							<!-- <span>{{ alertMessage }}</span> -->
 							<span class="alert alert-danger" role="alert" v-if="showAlert">
 								{{ alertMessage }}
 							</span>
@@ -58,25 +57,12 @@ Vue.use(VueRouter)
 				alertMessage: '',
 			}
 		},
-		// computed: {
-		//   items: function () {
-		//	 return this.$store.getters.items
-		//   },
-		//   // 直接書き換える事はできない＠セッターを使うとシンプルに書ける
-		//   categoryName: {
-		//	 get: function () { return this.$store.getters.categoryName },
-		//	 set: function (val) { this.$store.commit('updateCategoryName', val) }
-		//   }
-		// },
 		created() {
 			this.$store.dispatch('GET_USER').then(res => {
 				if(res.status == 200){
 					this.$router.push('/wow')
 				}
 			})
-			// if(this.$store.getters.authenticated){
-			// 	this.$router.push('/wow')
-			// }
 		},
 		updated(){
 			this.showAlert = false
@@ -89,6 +75,9 @@ Vue.use(VueRouter)
 				   	//ログイン成功
 					if(res.status == 200){
 						this.$router.push('/wow')
+					}else{
+						this.errorText();
+						return false
 					}
 				}, error => {
 					this.errorText();

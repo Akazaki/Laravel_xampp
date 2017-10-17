@@ -61,6 +61,52 @@ ul {
 #Wrapper {
   overflow: hidden;
 }
+#Breadcrumb {
+  background: #2c3338;
+  padding: 3px;
+  color: #ececec;
+}
+#Breadcrumb .breadcrumb {
+  list-style-type: none;
+}
+#Breadcrumb .v1 .breadcrumb-level::before,
+#Breadcrumb .v1 .breadcrumb-level::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: #3c3d3f;
+  z-index: -1;
+}
+#Breadcrumb .v1 .breadcrumb-level::before {
+  top: 0;
+  -webkit-transform: skew(20deg);
+          transform: skew(20deg);
+}
+#Breadcrumb .v1 .breadcrumb-level::after {
+  bottom: 0;
+  -webkit-transform: skew(-20deg);
+          transform: skew(-20deg);
+}
+#Breadcrumb .breadcrumb-level {
+  display: inline-block;
+  position: relative;
+}
+#Breadcrumb .breadcrumb-level:last-child a {
+  cursor: default;
+}
+#Breadcrumb .breadcrumb-level a {
+  display: inline-block;
+  position: relative;
+  line-height: 2.5;
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+}
+#Breadcrumb .breadcrumb.v1 {
+  margin-bottom: 50px;
+}
 #Navbar {
   overflow: hidden;
   background-color: #2c3338;
@@ -72,15 +118,153 @@ ul {
 #Navbar .header_logo img {
   max-width: 100%;
 }
+#Navbar .icon {
+  display: inline-block;
+  fill: var(--iconFill);
+  font-size: 2rem;
+  height: 20px;
+  vertical-align: middle;
+  width: 1em;
+}
+#Navbar .icons {
+  display: none;
+}
+#Navbar .navbar-right {
+  margin-right: 0;
+}
+#Navbar .navbar-right .auther {
+  margin-right: 40px;
+}
+#Navbar .navbar-right li {
+  float: left;
+  height: 64px;
+  color: #ececec;
+  padding-top: 20px;
+  margin: 0 10px;
+}
+#Navbar .navbar-right li a {
+  height: 64px;
+  padding-top: 20px;
+  color: #ececec;
+}
 #Sidebar {
   background-color: #434a52;
   width: 16%;
-  height: 800px;
+  min-height: 800px;
+  padding: 0;
+  height: auto;
+  /* Demo Navigation */
+  /* Demo Description */
+}
+#Sidebar .sidebar {
+  position: absolute;
+  width: 100%;
+}
+#Sidebar .content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 30px;
+  background: #eee;
+  -webkit-box-shadow: 0 0 5px #000000;
+          box-shadow: 0 0 5px #000000;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+#Sidebar .content.isOpen {
+  -webkit-transform: translate3d(220px, 0, 0);
+          transform: translate3d(220px, 0, 0);
+}
+#Sidebar .button {
+  cursor: pointer;
+}
+#Sidebar .button:before {
+  content: "\F0C9";
+  font: 42px fontawesome;
+}
+#Sidebar .title {
+  font-size: 16px;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  color: #eee;
+  border-bottom: 1px solid #222;
+  background: #2a2a2a;
+}
+#Sidebar .nav li a {
+  position: relative;
+  display: block;
+  padding: 20px 0 20px 50px;
+  font-size: 12px;
+  color: #eee;
+  border-bottom: 1px solid #222;
+}
+#Sidebar .nav li a:before {
+  font: 14px fontawesome;
+  position: absolute;
+  top: 19px;
+  left: 20px;
+}
+#Sidebar .nav li:nth-child(1) a:before {
+  content: "\F00A";
+}
+#Sidebar .nav li:nth-child(2) a:before {
+  content: "\F012";
+}
+#Sidebar .nav li:nth-child(3) a:before {
+  content: "\F0E8";
+}
+#Sidebar .nav li:nth-child(4) a:before {
+  content: "\F0C3";
+}
+#Sidebar .nav li:nth-child(5) a:before {
+  content: "\F022";
+}
+#Sidebar .nav li:nth-child(6) a:before {
+  content: "\F115";
+}
+#Sidebar .nav li:nth-child(7) a:before {
+  content: "\F085";
+}
+#Sidebar .nav li:nth-child(8) a:before {
+  content: "\F023";
+  left: 23px;
+}
+#Sidebar .nav li a:hover {
+  background: #444;
+}
+#Sidebar .nav li a.active {
+  -webkit-box-shadow: inset 5px 0 0 #41b883, inset 6px 0 0 #222;
+          box-shadow: inset 5px 0 0 #41b883, inset 6px 0 0 #222;
+  background: #444;
+}
+#Sidebar h1 {
+  margin: 25px 0 15px;
+  font-size: 28px;
+  font-weight: 400;
+}
+#Sidebar h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #999;
 }
 #Postlist {
   width: 80%;
   float: right;
   margin: 2% 2%;
+}
+#Postlist #Post_title {
+  font-size: 110%;
+  padding: 5px;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-right: 10px;
+  border-bottom: 3px solid #41b883;
 }
 #Postlist #table-content {
   background: #fff;
@@ -89,6 +273,9 @@ ul {
   margin-top: 20px;
   -webkit-box-shadow: #dcdee3 0px 0px 10px;
           box-shadow: #dcdee3 0px 0px 10px;
+}
+#Postlist #table-content td a {
+  color: #000;
 }
 #Postlist #table-content table {
   width: 100%;

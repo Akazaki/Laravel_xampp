@@ -7,7 +7,9 @@ use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 use Auth;
 use JWTAuth;
+use DB;
 use Laravel\Admins;// Model
+use Laravel\Posts;// Model
 
 class WowController extends Controller
 {   
@@ -15,20 +17,20 @@ class WowController extends Controller
 	{
 	}
 
-	public function index(Request $request)
-	{
-		$articles = [
-			[
-			'id' => 1,
-			'title' => 'タイトル'
-			],
-			[
-			'id' => 2,
-			'title' => 'タイトル2'
-			]
-		];
-        return $articles;
-	}
+	// public function index(Request $request)
+	// {
+	// 	$articles = [
+	// 		[
+	// 		'id' => 1,
+	// 		'title' => 'タイトル'
+	// 		],
+	// 		[
+	// 		'id' => 2,
+	// 		'title' => 'タイトル2'
+	// 		]
+	// 	];
+ //        return $articles;
+	// }
 
 	public function login(Request $request)
 	{
@@ -90,8 +92,14 @@ class WowController extends Controller
 		return redirect('wow/login');
 	}
 
-	public function postList($table){
-        return response()->json(['status' => 'success'], 200);
+	// public function postList($table){
+ //        return response()->json(['status' => 'success'], 200);
+	// }
+	public function postList(Request $request)
+	{
+		$posts = DB::table('posts')->get();
+
+        return $posts;
 	}
 
     public function signIn(Request $request)
