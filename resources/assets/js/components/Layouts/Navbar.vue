@@ -5,13 +5,13 @@
 			<ul class="navbar-nav navbar-left">
 				<li>
 					<div class="header_logo">
-						<router-link to="/wow"><img src="/public/wow/common/img/logo_wow.png" alt="Contents Management Flamework WOW"></router-link>
+						<!-- <router-link to="/wow"><img src="/public/wow/common/img/logo_wow.png" alt="Contents Management Flamework WOW"></router-link> -->
 					</div>
 				</li>
 			</ul>
 			<ul class="navbar-right">
 				<li class="auther">
-					<svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>{{ user }}
+					<svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>{{ username }}
 				</li>
 				<li class="button"><a href="javascript:void(0);" v-on:click="logout()">LOGOUT</a></li>
 			</ul>
@@ -30,21 +30,19 @@
 export default {
 	data (){
 		return {
-			user: ''
+			username: ''
 		}
 	},
-	//props: ['user'],
-	created () {
-		this.$store.dispatch('GET_USER').then(res => {
-			this.user = res.data.user.label_text
-		}, error => {
-			this.$router.push('/wow/login')
-		})
+	created(){
+		this.username = this.$store.getters.user.label_text;
 	},
+	//props: ['user'],
 	methods: {
 		logout(){
-			this.$store.dispatch('LOGOUT')
-			this.$router.push('/wow/login')
+			this.$store.dispatch('LOGOUT').then(res => {
+				this.$router.push('/wow/login')
+			}, error => {
+			})
 		}
 	}
 }

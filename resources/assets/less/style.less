@@ -6,6 +6,8 @@
 @vueGreen_hover: #59ce99;
 @textColor: #64697a;
 @wowBlack: #2c3338;
+@codepenBlack: #191919;
+@codepenGray: #373737;
 
 label {
 	margin: 0;
@@ -61,6 +63,10 @@ a {
 	color: @textColor;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 li {
 	list-style: none;
 }
@@ -71,7 +77,7 @@ ul {
 }
 
 #Header_line {
-	background: @wowBlack;
+	background: @codepenBlack;
 	padding: 10px;
 	width: 100%;
 	font-size: 5%;
@@ -85,7 +91,7 @@ ul {
 }
 
 #Breadcrumb {
-	background: @wowBlack;
+	background: @codepenBlack;
 	padding: 3px;
 	color: @offWhite;
 	
@@ -160,11 +166,16 @@ ul {
 
 #Navbar {
 	overflow: hidden;
-	background-color: @wowBlack;
+	background-color: @codepenBlack;
+	color: @offWhite;
+	padding: 10px;
+	
+	a {
+		color: @offWhite;
+	}
 	
 	.header_logo {
 		width: 240px;
-		margin: 12px auto;
 		
 		img {
 			max-width: 100%;
@@ -184,23 +195,30 @@ ul {
 		display: none;
 	}
 
+	.button a{
+		border-radius: 51px;
+		background-color: @codepenGray;
+		/* color: #FFF; */
+		padding: 10px;
+		width: 102px;
+		text-align: center;
+		display: block;
+		font-size: 80%;
+	}
+
 	.navbar-right {
 		margin-right: 0;
 		
 		.auther {
-			margin-right: 40px;
+		    margin: 7px 20px 0 0;
 		}
 
 		li {
 			float: left;
-			height: 64px;
 			color: @offWhite;
-			padding-top: 20px;
 			margin: 0 10px;
 			
 			a {
-				height: 64px;
-				padding-top: 20px;
 				color: @offWhite;
 			}
 		}
@@ -209,11 +227,12 @@ ul {
 
 
 #Sidebar {
-	background-color: @bgDark2;
+	background-color: @codepenBlack;
 	width: 16%;
 	min-height: 800px;
 	padding: 0;
 	height: auto;
+	font-weight: 700;
 
 	.sidebar {
 		position: absolute;
@@ -231,6 +250,10 @@ ul {
 
 	.content.isOpen {
 		transform: translate3d(220px, 0, 0);
+	}
+
+	.collapse {
+		height: 0;
 	}
 
 	.button {
@@ -259,7 +282,6 @@ ul {
 		position: relative;
 		display: block;
 		padding: 20px 0 20px 50px;
-		font-size: 12px;
 		color: #eee;
 		border-bottom: 1px solid #222;
 	}
@@ -298,24 +320,22 @@ ul {
 	}
 
 	.nav li a:hover {
-		background: #444;
+		background: @codepenGray;
 	}
 
 	.nav li a.active {
-		box-shadow: inset 5px 0 0 @vueGreen, inset 6px 0 0 #222;
-		background: #444;
+		//box-shadow: inset 5px 0 0 @vueGreen, inset 6px 0 0 #222;
+		background: @vueGreen;
 	}
 
 	/* Demo Description */
 
 	h1 {
 		margin: 25px 0 15px;
-		font-size: 28px;
 		font-weight: 400;
 	}
 
 	h2 {
-		font-size: 18px;
 		font-weight: 400;
 		color: #999;
 	}
@@ -340,7 +360,8 @@ ul {
 		width: auto;
 		height: 90%;
 		margin-top: 20px;
-		box-shadow: #dcdee3 0px 0px 10px;
+		//box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		// box-shadow: #dcdee3 0px 0px 10px;
 		
 		td {
 			a {
@@ -354,11 +375,12 @@ ul {
 	}
 
 	#table-content thead {
-		background: @vueGreen;
+		background: @codepenBlack;
+		color: #FFF;
 	}
 
 	#table-content thead tr td {
-		color: #757e92;
+		color: @offWhite;
 		font-size: 10px;
 		text-transform: uppercase;
 		padding: 14px 10px;
@@ -370,7 +392,7 @@ ul {
 	}
 
 	#table-content tbody tr:hover {
-		background: #fefaf2;
+		background: @bgGray;
 	}
 
 	.name-td {
@@ -380,7 +402,6 @@ ul {
 
 	.desc-td {
 		font-size: 13px;
-		color: #64697a;
 	}
 
 	.date-td {
@@ -389,11 +410,10 @@ ul {
 	}
 
 	.checked {
-		background: #fefaf2;
+		background: @bgGray;
 	}
 
 	#credit {
-		color: #76838c;
 		width: 300px;
 		margin: 0 auto;
 		font-size: 12px;
@@ -415,13 +435,13 @@ ul {
 
 .button_green a{
 	border-radius: 51px;
-		background-color: #41b883;
-		color: #FFF;
-		padding: 10px;
-		width: 102px;
-		text-align: center;
-		font-size: 80%;
-		display: block;
+	background-color: #41b883;
+	color: #FFF;
+	padding: 10px;
+	width: 102px;
+	text-align: center;
+	font-size: 80%;
+	display: block;
 }
 
 .search_button {
@@ -660,6 +680,8 @@ ul {
 
 	.login input[type='submit'] {
 		background-color: @vueGreen;
+		-webkit-border-radius: 30px;
+		        border-radius: 30px;
 		color: #fff;
 		font-weight: 700;
 		text-transform: uppercase;

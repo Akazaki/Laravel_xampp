@@ -2,7 +2,7 @@
 	<div id="Wrapper">
 		<navbar></navbar>
 		<sidenav></sidenav>
-		<div v-if="loginStatus">
+		<div>
 			<div id="Postlist">
 				<!-- <ol id="Breadcrumb" class="breadcrumb v1">
 					<li class="breadcrumb-level"><a href="">Level 1</a></li>
@@ -142,18 +142,11 @@ Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 		created () {
 			axios.post('/api/wow/postList', {})
 			.then(res => {
-				this.posts = res.data
+				this.posts = res.data.data
 				console.log(res)
 			}).catch(error => {
 				console.log(error);
 			});
-
-			this.$store.dispatch('GET_USER').then(res => {
-				this.loginStatus = true
-				this.user = this.$store.getters.user
-			}, error => {
-				this.$router.push('/wow/login')
-			})
 		},
 	}
 </script>

@@ -4131,7 +4131,7 @@ var index_esm = {
 			return response;
 		}, function (error) {
 			// Also, if we receive a Bad Request / Unauthorized error
-			return Promise.reject(error);
+			//return Promise.reject(error)
 		});
 	}
 });
@@ -4449,19 +4449,27 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 	mutations: {
 		// Userの書き換え
 		setUser: function setUser(state, payload) {
-			state.user = payload.data.user, state.authenticated = true;
-		},
-		setUserLogout: function setUserLogout(state) {
-			state.authenticated = false;
+			state.user = payload, state.authenticated = true;
 		}
 	},
 	actions: {
 		// User情報をAPIから取得
 		GET_USER: function GET_USER(commit) {
-			return axios.get('/api/wow/getcurrentuser', function (res) {
+			var _this = this;
+
+			// return axios.get('/api/wow/getcurrentuser', res => {
+			// 	// ここからコミット 引数の commit を使う
+			// 	console.log(res)
+			// 	commit('setUser', res.data.user)
+			// }, error => {
+			// })
+
+			return axios.get('/api/wow/getcurrentuser', {}).then(function (res) {
 				// ここからコミット 引数の commit を使う
-				commit('setUser');
-			}, function (error) {});
+				_this.commit('setUser', res.data.user);
+			}).catch(function (error) {
+				console.log(error);
+			});
 		},
 		//ログイン成功するとstateに保持
 		LOGIN: function LOGIN(commit, login_param) {
@@ -4473,7 +4481,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 		},
 		LOGOUT: function LOGOUT(commit) {
 			localStorage.removeItem('jwt-token');
-			commit('setUserLogout');
+			this.state.authenticated = false;
 		}
 	},
 	getters: {
@@ -4490,9 +4498,33 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 //ルーティング
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 	mode: 'history',
-	routes: [{ path: '/', component: __webpack_require__(40) },
-	// { path: '/about', component: require('./components/About.vue') },
-	{ path: '/wow/login', component: __webpack_require__(44) }, { path: '/wow', component: __webpack_require__(47) }]
+	routes: [{ path: '/', component: __webpack_require__(40) }, { path: '/wow/login', component: __webpack_require__(44) },
+	//↓ログインチェック有無をmetaに追加
+	{ path: '/wow', component: __webpack_require__(47), meta: { requiresAuth: true } }]
+});
+
+//ログインチェック
+router.beforeEach(function (to, from, next) {
+	__WEBPACK_IMPORTED_MODULE_3__services_http__["a" /* default */].init(); //JWTokenヘッダ付与
+
+	if (to.matched.some(function (record) {
+		return record.meta.requiresAuth;
+	}) && !store.state.authenticated) {
+		//JWTチェック
+		store.dispatch('GET_USER').then(function (res) {
+			//API叩いてユーザーチェック
+
+			if (store.state.authenticated) {
+				next();
+			} else {
+				next({ path: '/wow/login', query: { redirect: to.fullPath } });
+			}
+		}, function (error) {
+			next({ path: '/wow/login', query: { redirect: to.fullPath } });
+		});
+	} else {
+		next();
+	}
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
@@ -4500,7 +4532,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	router: router,
 	el: '#app',
 	created: function created() {
-		__WEBPACK_IMPORTED_MODULE_3__services_http__["a" /* default */].init();
 		// userStore.init()
 	}
 });
@@ -15777,9 +15808,9 @@ window._ = __webpack_require__(36);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(38);
+    window.$ = window.jQuery = __webpack_require__(38);
 
-  __webpack_require__(39);
+    __webpack_require__(39);
 } catch (e) {}
 
 /**
@@ -15795,8 +15826,8 @@ try {
 window.axios = __webpack_require__(7);
 
 window.axios.defaults.headers.common = {
-  'X-CSRF-TOKEN': window.Laravel.csrfToken,
-  'X-Requested-With': 'XMLHttpRequest'
+    'X-CSRF-TOKEN': window.Laravel.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 Vue.prototype.$http = window.axios;
@@ -15810,9 +15841,9 @@ Vue.prototype.$http = window.axios;
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -45616,7 +45647,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Index.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45627,9 +45658,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0cc0ebc8", Component.options)
+    hotAPI.createRecord("data-v-525384e1", Component.options)
   } else {
-    hotAPI.reload("data-v-0cc0ebc8", Component.options)
+    hotAPI.reload("data-v-525384e1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -45813,7 +45844,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0cc0ebc8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-525384e1", module.exports)
   }
 }
 
@@ -45840,7 +45871,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/wow/Login.vue"
+Component.options.__file = "resources\\assets\\js\\components\\wow\\Login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45851,9 +45882,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-67d6ea7a", Component.options)
+    hotAPI.createRecord("data-v-61139b08", Component.options)
   } else {
-    hotAPI.reload("data-v-67d6ea7a", Component.options)
+    hotAPI.reload("data-v-61139b08", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -45931,13 +45962,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 		};
 	},
 	created: function created() {
-		var _this = this;
-
-		this.$store.dispatch('GET_USER').then(function (res) {
-			if (res.status == 200) {
-				_this.$router.push('/wow');
-			}
-		});
+		// this.$store.dispatch('GET_USER').then(res => {
+		// 	if(res.status == 200){
+		// 		this.$router.push('/wow')
+		// 	}
+		// })
 	},
 	updated: function updated() {
 		this.showAlert = false;
@@ -45945,20 +45974,20 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 	methods: {
 		wowLogin: function wowLogin() {
-			var _this2 = this;
+			var _this = this;
 
 			var login_param = { email_text: this.email_text, password: this.password };
 
 			this.$store.dispatch('LOGIN', login_param).then(function (res) {
 				//ログイン成功
 				if (res.status == 200) {
-					_this2.$router.push('/wow');
+					_this.$router.push('/wow');
 				} else {
-					_this2.errorText();
+					_this.errorText();
 					return false;
 				}
 			}, function (error) {
-				_this2.errorText();
+				_this.errorText();
 				return false;
 			});
 		},
@@ -46176,7 +46205,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-67d6ea7a", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-61139b08", module.exports)
   }
 }
 
@@ -46203,7 +46232,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/wow/Dashboard.vue"
+Component.options.__file = "resources\\assets\\js\\components\\wow\\Dashboard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46214,9 +46243,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7d19876e", Component.options)
+    hotAPI.createRecord("data-v-5fdced33", Component.options)
   } else {
-    hotAPI.reload("data-v-7d19876e", Component.options)
+    hotAPI.reload("data-v-5fdced33", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46378,17 +46407,10 @@ Vue.component('sidenav', __webpack_require__(52));
 		var _this = this;
 
 		axios.post('/api/wow/postList', {}).then(function (res) {
-			_this.posts = res.data;
+			_this.posts = res.data.data;
 			console.log(res);
 		}).catch(function (error) {
 			console.log(error);
-		});
-
-		this.$store.dispatch('GET_USER').then(function (res) {
-			_this.loginStatus = true;
-			_this.user = _this.$store.getters.user;
-		}, function (error) {
-			_this.$router.push('/wow/login');
 		});
 	}
 });
@@ -46416,7 +46438,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Layouts/Navbar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46427,9 +46449,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-82b62ac8", Component.options)
+    hotAPI.createRecord("data-v-344e3d77", Component.options)
   } else {
-    hotAPI.reload("data-v-82b62ac8", Component.options)
+    hotAPI.reload("data-v-344e3d77", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46477,25 +46499,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			user: ''
+			username: ''
 		};
+	},
+	created: function created() {
+		this.username = this.$store.getters.user.label_text;
 	},
 
 	//props: ['user'],
-	created: function created() {
-		var _this = this;
-
-		this.$store.dispatch('GET_USER').then(function (res) {
-			_this.user = res.data.user.label_text;
-		}, function (error) {
-			_this.$router.push('/wow/login');
-		});
-	},
-
 	methods: {
 		logout: function logout() {
-			this.$store.dispatch('LOGOUT');
-			this.$router.push('/wow/login');
+			var _this = this;
+
+			this.$store.dispatch('LOGOUT').then(function (res) {
+				_this.$router.push('/wow/login');
+			}, function (error) {});
 		}
 	}
 });
@@ -46513,25 +46531,7 @@ var render = function() {
       "div",
       { staticClass: "collapse navbar-collapse", attrs: { id: "Navbar" } },
       [
-        _c("ul", { staticClass: "navbar-nav navbar-left" }, [
-          _c("li", [
-            _c(
-              "div",
-              { staticClass: "header_logo" },
-              [
-                _c("router-link", { attrs: { to: "/wow" } }, [
-                  _c("img", {
-                    attrs: {
-                      src: "/public/wow/common/img/logo_wow.png",
-                      alt: "Contents Management Flamework WOW"
-                    }
-                  })
-                ])
-              ],
-              1
-            )
-          ])
-        ]),
+        _vm._m(0),
         _vm._v(" "),
         _c("ul", { staticClass: "navbar-right" }, [
           _c("li", { staticClass: "auther" }, [
@@ -46543,7 +46543,7 @@ var render = function() {
                 }
               })
             ]),
-            _vm._v(_vm._s(_vm.user) + "\n\t\t\t")
+            _vm._v(_vm._s(_vm.username) + "\n\t\t\t")
           ]),
           _vm._v(" "),
           _c("li", { staticClass: "button" }, [
@@ -46603,13 +46603,22 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "navbar-nav navbar-left" }, [
+      _c("li", [_c("div", { staticClass: "header_logo" })])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-82b62ac8", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-344e3d77", module.exports)
   }
 }
 
@@ -46636,7 +46645,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Layouts/Sidenav.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Sidenav.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Sidenav.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46647,9 +46656,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0213af90", Component.options)
+    hotAPI.createRecord("data-v-4194b815", Component.options)
   } else {
-    hotAPI.reload("data-v-0213af90", Component.options)
+    hotAPI.reload("data-v-4194b815", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46665,24 +46674,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -46752,7 +46743,7 @@ var staticRenderFns = [
               ]
             ),
             _vm._v(" "),
-            _c("ul", { attrs: { id: "collapse-A" } }, [
+            _c("ul", { staticClass: "collapse", attrs: { id: "collapse-A" } }, [
               _c("li", [_c("a", { attrs: { href: "A-1" } }, [_vm._v("A-1")])]),
               _vm._v(" "),
               _c("li", [_c("a", { attrs: { href: "A-2" } }, [_vm._v("A-2")])]),
@@ -46760,19 +46751,7 @@ var staticRenderFns = [
               _c("li", [_c("a", { attrs: { href: "A-3" } }, [_vm._v("A-3")])])
             ]),
             _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Statistics")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Milestones")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Experiments")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Previews")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Assets")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Settings")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Logout")])])
+            _c("li", [_c("a", [_vm._v("Statistics")])])
           ])
         ])
       ]
@@ -46784,7 +46763,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0213af90", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-4194b815", module.exports)
   }
 }
 
@@ -46804,222 +46783,220 @@ var render = function() {
       _vm._v(" "),
       _c("sidenav"),
       _vm._v(" "),
-      _vm.loginStatus
-        ? _c("div", [
-            _c("div", { attrs: { id: "Postlist" } }, [
-              _c("ul", { staticClass: "button_box" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("li", { staticClass: "left" }, [
+      _c("div", [
+        _c("div", { attrs: { id: "Postlist" } }, [
+          _c("ul", { staticClass: "button_box" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("li", { staticClass: "left" }, [
+              _c(
+                "div",
+                { staticClass: "button_green" },
+                [
+                  _c("router-link", { attrs: { to: "/" } }, [
+                    _vm._v("\n\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t")
+                  ])
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "demo1" } }, [
+            _c(
+              "ul",
+              _vm._l(_vm.posts, function(post) {
+                return _c("li", [_vm._v(_vm._s(post.label_text))])
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "table-content" } }, [
+            _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
                   _c(
-                    "div",
-                    { staticClass: "button_green" },
+                    "td",
+                    { staticClass: "name-td" },
                     [
                       _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("\n\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t")
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
                       ])
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "demo1" } }, [
-                _c(
-                  "ul",
-                  _vm._l(_vm.posts, function(post) {
-                    return _c("li", [_vm._v(_vm._s(post.label_text))])
-                  })
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "table-content" } }, [
-                _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
-                  _vm._m(2),
+                _c("tr", [
+                  _vm._m(4),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(6),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(7),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(8),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(9),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("001")]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "name-td" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("テスト投稿テスト投稿テスト投稿")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "desc-td" }, [
-                        _vm._v("2017-08-31 20:30:50")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                      _vm._v(" "),
-                      _c("td")
-                    ])
-                  ])
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("001")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "name-td" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("テスト投稿テスト投稿テスト投稿")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "desc-td" }, [
+                    _vm._v("2017-08-31 20:30:50")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
+                  _vm._v(" "),
+                  _c("td")
                 ])
               ])
             ])
           ])
-        : _vm._e()
+        ])
+      ])
     ],
     1
   )
@@ -47113,7 +47090,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7d19876e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5fdced33", module.exports)
   }
 }
 

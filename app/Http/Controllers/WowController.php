@@ -97,9 +97,14 @@ class WowController extends Controller
 	// }
 	public function postList(Request $request)
 	{
-		$posts = DB::table('posts')->get();
+		$query = Posts::query();
 
+        $posts = $query->orderBy('id','desc')->paginate(10);
         return $posts;
+
+		// $posts = DB::table('posts')->get();
+
+  //       return $posts;
 	}
 
     public function signIn(Request $request)

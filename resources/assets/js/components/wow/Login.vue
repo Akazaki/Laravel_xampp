@@ -58,11 +58,11 @@ Vue.use(VueRouter)
 			}
 		},
 		created() {
-			this.$store.dispatch('GET_USER').then(res => {
-				if(res.status == 200){
-					this.$router.push('/wow')
-				}
-			})
+			// this.$store.dispatch('GET_USER').then(res => {
+			// 	if(res.status == 200){
+			// 		this.$router.push('/wow')
+			// 	}
+			// })
 		},
 		updated(){
 			this.showAlert = false

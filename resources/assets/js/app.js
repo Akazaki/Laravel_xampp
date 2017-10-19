@@ -17,21 +17,27 @@ const store = new Vuex.Store({
 	mutations: {
 		// Userの書き換え
 		setUser: function (state, payload) {
-			state.user = payload.data.user,
+			state.user = payload,
 			state.authenticated = true;
-		},
-		setUserLogout: function (state) {
-			state.authenticated = false;
 		}
 	},
 	actions: {
 		// User情報をAPIから取得
 		GET_USER: function (commit) {
-			return axios.get('/api/wow/getcurrentuser', res => {
+			// return axios.get('/api/wow/getcurrentuser', res => {
+			// 	// ここからコミット 引数の commit を使う
+			// 	console.log(res)
+			// 	commit('setUser', res.data.user)
+			// }, error => {
+			// })
+
+			return axios.get('/api/wow/getcurrentuser', {})
+			.then(res => {
 				// ここからコミット 引数の commit を使う
-				commit('setUser')
-			}, error => {
-			})
+				this.commit('setUser', res.data.user)
+			}).catch(error => {
+				console.log(error);
+			});
 		},
 		//ログイン成功するとstateに保持
 		LOGIN: function(commit, login_param) {
@@ -43,7 +49,7 @@ const store = new Vuex.Store({
 		},
 		LOGOUT: function (commit) {
 			localStorage.removeItem('jwt-token')
-			commit('setUserLogout')
+			this.state.authenticated = false;
 		}
 	},
 	getters: {
@@ -58,18 +64,38 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{ path: '/', component: require('./components/Index.vue') },
-		// { path: '/about', component: require('./components/About.vue') },
 		{ path: '/wow/login', component: require('./components/wow/Login.vue') },
-		{ path: '/wow', component: require('./components/wow/Dashboard.vue') },
+		//↓ログインチェック有無をmetaに追加
+		{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
 	]
 })
+
+//ログインチェック
+router.beforeEach((to, from, next) => {
+	http.init()//JWTokenヘッダ付与
+	
+	if (to.matched.some(record => record.meta.requiresAuth) && !store.state.authenticated) {//JWTチェック
+		store.dispatch('GET_USER').then(res => {//API叩いてユーザーチェック
+			
+			if(store.state.authenticated){
+				next();
+			}else{
+				next({ path: '/wow/login', query: { redirect: to.fullPath }});
+			}
+		}, error => {
+			next({ path: '/wow/login', query: { redirect: to.fullPath }});
+		})
+
+	} else {
+		next();
+	}
+});
 
 const app = new Vue({
 	store: store,
 	router,
 	el: '#app',
 	created () {
-		http.init()
 		// userStore.init()
 	}
 })
