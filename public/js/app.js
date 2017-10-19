@@ -4434,7 +4434,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 
-// import store from './stores/userStore'
 
 __webpack_require__(35);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
@@ -46261,48 +46260,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(2);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_wow__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(2);
 //
 //
 //
@@ -46389,29 +46348,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-// import http from '../../services/http'
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 Vue.component('navbar', __webpack_require__(49));
 Vue.component('sidenav', __webpack_require__(52));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			user: '',
-			loginStatus: false,
-			posts: {}
+			posts: {}, //記事データ
+			current_page: 1, //現在のページ
+			isStartPage: false,
+			isEndPage: false,
+			last_page: 0, //ラストのページ番号
+			per_page: 0, //一度の取得数
+			page_length: 0 //全ページ数
 		};
 	},
 	created: function created() {
-		var _this = this;
+		this.posts_get(this.current_page);
+	},
 
-		axios.post('/api/wow/postList', {}).then(function (res) {
-			_this.posts = res.data.data;
-			console.log(res);
-		}).catch(function (error) {
-			console.log(error);
-		});
+	//props: ['user'],
+	methods: {
+		//ページング処理
+		posts_get: function posts_get(page) {
+			var _this = this;
+
+			axios.post('/api/wow/postList?page=' + page, {}).then(function (res) {
+				_this.posts = res.data.data;
+				_this.current_page = res.data.current_page;
+				_this.last_page = res.data.last_page;
+				_this.page_length = Math.ceil(res.data.total / res.data.per_page);
+
+				//前のページがあるか
+				if (res.data.prev_page_url) {
+					_this.isStartPage = true;
+				} else {
+					_this.isStartPage = false;
+				}
+
+				//次のページがあるか
+				if (res.data.next_page_url) {
+					_this.isEndPage = true;
+				} else {
+					_this.isEndPage = false;
+				}
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	},
+	computed: {
+		// pageCount: function() {
+		//           return this.page_length
+		//       }
 	}
 });
 
@@ -46467,6 +46459,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46598,7 +46595,9 @@ var render = function() {
               })
             ])
           ]
-        )
+        ),
+        _vm._v(" "),
+        _vm._m(1)
       ]
     )
   ])
@@ -46610,6 +46609,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "navbar-nav navbar-left" }, [
       _c("li", [_c("div", { staticClass: "header_logo" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "Loading" } }, [
+      _c("div", { staticClass: "loading" })
     ])
   }
 ]
@@ -46738,7 +46745,7 @@ var staticRenderFns = [
               [
                 _c("a", { staticClass: "active", attrs: { href: "#" } }, [
                   _c("span", { staticClass: "caret" }),
-                  _vm._v(" menu A")
+                  _vm._v(" 投稿")
                 ])
               ]
             ),
@@ -46751,7 +46758,7 @@ var staticRenderFns = [
               _c("li", [_c("a", { attrs: { href: "A-3" } }, [_vm._v("A-3")])])
             ]),
             _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("Statistics")])])
+            _c("li", [_c("a", [_vm._v("画像")])])
           ])
         ])
       ]
@@ -46804,196 +46811,153 @@ var render = function() {
             _vm._m(1)
           ]),
           _vm._v(" "),
-          _c("div", { attrs: { id: "demo1" } }, [
-            _c(
-              "ul",
-              _vm._l(_vm.posts, function(post) {
-                return _c("li", [_vm._v(_vm._s(post.label_text))])
-              })
-            )
-          ]),
-          _vm._v(" "),
           _c("div", { attrs: { id: "table-content" } }, [
             _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
               _vm._m(2),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(6),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(7),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(8),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(9),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("001")]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "name-td" },
-                    [
-                      _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("テスト投稿テスト投稿テスト投稿")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "desc-td" }, [
-                    _vm._v("2017-08-31 20:30:50")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "date-td" }, [_vm._v("公開")]),
-                  _vm._v(" "),
-                  _c("td")
-                ])
-              ])
+              _c(
+                "tbody",
+                _vm._l(_vm.posts, function(post) {
+                  return _c("tr", [
+                    _vm._m(3, true),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(post.id))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "name-td" },
+                      [
+                        _c("router-link", { attrs: { to: "/" } }, [
+                          _vm._v(_vm._s(post.label_text))
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "desc-td" }, [
+                      _vm._v(_vm._s(post.created_at))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "date-td" }, [
+                      _vm._v(_vm._s(post.acknowledge))
+                    ])
+                  ])
+                })
+              )
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "Pagination" } }, [
+            _c(
+              "ul",
+              { staticClass: "pager-list" },
+              [
+                _c("li", { staticClass: "pager-item pager-item-last" }, [
+                  _vm.posts
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "javascript:void(0);" },
+                          on: {
+                            click: function($event) {
+                              _vm.posts_get(1)
+                            }
+                          }
+                        },
+                        [_vm._v("<<")]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "pager-item pager-item-first" }, [
+                  _vm.isStartPage
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "javascript:void(0);" },
+                          on: {
+                            click: function($event) {
+                              _vm.posts_get(_vm.current_page - 1)
+                            }
+                          }
+                        },
+                        [_vm._v("<")]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.page_length, function(num) {
+                  return [
+                    _c(
+                      "li",
+                      {
+                        staticClass: "pager-item pager-item-active",
+                        on: {
+                          click: function($event) {
+                            _vm.posts_get(num)
+                          }
+                        }
+                      },
+                      [
+                        num !== _vm.current_page
+                          ? [
+                              _c(
+                                "a",
+                                { attrs: { href: "javascript:void(0);" } },
+                                [_vm._v(_vm._s(num))]
+                              )
+                            ]
+                          : [
+                              _c("span", [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "javascript:void(0);" } },
+                                  [_vm._v(_vm._s(num))]
+                                )
+                              ])
+                            ]
+                      ],
+                      2
+                    )
+                  ]
+                }),
+                _vm._v(" "),
+                _c("li", { staticClass: "pager-item pager-item-last" }, [
+                  _vm.isEndPage
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "javascript:void(0);" },
+                          on: {
+                            click: function($event) {
+                              _vm.posts_get(_vm.current_page + 1)
+                            }
+                          }
+                        },
+                        [_vm._v(">")]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "pager-item pager-item-last" }, [
+                  _vm.last_page
+                    ? _c(
+                        "a",
+                        {
+                          attrs: { href: "javascript:void(0);" },
+                          on: {
+                            click: function($event) {
+                              _vm.posts_get(_vm.last_page)
+                            }
+                          }
+                        },
+                        [_vm._v(">>")]
+                      )
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ])
         ])
       ])
@@ -47047,42 +47011,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
   }
 ]
 render._withStripped = true
@@ -47105,6 +47033,39 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+/**
+ * Responsible for all HTTP requests.
+ */
+/* unused harmony default export */ var _unused_webpack_default_export = ({
+	// posts_get(url, page){
+	// 	axios.post(url+'?page='+page, {})
+	// 	.then(res => {
+	// 		return res
+	// 	}).catch(error => {
+	// 		return error
+	// 	});
+	// }
+});
 
 /***/ })
 /******/ ]);

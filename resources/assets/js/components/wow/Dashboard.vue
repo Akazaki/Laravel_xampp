@@ -28,11 +28,7 @@
 						</div>
 					</li>
 				</ul>
-				<div id="demo1">
-					<ul>
-					<li v-for="post in posts">{{post.label_text}}</li>
-					</ul>
-				</div>
+
 				<div id="table-content">
 					<table cellspacing="0" cellpadding="0">
 					<thead>
@@ -46,86 +42,49 @@
 						</tr>	
 					</thead>
 					<tbody>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
-						</tr>
-						<tr>
-						<td><input type="checkbox"></td>
-						<td>001</td>
-						<td class="name-td">
-							<router-link to="/">テスト投稿テスト投稿テスト投稿</router-link>
-						</td>
-						<td class="desc-td">2017-08-31 20:30:50</td>
-						<td class="date-td">公開</td>
-						<td></td>
+						<tr v-for="post in posts">
+							<td><input type="checkbox"></td>
+							<td>{{post.id}}</td>
+							<td class="name-td">
+								<router-link to="/">{{post.label_text}}</router-link>
+							</td>
+							<td class="desc-td">{{post.created_at}}</td>
+							<td class="date-td">{{post.acknowledge}}</td>
+							</tr>
 						</tr>
 					</tbody>
 					</table>
-				</div> 
-			</div>			
+				</div>
+				<div id="Pagination">
+					<ul class="pager-list">
+						<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="posts_get(1)" v-if="posts">&lt;&lt;</a></li>
+						<li class="pager-item pager-item-first"><a href="javascript:void(0);" v-on:click="posts_get(current_page-1)" v-if="isStartPage">&lt;</a></li>
+
+						<template v-for="num in page_length">
+							<li class="pager-item pager-item-active" v-on:click="posts_get(num)">
+								<template v-if="num !== current_page">
+									<a href="javascript:void(0);">{{num}}</a>
+								</template>
+								<template v-else>
+									<span>
+										<a href="javascript:void(0);">{{num}}</a>
+									</span>
+								</template>
+							</li>
+						</template>
+
+						<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="posts_get(current_page+1)" v-if="isEndPage">&gt;</a></li>
+						<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="posts_get(last_page)" v-if="last_page">&gt;&gt;</a></li>
+					</ul>
+				</div>
+				
+			</div>
 		</div>			
 	</div>
 </template>
 
 <script>
-// import http from '../../services/http'
+import wow from '../../services/wow'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
@@ -134,19 +93,51 @@ Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 	export default {
 		data (){
 			return {
-				user: '',
-				loginStatus: false,
-				posts: {}
+				posts: {},//記事データ
+				current_page: 1,//現在のページ
+				isStartPage: false,
+				isEndPage: false,
+				last_page: 0,//ラストのページ番号
+				per_page: 0,//一度の取得数
+				page_length: 0,//全ページ数
 			}
 		},
 		created () {
-			axios.post('/api/wow/postList', {})
-			.then(res => {
-				this.posts = res.data.data
-				console.log(res)
-			}).catch(error => {
-				console.log(error);
-			});
+			this.posts_get(this.current_page);
 		},
+		//props: ['user'],
+		methods: {
+			//ページング処理
+			posts_get(page){
+				axios.post('/api/wow/postList?page='+page, {})
+				.then(res => {
+					this.posts = res.data.data
+					this.current_page = res.data.current_page
+					this.last_page = res.data.last_page
+					this.page_length = Math.ceil(res.data.total / res.data.per_page);
+					
+					//前のページがあるか
+					if(res.data.prev_page_url){
+						this.isStartPage = true
+					}else{
+						this.isStartPage = false
+					}
+
+					//次のページがあるか
+					if(res.data.next_page_url){
+						this.isEndPage = true
+					}else{
+						this.isEndPage = false
+					}
+				}).catch(error => {
+					console.log(error);
+				});
+			}
+		},
+		computed:{
+			// pageCount: function() {
+	  //           return this.page_length
+	  //       }
+		}
 	}
 </script>

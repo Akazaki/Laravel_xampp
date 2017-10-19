@@ -3,15 +3,15 @@
 		<div class='sidebar'>
 			<ul class='nav'>
 				<li data-toggle="collapse" href="#collapse-A">
-					<a class='active' href="#"><span class="caret"></span> menu A</a>
+					<a class='active' href="#"><span class="caret"></span> 投稿</a>
 				</li>
 				<ul id="collapse-A" class="collapse">
-					<li><a href="A-1">A-1</a></li><!-- 閉じタグ省略可能 -->
-					<li><a href="A-2">A-2</a></li><!-- 閉じタグ省略可能 -->
-					<li><a href="A-3">A-3</a></li><!-- 閉じタグ省略可能 -->
+					<li><a href="A-1">A-1</a></li>
+					<li><a href="A-2">A-2</a></li>
+					<li><a href="A-3">A-3</a></li>
 				</ul>
 				<li>
-					<a>Statistics</a>
+					<a>画像</a>
 				</li>
 			</ul>
 		</div>

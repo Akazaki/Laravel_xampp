@@ -17,21 +17,6 @@ class WowController extends Controller
 	{
 	}
 
-	// public function index(Request $request)
-	// {
-	// 	$articles = [
-	// 		[
-	// 		'id' => 1,
-	// 		'title' => 'タイトル'
-	// 		],
-	// 		[
-	// 		'id' => 2,
-	// 		'title' => 'タイトル2'
-	// 		]
-	// 	];
- //        return $articles;
-	// }
-
 	public function login(Request $request)
 	{
 		return view('wow/login');
@@ -57,12 +42,8 @@ class WowController extends Controller
 
 	// 	return response()->json(['status' => 'success', 'user' => Auth::user()->label_text], 200);
 	// }
-
-	public function register(Request $request)
-	{
-		return view('wow/register');
-	}
-
+	
+    // 登録
 	public function signUp(Request $request)
 	{
 		// バリデーション
@@ -87,26 +68,22 @@ class WowController extends Controller
 		}
 	}
 
+    // ログアウト
 	public function signOut(){
 		//Auth::logout();
 		return redirect('wow/login');
 	}
 
-	// public function postList($table){
- //        return response()->json(['status' => 'success'], 200);
-	// }
+    // 記事取得
 	public function postList(Request $request)
 	{
 		$query = Posts::query();
 
-        $posts = $query->orderBy('id','desc')->paginate(10);
+        $posts = $query->orderBy('id','desc')->paginate(3);
         return $posts;
-
-		// $posts = DB::table('posts')->get();
-
-  //       return $posts;
 	}
 
+    // ログイン処理
     public function signIn(Request $request)
     {    	
 		$this->validate($request,[

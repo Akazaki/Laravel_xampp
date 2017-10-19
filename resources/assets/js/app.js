@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex'
 window.Vue = Vue;
 import VueRouter from 'vue-router'
-// import store from './stores/userStore'
 import http from './services/http'
 require('./bootstrap')
 Vue.use(VueRouter)
