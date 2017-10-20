@@ -16,10 +16,12 @@
 		</script>
 	</head>
 	<body>
-		<navbar></navbar>
 		<div id="app">
 			<div>
-				<router-view></router-view>
+				<transition name="fade" mode="out-in" @before-leave="$refs.overlay.start()" @enter="$refs.overlay.end()">
+			    	<router-view></router-view>
+				</transition>
+				<loading ref="overlay"></loading>
 			</div>
 		</div>
 		<script src="/public/js/app.js"></script>

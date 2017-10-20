@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 window.Vue = Vue;
 import VueRouter from 'vue-router'
 import http from './services/http'
+Vue.component('loading', require('./components/Layouts/Loading.vue'))
 require('./bootstrap')
 Vue.use(VueRouter)
 Vue.use(Vuex)

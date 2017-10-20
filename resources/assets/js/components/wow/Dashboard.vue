@@ -50,7 +50,6 @@
 							</td>
 							<td class="desc-td">{{post.created_at}}</td>
 							<td class="date-td">{{post.acknowledge}}</td>
-							</tr>
 						</tr>
 					</tbody>
 					</table>
