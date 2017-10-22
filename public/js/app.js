@@ -4466,7 +4466,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
 			return axios.get('/api/wow/getcurrentuser', {}).then(function (res) {
 				// ここからコミット 引数の commit を使う
-				_this.commit('setUser', res.data.user);
+				if (res && res.data.user) {
+					_this.commit('setUser', res.data.user);
+				}
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -15808,9 +15810,9 @@ window._ = __webpack_require__(36);
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(38);
+  window.$ = window.jQuery = __webpack_require__(38);
 
-    __webpack_require__(39);
+  __webpack_require__(39);
 } catch (e) {}
 
 /**
@@ -15826,8 +15828,8 @@ try {
 window.axios = __webpack_require__(3);
 
 window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
+  'X-CSRF-TOKEN': window.Laravel.csrfToken,
+  'X-Requested-With': 'XMLHttpRequest'
 };
 
 Vue.prototype.$http = window.axios;
@@ -15841,9 +15843,9 @@ Vue.prototype.$http = window.axios;
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -45647,7 +45649,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Index.vue"
+Component.options.__file = "resources/assets/js/components/Index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45658,9 +45660,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-525384e1", Component.options)
+    hotAPI.createRecord("data-v-0cc0ebc8", Component.options)
   } else {
-    hotAPI.reload("data-v-525384e1", Component.options)
+    hotAPI.reload("data-v-0cc0ebc8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -45844,7 +45846,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-525384e1", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0cc0ebc8", module.exports)
   }
 }
 
@@ -45871,7 +45873,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\wow\\Login.vue"
+Component.options.__file = "resources/assets/js/components/wow/Login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45882,9 +45884,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-61139b08", Component.options)
+    hotAPI.createRecord("data-v-67d6ea7a", Component.options)
   } else {
-    hotAPI.reload("data-v-61139b08", Component.options)
+    hotAPI.reload("data-v-67d6ea7a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -45902,6 +45904,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(2);
+//
 //
 //
 //
@@ -45968,19 +45971,20 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 		// 	}
 		// })
 	},
-	updated: function updated() {
-		this.showAlert = false;
-	},
 
+	// updated(){
+	// 	this.showAlert = false
+	// },
 	methods: {
 		wowLogin: function wowLogin() {
 			var _this = this;
 
+			this.showAlert = false;
 			var login_param = { email_text: this.email_text, password: this.password };
 
 			this.$store.dispatch('LOGIN', login_param).then(function (res) {
 				//ログイン成功
-				if (res.status == 200) {
+				if (res && res.status == 200) {
 					_this.$router.push('/wow');
 				} else {
 					_this.errorText();
@@ -45993,7 +45997,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 		},
 		errorText: function errorText() {
 			this.showAlert = true;
-			this.alertMessage = 'メールアドレスかパスワードが違います';
+			this.alertMessage = '※メールアドレスまたはパスワードが違います';
 		}
 	}
 });
@@ -46012,12 +46016,31 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "wrapper" }, [
-      _c("div", { attrs: { id: "login" } }, [
+      _c("div", { attrs: { id: "Login" } }, [
         _c("div", { staticClass: "loginWidth", attrs: { id: "loginInner" } }, [
           _c("div", { staticClass: "alice clr" }, [
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "form login" }, [
+              _c(
+                "p",
+                { staticClass: "error_text" },
+                [
+                  _c("transition", { attrs: { name: "fade" } }, [
+                    _vm.showAlert
+                      ? _c("span", { attrs: { role: "alert" } }, [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t" +
+                              _vm._s(_vm.alertMessage) +
+                              "\n\t\t\t\t\t\t\t"
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "form__field" }, [
                 _c("label", { attrs: { for: "login__username" } }, [
                   _c("svg", { staticClass: "icon" }, [
@@ -46154,28 +46177,7 @@ var render = function() {
                   )
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "err" }, [
-              _vm.showAlert
-                ? _c(
-                    "span",
-                    {
-                      staticClass: "alert alert-danger",
-                      attrs: { role: "alert" }
-                    },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t\t" +
-                          _vm._s(_vm.alertMessage) +
-                          "\n\t\t\t\t\t\t"
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "check" })
+            ])
           ])
         ])
       ])
@@ -46205,7 +46207,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-61139b08", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-67d6ea7a", module.exports)
   }
 }
 
@@ -46232,7 +46234,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\wow\\Dashboard.vue"
+Component.options.__file = "resources/assets/js/components/wow/Dashboard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Dashboard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46243,9 +46245,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5fdced33", Component.options)
+    hotAPI.createRecord("data-v-7d19876e", Component.options)
   } else {
-    hotAPI.reload("data-v-5fdced33", Component.options)
+    hotAPI.reload("data-v-7d19876e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46346,7 +46348,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -46363,7 +46364,8 @@ Vue.component('sidenav', __webpack_require__(53));
 			isEndPage: false,
 			last_page: 0, //ラストのページ番号
 			per_page: 0, //一度の取得数
-			page_length: 0 //全ページ数
+			page_length: 0, //全ページ数
+			list_columns: '' //カラムリスト
 		};
 	},
 	created: function created() {
@@ -46377,20 +46379,23 @@ Vue.component('sidenav', __webpack_require__(53));
 			var _this = this;
 
 			axios.post('/api/wow/postList?page=' + page, {}).then(function (res) {
-				_this.posts = res.data.data;
-				_this.current_page = res.data.current_page;
-				_this.last_page = res.data.last_page;
-				_this.page_length = Math.ceil(res.data.total / res.data.per_page);
+				var postsdata = res.data.posts;
+
+				_this.list_columns = res.data._listColumns;
+				_this.posts = postsdata.data;
+				_this.current_page = postsdata.current_page;
+				_this.last_page = postsdata.last_page;
+				_this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
 
 				//前のページがあるか
-				if (res.data.prev_page_url) {
+				if (postsdata.prev_page_url) {
 					_this.isStartPage = true;
 				} else {
 					_this.isStartPage = false;
 				}
 
 				//次のページがあるか
-				if (res.data.next_page_url) {
+				if (postsdata.next_page_url) {
 					_this.isEndPage = true;
 				} else {
 					_this.isEndPage = false;
@@ -46453,7 +46458,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Navbar.vue"
+Component.options.__file = "resources/assets/js/components/Layouts/Navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46464,9 +46469,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-344e3d77", Component.options)
+    hotAPI.createRecord("data-v-82b62ac8", Component.options)
   } else {
-    hotAPI.reload("data-v-344e3d77", Component.options)
+    hotAPI.reload("data-v-82b62ac8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46551,7 +46556,25 @@ var render = function() {
       "div",
       { staticClass: "collapse navbar-collapse", attrs: { id: "Navbar" } },
       [
-        _vm._m(0),
+        _c("ul", { staticClass: "navbar-nav navbar-left" }, [
+          _c("li", [
+            _c(
+              "div",
+              { staticClass: "header_logo" },
+              [
+                _c("router-link", { attrs: { to: "/wow" } }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/public/wow/common/img/logo_wow.png",
+                      alt: "Contents Management Flamework WOW"
+                    }
+                  })
+                ])
+              ],
+              1
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("ul", { staticClass: "navbar-right" }, [
           _c("li", { staticClass: "auther" }, [
@@ -46623,22 +46646,13 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "navbar-nav navbar-left" }, [
-      _c("li", [_c("div", { staticClass: "header_logo" })])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-344e3d77", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-82b62ac8", module.exports)
   }
 }
 
@@ -46665,7 +46679,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Sidenav.vue"
+Component.options.__file = "resources/assets/js/components/Layouts/Sidenav.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Sidenav.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46676,9 +46690,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4194b815", Component.options)
+    hotAPI.createRecord("data-v-0213af90", Component.options)
   } else {
-    hotAPI.reload("data-v-4194b815", Component.options)
+    hotAPI.reload("data-v-0213af90", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -46783,7 +46797,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4194b815", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-0213af90", module.exports)
   }
 }
 
@@ -46826,7 +46840,19 @@ var render = function() {
           _vm._v(" "),
           _c("div", { attrs: { id: "table-content" } }, [
             _c("table", { attrs: { cellspacing: "0", cellpadding: "0" } }, [
-              _vm._m(2),
+              _c("thead", [
+                _c(
+                  "tr",
+                  [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _vm._l(_vm.list_columns, function(column) {
+                      return [_c("td", [_vm._v(_vm._s(column))])]
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -46834,7 +46860,9 @@ var render = function() {
                   return _c("tr", [
                     _vm._m(3, true),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(post.id))]),
+                    _c("td", { staticClass: "id-td" }, [
+                      _vm._v(_vm._s(post.id))
+                    ]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -46847,11 +46875,11 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("td", { staticClass: "desc-td" }, [
+                    _c("td", { staticClass: "date-td" }, [
                       _vm._v(_vm._s(post.created_at))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "date-td" }, [
+                    _c("td", { staticClass: "acknowledge-td" }, [
                       _vm._v(_vm._s(post.acknowledge))
                     ])
                   ])
@@ -46973,7 +47001,9 @@ var render = function() {
             )
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c("footer")
     ],
     1
   )
@@ -47003,21 +47033,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("td", [_c("input", { attrs: { type: "checkbox" } })]),
-        _vm._v(" "),
-        _c("td", [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("タイトル")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("公開日")]),
-        _vm._v(" "),
-        _c("td", [_vm._v("ステータス")]),
-        _vm._v(" "),
-        _c("td")
-      ])
-    ])
+    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
   },
   function() {
     var _vm = this
@@ -47031,7 +47047,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5fdced33", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7d19876e", module.exports)
   }
 }
 
@@ -47155,7 +47171,7 @@ var __vue_template__ = __webpack_require__(75)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-5d8b0e36"
+var __vue_scopeId__ = "data-v-dc8d1f40"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -47165,7 +47181,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Loading.vue"
+Component.options.__file = "resources/assets/js/components/Layouts/Loading.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Loading.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47176,9 +47192,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d8b0e36", Component.options)
+    hotAPI.createRecord("data-v-dc8d1f40", Component.options)
   } else {
-    hotAPI.reload("data-v-5d8b0e36", Component.options)
+    hotAPI.reload("data-v-dc8d1f40", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47199,13 +47215,13 @@ var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(72)("1810f363", content, false);
+var update = __webpack_require__(72)("11e3500e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d8b0e36\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loading.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d8b0e36\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loading.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc8d1f40\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loading.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc8d1f40\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loading.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -47223,7 +47239,7 @@ exports = module.exports = __webpack_require__(60)(undefined);
 
 
 // module
-exports.push([module.i, "\n@keyframes router-transition-in-data-v-5d8b0e36 {\nfrom {\r\n    opacity: 0;\n}\nto {\r\n    opacity: 1;\n}\n}\n.overlay[data-v-5d8b0e36] {\r\n  position: absolute;\r\n  background: rgba(220, 220, 220, 0.8);\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 100;\r\n  display: none;\r\n  align-items: center;\r\n  justify-content: center;\r\n  opacity: 0;\r\n  transition: opacity 1s ease .4s;\n}\n.overlay.enter[data-v-5d8b0e36] {\r\n  display: flex;\r\n  opacity: 1;\r\n  animation: router-transition-in-data-v-5d8b0e36 0.4s;\n}\n.overlay.leave[data-v-5d8b0e36] {\r\n  display: flex;\r\n  opacity: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n@keyframes router-transition-in-data-v-dc8d1f40 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n", ""]);
 
 // exports
 
@@ -47541,7 +47557,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5d8b0e36", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-dc8d1f40", module.exports)
   }
 }
 

@@ -187,14 +187,37 @@ ul {
 	}
 }
 
+.overlay {
+  position: absolute;
+  background: rgba(220, 220, 220, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1s ease .4s;
+}
+.overlay.enter {
+  display: flex;
+  opacity: 1;
+  animation: router-transition-in 0.4s;
+}
+.overlay.leave {
+  display: flex;
+  opacity: 0;
+}
 
 #Sidebar {
 	background-color: @codepenBlack;
 	width: 16%;
-	min-height: 800px;
+	min-height: 500px;
 	padding: 0;
 	height: auto;
-	font-weight: 700;
+	font-size: 90%;
 
 	.sidebar {
 		position: absolute;
@@ -212,10 +235,6 @@ ul {
 
 	.content.isOpen {
 		transform: translate3d(220px, 0, 0);
-	}
-
-	.collapse {
-		height: 0;
 	}
 
 	.button {
@@ -350,25 +369,27 @@ ul {
 
 	#table-content tbody tr td {
 		padding: 14px 10px;
-		border-bottom: #eaecee solid 1px;
+		font-size: 80%;
+		border: 1px solid #ececec;
 	}
 
 	#table-content tbody tr:hover {
 		background: @bgGray;
 	}
 
-	.name-td {
-		font-size: 13px;
-		font-weight: 600;
+	.id-td {
+		width: 8%;
 	}
 
-	.desc-td {
-		font-size: 13px;
+	.name-td {
+		width: 40%;
 	}
 
 	.date-td {
-		text-align: right;
-		font-size: 9px;
+	}
+
+	.acknowledge-td {
+		width: 15%;
 	}
 
 	.checked {
@@ -397,8 +418,7 @@ ul {
 			background: #333;
 		}
 
-		.pager-item a,
-		.pager-item span {
+		.pager-item a {
 			display: block;
 			padding: 12px;
 			color: #fff;
@@ -456,7 +476,7 @@ ul {
 	input[type=search] {
 		background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
 		border: solid 1px #ccc;
-		padding: 7px 20px 7px 36px;
+		padding: 9px 20px 7px 36px;
 		width: 55px;
 		
 		-webkit-border-radius: 10em;
@@ -485,7 +505,7 @@ ul {
 	}
 }
 
-#login {
+#Login {
 	width: 1000px;
 	background-color: #FFF;
 	margin: 0 auto;
@@ -698,6 +718,18 @@ ul {
 
 	.text--center {
 		text-align: center;
+	}
+
+	.error_text {
+		position: relative;
+		margin: 14px 0;
+		text-align: center;
+		
+		span {
+			font-weight: bold;
+			color: #c74444;
+			font-size: 90%;
+		}
 	}
 }
 

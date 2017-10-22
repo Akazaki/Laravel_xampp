@@ -43,7 +43,7 @@ class WowController extends Controller
 	// 	return response()->json(['status' => 'success', 'user' => Auth::user()->label_text], 200);
 	// }
 	
-    // 登録
+	// 登録
 	public function signUp(Request $request)
 	{
 		// バリデーション
@@ -68,52 +68,56 @@ class WowController extends Controller
 		}
 	}
 
-    // ログアウト
+	// ログアウト
 	public function signOut(){
 		//Auth::logout();
 		return redirect('wow/login');
 	}
 
-    // 記事取得
-	public function postList(Request $request)
-	{
-		$query = Posts::query();
-
-        $posts = $query->orderBy('id','desc')->paginate(3);
-        return $posts;
-	}
-
-    // ログイン処理
-    public function signIn(Request $request)
-    {    	
+	// ログイン処理
+	public function signIn(Request $request)
+	{		
 		$this->validate($request,[
 			'email_text' => 'email|required',
 			'password' => 'required|min:4'
 		]);
 
-        // grab credentials from the request
-        $credentials = $request->only('email_text', 'password');
+		// grab credentials from the request
+		$credentials = $request->only('email_text', 'password');
 
-        try {
-            // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
+		try {
+			// attempt to verify the credentials and create a token for the user
+			if (! $token = JWTAuth::attempt($credentials)) {
+				return response()->json(['error' => 'invalid_credentials'], 401);
+			}
+		} catch (JWTException $e) {
+			// something went wrong whilst attempting to encode the token
+			return response()->json(['error' => 'could_not_create_token'], 500);
+		}
 
-        $user = Admins::where('email_text', $request->email_text)->first();
+		$user = Admins::where('email_text', $request->email_text)->first();
 
-        // all good so return the token
+		// all good so return the token
 		return response()->json(compact('user', 'token'));
-    }
+	}
 
-    // ログインチェック
-    public function getCurrentUser(Request $request)
-    {
-        $user = JWTAuth::parseToken()->authenticate();
-        return response()->json(compact('user'));
-    }
+	// ログインチェック
+	public function getCurrentUser(Request $request)
+	{
+		$user = JWTAuth::parseToken()->authenticate();
+		return response()->json(compact('user'));
+	}
+
+	// 記事取得
+	public function postList(Request $request)
+	{
+		$_listColumns = ['id', 'label_text', 'create_datetime', 'acknowledge'];
+		
+		$query = Posts::query();
+
+		$posts['posts'] = $query->orderBy('id','desc')->paginate(3);
+		$posts['_listColumns'] = $_listColumns;
+
+		return $posts;
+	}
 }

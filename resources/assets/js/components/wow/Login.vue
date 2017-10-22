@@ -2,13 +2,21 @@
 	<div>
 		<div ID="Header_line">ようこそ、Contents Management Flamework WOWへ</div>
 		<div class="wrapper">
-			<div id="login">
+			<div id="Login">
 				<div id="loginInner" class="loginWidth">
 					<div class="alice clr">
 						<!-- <p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p> -->
 						<h3 class="logo_gp"><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" height="79" class="png"></h3>
 
 						<div class="form login">
+
+							<p class="error_text">
+								<transition name="fade">
+								<span role="alert" v-if="showAlert">
+									{{ alertMessage }}
+								</span>
+								</transition>
+							</p>
 
 							<div class="form__field">
 								<label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">Username</span></label>
@@ -28,13 +36,6 @@
 
 						</div>
 						
-						<p class="err">
-							<span class="alert alert-danger" role="alert" v-if="showAlert">
-								{{ alertMessage }}
-							</span>
-						</p>
-
-						<div class="check"></div>
 					</div>
 				</div>
 			</div>
@@ -64,16 +65,17 @@ Vue.use(VueRouter)
 			// 	}
 			// })
 		},
-		updated(){
-			this.showAlert = false
-		},
+		// updated(){
+		// 	this.showAlert = false
+		// },
 		methods: {
 			wowLogin () {
+				this.showAlert = false
 				var login_param = {email_text: this.email_text, password: this.password}
 
 				this.$store.dispatch('LOGIN', login_param).then(res => {
 				   	//ログイン成功
-					if(res.status == 200){
+					if(res && res.status == 200){
 						this.$router.push('/wow')
 					}else{
 						this.errorText();
@@ -86,7 +88,7 @@ Vue.use(VueRouter)
 			},
 			errorText(){
 				this.showAlert = true
-				this.alertMessage = 'メールアドレスかパスワードが違います'
+				this.alertMessage = '※メールアドレスまたはパスワードが違います'
 			}
 		}
 	}

@@ -33,23 +33,21 @@
 					<table cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-						<td><input type="checkbox"></td>
-						<td>ID</td>
-						<td>タイトル</td>
-						<td>公開日</td>
-						<td>ステータス</td>
-						<td></td>
+							<td><input type="checkbox"></td>
+							<template v-for="column in list_columns">
+								<td>{{column}}</td>
+							</template>
 						</tr>	
 					</thead>
 					<tbody>
 						<tr v-for="post in posts">
 							<td><input type="checkbox"></td>
-							<td>{{post.id}}</td>
+							<td class="id-td">{{post.id}}</td>
 							<td class="name-td">
 								<router-link to="/">{{post.label_text}}</router-link>
 							</td>
-							<td class="desc-td">{{post.created_at}}</td>
-							<td class="date-td">{{post.acknowledge}}</td>
+							<td class="date-td">{{post.created_at}}</td>
+							<td class="acknowledge-td">{{post.acknowledge}}</td>
 						</tr>
 					</tbody>
 					</table>
@@ -78,7 +76,8 @@
 				</div>
 				
 			</div>
-		</div>			
+		</div>	
+		<footer></footer>		
 	</div>
 </template>
 
@@ -99,6 +98,7 @@ Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 				last_page: 0,//ラストのページ番号
 				per_page: 0,//一度の取得数
 				page_length: 0,//全ページ数
+				list_columns: '',//カラムリスト
 			}
 		},
 		created () {
@@ -110,20 +110,23 @@ Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 			posts_get(page){
 				axios.post('/api/wow/postList?page='+page, {})
 				.then(res => {
-					this.posts = res.data.data
-					this.current_page = res.data.current_page
-					this.last_page = res.data.last_page
-					this.page_length = Math.ceil(res.data.total / res.data.per_page);
+					var postsdata = res.data.posts;
+
+					this.list_columns = res.data._listColumns
+					this.posts = postsdata.data
+					this.current_page = postsdata.current_page
+					this.last_page = postsdata.last_page
+					this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
 					
 					//前のページがあるか
-					if(res.data.prev_page_url){
+					if(postsdata.prev_page_url){
 						this.isStartPage = true
 					}else{
 						this.isStartPage = false
 					}
 
 					//次のページがあるか
-					if(res.data.next_page_url){
+					if(postsdata.next_page_url){
 						this.isEndPage = true
 					}else{
 						this.isEndPage = false

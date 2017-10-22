@@ -34,7 +34,9 @@ const store = new Vuex.Store({
 			return axios.get('/api/wow/getcurrentuser', {})
 			.then(res => {
 				// ここからコミット 引数の commit を使う
-				this.commit('setUser', res.data.user)
+				if(res && res.data.user){
+					this.commit('setUser', res.data.user)
+				}
 			}).catch(error => {
 				console.log(error);
 			});
