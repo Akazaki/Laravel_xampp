@@ -13,12 +13,17 @@ const store = new Vuex.Store({
 	state: {
 		user: {},//ログインユーザー
 		authenticated: false,//ログイン状態
+		posts: {},//記事データ
 	},
 	mutations: {
 		// Userの書き換え
 		setUser: function (state, payload) {
 			state.user = payload,
 			state.authenticated = true;
+		},
+		// Userの書き換え
+		setPosts: function (state, payload) {
+			state.posts = payload
 		}
 	},
 	actions: {
@@ -52,12 +57,17 @@ const store = new Vuex.Store({
 		LOGOUT: function (commit) {
 			localStorage.removeItem('jwt-token')
 			this.state.authenticated = false;
-		}
+		},
+		// //記事データセット
+		// SET_POSTS: function (commit, posts_data) {
+		// 	commit('setPosts', posts_data)
+		// }
 	},
 	getters: {
 		// User をそのまま使用
 		user: function (state) { return state.user },
-		authenticated: function (state) { return state.authenticated }
+		authenticated: function (state) { return state.authenticated },
+		posts: function (state) { return state.posts },
 	}
 })
 

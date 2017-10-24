@@ -68,7 +68,10 @@ ul {
   overflow: hidden;
   background-color: #191919;
   color: #ececec;
+  position: fixed;
+  width: 100%;
   padding: 10px;
+  z-index: 9999;
 }
 #Navbar a {
   color: #ececec;
@@ -195,10 +198,12 @@ ul {
 #Sidebar {
   background-color: #191919;
   width: 16%;
-  min-height: 500px;
   padding: 0;
-  height: auto;
+  position: fixed;
+  top: 56px;
+  height: 100%;
   font-size: 90%;
+  z-index: 9999;
   /* Demo Navigation */
   /* Demo Description */
 }
@@ -293,6 +298,11 @@ ul {
 #Sidebar h2 {
   font-weight: 400;
   color: #999;
+}
+#Main {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  overflow: hidden;
 }
 #Postlist {
   width: 80%;
@@ -639,6 +649,14 @@ ul {
 .fade-enter,
 .fade-leave {
   opacity: 0;
+}
+#Footer {
+  background-color: #191919;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  z-index: 9999;
 }
 /*-------------------WOWここまで--------------------------*/
 /*-------------------お問い合わせフォーム--------------------------*/

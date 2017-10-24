@@ -112,10 +112,11 @@ class WowController extends Controller
 	public function postList(Request $request)
 	{
 		$_listColumns = ['id', 'label_text', 'create_datetime', 'acknowledge'];
+		$get_postnum = 6;
 		
 		$query = Posts::query();
 
-		$posts['posts'] = $query->orderBy('id','desc')->paginate(3);
+		$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
 		$posts['_listColumns'] = $_listColumns;
 
 		return $posts;

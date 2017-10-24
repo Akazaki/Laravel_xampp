@@ -94,7 +94,10 @@ ul {
 	overflow: hidden;
 	background-color: @codepenBlack;
 	color: @offWhite;
+	position: fixed;
+	width: 100%;
 	padding: 10px;
+	z-index: 9999;
 	
 	a {
 		color: @offWhite;
@@ -214,10 +217,12 @@ ul {
 #Sidebar {
 	background-color: @codepenBlack;
 	width: 16%;
-	min-height: 500px;
 	padding: 0;
-	height: auto;
+	position: fixed;
+	top: 56px;
+	height: 100%;
 	font-size: 90%;
+	z-index: 9999;
 
 	.sidebar {
 		position: absolute;
@@ -320,6 +325,12 @@ ul {
 		font-weight: 400;
 		color: #999;
 	}
+}
+
+#Main {
+	padding-top: 50px;
+    padding-bottom: 50px;
+    overflow: hidden;
 }
 
 #Postlist {
@@ -739,6 +750,15 @@ ul {
 }
 .fade-enter, .fade-leave {
   opacity: 0
+}
+
+#Footer {
+	background-color: @codepenBlack;
+	position: fixed;
+	bottom: 0;
+	height: 50px;
+	width: 100%;
+	z-index: 9999;
 }
 
 
