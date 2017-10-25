@@ -1,7 +1,7 @@
 <template>
 	<div id="Pagination">
 		<ul class="pager-list">
-			<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(1)" v-if="posts">&lt;&lt;</a></li>
+			<li v-if="1 !== current_page" class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(1)" v-if="posts">&lt;&lt;</a></li>
 			<li class="pager-item pager-item-first"><a href="javascript:void(0);" v-on:click="get_posts(current_page-1)" v-if="isStartPage">&lt;</a></li>
 
 			<template v-for="num in page_length">
@@ -18,7 +18,7 @@
 			</template>
 
 			<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(current_page+1)" v-if="isEndPage">&gt;</a></li>
-			<li class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(last_page)" v-if="last_page">&gt;&gt;</a></li>
+			<li v-if="last_page !== current_page" class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(last_page)" v-if="last_page">&gt;&gt;</a></li>
 		</ul>
 	</div>
 </template>

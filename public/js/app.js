@@ -4415,7 +4415,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(65);
+module.exports = __webpack_require__(71);
 
 
 /***/ }),
@@ -4513,7 +4513,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 	mode: 'history',
 	routes: [{ path: '/', component: __webpack_require__(48) }, { path: '/wow/login', component: __webpack_require__(52) },
 	//↓ログインチェック有無をmetaに追加
-	{ path: '/wow', component: __webpack_require__(55), meta: { requiresAuth: true } }]
+	{ path: '/wow', component: __webpack_require__(55), meta: { requiresAuth: true } }, { path: '/posts/:id', component: __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/wow/posts.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())) }]
 });
 
 //ログインチェック
@@ -46720,7 +46720,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(64)
+var __vue_template__ = __webpack_require__(70)
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -46834,8 +46834,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 Vue.component('navbar', __webpack_require__(58));
 Vue.component('sidenav', __webpack_require__(61));
-Vue.component('footerber', __webpack_require__(69));
-Vue.component('pager', __webpack_require__(72));
+Vue.component('footerber', __webpack_require__(64));
+Vue.component('pager', __webpack_require__(67));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -47232,6 +47232,376 @@ if (false) {
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(65)
+/* template */
+var __vue_template__ = __webpack_require__(66)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Footer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Footer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d4c7ccfc", Component.options)
+  } else {
+    hotAPI.reload("data-v-d4c7ccfc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			data: ''
+		};
+	},
+	created: function created() {},
+
+	methods: {}
+});
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "footer", attrs: { id: "Footer" } })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-d4c7ccfc", module.exports)
+  }
+}
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(68)
+/* template */
+var __vue_template__ = __webpack_require__(69)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Pager.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Pager.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-eb6f07a8", Component.options)
+  } else {
+    hotAPI.reload("data-v-eb6f07a8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// import userStore from '../../stores/userStore'
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			posts: {}, //記事データ
+			current_page: 1, //現在のページ
+			isStartPage: false,
+			isEndPage: false,
+			last_page: 0, //ラストのページ番号
+			per_page: 0, //一度の取得数
+			page_length: 0, //全ページ数
+			list_columns: '' //カラムリスト
+		};
+	},
+	created: function created() {
+		this.get_posts(this.current_page);
+	},
+
+	methods: {
+		//ページング処理
+		get_posts: function get_posts(page) {
+			var _this = this;
+
+			axios.post('/api/wow/postList?page=' + page, {}).then(function (res) {
+				var data = res.data;
+				var postsdata = data.posts;
+
+				_this.list_columns = data._listColumns;
+				_this.posts = postsdata.data;
+				_this.current_page = postsdata.current_page;
+				_this.last_page = postsdata.last_page;
+				_this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
+
+				//前のページがあるか
+				if (postsdata.prev_page_url) {
+					_this.isStartPage = true;
+				} else {
+					_this.isStartPage = false;
+				}
+
+				//次のページがあるか
+				if (postsdata.next_page_url) {
+					_this.isEndPage = true;
+				} else {
+					_this.isEndPage = false;
+				}
+
+				//stateにセット
+				_this.$store.commit('setPosts', data);
+
+				//親コンポーネントの関数実行
+				_this.$emit('getposts');
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "Pagination" } }, [
+    _c(
+      "ul",
+      { staticClass: "pager-list" },
+      [
+        1 !== _vm.current_page
+          ? _c("li", { staticClass: "pager-item pager-item-last" }, [
+              _vm.posts
+                ? _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:void(0);" },
+                      on: {
+                        click: function($event) {
+                          _vm.get_posts(1)
+                        }
+                      }
+                    },
+                    [_vm._v("<<")]
+                  )
+                : _vm._e()
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("li", { staticClass: "pager-item pager-item-first" }, [
+          _vm.isStartPage
+            ? _c(
+                "a",
+                {
+                  attrs: { href: "javascript:void(0);" },
+                  on: {
+                    click: function($event) {
+                      _vm.get_posts(_vm.current_page - 1)
+                    }
+                  }
+                },
+                [_vm._v("<")]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.page_length, function(num) {
+          return [
+            _c(
+              "li",
+              {
+                staticClass: "pager-item pager-item-active",
+                on: {
+                  click: function($event) {
+                    _vm.get_posts(num)
+                  }
+                }
+              },
+              [
+                num !== _vm.current_page
+                  ? [
+                      _c("a", { attrs: { href: "javascript:void(0);" } }, [
+                        _vm._v(_vm._s(num))
+                      ])
+                    ]
+                  : [
+                      _c("span", [
+                        _c("a", { attrs: { href: "javascript:void(0);" } }, [
+                          _vm._v(_vm._s(num))
+                        ])
+                      ])
+                    ]
+              ],
+              2
+            )
+          ]
+        }),
+        _vm._v(" "),
+        _c("li", { staticClass: "pager-item pager-item-last" }, [
+          _vm.isEndPage
+            ? _c(
+                "a",
+                {
+                  attrs: { href: "javascript:void(0);" },
+                  on: {
+                    click: function($event) {
+                      _vm.get_posts(_vm.current_page + 1)
+                    }
+                  }
+                },
+                [_vm._v(">")]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm.last_page !== _vm.current_page
+          ? _c("li", { staticClass: "pager-item pager-item-last" }, [
+              _vm.last_page
+                ? _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:void(0);" },
+                      on: {
+                        click: function($event) {
+                          _vm.get_posts(_vm.last_page)
+                        }
+                      }
+                    },
+                    [_vm._v(">>")]
+                  )
+                : _vm._e()
+            ])
+          : _vm._e()
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-eb6f07a8", module.exports)
+  }
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -47383,379 +47753,10 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 71 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(70)
-/* template */
-var __vue_template__ = __webpack_require__(71)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Footer.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Footer.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d4c7ccfc", Component.options)
-  } else {
-    hotAPI.reload("data-v-d4c7ccfc", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 70 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			data: ''
-		};
-	},
-	created: function created() {},
-
-	methods: {}
-});
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "footer", attrs: { id: "Footer" } })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-d4c7ccfc", module.exports)
-  }
-}
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(73)
-/* template */
-var __vue_template__ = __webpack_require__(74)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Layouts\\Pager.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Pager.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-eb6f07a8", Component.options)
-  } else {
-    hotAPI.reload("data-v-eb6f07a8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 73 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-// import userStore from '../../stores/userStore'
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			posts: {}, //記事データ
-			current_page: 1, //現在のページ
-			isStartPage: false,
-			isEndPage: false,
-			last_page: 0, //ラストのページ番号
-			per_page: 0, //一度の取得数
-			page_length: 0, //全ページ数
-			list_columns: '' //カラムリスト
-		};
-	},
-	created: function created() {
-		this.get_posts(this.current_page);
-	},
-
-	methods: {
-		//ページング処理
-		get_posts: function get_posts(page) {
-			var _this = this;
-
-			axios.post('/api/wow/postList?page=' + page, {}).then(function (res) {
-				var data = res.data;
-				var postsdata = data.posts;
-
-				_this.list_columns = data._listColumns;
-				_this.posts = postsdata.data;
-				_this.current_page = postsdata.current_page;
-				_this.last_page = postsdata.last_page;
-				_this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
-
-				//前のページがあるか
-				if (postsdata.prev_page_url) {
-					_this.isStartPage = true;
-				} else {
-					_this.isStartPage = false;
-				}
-
-				//次のページがあるか
-				if (postsdata.next_page_url) {
-					_this.isEndPage = true;
-				} else {
-					_this.isEndPage = false;
-				}
-
-				//stateにセット
-				_this.$store.commit('setPosts', data);
-
-				//親コンポーネントの関数実行
-				_this.$emit('getposts');
-			}).catch(function (error) {
-				console.log(error);
-			});
-		}
-	}
-});
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "Pagination" } }, [
-    _c(
-      "ul",
-      { staticClass: "pager-list" },
-      [
-        _c("li", { staticClass: "pager-item pager-item-last" }, [
-          _vm.posts
-            ? _c(
-                "a",
-                {
-                  attrs: { href: "javascript:void(0);" },
-                  on: {
-                    click: function($event) {
-                      _vm.get_posts(1)
-                    }
-                  }
-                },
-                [_vm._v("<<")]
-              )
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "pager-item pager-item-first" }, [
-          _vm.isStartPage
-            ? _c(
-                "a",
-                {
-                  attrs: { href: "javascript:void(0);" },
-                  on: {
-                    click: function($event) {
-                      _vm.get_posts(_vm.current_page - 1)
-                    }
-                  }
-                },
-                [_vm._v("<")]
-              )
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.page_length, function(num) {
-          return [
-            _c(
-              "li",
-              {
-                staticClass: "pager-item pager-item-active",
-                on: {
-                  click: function($event) {
-                    _vm.get_posts(num)
-                  }
-                }
-              },
-              [
-                num !== _vm.current_page
-                  ? [
-                      _c("a", { attrs: { href: "javascript:void(0);" } }, [
-                        _vm._v(_vm._s(num))
-                      ])
-                    ]
-                  : [
-                      _c("span", [
-                        _c("a", { attrs: { href: "javascript:void(0);" } }, [
-                          _vm._v(_vm._s(num))
-                        ])
-                      ])
-                    ]
-              ],
-              2
-            )
-          ]
-        }),
-        _vm._v(" "),
-        _c("li", { staticClass: "pager-item pager-item-last" }, [
-          _vm.isEndPage
-            ? _c(
-                "a",
-                {
-                  attrs: { href: "javascript:void(0);" },
-                  on: {
-                    click: function($event) {
-                      _vm.get_posts(_vm.current_page + 1)
-                    }
-                  }
-                },
-                [_vm._v(">")]
-              )
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "pager-item pager-item-last" }, [
-          _vm.last_page
-            ? _c(
-                "a",
-                {
-                  attrs: { href: "javascript:void(0);" },
-                  on: {
-                    click: function($event) {
-                      _vm.get_posts(_vm.last_page)
-                    }
-                  }
-                },
-                [_vm._v(">>")]
-              )
-            : _vm._e()
-        ])
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-eb6f07a8", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
