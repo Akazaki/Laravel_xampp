@@ -34,14 +34,14 @@
 									<template v-for="column in list_columns">
 										<td>{{column}}</td>
 									</template>
-								</tr>	
+								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="post in posts">
-									<td><input type="checkbox"></td>
+									<td class="check-td"><input type="checkbox"></td>
 									<td class="id-td">{{post.id}}</td>
 									<td class="name-td">
-										<router-link to="/">{{post.label_text}}</router-link>
+										<router-link v-bind:to="{ name : 'Posts', params : { id: post.id }}">{{post.label_text}}</router-link>
 									</td>
 									<td class="date-td">{{post.created_at}}</td>
 									<td class="acknowledge-td">{{post.acknowledge}}</td>

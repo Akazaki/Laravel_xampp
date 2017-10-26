@@ -4513,7 +4513,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 	mode: 'history',
 	routes: [{ path: '/', component: __webpack_require__(48) }, { path: '/wow/login', component: __webpack_require__(52) },
 	//↓ログインチェック有無をmetaに追加
-	{ path: '/wow', component: __webpack_require__(55), meta: { requiresAuth: true } }, { path: '/posts/:id', component: __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/wow/posts.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())) }]
+	{ path: '/wow', component: __webpack_require__(55), meta: { requiresAuth: true } }, { path: '/wow/posts/', component: __webpack_require__(55), meta: { requiresAuth: true } }, { path: '/wow/posts/:id', name: 'Posts', props: true, component: __webpack_require__(78), meta: { requiresAuth: true } }]
 });
 
 //ログインチェック
@@ -47018,7 +47018,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("LOGOUT")]
+              [_vm._v("Logout")]
             )
           ])
         ]),
@@ -47155,6 +47155,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import userStore from '../../stores/userStore'
 
@@ -47164,12 +47181,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	// 	// 	userState: this.$store.
 	// 	// }
 	// },
-	methods: {
-		logout: function logout() {
-			this.$store.dispatch('LOGOUT');
-			this.$router.push('/wow/logout');
-		}
-	}
+	methods: {}
 });
 
 /***/ }),
@@ -47180,7 +47192,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "col-xs-3 col-xs-2 sidebar", attrs: { id: "Sidebar" } },
+    [
+      _c("aside", { staticClass: "sidebar" }, [
+        _c(
+          "div",
+          { staticClass: "nano", attrs: { id: "leftside-navigation" } },
+          [
+            _c("ul", { staticClass: "nano-content nav" }, [
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: "/wow/" } }, [
+                    _c("i", { staticClass: "fa fa-dashboard" }),
+                    _c("span", [_vm._v("Dashboard")])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -47188,35 +47235,76 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "col-xs-3 col-xs-2 sidebar", attrs: { id: "Sidebar" } },
+      "li",
+      {
+        staticClass: "sub-menu active",
+        attrs: { "data-toggle": "collapse", href: "#collapse-A" }
+      },
       [
-        _c("div", { staticClass: "sidebar" }, [
-          _c("ul", { staticClass: "nav" }, [
-            _c(
-              "li",
-              { attrs: { "data-toggle": "collapse", href: "#collapse-A" } },
-              [
-                _c("a", { staticClass: "active", attrs: { href: "#" } }, [
-                  _c("span", { staticClass: "caret" }),
-                  _vm._v(" 投稿")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("ul", { staticClass: "collapse", attrs: { id: "collapse-A" } }, [
-              _c("li", [_c("a", { attrs: { href: "A-1" } }, [_vm._v("A-1")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "A-2" } }, [_vm._v("A-2")])]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "A-3" } }, [_vm._v("A-3")])])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", [_vm._v("画像")])])
+        _c("a", { attrs: { href: "javascript:void(0);" } }, [
+          _c("i", { staticClass: "fa fa-envelope" }),
+          _c("span", [_vm._v("Mail")]),
+          _c("i", { staticClass: "arrow fa fa-angle-right pull-right" })
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "collapse", attrs: { id: "collapse-A" } }, [
+          _c("li", { staticClass: "active" }, [
+            _c("a", { attrs: { href: "mail-inbox.html" } }, [_vm._v("Logout")])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "mail-compose.html" } }, [_vm._v("test")])
           ])
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "sub-menu" }, [
+      _c("a", { attrs: { href: "javascript:void(0);" } }, [
+        _c("i", { staticClass: "fa fa-bar-chart-o" }),
+        _c("span", [_vm._v("Charts")]),
+        _c("i", { staticClass: "arrow fa fa-angle-right pull-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "sub-menu" }, [
+      _c("a", { attrs: { href: "javascript:void(0);" } }, [
+        _c("i", { staticClass: "fa fa-map-marker" }),
+        _c("span", [_vm._v("Maps")]),
+        _c("i", { staticClass: "arrow fa fa-angle-right pull-right" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "sub-menu" }, [
+      _c("a", { attrs: { href: "typography.html" } }, [
+        _c("i", { staticClass: "fa fa-text-height" }),
+        _c("span", [_vm._v("Typography")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "sub-menu" }, [
+      _c("a", { attrs: { href: "javascript:void(0);" } }, [
+        _c("i", { staticClass: "fa fa-file" }),
+        _c("span", [_vm._v("Pages")]),
+        _c("i", { staticClass: "arrow fa fa-angle-right pull-right" })
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -47431,36 +47519,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		get_posts: function get_posts(page) {
 			var _this = this;
 
-			axios.post('/api/wow/postList?page=' + page, {}).then(function (res) {
-				var data = res.data;
-				var postsdata = data.posts;
+			axios.post('/api/wow/postList', { page: page }).then(function (res) {
 
-				_this.list_columns = data._listColumns;
-				_this.posts = postsdata.data;
-				_this.current_page = postsdata.current_page;
-				_this.last_page = postsdata.last_page;
-				_this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
+				if (res.data && res.status == 200) {
+					var data = res.data;
+					var postsdata = data.posts;
 
-				//前のページがあるか
-				if (postsdata.prev_page_url) {
-					_this.isStartPage = true;
+					_this.list_columns = data._listColumns;
+					_this.posts = postsdata.data;
+					_this.current_page = postsdata.current_page;
+					_this.last_page = postsdata.last_page;
+					_this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
+
+					//前のページがあるか
+					if (postsdata.prev_page_url) {
+						_this.isStartPage = true;
+					} else {
+						_this.isStartPage = false;
+					}
+
+					//次のページがあるか
+					if (postsdata.next_page_url) {
+						_this.isEndPage = true;
+					} else {
+						_this.isEndPage = false;
+					}
+
+					//stateにセット
+					_this.$store.commit('setPosts', data);
+
+					//親コンポーネントの関数実行
+					_this.$emit('getposts');
 				} else {
-					_this.isStartPage = false;
+					_this.$router.push('/wow/login');
 				}
-
-				//次のページがあるか
-				if (postsdata.next_page_url) {
-					_this.isEndPage = true;
-				} else {
-					_this.isEndPage = false;
-				}
-
-				//stateにセット
-				_this.$store.commit('setPosts', data);
-
-				//親コンポーネントの関数実行
-				_this.$emit('getposts');
 			}).catch(function (error) {
+				//this.$router.push('/wow/login')
 				console.log(error);
 			});
 		}
@@ -47674,9 +47768,18 @@ var render = function() {
                               "td",
                               { staticClass: "name-td" },
                               [
-                                _c("router-link", { attrs: { to: "/" } }, [
-                                  _vm._v(_vm._s(post.label_text))
-                                ])
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "Posts",
+                                        params: { id: post.id }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(post.label_text))]
+                                )
                               ],
                               1
                             ),
@@ -47740,7 +47843,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [_c("input", { attrs: { type: "checkbox" } })])
+    return _c("td", { staticClass: "check-td" }, [
+      _c("input", { attrs: { type: "checkbox" } })
+    ])
   }
 ]
 render._withStripped = true
@@ -47757,6 +47862,263 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\wow\\Posts.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Posts.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3ffbe272", Component.options)
+  } else {
+    hotAPI.reload("data-v-3ffbe272", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_wow__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+Vue.component('navbar', __webpack_require__(58));
+Vue.component('sidenav', __webpack_require__(61));
+Vue.component('footerber', __webpack_require__(64));
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['id'],
+	data: function data() {
+		return {
+			post: {}, //記事データ
+			edit_columns: '' //カラムリスト
+		};
+	},
+	created: function created() {
+		this.get_post(this.id);
+	},
+
+	methods: {
+		/**
+  * 記事データ取得
+  * @param {id} num - 記事id
+  */
+		get_post: function get_post(id) {
+			var _this = this;
+
+			axios.post('/api/wow/postEdit', { id: id }).then(function (res) {
+				if (res.data && res.status == 200) {
+					var data = res.data;
+					_this.post = data.post;
+					_this.edit_columns = data._editColumns;
+
+					console.log(_this.post);
+					console.log(_this.edit_columns);
+				} else {
+					_this.$router.push('/wow/login');
+				}
+			}).catch(function (error) {
+				_this.$router.push('/wow/login');
+				console.log(error);
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { attrs: { id: "Wrapper" } },
+        [
+          _c("navbar"),
+          _vm._v(" "),
+          _c("sidenav"),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "Main" } }, [
+            _c("div", { attrs: { id: "Postlist" } }, [
+              _c("ul", { staticClass: "button_box" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("li", { staticClass: "left" }, [
+                  _c(
+                    "div",
+                    { staticClass: "button_green" },
+                    [
+                      _c("router-link", { attrs: { to: "/" } }, [
+                        _vm._v("\n\t\t\t\t\t\t\t\tプレビュー\n\t\t\t\t\t\t\t")
+                      ])
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "Edit_box" } }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "button_green" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _vm._v("\n\t\t\t\t\t\t\t保存\n\t\t\t\t\t\t")
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("footerber")
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "left" }, [
+      _c("p", { attrs: { id: "Post_title" } }, [_vm._v("記事編集")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form__field" }, [
+      _c("input", {
+        staticClass: "form__input",
+        attrs: { type: "text", name: "name", placeholder: "text", required: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form__field" }, [
+      _c("input", {
+        staticClass: "form__input",
+        attrs: { type: "text", name: "email_text", required: "" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3ffbe272", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

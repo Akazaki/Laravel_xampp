@@ -1,5 +1,5 @@
 <?php
-namespace Laravel\Http\Controllers;
+namespace Laravel\Http\Controllers\Wow;
  
 use Illuminate\Http\Request;
  
@@ -76,7 +76,7 @@ class WowController extends Controller
 
 	// ログイン処理
 	public function signIn(Request $request)
-	{		
+	{
 		$this->validate($request,[
 			'email_text' => 'email|required',
 			'password' => 'required|min:4'
@@ -106,19 +106,5 @@ class WowController extends Controller
 	{
 		$user = JWTAuth::parseToken()->authenticate();
 		return response()->json(compact('user'));
-	}
-
-	// 記事取得
-	public function postList(Request $request)
-	{
-		$_listColumns = ['id', 'label_text', 'create_datetime', 'acknowledge'];
-		$get_postnum = 6;
-		
-		$query = Posts::query();
-
-		$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
-		$posts['_listColumns'] = $_listColumns;
-
-		return $posts;
 	}
 }

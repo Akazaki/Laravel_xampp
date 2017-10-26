@@ -1,20 +1,37 @@
 <template>
 	<div id="Sidebar" class="col-xs-3 col-xs-2 sidebar">
-		<div class='sidebar'>
-			<ul class='nav'>
-				<li data-toggle="collapse" href="#collapse-A">
-					<a class='active' href="#"><span class="caret"></span> 投稿</a>
-				</li>
-				<ul id="collapse-A" class="collapse">
-					<li><a href="A-1">A-1</a></li>
-					<li><a href="A-2">A-2</a></li>
-					<li><a href="A-3">A-3</a></li>
+		<aside class="sidebar">
+			<div id="leftside-navigation" class="nano">
+				<ul class="nano-content nav">
+					<li>
+						<router-link to="/wow/"><i class="fa fa-dashboard"></i><span>Dashboard</span></router-link>
+					</li>
+					<li class="sub-menu active" data-toggle="collapse" href="#collapse-A">
+						<a href="javascript:void(0);"><i class="fa fa-envelope"></i><span>Mail</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+						<ul id="collapse-A" class="collapse">
+							<li class="active">
+								<a href="mail-inbox.html">Logout</a>
+							</li>
+							<li>
+								<a href="mail-compose.html">test</a>
+							</li>
+						</ul>
+					</li>
+					<li class="sub-menu">
+						<a href="javascript:void(0);"><i class="fa fa-bar-chart-o"></i><span>Charts</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+					</li>
+					<li class="sub-menu">
+						<a href="javascript:void(0);"><i class="fa fa-map-marker"></i><span>Maps</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+					</li>
+					<li class="sub-menu">
+						<a href="typography.html"><i class="fa fa-text-height"></i><span>Typography</span></a>
+					</li>
+					<li class="sub-menu">
+						<a href="javascript:void(0);"><i class="fa fa-file"></i><span>Pages</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+					</li>
 				</ul>
-				<li>
-					<a>画像</a>
-				</li>
-			</ul>
-		</div>
+			</div>
+		</aside>
 	</div>
 </template>
 
@@ -28,10 +45,6 @@ export default {
 	// 	// }
 	// },
 	methods: {
-		logout(){
-			this.$store.dispatch('LOGOUT')
-			this.$router.push('/wow/logout')
-		}
 	}
 }
 </script>

@@ -45,38 +45,44 @@
 		methods: {
 			//ページング処理
 			get_posts(page){
-				axios.post('/api/wow/postList?page='+page, {})
+				axios.post('/api/wow/postList', {page: page})
 				.then(res => {
-					var data = res.data;
-					var postsdata = data.posts;
 
-					this.list_columns = data._listColumns
-					this.posts = postsdata.data
-					this.current_page = postsdata.current_page
-					this.last_page = postsdata.last_page
-					this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
-					
-					//前のページがあるか
-					if(postsdata.prev_page_url){
-						this.isStartPage = true
+					if(res.data && res.status == 200){
+						var data = res.data;
+						var postsdata = data.posts;
+
+						this.list_columns = data._listColumns
+						this.posts = postsdata.data
+						this.current_page = postsdata.current_page
+						this.last_page = postsdata.last_page
+						this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
+						
+						//前のページがあるか
+						if(postsdata.prev_page_url){
+							this.isStartPage = true
+						}else{
+							this.isStartPage = false
+						}
+
+						//次のページがあるか
+						if(postsdata.next_page_url){
+							this.isEndPage = true
+						}else{
+							this.isEndPage = false
+						}
+
+						//stateにセット
+						this.$store.commit('setPosts', data)
+
+						//親コンポーネントの関数実行
+						this.$emit('getposts');
 					}else{
-						this.isStartPage = false
+						this.$router.push('/wow/login')
 					}
-
-					//次のページがあるか
-					if(postsdata.next_page_url){
-						this.isEndPage = true
-					}else{
-						this.isEndPage = false
-					}
-
-					//stateにセット
-					this.$store.commit('setPosts', data)
-
-					//親コンポーネントの関数実行
-					this.$emit('getposts');
 					
 				}).catch(error => {
+					//this.$router.push('/wow/login')
 					console.log(error);
 				});
 			}

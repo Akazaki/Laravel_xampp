@@ -1,4 +1,4 @@
-label {
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);label {
   margin: 0;
 }
 /*-------------------WOW--------------------------*/
@@ -52,6 +52,7 @@ ul {
   margin: 0;
   padding: 0;
 }
+/*hoverアニメ*/
 #Header_line {
   background: #191919;
   padding: 10px;
@@ -67,14 +68,15 @@ ul {
 #Navbar {
   overflow: hidden;
   background-color: #191919;
-  color: #ececec;
+  color: #d0d0d0;
   position: fixed;
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   z-index: 9999;
+  font-size: 12px;
 }
 #Navbar a {
-  color: #ececec;
+  color: #d0d0d0;
 }
 #Navbar .header_logo {
   width: 240px;
@@ -101,7 +103,11 @@ ul {
   width: 102px;
   text-align: center;
   display: block;
-  font-size: 80%;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+#Navbar .button a:hover {
+  background-color: #595959;
 }
 #Navbar .navbar-right {
   margin-right: 0;
@@ -200,107 +206,74 @@ ul {
   width: 16%;
   padding: 0;
   position: fixed;
-  top: 56px;
+  top: 60px;
   height: 100%;
-  font-size: 90%;
+  font-size: 12px;
   z-index: 9999;
-  /* Demo Navigation */
-  /* Demo Description */
+}
+#Sidebar .sidebar-toggle {
+  margin-left: -240px;
 }
 #Sidebar .sidebar {
-  position: absolute;
+  background-color: #191919;
   width: 100%;
-}
-#Sidebar .content {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 30px;
-  background: #eee;
-  -webkit-box-shadow: 0 0 5px #000000;
-          box-shadow: 0 0 5px #000000;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s;
-}
-#Sidebar .content.isOpen {
-  -webkit-transform: translate3d(220px, 0, 0);
-          transform: translate3d(220px, 0, 0);
-}
-#Sidebar .button {
-  cursor: pointer;
-}
-#Sidebar .button:before {
-  content: "\F0C9";
-  font: 42px fontawesome;
-}
-#Sidebar .title {
-  font-size: 16px;
-  line-height: 50px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 7px;
-  color: #eee;
-  border-bottom: 1px solid #222;
-  background: #2a2a2a;
-}
-#Sidebar .nav li a {
-  position: relative;
-  display: block;
-  padding: 20px 0 20px 50px;
-  color: #eee;
-  border-bottom: 1px solid #222;
-}
-#Sidebar .nav li a:before {
-  font: 14px fontawesome;
+  height: 100%;
   position: absolute;
-  top: 19px;
-  left: 20px;
+  -webkit-transition: all 0.3s ease-in-out-out;
+  transition: all 0.3s ease-in-out-out;
+  z-index: 100;
 }
-#Sidebar .nav li:nth-child(1) a:before {
-  content: "\F00A";
+#Sidebar .sidebar #leftside-navigation ul,
+#Sidebar .sidebar #leftside-navigation ul ul {
+  padding: 0;
 }
-#Sidebar .nav li:nth-child(2) a:before {
-  content: "\F012";
+#Sidebar .sidebar #leftside-navigation ul li {
+  list-style-type: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-#Sidebar .nav li:nth-child(3) a:before {
-  content: "\F0E8";
+#Sidebar .sidebar #leftside-navigation ul li.active > a {
+  color: #d0d0d0;
 }
-#Sidebar .nav li:nth-child(4) a:before {
-  content: "\F0C3";
+#Sidebar .sidebar #leftside-navigation ul li.active ul {
+  overflow: hidden;
 }
-#Sidebar .nav li:nth-child(5) a:before {
-  content: "\F022";
+#Sidebar .sidebar #leftside-navigation ul li a {
+  color: #d0d0d0;
+  text-decoration: none;
+  display: block;
+  padding: 18px 0 18px 25px;
+  font-size: 12px;
+  outline: 0;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
-#Sidebar .nav li:nth-child(6) a:before {
-  content: "\F115";
+#Sidebar .sidebar #leftside-navigation ul li a:hover {
+  background-color: #41b883;
 }
-#Sidebar .nav li:nth-child(7) a:before {
-  content: "\F085";
+#Sidebar .sidebar #leftside-navigation ul li a span {
+  display: inline-block;
 }
-#Sidebar .nav li:nth-child(8) a:before {
-  content: "\F023";
-  left: 23px;
+#Sidebar .sidebar #leftside-navigation ul li a i {
+  width: 20px;
 }
-#Sidebar .nav li a:hover {
-  background: #373737;
+#Sidebar .sidebar #leftside-navigation ul li a i .fa-angle-left,
+#Sidebar .sidebar #leftside-navigation ul li a i .fa-angle-right {
+  padding-top: 3px;
 }
-#Sidebar .nav li a.active {
-  background: #41b883;
+#Sidebar .sidebar #leftside-navigation ul ul li {
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-bottom: none;
 }
-#Sidebar h1 {
-  margin: 25px 0 15px;
-  font-weight: 400;
-}
-#Sidebar h2 {
-  font-weight: 400;
-  color: #999;
+#Sidebar .sidebar #leftside-navigation ul ul li a {
+  font-size: 12px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  color: #d0d0d0;
 }
 #Main {
-  padding-top: 50px;
+  padding-top: 60px;
   padding-bottom: 50px;
   overflow: hidden;
 }
@@ -325,6 +298,7 @@ ul {
 }
 #Postlist #table-content td a {
   color: #000;
+  font-size: 120%;
 }
 #Postlist #table-content table {
   width: 100%;
@@ -345,16 +319,27 @@ ul {
   border: 1px solid #ececec;
 }
 #Postlist #table-content tbody tr:hover {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
   background: #eff1f3;
 }
+#Postlist .check-td {
+  width: 3%;
+}
 #Postlist .id-td {
-  width: 8%;
+  width: 3%;
+  text-align: center;
 }
 #Postlist .name-td {
   width: 40%;
 }
+#Postlist .date-td {
+  text-align: center;
+  width: 8%;
+}
 #Postlist .acknowledge-td {
-  width: 15%;
+  text-align: center;
+  width: 8%;
 }
 #Postlist .checked {
   background: #eff1f3;
@@ -385,8 +370,53 @@ ul {
   text-decoration: none;
 }
 #Postlist #Pagination .pager-item-active span,
-#Postlist #Pagination .pager-item a:hover {
-  background: #191919;
+#Postlist #Pagination .pager-item {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+#Postlist #Pagination .pager-item-active span:hover,
+#Postlist #Pagination .pager-item:hover {
+  background-color: #3b3b3b;
+}
+#Postlist #Edit_box {
+  margin: 0 auto;
+  padding: 25px 0;
+}
+#Postlist #Edit_box .form__field {
+  margin-bottom: 15px;
+}
+#Postlist #Edit_box .form__field input {
+  outline: none;
+}
+#Postlist #Edit_box .form__field input[type=text] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: inherit;
+  font-size: 100%;
+  width: 60%;
+}
+#Postlist #Edit_box .form__field input::-webkit-text-decoration,
+#Postlist #Edit_box .form__field input::-webkit-text-cancel-button {
+  display: none;
+}
+#Postlist #Edit_box .form__field input[type=text] {
+  border: solid 1px #ccc;
+  padding: 10px 20px;
+  border-radius: 10em;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+#Postlist #Edit_box .form__field input[type=text]:focus {
+  background-color: #fff;
+  border-color: #41b883;
+  -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+  box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+#Postlist #Edit_box .form__field input:-moz-placeholder {
+  color: #999;
+}
+#Postlist #Edit_box .form__field input::-webkit-input-placeholder {
+  color: #999;
 }
 .button_box {
   overflow: hidden;
@@ -406,6 +436,11 @@ ul {
   text-align: center;
   font-size: 80%;
   display: block;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+.button_green a:hover {
+  background-color: #63daa5;
 }
 .search_button {
   font-size: 80%;
@@ -435,7 +470,7 @@ ul {
 .search_button input[type=search]:focus {
   width: 130px;
   background-color: #fff;
-  border-color: #66CC75;
+  border-color: #41b883;
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
