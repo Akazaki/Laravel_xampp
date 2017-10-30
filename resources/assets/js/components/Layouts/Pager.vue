@@ -48,7 +48,7 @@
 				axios.post('/api/wow/postList', {page: page})
 				.then(res => {
 
-					if(res.data && res.status == 200){
+					if(res.data !== undefined && res.status == 200){
 						var data = res.data;
 						var postsdata = data.posts;
 

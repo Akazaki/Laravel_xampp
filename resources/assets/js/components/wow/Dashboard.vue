@@ -30,7 +30,10 @@
 						<table cellspacing="0" cellpadding="0">
 							<thead>
 								<tr>
-									<td><input type="checkbox"></td>
+									<td class="check-td-tr">
+										<input type="checkbox" id="checkall" />
+										<label for="checkall"></label>
+									</td>
 									<template v-for="column in list_columns">
 										<td>{{column}}</td>
 									</template>
@@ -38,7 +41,10 @@
 							</thead>
 							<tbody>
 								<tr v-for="post in posts">
-									<td class="check-td"><input type="checkbox"></td>
+									<td class="check-td-tr">
+										<input type="checkbox" v-bind:id="'checkid' + post.id" />
+										<label v-bind:for="'checkid' + post.id"></label>
+									</td>
 									<td class="id-td">{{post.id}}</td>
 									<td class="name-td">
 										<router-link v-bind:to="{ name : 'Posts', params : { id: post.id }}">{{post.label_text}}</router-link>
@@ -49,7 +55,7 @@
 							</tbody>
 						</table>
 					</div>
-					
+
 					<!--ページャー(子からのイベント実行)-->
 					<pager　@getposts="acceptance_posts"></pager>
 					
@@ -81,7 +87,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 		},
 		methods: {
 			//ページャーコンポーネントから実行されるイベント
-		    acceptance_posts　: function () {
+			acceptance_posts　: function () {
 				this.posts = this.$store.getters.posts.posts.data;
 				this.list_columns = this.$store.getters.posts._listColumns;
 			}

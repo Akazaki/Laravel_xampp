@@ -4,10 +4,10 @@
 			<div id="leftside-navigation" class="nano">
 				<ul class="nano-content nav">
 					<li>
-						<router-link to="/wow/"><i class="fa fa-dashboard"></i><span>Dashboard</span></router-link>
+						<router-link to="/wow/"><i class="fa fa-dashboard"></i><span>記事一覧</span></router-link>
 					</li>
 					<li class="sub-menu active" data-toggle="collapse" href="#collapse-A">
-						<a href="javascript:void(0);"><i class="fa fa-envelope"></i><span>Mail</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+						<a href="javascript:void(0);"><i class="fa fa-envelope"></i><span>記事一覧</span><i class="arrow fa fa-angle-right pull-right"></i></a>
 						<ul id="collapse-A" class="collapse">
 							<li class="active">
 								<a href="mail-inbox.html">Logout</a>
@@ -18,16 +18,10 @@
 						</ul>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:void(0);"><i class="fa fa-bar-chart-o"></i><span>Charts</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+						<a href="javascript:void(0);"><i class="fa fa-bar-chart-o"></i><span>ブログ</span><i class="arrow fa fa-angle-right pull-right"></i></a>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:void(0);"><i class="fa fa-map-marker"></i><span>Maps</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-					</li>
-					<li class="sub-menu">
-						<a href="typography.html"><i class="fa fa-text-height"></i><span>Typography</span></a>
-					</li>
-					<li class="sub-menu">
-						<a href="javascript:void(0);"><i class="fa fa-file"></i><span>Pages</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+						<a href="javascript:void(0);"><i class="fa fa-map-marker"></i><span>記事一覧</span><i class="arrow fa fa-angle-right pull-right"></i></a>
 					</li>
 				</ul>
 			</div>

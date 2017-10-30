@@ -25,14 +25,14 @@
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-size: var(--htmlFontSize);
+  font-size: 12px;
   height: 100%;
 }
 body {
   background-color: #ececec;
   color: var(--bodyColor);
   font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
-  font-size: var(--bodyFontSize);
+  font-size: 12px;
   font-weight: var(--bodyFontWeight);
   height: 100%;
   line-height: var(--bodyLineHeight);
@@ -57,7 +57,7 @@ ul {
   background: #191919;
   padding: 10px;
   width: 100%;
-  font-size: 5%;
+  font-size: 12px;
   color: #FFF;
   position: relative;
   z-index: 9999;
@@ -87,7 +87,7 @@ ul {
 #Navbar .icon {
   display: inline-block;
   fill: var(--iconFill);
-  font-size: 2rem;
+  font-size: 12px;
   height: 20px;
   vertical-align: middle;
   width: 1em;
@@ -283,7 +283,7 @@ ul {
   margin: 2% 2%;
 }
 #Postlist #Post_title {
-  font-size: 110%;
+  font-size: 12px;
   padding: 5px;
   font-weight: bold;
   margin-bottom: 0;
@@ -298,7 +298,6 @@ ul {
 }
 #Postlist #table-content td a {
   color: #000;
-  font-size: 120%;
 }
 #Postlist #table-content table {
   width: 100%;
@@ -307,24 +306,86 @@ ul {
   background: #191919;
   color: #FFF;
 }
+#Postlist #table-content thead tr {
+  text-align: center;
+}
 #Postlist #table-content thead tr td {
   color: #ececec;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   padding: 14px 10px;
 }
 #Postlist #table-content tbody tr td {
   padding: 14px 10px;
-  font-size: 80%;
-  border: 1px solid #ececec;
+  font-size: 12px;
+  border-bottom: 7px solid #ececec;
 }
 #Postlist #table-content tbody tr:hover {
   -webkit-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
   background: #eff1f3;
 }
-#Postlist .check-td {
+#Postlist .check-td-tr {
   width: 3%;
+}
+#Postlist .check-td-tr input {
+  display: none;
+}
+#Postlist .check-td-tr [type="checkbox"]:checked,
+#Postlist .check-td-tr [type="checkbox"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+#Postlist .check-td-tr [type="checkbox"]:checked + label,
+#Postlist .check-td-tr [type="checkbox"]:not(:checked) + label {
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  display: block;
+  color: #666;
+  top: -7px;
+  left: 4px;
+}
+#Postlist .check-td-tr [type="checkbox"]:checked + label:before,
+#Postlist .check-td-tr [type="checkbox"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+#Postlist .check-td-tr [type="checkbox"]:checked + label:after,
+#Postlist .check-td-tr [type="checkbox"]:not(:checked) + label:after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  background: #41b883;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+#Postlist .check-td-tr [type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+#Postlist .check-td-tr [type="checkbox"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+#Postlist .check-td-tr [type="checkbox"]:disabled:checked + label:before,
+#Postlist .check-td-tr [type="checkbox"]:disabled:not(:checked) + label:before {
+  border-color: #ccc;
+  background-color: #eee;
+}
+#Postlist .check-td-tr [type="checkbox"]:disabled:checked + label:after {
+  background: #aaa;
 }
 #Postlist .id-td {
   width: 3%;
@@ -381,42 +442,216 @@ ul {
 #Postlist #Edit_box {
   margin: 0 auto;
   padding: 25px 0;
+  width: 90%;
 }
-#Postlist #Edit_box .form__field {
-  margin-bottom: 15px;
+#Postlist #Edit_box .form_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 12px;
 }
-#Postlist #Edit_box .form__field input {
+#Postlist #Edit_box .required::after {
+  font-size: 12px;
+  content: '*';
+  padding-left: 4px;
+  color: #ea2c00;
+}
+#Postlist #Edit_box .form_field {
+  margin-bottom: 30px;
+  /*------- input[text] -------*/
+  /*------- textarea -------*/
+  /*------- checkbox -------*/
+  /*------- radiobutton -------*/
+}
+#Postlist #Edit_box .form_field ul li {
+  margin-bottom: 10px;
+}
+#Postlist #Edit_box .form_field ul li:last-child {
+  margin-bottom: 0;
+}
+#Postlist #Edit_box .form_field input {
   outline: none;
 }
-#Postlist #Edit_box .form__field input[type=text] {
+#Postlist #Edit_box .form_field input[type=text] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   font-family: inherit;
-  font-size: 100%;
-  width: 60%;
+  font-size: 12px;
+  width: 90%;
 }
-#Postlist #Edit_box .form__field input::-webkit-text-decoration,
-#Postlist #Edit_box .form__field input::-webkit-text-cancel-button {
+#Postlist #Edit_box .form_field input::-webkit-text-decoration,
+#Postlist #Edit_box .form_field input::-webkit-text-cancel-button {
   display: none;
 }
-#Postlist #Edit_box .form__field input[type=text] {
+#Postlist #Edit_box .form_field input[type=text] {
   border: solid 1px #ccc;
   padding: 10px 20px;
   border-radius: 10em;
   -webkit-transition: all .5s;
   transition: all .5s;
 }
-#Postlist #Edit_box .form__field input[type=text]:focus {
+#Postlist #Edit_box .form_field input[type=text]:focus {
   background-color: #fff;
   border-color: #41b883;
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
 }
-#Postlist #Edit_box .form__field input:-moz-placeholder {
+#Postlist #Edit_box .form_field input:-moz-placeholder {
   color: #999;
 }
-#Postlist #Edit_box .form__field input::-webkit-input-placeholder {
+#Postlist #Edit_box .form_field input::-webkit-input-placeholder {
   color: #999;
+}
+#Postlist #Edit_box .form_field textarea,
+#Postlist #Edit_box .form_field #editor div {
+  display: inline-block;
+  width: 49%;
+  height: 100%;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+#Postlist #Edit_box .form_field textarea {
+  border: none;
+  border-right: 1px solid #ccc;
+  resize: none;
+  outline: none;
+  background-color: #f6f6f6;
+  font-size: 14px;
+  font-family: 'Monaco', courier, monospace;
+  padding: 20px;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:checked,
+#Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:checked + label,
+#Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) + label {
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  display: block;
+  color: #666;
+  padding-left: 30px;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:checked + label:before,
+#Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:checked + label:after,
+#Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) + label:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #41b883;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:disabled:checked + label:before,
+#Postlist #Edit_box .form_field [type="checkbox"]:disabled:not(:checked) + label:before {
+  border-color: #ccc;
+  background-color: #eee;
+}
+#Postlist #Edit_box .form_field [type="checkbox"]:disabled:checked + label:after {
+  background: #aaa;
+}
+#Postlist #Edit_box .form_field [type="radio"]:checked,
+#Postlist #Edit_box .form_field [type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+#Postlist #Edit_box .form_field [type="radio"]:checked + label,
+#Postlist #Edit_box .form_field [type="radio"]:not(:checked) + label {
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  display: block;
+  color: #666;
+  padding-left: 30px;
+}
+#Postlist #Edit_box .form_field [type="radio"]:checked + label:before,
+#Postlist #Edit_box .form_field [type="radio"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 50%;
+}
+#Postlist #Edit_box .form_field [type="radio"]:checked + label:after,
+#Postlist #Edit_box .form_field [type="radio"]:not(:checked) + label:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #41b883;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+#Postlist #Edit_box .form_field [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+#Postlist #Edit_box .form_field [type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+#Postlist #Edit_box .form_field [type="radio"]:disabled:checked + label:before,
+#Postlist #Edit_box .form_field [type="radio"]:disabled:not(:checked) + label:before {
+  border-color: #ccc;
+  background-color: #eee;
+}
+#Postlist #Edit_box .form_field [type="radio"]:disabled:checked + label:after {
+  background: #aaa;
+}
+#Postlist #Edit_box .form_field .datetimepicker input[type=text] {
+  width: 55% !important;
+  padding: 0px 15px;
+  text-align: center;
+}
+#Postlist #Edit_box .form_field .datetimepicker span {
+  display: none;
+}
+#Postlist #Edit_box .button_box {
+  overflow: hidden;
+  margin: 0 auto;
+  width: 214px;
+}
+#Postlist #Edit_box .button_box li {
+  float: left;
+  margin-right: 10px;
+}
+#Postlist #Edit_box .button_box li:last-child {
+  margin-right: 0;
 }
 .button_box {
   overflow: hidden;
@@ -434,7 +669,7 @@ ul {
   padding: 10px;
   width: 102px;
   text-align: center;
-  font-size: 80%;
+  font-size: 12px;
   display: block;
   -webkit-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
@@ -443,7 +678,7 @@ ul {
   background-color: #63daa5;
 }
 .search_button {
-  font-size: 80%;
+  font-size: 12px;
 }
 .search_button input {
   outline: none;
@@ -452,7 +687,7 @@ ul {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 12px;
 }
 .search_button input::-webkit-search-decoration,
 .search_button input::-webkit-search-cancel-button {
@@ -544,13 +779,13 @@ ul {
 #Login .icon {
   display: inline-block;
   fill: var(--iconFill);
-  font-size: 1rem;
+  font-size: 12px;
   height: 1em;
   vertical-align: middle;
   width: 1em;
 }
 #Login :root {
-  --htmlFontSize: 100%;
+  --htmlFontSize: 12px;
   --bodyBackgroundColor: #2c3338;
   --bodyColor: var(--baseColor);
   --bodyFontFamily: 'Open Sans';
@@ -674,7 +909,7 @@ ul {
 #Login .error_text span {
   font-weight: bold;
   color: #c74444;
-  font-size: 90%;
+  font-size: 12px;
 }
 .fade-enter-active,
 .fade-leave-active {

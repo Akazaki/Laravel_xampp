@@ -25,6 +25,7 @@
 				<loading ref="overlay"></loading>
 			</div>
 		</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
 		<script src="/public/js/app.js"></script>
 	</body>
 </html>
