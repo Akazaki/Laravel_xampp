@@ -34,8 +34,8 @@
 						<div class="form_field">
 							<!-- <textarea name="detail_text" id="detail_text" cols="30" rows="20" required></textarea> -->
 							<div id="editor">
-							    <textarea v-model="markdown_value" debounce="300"></textarea>
-							    <div v-html="markdown_value | marked"></div>
+							    <textarea class="editor" v-model="markdown_value"></textarea>
+       							<vue-markdown :source="markdown_value"></vue-markdown>
 							</div>
 						</div>
 
@@ -90,7 +90,7 @@
 							</li>
 							<li>
 								<div class="button_green">
-									<router-link to="/">
+									<router-link to="/wow/posts">
 										キャンセル
 									</router-link>
 								</div>
@@ -111,6 +111,8 @@ import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
+import VueMarkdown from 'vue-markdown'
+
 Vue.use(ElementUI, { locale })
 Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
@@ -124,7 +126,7 @@ Vue.component('footerber', require('../../components/Layouts/Footer.vue'))
 				post: {},//記事データ
 				edit_columns: '',//カラムリスト
 				datetime_value: '',
-				markdown_value: '# hello',
+				markdown_value: '# hello\n:smile:',
 			}
 		},
 	    filters: {
@@ -162,6 +164,9 @@ Vue.component('footerber', require('../../components/Layouts/Footer.vue'))
 			update: _.debounce(function (e) {
 				this.input = e.target.value
 			}, 300)
+		},
+		components: {
+			VueMarkdown
 		}
 	}
 </script>

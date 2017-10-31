@@ -38,9 +38,23 @@ class PostsController extends Controller
 		]);
 
 		// 編集項目
-		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'menulevel_radio', 'parentmenuid_check', 'create_datetime', 'acknowledge'];
+		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'postscategory_check', 'create_datetime', 'acknowledge_radio'];
 
 		$query = Posts::query();
+
+		//radioとcheckboxのマスターデータ取得
+		foreach ($_editColumns as $key => $value) {
+			if(strpos($value,'_radio') !== false){
+				$table_name = str_replace('_radio', '', $value);
+			}else if(strpos($value,'_check') !== false){
+				$table_name = str_replace('_check', '', $value);
+			}
+			$master = DB::table($table_name)->get();
+
+			if(!empty($master)){
+				$post[$master.'_master'] = $master;
+			}
+		}
 
 		// データ取得
 		$post['post'] = $query->where('id', (INT)$request->id)->first();

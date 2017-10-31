@@ -8,6 +8,7 @@ use Laravel\Http\Controllers\Controller;
 use Auth;
 use JWTAuth;
 use DB;
+use Validator;
 use Laravel\Admins;// Model
 use Laravel\Posts;// Model
 
@@ -47,11 +48,14 @@ class WowController extends Controller
 	public function signUp(Request $request)
 	{
 		// バリデーション
-		$this->validate($request,[
-			'label_text' => 'required',
+		$validator = Validator::make($request->all(), [
+            'label_text' => 'required',
 			'email_text' => 'email|required|unique:admins',
 			'password' => 'required|min:4'
-		]);
+        ]);
+        if ($validator->fails()) {
+             return response()->json(['error' => $validator->messages()],401);
+        }
 	 
 		// DBインサート
 		$user = new Admins([

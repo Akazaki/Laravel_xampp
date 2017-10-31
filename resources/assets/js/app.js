@@ -77,6 +77,7 @@ const router = new VueRouter({
 	routes: [
 		{ path: '/', component: require('./components/Index.vue') },
 		{ path: '/wow/login', component: require('./components/wow/Login.vue') },
+		{ path: '/wow/signup', component: require('./components/wow/Signup.vue') },
 		//↓ログインチェック有無をmetaに追加
 		{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
 		{ path: '/wow/posts/', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},

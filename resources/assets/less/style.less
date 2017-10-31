@@ -610,10 +610,15 @@ ul {
 			}
 
 			/*------- textarea -------*/
+			
+			#editor {
+				border: solid 1px #ccc;
+			}
+			
 			textarea, #editor div {
 				display: inline-block;
 				width: 49%;
-				height: 100%;
+				height: 300px;
 				vertical-align: top;
 				-webkit-box-sizing: border-box;
 				-moz-box-sizing: border-box;
@@ -648,25 +653,25 @@ ul {
 			// 	-moz-transition: all .5s;
 			// 	transition: all .5s;
 			// }
-			// textarea::-webkit-text-decoration,
-			// textarea::-webkit-text-cancel-button {
-			// 	display: none; 
-			// }
-			// textarea:focus {
-			// 	background-color: #fff;
-			// 	border-color: @vueGreen;
+			textarea::-webkit-text-decoration,
+			textarea::-webkit-text-cancel-button {
+				display: none; 
+			}
+			textarea:focus {
+				background-color: #fff;
+				border-color: @vueGreen;
 				
-			// 	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-			// 	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-			// 	box-shadow: 0 0 5px rgba(109,207,246,.5);
-			// }
+				-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+				-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+				box-shadow: 0 0 5px rgba(109,207,246,.5);
+			}
 
-			// textarea:-moz-placeholder {
-			// 	color: #999;
-			// }
-			// textarea::-webkit-input-placeholder {
-			// 	color: #999;
-			// }
+			textarea:-moz-placeholder {
+				color: #999;
+			}
+			textarea::-webkit-input-placeholder {
+				color: #999;
+			}
 
 			/*------- checkbox -------*/
 			[type="checkbox"]:checked,
