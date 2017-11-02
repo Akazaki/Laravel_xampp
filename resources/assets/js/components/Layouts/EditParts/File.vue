@@ -22,9 +22,10 @@
 <script>
 
 	export default {
+		props: ['value'],
 		data (){
 			return {
-				image: '',
+				image: this.value,
 			}
 		},
 		created () {

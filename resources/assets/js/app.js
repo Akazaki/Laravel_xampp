@@ -81,7 +81,8 @@ const router = new VueRouter({
 		//↓ログインチェック有無をmetaに追加
 		{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
 		{ path: '/wow/posts/', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
-		{ path: '/wow/posts/:id', name: 'Posts', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }}
+		{ path: '/wow/posts/:id', name: 'Posts', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
+		{ path: '/wow/posts/create', component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
 	]
 })
 

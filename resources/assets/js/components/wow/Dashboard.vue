@@ -12,7 +12,7 @@
 						</li>
 						<li class="left">
 							<div class="button_green">
-								<router-link to="/">
+								<router-link to="/wow/posts/create">
 									新規追加
 								</router-link>
 							</div>

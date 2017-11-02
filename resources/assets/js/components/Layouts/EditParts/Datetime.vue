@@ -12,9 +12,10 @@
 // import userStore from '../../stores/userStore'
 
 	export default {
+		props: ['value'],
 		data (){
 			return {
-				datetime_value: '',
+				datetime_value: this.value,
 			}
 		},
 		created () {

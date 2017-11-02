@@ -39,5 +39,8 @@ use Illuminate\Http\Request;
 		Route::post('/wow/postEdit/', 'Wow\PostsController@postEdit');
 
 		Route::post('/wow/fileup/', 'FileupController@index');
+
+		// マスターデータ取得
+		Route::post('/wow/getMasterData/', 'Wow\PostsController@getMasterData');
 	});
 //});

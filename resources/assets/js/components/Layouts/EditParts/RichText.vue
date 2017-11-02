@@ -3,7 +3,9 @@
 		<div class="form_field">
 			<div id="editor">
 			    <textarea class="editor" v-model="markdown_value"></textarea>
+				<div class="view-area">
 					<vue-markdown :source="markdown_value"></vue-markdown>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -16,15 +18,17 @@ import locale from 'element-ui/lib/locale/lang/ja'
 import VueMarkdown from 'vue-markdown'
 
 	export default {
+		props: ['value'],
 		data (){
 			return {
-				markdown_value: '# hello\n:smile:',
+				markdown_value: this.value,
 			}
 		},
 	    filters: {
 	        marked: marked
 	    },
 		created () {
+
 		},
 		computed: {
 			compiledMarkdown: function () {

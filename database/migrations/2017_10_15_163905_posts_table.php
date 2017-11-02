@@ -15,12 +15,12 @@ class PostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('acknowledge');
+            $table->unsignedInteger('acknowledge_radio');
             $table->string('permission');
             $table->string('label_text');
             $table->string('detail_richtext');
-            $table->binary('main_file');
-            $table->unsignedInteger('category_check');//カテゴリ
+            $table->string('main_file');
+            $table->unsignedInteger('postscategory_check');//カテゴリ
             $table->timestamps();
         });
     }

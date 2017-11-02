@@ -2,14 +2,18 @@
 	<div id="Check">
 		<div class="form_field">
 			<ul>
-				<li>
-					<input type="checkbox" v-bind:id="'checkid' + 1" />
-					<label v-bind:for="'checkid' + 1">ssssssssssssssss</label>
-				</li>
-				<li>
-					<input type="checkbox" v-bind:id="'checkid' + 2" />
-					<label v-bind:for="'checkid' + 2">ssssssssssssssss</label>
-				</li>
+				<template v-for="(value, key) in checkbox_master">
+					<li>
+						<template v-if="(1 << (key-1) & checkbox_num)">
+							<input type="checkbox" v-bind:id="'checkid' + key" v-bind:value="key" checked="checked"/>
+						</template>
+						<template v-else>
+							<input type="checkbox" v-bind:id="'checkid' + key" v-bind:value="key" />
+						</template>
+
+						<label v-bind:for="'checkid' + key">{{value}}</label>
+					</li>
+				</template>
 			</ul>
 		</div>
 	</div>
@@ -17,15 +21,38 @@
 
 <script>
 	export default {
+		props: [
+			'value',
+		],
 		data (){
 			return {
+				checkbox_master: {},
+				checkbox_num: this.value.value,
 			}
 		},
 		created () {
+			this.get_master(this.value.key);
 		},
 		computed: {
 		},
 		methods: {
+			/**
+			 * マスターデータ取得
+			 * @param {table_name} stirng - テーブル名
+			 */
+			get_master(table_name){
+				axios.post('/api/wow/getMasterData', {table_name: table_name})
+				.then(res => {
+					if(res.data && res.status == 200){
+						this.checkbox_master = res.data;
+					}else{
+						this.$router.push('/wow/login')
+					}
+					
+				}).catch(error => {
+					this.$router.push('/wow/login')
+				});
+			},
 		},
 	}
 </script>

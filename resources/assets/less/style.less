@@ -9,6 +9,7 @@
 @wowBlack: #2c3338;
 @codepenBlack: #191919;
 @codepenGray: #373737;
+@cautionRed: #ea2c00;
 
 label {
 	margin: 0;
@@ -62,6 +63,7 @@ body {
 
 a {
 	color: @textColor;
+	text-decoration: none;
 }
 
 a:hover {
@@ -548,7 +550,15 @@ ul {
 			font-size: 12px;
 			content: '*';
 			padding-left: 4px;
-			color: #ea2c00;
+			color: @cautionRed;
+		}
+
+		.error_text {
+			color: @cautionRed;
+			-webkit-transition: all 0.2s ease;
+			-moz-transition: all 0.2s ease;
+			-o-transition: all 0.2s ease;
+			transition: all 0.2s ease;
 		}
 		
 		.form_field {
@@ -612,7 +622,9 @@ ul {
 			/*------- textarea -------*/
 			
 			#editor {
-				border: solid 1px #ccc;
+				.view-area {
+					border: solid 1px #ccc;
+				}
 			}
 			
 			textarea, #editor div {
@@ -628,13 +640,20 @@ ul {
 			
 			textarea {
 				border: none;
-				border-right: 1px solid #ccc;
+				// -webkit-border-radius: 1em;
+				// -moz-border-radius: 1em;
+				// border-radius: 1em;
+				border: solid 1px #ccc;
 				resize: none;
 				outline: none;
 				background-color: #f6f6f6;
 				font-size: 14px;
 				font-family: 'Monaco', courier, monospace;
 				padding: 20px;
+				
+				-webkit-transition: all .5s;
+				-moz-transition: all .5s;
+				transition: all .5s;
 			}
 			// textarea {
 			// 	-webkit-appearance: textfield;

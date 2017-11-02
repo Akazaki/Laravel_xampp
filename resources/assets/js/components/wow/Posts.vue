@@ -21,36 +21,39 @@
 
 					<div id="Edit_box">
 						
-						<template v-for="column in edit_columns">
+						<template v-for="(value, key) in post">
 							<p class="form_title required">
 								タイトル
 							</p>
-							<template v-if="column.match(/_richtext/)">
-								<edit-richtext></edit-richtext>
+							<p class="error_text">
+								※必須項目です
+							</p>
+							<template v-if="key.match(/_richtext/)">
+								<edit-richtext :value="value"></edit-richtext>
 							</template>
-							<template v-else-if="column.match(/_file/)">
-								<edit-file></edit-file>
+							<template v-else-if="key.match(/_file/)">
+								<edit-file :value="value"></edit-file>
 							</template>
-							<template v-else-if="column.match(/_check/)">
-								<edit-check></edit-check>
+							<template v-else-if="key.match(/_check/)">
+								<edit-check :value="{value:value, key:key}"></edit-check>
 							</template>
-							<template v-else-if="column.match(/_radio/)">
-								<edit-radio></edit-radio>
+							<template v-else-if="key.match(/_radio/)">
+								<edit-radio :value="{value:value, key:key}"></edit-radio>
 							</template>
-							<template v-else-if="column.match(/_datetime/)">
-								<edit-datetime></edit-datetime>
+							<template v-else-if="key.match(/_at/)">
+								<edit-datetime :value="value"></edit-datetime>
 							</template>
 							<template v-else>
-								<edit-text></edit-text>
+								<edit-text :value="value"></edit-text>
 							</template>
 						</template>
 
 						<ul class="button_box">
 							<li>
 								<div class="button_green">
-									<router-link to="/">
+									<a href="javascript:void(0);" v-on:click="save">
 										保存
-									</router-link>
+									</a>
 								</div>
 							</li>
 							<li>
@@ -98,11 +101,13 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			return {
 				post: {},//記事データ
 				errors: {},
-				edit_columns: '',//カラムリスト
 			}
 		},
 		created () {
-			this.get_post(this.id);
+			console.log(this.id)
+			if(this.id != 'create'){
+				this.get_post(this.id);
+			}
 		},
 		methods: {
 			 /**
@@ -115,7 +120,6 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					if(res.data && res.status == 200){
 						var data = res.data;
 						this.post = data.post;
-						this.edit_columns = data._editColumns
 					}else{
 						this.$router.push('/wow/login')
 					}
@@ -124,6 +128,25 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					this.$router.push('/wow/login')
 					console.log(error);
 				});
+			},
+			 /**
+			 * 記事保存
+			 */
+			save(){
+				console.log('aaa');
+				// axios.post('/api/wow/postEdit', {id: id})
+				// .then(res => {
+				// 	if(res.data && res.status == 200){
+				// 		var data = res.data;
+				// 		this.post = data.post;
+				// 	}else{
+				// 		this.$router.push('/wow/login')
+				// 	}
+					
+				// }).catch(error => {
+				// 	this.$router.push('/wow/login')
+				// 	console.log(error);
+				// });
 			},
 		}
 	}

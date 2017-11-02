@@ -2,14 +2,18 @@
 	<div id="Radio">
 		<div class="form_field">
 			<ul>
-				<li>
-					<input type="radio" name="radio" v-bind:id="'radioid' + 1" />
-					<label v-bind:for="'radioid' + 1">ssssssssssssssss</label>
-				</li>
-				<li>	
-					<input type="radio" name="radio" v-bind:id="'radioid' + 2" />
-					<label v-bind:for="'radioid' + 2">ssssssssssssssss</label>
-				</li>
+				<template v-for="(value, key) in radiobutton_master">
+					<li>
+						<template v-if="radiobutton_num == key">
+							<input type="radio" name="radio" v-bind:id="'radioid' + key" v-bind:value="key" checked="checked"/>
+							<label v-bind:for="'radioid' + key">{{value}}</label>
+						</template>
+						<template v-else>
+							<input type="radio" name="radio" v-bind:id="'radioid' + key" v-bind:value="key" />
+							<label v-bind:for="'radioid' + key">{{value}}</label>
+						</template>
+					</li>
+				</template>
 			</ul>
 		</div>
 	</div>
@@ -17,15 +21,38 @@
 
 <script>
 	export default {
+		props: [
+			'value',
+		],
 		data (){
 			return {
+				radiobutton_master: {},
+				radiobutton_num: this.value.value,
 			}
 		},
 		created () {
+			this.get_master(this.value.key);
 		},
 		computed: {
 		},
 		methods: {
+			/**
+			 * マスターデータ取得
+			 * @param {table_name} stirng - テーブル名
+			 */
+			get_master(table_name){
+				axios.post('/api/wow/getMasterData', {table_name: table_name})
+				.then(res => {
+					if(res.data && res.status == 200){
+						this.radiobutton_master = res.data;
+					}else{
+						this.$router.push('/wow/login')
+					}
+					
+				}).catch(error => {
+					this.$router.push('/wow/login')
+				});
+			},
 		},
 	}
 </script>

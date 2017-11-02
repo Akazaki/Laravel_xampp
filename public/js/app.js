@@ -22225,7 +22225,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 	mode: 'history',
 	routes: [{ path: '/', component: __webpack_require__(142) }, { path: '/wow/login', component: __webpack_require__(146) }, { path: '/wow/signup', component: __webpack_require__(149) },
 	//↓ログインチェック有無をmetaに追加
-	{ path: '/wow', component: __webpack_require__(73), meta: { requiresAuth: true } }, { path: '/wow/posts/', component: __webpack_require__(73), meta: { requiresAuth: true } }, { path: '/wow/posts/:id', name: 'Posts', props: true, component: __webpack_require__(163), meta: { requiresAuth: true } }]
+	{ path: '/wow', component: __webpack_require__(73), meta: { requiresAuth: true } }, { path: '/wow/posts/', component: __webpack_require__(73), meta: { requiresAuth: true } }, { path: '/wow/posts/:id', name: 'Posts', props: true, component: __webpack_require__(163), meta: { requiresAuth: true } }, { path: '/wow/posts/create', component: __webpack_require__(163), meta: { requiresAuth: true } }]
 });
 
 //ログインチェック
@@ -55414,9 +55414,11 @@ var render = function() {
                       "div",
                       { staticClass: "button_green" },
                       [
-                        _c("router-link", { attrs: { to: "/" } }, [
-                          _vm._v("\n\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t")
-                        ])
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/wow/posts/create" } },
+                          [_vm._v("\n\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t")]
+                        )
                       ],
                       1
                     )
@@ -55688,6 +55690,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -55715,12 +55720,14 @@ Vue.component('edit-datetime', __webpack_require__(367));
 	data: function data() {
 		return {
 			post: {}, //記事データ
-			errors: {},
-			edit_columns: '' //カラムリスト
+			errors: {}
 		};
 	},
 	created: function created() {
-		this.get_post(this.id);
+		console.log(this.id);
+		if (this.id != 'create') {
+			this.get_post(this.id);
+		}
 	},
 
 	methods: {
@@ -55735,7 +55742,6 @@ Vue.component('edit-datetime', __webpack_require__(367));
 				if (res.data && res.status == 200) {
 					var data = res.data;
 					_this.post = data.post;
-					_this.edit_columns = data._editColumns;
 				} else {
 					_this.$router.push('/wow/login');
 				}
@@ -55743,6 +55749,26 @@ Vue.component('edit-datetime', __webpack_require__(367));
 				_this.$router.push('/wow/login');
 				console.log(error);
 			});
+		},
+
+		/**
+  * 記事保存
+  */
+		save: function save() {
+			console.log('aaa');
+			// axios.post('/api/wow/postEdit', {id: id})
+			// .then(res => {
+			// 	if(res.data && res.status == 200){
+			// 		var data = res.data;
+			// 		this.post = data.post;
+			// 	}else{
+			// 		this.$router.push('/wow/login')
+			// 	}
+
+			// }).catch(error => {
+			// 	this.$router.push('/wow/login')
+			// 	console.log(error);
+			// });
 		}
 	}
 });
@@ -113801,38 +113827,54 @@ var render = function() {
                 "div",
                 { attrs: { id: "Edit_box" } },
                 [
-                  _vm._l(_vm.edit_columns, function(column) {
+                  _vm._l(_vm.post, function(value, key) {
                     return [
                       _c("p", { staticClass: "form_title required" }, [
                         _vm._v("\n\t\t\t\t\t\t\tタイトル\n\t\t\t\t\t\t")
                       ]),
                       _vm._v(" "),
-                      column.match(/_richtext/)
-                        ? [_c("edit-richtext")]
-                        : column.match(/_file/)
-                          ? [_c("edit-file")]
-                          : column.match(/_check/)
-                            ? [_c("edit-check")]
-                            : column.match(/_radio/)
-                              ? [_c("edit-radio")]
-                              : column.match(/_datetime/)
-                                ? [_c("edit-datetime")]
-                                : [_c("edit-text")]
+                      _c("p", { staticClass: "error_text" }, [
+                        _vm._v("\n\t\t\t\t\t\t\t※必須項目です\n\t\t\t\t\t\t")
+                      ]),
+                      _vm._v(" "),
+                      key.match(/_richtext/)
+                        ? [_c("edit-richtext", { attrs: { value: value } })]
+                        : key.match(/_file/)
+                          ? [_c("edit-file", { attrs: { value: value } })]
+                          : key.match(/_check/)
+                            ? [
+                                _c("edit-check", {
+                                  attrs: { value: { value: value, key: key } }
+                                })
+                              ]
+                            : key.match(/_radio/)
+                              ? [
+                                  _c("edit-radio", {
+                                    attrs: { value: { value: value, key: key } }
+                                  })
+                                ]
+                              : key.match(/_at/)
+                                ? [
+                                    _c("edit-datetime", {
+                                      attrs: { value: value }
+                                    })
+                                  ]
+                                : [_c("edit-text", { attrs: { value: value } })]
                     ]
                   }),
                   _vm._v(" "),
                   _c("ul", { staticClass: "button_box" }, [
                     _c("li", [
-                      _c(
-                        "div",
-                        { staticClass: "button_green" },
-                        [
-                          _c("router-link", { attrs: { to: "/" } }, [
-                            _vm._v("\n\t\t\t\t\t\t\t\t\t保存\n\t\t\t\t\t\t\t\t")
-                          ])
-                        ],
-                        1
-                      )
+                      _c("div", { staticClass: "button_green" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "javascript:void(0);" },
+                            on: { click: _vm.save }
+                          },
+                          [_vm._v("\n\t\t\t\t\t\t\t\t\t保存\n\t\t\t\t\t\t\t\t")]
+                        )
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("li", [
@@ -113953,6 +113995,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
 		return {};
 	},
@@ -113969,28 +114012,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "Text" } }, [
-      _c("div", { staticClass: "form_field" }, [
-        _c("input", {
-          staticClass: "form__input",
-          attrs: {
-            type: "text",
-            name: "name",
-            placeholder: "text",
-            required: ""
+  return _c("div", { attrs: { id: "Text" } }, [
+    _c("div", { staticClass: "form_field" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.value,
+            expression: "value"
           }
-        })
-      ])
+        ],
+        staticClass: "form__input",
+        attrs: {
+          type: "text",
+          name: "name",
+          placeholder: "text",
+          required: ""
+        },
+        domProps: { value: _vm.value },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.value = $event.target.value
+          }
+        }
+      })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -114071,6 +114124,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -114078,9 +114133,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
 		return {
-			markdown_value: '# hello\n:smile:'
+			markdown_value: this.value
 		};
 	},
 
@@ -114114,35 +114170,35 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "RichText" } }, [
     _c("div", { staticClass: "form_field" }, [
-      _c(
-        "div",
-        { attrs: { id: "editor" } },
-        [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.markdown_value,
-                expression: "markdown_value"
-              }
-            ],
-            staticClass: "editor",
-            domProps: { value: _vm.markdown_value },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.markdown_value = $event.target.value
-              }
+      _c("div", { attrs: { id: "editor" } }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.markdown_value,
+              expression: "markdown_value"
             }
-          }),
-          _vm._v(" "),
-          _c("vue-markdown", { attrs: { source: _vm.markdown_value } })
-        ],
-        1
-      )
+          ],
+          staticClass: "editor",
+          domProps: { value: _vm.markdown_value },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.markdown_value = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "view-area" },
+          [_c("vue-markdown", { attrs: { source: _vm.markdown_value } })],
+          1
+        )
+      ])
     ])
   ])
 }
@@ -114232,9 +114288,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
 		return {
-			image: ''
+			image: this.value
 		};
 	},
 	created: function created() {},
@@ -114409,15 +114466,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
-		return {};
+		return {
+			checkbox_master: {},
+			checkbox_num: this.value.value
+		};
 	},
-	created: function created() {},
+	created: function created() {
+		this.get_master(this.value.key);
+	},
 
 	computed: {},
-	methods: {}
+	methods: {
+		/**
+   * マスターデータ取得
+   * @param {table_name} stirng - テーブル名
+   */
+		get_master: function get_master(table_name) {
+			var _this = this;
+
+			axios.post('/api/wow/getMasterData', { table_name: table_name }).then(function (res) {
+				if (res.data && res.status == 200) {
+					_this.checkbox_master = res.data;
+				} else {
+					_this.$router.push('/wow/login');
+				}
+			}).catch(function (error) {
+				_this.$router.push('/wow/login');
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -114430,23 +114515,43 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "Check" } }, [
     _c("div", { staticClass: "form_field" }, [
-      _c("ul", [
-        _c("li", [
-          _c("input", { attrs: { type: "checkbox", id: "checkid" + 1 } }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "checkid" + 1 } }, [
-            _vm._v("ssssssssssssssss")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("input", { attrs: { type: "checkbox", id: "checkid" + 2 } }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "checkid" + 2 } }, [
-            _vm._v("ssssssssssssssss")
-          ])
-        ])
-      ])
+      _c(
+        "ul",
+        [
+          _vm._l(_vm.checkbox_master, function(value, key) {
+            return [
+              _c(
+                "li",
+                [
+                  (1 << (key - 1)) & _vm.checkbox_num
+                    ? [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            id: "checkid" + key,
+                            checked: "checked"
+                          },
+                          domProps: { value: key }
+                        })
+                      ]
+                    : [
+                        _c("input", {
+                          attrs: { type: "checkbox", id: "checkid" + key },
+                          domProps: { value: key }
+                        })
+                      ],
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "checkid" + key } }, [
+                    _vm._v(_vm._s(value))
+                  ])
+                ],
+                2
+              )
+            ]
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -114529,15 +114634,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
-		return {};
+		return {
+			radiobutton_master: {},
+			radiobutton_num: this.value.value
+		};
 	},
-	created: function created() {},
+	created: function created() {
+		this.get_master(this.value.key);
+	},
 
 	computed: {},
-	methods: {}
+	methods: {
+		/**
+   * マスターデータ取得
+   * @param {table_name} stirng - テーブル名
+   */
+		get_master: function get_master(table_name) {
+			var _this = this;
+
+			axios.post('/api/wow/getMasterData', { table_name: table_name }).then(function (res) {
+				if (res.data && res.status == 200) {
+					_this.radiobutton_master = res.data;
+				} else {
+					_this.$router.push('/wow/login');
+				}
+			}).catch(function (error) {
+				_this.$router.push('/wow/login');
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -114550,27 +114683,52 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "Radio" } }, [
     _c("div", { staticClass: "form_field" }, [
-      _c("ul", [
-        _c("li", [
-          _c("input", {
-            attrs: { type: "radio", name: "radio", id: "radioid" + 1 }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "radioid" + 1 } }, [
-            _vm._v("ssssssssssssssss")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("input", {
-            attrs: { type: "radio", name: "radio", id: "radioid" + 2 }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "radioid" + 2 } }, [
-            _vm._v("ssssssssssssssss")
-          ])
-        ])
-      ])
+      _c(
+        "ul",
+        [
+          _vm._l(_vm.radiobutton_master, function(value, key) {
+            return [
+              _c(
+                "li",
+                [
+                  _vm.radiobutton_num == key
+                    ? [
+                        _c("input", {
+                          attrs: {
+                            type: "radio",
+                            name: "radio",
+                            id: "radioid" + key,
+                            checked: "checked"
+                          },
+                          domProps: { value: key }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "radioid" + key } }, [
+                          _vm._v(_vm._s(value))
+                        ])
+                      ]
+                    : [
+                        _c("input", {
+                          attrs: {
+                            type: "radio",
+                            name: "radio",
+                            id: "radioid" + key
+                          },
+                          domProps: { value: key }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "radioid" + key } }, [
+                          _vm._v(_vm._s(value))
+                        ])
+                      ]
+                ],
+                2
+              )
+            ]
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -114650,9 +114808,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import userStore from '../../stores/userStore'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
 	data: function data() {
 		return {
-			datetime_value: ''
+			datetime_value: this.value
 		};
 	},
 	created: function created() {},

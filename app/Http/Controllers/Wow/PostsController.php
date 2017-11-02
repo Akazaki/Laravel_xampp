@@ -38,30 +38,44 @@ class PostsController extends Controller
 		]);
 
 		// 編集項目
-		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'postscategory_check', 'create_datetime', 'acknowledge_radio'];
+		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'postscategory_check', 'created_at', 'acknowledge_radio'];
 
 		$query = Posts::query();
 
-		//radioとcheckboxのマスターデータ取得
-		foreach ($_editColumns as $key => $value) {
-			if(strpos($value,'_radio') !== false){
-				$table_name = str_replace('_radio', '', $value);
-				$master = DB::table($table_name)->get();
-			}else if(strpos($value,'_check') !== false){
-				$table_name = str_replace('_check', '', $value);
-				$master = DB::table($table_name)->get();
-			}
-
-			if(!empty($master)){
-				$post[$table_name.'_master'] = $master;
-			}
-		}
-
 		// データ取得
-		$post['post'] = $query->where('id', (INT)$request->id)->first();
-		$post['_editColumns'] = $_editColumns;
+		$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
 
 		return $post;
+	}
+
+	 /**
+	 * マスターデータ取得
+	 * @param {table_name} string - 
+	 */
+	public function getMasterData(Request $request)
+	{
+		// $this->validate($request,[
+		// 	'id' => 'integer|required'
+		// ]);
+
+		//radioとcheckboxのマスターデータ取得
+		if(strpos($request->table_name,'_radio') !== false){
+			$table_name = str_replace('_radio', '', $request->table_name);
+			$master = DB::table($table_name)->get();
+		}else if(strpos($request->table_name,'_check') !== false){
+			$table_name = str_replace('_check', '', $request->table_name);
+			$master = DB::table($table_name)->get();
+		}
+
+		//カテゴリ名のみ摘出
+		$master_data = array();
+		if(!empty($master)){
+			foreach($master as $r){
+				$master_data[$r->id] = $r->label_text;
+			}
+		}
+		
+		return $master_data;
 	}
 
 	// function s(){
