@@ -459,6 +459,7 @@ ul {
   margin-bottom: 30px;
   /*------- input[text] -------*/
   /*------- textarea -------*/
+  /*------- file -------*/
   /*------- checkbox -------*/
   /*------- radiobutton -------*/
 }
@@ -539,6 +540,53 @@ ul {
 }
 #Postlist #Edit_box .form_field textarea::-webkit-input-placeholder {
   color: #999;
+}
+#Postlist #Edit_box .form_field .fileup_field img {
+  max-width: 300px;
+  height: auto;
+  margin-top: 10px;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+#Postlist #Edit_box .form_field .fileup_field .btn-tertiary {
+  color: #ececec;
+  padding: 0;
+  line-height: 33px;
+  width: 102px;
+  display: block;
+  background-color: #41b883;
+  border-radius: 51px;
+}
+#Postlist #Edit_box .form_field .fileup_field .btn-tertiary:hover,
+#Postlist #Edit_box .form_field .fileup_field .btn-tertiary:focus {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+#Postlist #Edit_box .form_field .fileup_field .btn-tertiary:hover:hover,
+#Postlist #Edit_box .form_field .fileup_field .btn-tertiary:focus:hover {
+  background-color: #63daa5;
+}
+#Postlist #Edit_box .form_field .fileup_field input[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+#Postlist #Edit_box .form_field .fileup_field input[type='file'] + .js-labelFile {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+  cursor: pointer;
+}
+#Postlist #Edit_box .form_field .fileup_field input[type='file'] + .js-labelFile .icon:before {
+  content: "\F093";
+}
+#Postlist #Edit_box .form_field .fileup_field input[type='file'] + .js-labelFile.has-file .icon:before {
+  content: "\F00C";
+  color: #5AAC7B;
 }
 #Postlist #Edit_box .form_field [type="checkbox"]:checked,
 #Postlist #Edit_box .form_field [type="checkbox"]:not(:checked) {

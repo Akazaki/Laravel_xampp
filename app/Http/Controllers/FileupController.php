@@ -31,15 +31,15 @@ class FileupController extends Controller
             //getRealPath():アップロードしたファイルのパスを取得します。
             $image = Image::make($request->file('image')->getRealPath());
             //画像を保存する
-            $image->save(public_path().'/tmpfile/'.$upfile);
+            $image->save(public_path().'/wow/tmpfile/'.$upfile);
             //パス
-            $reasult['img_path'] = '/public/tmpfile/'.$upfile;
+            $reasult['img_path'] = '/public/wow/tmpfile/'.$upfile;
             //name
             $reasult['img_name'] = $upfile;
         }
 
         //
-        return response()->json($reasult);
+        return $reasult;
     }
 
     /**

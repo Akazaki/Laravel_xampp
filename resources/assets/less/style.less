@@ -673,6 +673,56 @@ ul {
 				color: #999;
 			}
 
+
+			/*------- file -------*/
+			.fileup_field {
+
+				img {
+					max-width: 300px;
+					height: auto;
+					margin-top: 10px;
+					-webkit-transition: all .5s;
+					-moz-transition: all .5s;
+					transition: all .5s;
+				}
+
+				.btn-tertiary {
+					color: @offWhite;
+					padding: 0;
+					line-height: 33px;
+					width: 102px;
+					display: block;
+					background-color: @vueGreen;
+				    border-radius: 51px;
+				}
+				.btn-tertiary:hover, .btn-tertiary:focus {
+					.hover_anime(@vueGreen);
+				}
+
+				input[type='file'] {
+					width: 0.1px;
+					height: 0.1px;
+					opacity: 0;
+					overflow: hidden;
+					position: absolute;
+					z-index: -1;
+				}
+				input[type='file'] + .js-labelFile {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					padding: 0 10px;
+					cursor: pointer;
+				}
+				input[type='file'] + .js-labelFile .icon:before {
+					content: "\f093";
+				}
+				input[type='file'] + .js-labelFile.has-file .icon:before {
+					content: "\f00c";
+					color: #5AAC7B;
+				}
+			}
+
 			/*------- checkbox -------*/
 			[type="checkbox"]:checked,
 			[type="checkbox"]:not(:checked)

@@ -1,3 +1,5 @@
 /vendor
 /node_modules
 /public/tmpfile
+public/wow/tmpfile/
+public/wow/uploads/

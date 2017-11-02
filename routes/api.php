@@ -37,5 +37,7 @@ use Illuminate\Http\Request;
 		Route::post('/wow/postList/', 'Wow\PostsController@postList');
 		//記事一覧
 		Route::post('/wow/postEdit/', 'Wow\PostsController@postEdit');
+
+		Route::post('/wow/fileup/', 'FileupController@index');
 	});
 //});

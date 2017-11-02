@@ -46,13 +46,14 @@ class PostsController extends Controller
 		foreach ($_editColumns as $key => $value) {
 			if(strpos($value,'_radio') !== false){
 				$table_name = str_replace('_radio', '', $value);
+				$master = DB::table($table_name)->get();
 			}else if(strpos($value,'_check') !== false){
 				$table_name = str_replace('_check', '', $value);
+				$master = DB::table($table_name)->get();
 			}
-			$master = DB::table($table_name)->get();
 
 			if(!empty($master)){
-				$post[$master.'_master'] = $master;
+				$post[$table_name.'_master'] = $master;
 			}
 		}
 
@@ -62,4 +63,20 @@ class PostsController extends Controller
 
 		return $post;
 	}
+
+	// function s(){
+	// 	$checknum = str_pad((string)decbin($@@@['category_check']), count($@@@Master), "0", STR_PAD_LEFT);
+	// 	$checknum = strrev($checknum);
+	// 	$this->foge['category_check_a'] = str_split($checknum);
+
+	// 	$_array = array();
+	// 	foreach($this->foge['category_check_a'] as $key2=>$c){
+	// 	 if($c == 1){
+	// 	  $this->foge['infocategory_check_a'][$key2] = $@@@categoryMaster[$key2];
+	// 	 }else{
+	// 	  unset($this->foge['category_check_a'][$key2]);
+	// 	 }
+	// 	}
+
+	// }
 }
