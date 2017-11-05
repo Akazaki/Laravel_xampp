@@ -12,7 +12,7 @@
 						</li>
 						<li class="left">
 							<div class="button_green">
-								<router-link to="/wow/posts/create">
+								<router-link to="/wow/posts/0">
 									新規追加
 								</router-link>
 							</div>
@@ -63,7 +63,7 @@
 			</div>
 			
 		</div>
-		<footerber></footerber>
+		<footerbar></footerbar>
 	</div>
 </template>
 
@@ -73,7 +73,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
 Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
-Vue.component('footerber', require('../../components/Layouts/Footer.vue'))
+Vue.component('footerbar', require('../../components/Layouts/Footer.vue'))
 Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 
 	export default {

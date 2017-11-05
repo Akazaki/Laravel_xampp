@@ -82,7 +82,7 @@ const router = new VueRouter({
 		{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
 		{ path: '/wow/posts/', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
 		{ path: '/wow/posts/:id', name: 'Posts', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
-		{ path: '/wow/posts/create', component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
+		{ path: '/wow/posts/0', component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
 	]
 })
 

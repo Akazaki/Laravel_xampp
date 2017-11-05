@@ -51,7 +51,7 @@
 						<ul class="button_box">
 							<li>
 								<div class="button_green">
-									<a href="javascript:void(0);" v-on:click="save">
+									<a href="javascript:void(0);" v-on:click="done_edit">
 										保存
 									</a>
 								</div>
@@ -69,7 +69,7 @@
 			</div>
 			
 		</div>
-		<footerber></footerber>
+		<footerbar></footerbar>
 	</div>
 </template>
 
@@ -85,7 +85,7 @@ Vue.use(ElementUI, { locale })
 Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
 Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
-Vue.component('footerber', require('../../components/Layouts/Footer.vue'))
+Vue.component('footerbar', require('../../components/Layouts/Footer.vue'))
 
 // EditParts
 Vue.component('edit-text', require('../../components/Layouts/EditParts/Text.vue'))
@@ -101,13 +101,11 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			return {
 				post: {},//記事データ
 				errors: {},
+				form_posts: {},//送信するデータ
 			}
 		},
 		created () {
-			console.log(this.id)
-			if(this.id != 'create'){
-				this.get_post(this.id);
-			}
+			this.get_post(this.id);
 		},
 		methods: {
 			 /**
@@ -122,7 +120,11 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 						this.post = data.post;
 					}else{
 						this.$router.push('/wow/login')
+						return false;
 					}
+
+					//dataにedit項目追加
+					//for
 					
 				}).catch(error => {
 					this.$router.push('/wow/login')
@@ -132,8 +134,8 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 /**
 			 * 記事保存
 			 */
-			save(){
-				console.log('aaa');
+			done_edit(){
+				console.log(this.datetime_value);
 				// axios.post('/api/wow/postEdit', {id: id})
 				// .then(res => {
 				// 	if(res.data && res.status == 200){

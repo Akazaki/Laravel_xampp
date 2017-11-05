@@ -14,7 +14,7 @@ use Laravel\Posts;// Model
 
 class WowController extends Controller
 {   
-	function __construct(Request $request)
+	function __construct()
 	{
 	}
 

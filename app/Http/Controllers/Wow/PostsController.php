@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
  
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
+use Laravel\Http\Controllers\Wow\WowEditController;
 use Auth;
 use JWTAuth;
 use DB;
@@ -12,8 +13,9 @@ use Laravel\Posts;// Model
 
 class PostsController extends Controller
 {
-	function __construct(Request $request)
+	function __construct(EditController $EditController)
 	{
+		//$EditController->EditController();
 	}
 
 	// 記事取得
@@ -42,12 +44,43 @@ class PostsController extends Controller
 
 		$query = Posts::query();
 
-		// データ取得
-		$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
+		if((INT)$request->id > 0){
+			// データ取得
+			$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
+		}else{
+			// 新規作成
+			$post['post'] = $this->getEmptyData($_editColumns);
+			$post['post'] = $post['post'][0];
+		}
 
 		return $post;
 	}
 
+	/**
+	 * 空のデータを取得する（新規追加時に使用）
+	 *
+	 * @params array $columns : カラム名配列
+	 */
+	function getEmptyData($columns=array('*'))
+	{
+		$data = array();
+		foreach($columns as $c){
+			if($c == 'id'){
+				$data[$c] = '*****';
+			}else{
+				$data[$c] = '';
+			}
+			// foreach(wowConst('ACCESS_PERMISSION') as $acc){
+			// 	if(strpos($this->ctrl->SCRIPT_FROM_DOCUMENT_ROOT, $acc['script']) === 0){
+			// 		$data['permission'] = $acc['permission'];
+			// 		break;
+			// 	}
+			// }
+		}
+		return array($data);
+	}
+
+	
 	 /**
 	 * マスターデータ取得
 	 * @param {table_name} string - 
@@ -77,20 +110,4 @@ class PostsController extends Controller
 		
 		return $master_data;
 	}
-
-	// function s(){
-	// 	$checknum = str_pad((string)decbin($@@@['category_check']), count($@@@Master), "0", STR_PAD_LEFT);
-	// 	$checknum = strrev($checknum);
-	// 	$this->foge['category_check_a'] = str_split($checknum);
-
-	// 	$_array = array();
-	// 	foreach($this->foge['category_check_a'] as $key2=>$c){
-	// 	 if($c == 1){
-	// 	  $this->foge['infocategory_check_a'][$key2] = $@@@categoryMaster[$key2];
-	// 	 }else{
-	// 	  unset($this->foge['category_check_a'][$key2]);
-	// 	 }
-	// 	}
-
-	// }
 }
