@@ -29,10 +29,10 @@
 								※必須項目です
 							</p>
 							<template v-if="key.match(/_richtext/)">
-								<edit-richtext :value="value"></edit-richtext>
+								<edit-richtext :value="{value:value, key:key}"></edit-richtext>
 							</template>
 							<template v-else-if="key.match(/_file/)">
-								<edit-file :value="value"></edit-file>
+								<edit-file :value="{value:value, key:key}"></edit-file>
 							</template>
 							<template v-else-if="key.match(/_check/)">
 								<edit-check :value="{value:value, key:key}"></edit-check>
@@ -41,10 +41,10 @@
 								<edit-radio :value="{value:value, key:key}"></edit-radio>
 							</template>
 							<template v-else-if="key.match(/_at/)">
-								<edit-datetime :value="value"></edit-datetime>
+								<edit-datetime :value="{value:value, key:key}"></edit-datetime>
 							</template>
 							<template v-else>
-								<edit-text :value="value"></edit-text>
+								<edit-text :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-text>
 							</template>
 						</template>
 
@@ -101,7 +101,7 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			return {
 				post: {},//記事データ
 				errors: {},
-				form_posts: {},//送信するデータ
+				// form_posts: {},//送信するデータ
 			}
 		},
 		created () {
@@ -112,19 +112,24 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 * 記事データ取得
 			 * @param {id} num - 記事id
 			 */
-			get_post(id){
+			get_post: function(id){
 				axios.post('/api/wow/postEdit', {id: id})
 				.then(res => {
 					if(res.data && res.status == 200){
 						var data = res.data;
 						this.post = data.post;
+						var self = this;
+
+						// //dataにedit項目追加
+						// Object.keys(this.post).forEach(function (key) {
+						// 	self.form_posts[key] = self.post[key];
+						// });
+						// console.log(this.post);
+
 					}else{
 						this.$router.push('/wow/login')
 						return false;
 					}
-
-					//dataにedit項目追加
-					//for
 					
 				}).catch(error => {
 					this.$router.push('/wow/login')
@@ -132,10 +137,20 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 				});
 			},
 			 /**
+			 * 子コンポーネントから実行されるイベント
+			 * @param {value} - 子から渡された値
+			 * @param {key} - 書き換えるkeyの名前
+			 */
+			value_update: function(emit_value, emit_key) {
+				if (emit_key in this.post) {
+					this.post[emit_key] = emit_value;//書き換え
+				}
+			},
+			 /**
 			 * 記事保存
 			 */
-			done_edit(){
-				console.log(this.datetime_value);
+			done_edit: function() {
+				console.log(this.post);
 				// axios.post('/api/wow/postEdit', {id: id})
 				// .then(res => {
 				// 	if(res.data && res.status == 200){

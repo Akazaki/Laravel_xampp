@@ -15,7 +15,7 @@
 		props: ['value'],
 		data (){
 			return {
-				datetime_value: this.value,
+				datetime_value: this.value.value,
 			}
 		},
 		created () {

@@ -21,7 +21,7 @@ import VueMarkdown from 'vue-markdown'
 		props: ['value'],
 		data (){
 			return {
-				markdown_value: this.value,
+				markdown_value: this.value.value,
 			}
 		},
 	    filters: {

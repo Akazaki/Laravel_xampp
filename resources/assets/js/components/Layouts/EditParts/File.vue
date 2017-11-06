@@ -25,7 +25,7 @@
 		props: ['value'],
 		data (){
 			return {
-				image: this.value,
+				image: this.value.value,
 			}
 		},
 		created () {

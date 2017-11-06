@@ -17,12 +17,6 @@
 							</li>
 						</ul>
 					</li>
-					<li class="sub-menu">
-						<a href="javascript:void(0);"><i class="fa fa-bar-chart-o"></i><span>ブログ</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-					</li>
-					<li class="sub-menu">
-						<a href="javascript:void(0);"><i class="fa fa-map-marker"></i><span>記事一覧</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-					</li>
 				</ul>
 			</div>
 		</aside>
