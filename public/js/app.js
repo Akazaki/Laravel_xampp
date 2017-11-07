@@ -85936,7 +85936,6 @@ Vue.component('edit-datetime', __webpack_require__(364));
 		return {
 			post: {}, //記事データ
 			errors: {}
-			// form_posts: {},//送信するデータ
 		};
 	},
 	created: function created() {
@@ -85955,13 +85954,6 @@ Vue.component('edit-datetime', __webpack_require__(364));
 				if (res.data && res.status == 200) {
 					var data = res.data;
 					_this.post = data.post;
-					var self = _this;
-
-					// //dataにedit項目追加
-					// Object.keys(this.post).forEach(function (key) {
-					// 	self.form_posts[key] = self.post[key];
-					// });
-					// console.log(this.post);
 				} else {
 					_this.$router.push('/wow/login');
 					return false;
@@ -85985,20 +85977,17 @@ Vue.component('edit-datetime', __webpack_require__(364));
   * 記事保存
   */
 		done_edit: function done_edit() {
-			console.log(this.post);
-			// axios.post('/api/wow/postEdit', {id: id})
-			// .then(res => {
-			// 	if(res.data && res.status == 200){
-			// 		var data = res.data;
-			// 		this.post = data.post;
-			// 	}else{
-			// 		this.$router.push('/wow/login')
-			// 	}
+			axios.post('/api/wow/postDoneEdit', { rows: this.post }).then(function (res) {
+				// if(res.data && res.status == 200){
+				// 	this.$router.push('/wow/posts')
+				// }else{
+				// 	this.$router.push('/wow/login')
+				// }
 
-			// }).catch(error => {
-			// 	this.$router.push('/wow/login')
-			// 	console.log(error);
-			// });
+			}).catch(function (error) {
+				// this.$router.push('/wow/login')
+				// console.log(error);
+			});
 		}
 	}
 });
@@ -113975,7 +113964,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['value'],
 	data: function data() {
 		return {
-			markdown_value: this.value.value
+			markdown_value: this.value.value,
+			key: this.value.key
 		};
 	},
 
@@ -113992,6 +113982,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	//markdown
 	update: _.debounce(function (e) {
 		this.input = e.target.value;
+		//変更時、親に渡す
+		this.$emit('ValueUpdate', this.markdown_value, this.key);
 	}, 300),
 	methods: {},
 	components: {
@@ -114130,10 +114122,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['value'],
 	data: function data() {
 		return {
-			image: this.value.value
+			image: this.value.value,
+			key: this.value.key
 		};
 	},
 	created: function created() {},
+	updated: function updated() {
+		//変更時、親に渡す
+		this.$emit('ValueUpdate', this.image, this.key);
+	},
 
 	methods: {
 		//fileup
@@ -114155,7 +114152,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			};
 
 			axios.post('/api/wow/fileup', formData, config).then(function (res) {
-				console.log(res);
 				// response 処理
 				var img_path = '/public/wow/tmpfile/' + res.data.img_name;
 				_this.image = img_path;
@@ -114309,20 +114305,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['value'],
 	data: function data() {
 		return {
 			checkbox_master: {},
-			checkbox_num: this.value.value
+			checked_names: [],
+			checkbox_num: this.value.value,
+			key: this.value.key
 		};
 	},
 	created: function created() {
 		this.get_master(this.value.key);
 	},
+	updated: function updated() {
+		//変更時、親に渡す
+		this.$emit('ValueUpdate', this.checked_names, this.key);
+	},
 
-	computed: {},
 	methods: {
 		/**
    * マスターデータ取得
@@ -114334,6 +114338,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post('/api/wow/getMasterData', { table_name: table_name }).then(function (res) {
 				if (res.data && res.status == 200) {
 					_this.checkbox_master = res.data;
+					var self = _this;
+
+					// チェック判定
+					for (var i = 0; i < Object.keys(_this.checkbox_master).length; i++) {
+						// 2進数判定
+						if (1 << i & self.checkbox_num) {
+							var key = i + 1;
+							self.checked_names[i] = Number(key);
+						}
+					}
 				} else {
 					_this.$router.push('/wow/login');
 				}
@@ -114362,23 +114376,47 @@ var render = function() {
               _c(
                 "li",
                 [
-                  (1 << (key - 1)) & _vm.checkbox_num
-                    ? [
-                        _c("input", {
-                          attrs: {
-                            type: "checkbox",
-                            id: "checkid" + key,
-                            checked: "checked"
-                          },
-                          domProps: { value: key }
-                        })
-                      ]
-                    : [
-                        _c("input", {
-                          attrs: { type: "checkbox", id: "checkid" + key },
-                          domProps: { value: key }
-                        })
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.checked_names,
+                          expression: "checked_names"
+                        }
                       ],
+                      attrs: { type: "checkbox", id: "checkid" + key },
+                      domProps: {
+                        checked: true,
+                        value: key,
+                        checked: Array.isArray(_vm.checked_names)
+                          ? _vm._i(_vm.checked_names, key) > -1
+                          : _vm.checked_names
+                      },
+                      on: {
+                        __c: function($event) {
+                          var $$a = _vm.checked_names,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = key,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.checked_names = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.checked_names = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.checked_names = $$c
+                          }
+                        }
+                      }
+                    })
+                  ],
                   _vm._v(" "),
                   _c("label", { attrs: { for: "checkid" + key } }, [
                     _vm._v(_vm._s(value))
@@ -114483,11 +114521,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			radiobutton_master: {},
-			radiobutton_num: this.value.value
+			radiobutton_num: Number(this.value.value),
+			key: this.value.key
 		};
 	},
 	created: function created() {
 		this.get_master(this.value.key);
+	},
+	updated: function updated() {
+		//変更時、親に渡す
+		this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key);
 	},
 
 	computed: {},
@@ -114533,13 +114576,29 @@ var render = function() {
                   _vm.radiobutton_num == key
                     ? [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.radiobutton_num,
+                              expression: "radiobutton_num"
+                            }
+                          ],
                           attrs: {
                             type: "radio",
                             name: "radio",
                             id: "radioid" + key,
                             checked: "checked"
                           },
-                          domProps: { value: key }
+                          domProps: {
+                            value: key,
+                            checked: _vm._q(_vm.radiobutton_num, key)
+                          },
+                          on: {
+                            __c: function($event) {
+                              _vm.radiobutton_num = key
+                            }
+                          }
                         }),
                         _vm._v(" "),
                         _c("label", { attrs: { for: "radioid" + key } }, [
@@ -114548,12 +114607,28 @@ var render = function() {
                       ]
                     : [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.radiobutton_num,
+                              expression: "radiobutton_num"
+                            }
+                          ],
                           attrs: {
                             type: "radio",
                             name: "radio",
                             id: "radioid" + key
                           },
-                          domProps: { value: key }
+                          domProps: {
+                            value: key,
+                            checked: _vm._q(_vm.radiobutton_num, key)
+                          },
+                          on: {
+                            __c: function($event) {
+                              _vm.radiobutton_num = key
+                            }
+                          }
                         }),
                         _vm._v(" "),
                         _c("label", { attrs: { for: "radioid" + key } }, [
@@ -114650,10 +114725,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['value'],
 	data: function data() {
 		return {
-			datetime_value: this.value.value
+			datetime_value: this.value.value,
+			key: this.value.key
 		};
 	},
 	created: function created() {},
+	updated: function updated() {
+		//変更時、親に渡す
+		this.$emit('ValueUpdate', this.datetime_value, this.key);
+	},
 
 	methods: {}
 });
@@ -114753,25 +114833,31 @@ var render = function() {
                       key.match(/_richtext/)
                         ? [
                             _c("edit-richtext", {
-                              attrs: { value: { value: value, key: key } }
+                              attrs: { value: { value: value, key: key } },
+                              on: { ValueUpdate: _vm.value_update }
                             })
                           ]
                         : key.match(/_file/)
                           ? [
                               _c("edit-file", {
-                                attrs: { value: { value: value, key: key } }
+                                attrs: { value: { value: value, key: key } },
+                                on: { ValueUpdate: _vm.value_update }
                               })
                             ]
                           : key.match(/_check/)
                             ? [
                                 _c("edit-check", {
-                                  attrs: { value: { value: value, key: key } }
+                                  attrs: { value: { value: value, key: key } },
+                                  on: { ValueUpdate: _vm.value_update }
                                 })
                               ]
                             : key.match(/_radio/)
                               ? [
                                   _c("edit-radio", {
-                                    attrs: { value: { value: value, key: key } }
+                                    attrs: {
+                                      value: { value: value, key: key }
+                                    },
+                                    on: { ValueUpdate: _vm.value_update }
                                   })
                                 ]
                               : key.match(/_at/)
@@ -114779,7 +114865,8 @@ var render = function() {
                                     _c("edit-datetime", {
                                       attrs: {
                                         value: { value: value, key: key }
-                                      }
+                                      },
+                                      on: { ValueUpdate: _vm.value_update }
                                     })
                                   ]
                                 : [

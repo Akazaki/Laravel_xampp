@@ -35,8 +35,10 @@ use Illuminate\Http\Request;
 		Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
 		//記事一覧
 		Route::post('/wow/postList/', 'Wow\PostsController@postList');
-		//記事一覧
+		//記事編集
 		Route::post('/wow/postEdit/', 'Wow\PostsController@postEdit');
+		//記事保存
+		Route::post('/wow/postDoneEdit/', 'Wow\PostsController@postDoneEdit');
 
 		Route::post('/wow/fileup/', 'FileupController@index');
 

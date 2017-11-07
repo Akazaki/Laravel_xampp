@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 use Laravel\Http\Controllers\Wow\WowEditController;
+use Laravel\Http\Requests\PostRequest;// バリデート
 use Auth;
 use JWTAuth;
 use DB;
@@ -54,6 +55,36 @@ class PostsController extends Controller
 		}
 
 		return $post;
+	}
+
+	//記事保存
+	public function postDoneEdit(Request $request){
+		$post = [1];
+		return $post;
+		// $tv = 0;
+		// if(is_array($this->ctrl->{$_column})){
+		// 	foreach($this->ctrl->{$_column} as $tc){
+		// 		$tv += 1 << ($tc - 1);
+		// 	}
+		// }
+		// return $tv;
+	}
+
+	/**
+	 * checkboxを10進数で保存
+	 *
+	 * @param array $arr : 定数名
+	 * @return mixed : 定数
+	 */
+	function _getFormData_check($arr)
+	{
+		$tv = 0;
+		if(is_array($arr)){
+			foreach($arr as $tc){
+				$tv += 1 << ($tc - 1);
+			}
+		}
+		return $tv;
 	}
 
 	/**

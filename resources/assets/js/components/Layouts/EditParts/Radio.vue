@@ -5,11 +5,11 @@
 				<template v-for="(value, key) in radiobutton_master">
 					<li>
 						<template v-if="radiobutton_num == key">
-							<input type="radio" name="radio" v-bind:id="'radioid' + key" v-bind:value="key" checked="checked"/>
+							<input type="radio" name="radio" v-model="radiobutton_num" v-bind:id="'radioid' + key" v-bind:value="key" checked="checked"/>
 							<label v-bind:for="'radioid' + key">{{value}}</label>
 						</template>
 						<template v-else>
-							<input type="radio" name="radio" v-bind:id="'radioid' + key" v-bind:value="key" />
+							<input type="radio" name="radio" v-model="radiobutton_num" v-bind:id="'radioid' + key" v-bind:value="key" />
 							<label v-bind:for="'radioid' + key">{{value}}</label>
 						</template>
 					</li>
@@ -27,11 +27,16 @@
 		data (){
 			return {
 				radiobutton_master: {},
-				radiobutton_num: this.value.value,
+				radiobutton_num: Number(this.value.value),
+				key: this.value.key,
 			}
 		},
 		created () {
 			this.get_master(this.value.key);
+		},
+		updated (){
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key)
 		},
 		computed: {
 		},

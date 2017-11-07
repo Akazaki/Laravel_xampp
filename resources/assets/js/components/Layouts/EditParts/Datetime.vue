@@ -16,9 +16,14 @@
 		data (){
 			return {
 				datetime_value: this.value.value,
+				key: this.value.key,
 			}
 		},
 		created () {
+		},
+		updated (){
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', this.datetime_value, this.key)
 		},
 		methods: {
 		}

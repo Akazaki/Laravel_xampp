@@ -26,9 +26,14 @@
 		data (){
 			return {
 				image: this.value.value,
+				key: this.value.key,
 			}
 		},
 		created () {
+		},
+		updated (){
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', this.image, this.key)
 		},
 		methods: {
 			//fileup
@@ -51,7 +56,6 @@
 
                 axios.post('/api/wow/fileup', formData, config)
                 .then(res => {
-                	console.log(res);
                 	// response 処理
                 	var img_path = '/public/wow/tmpfile/'+res.data.img_name;
                 	this.image = img_path;

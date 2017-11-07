@@ -22,6 +22,7 @@ import VueMarkdown from 'vue-markdown'
 		data (){
 			return {
 				markdown_value: this.value.value,
+				key: this.value.key,
 			}
 		},
 	    filters: {
@@ -38,6 +39,8 @@ import VueMarkdown from 'vue-markdown'
 		//markdown
 		update: _.debounce(function (e) {
 			this.input = e.target.value
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', this.markdown_value, this.key)
 		}, 300),
 		methods: {
 		},

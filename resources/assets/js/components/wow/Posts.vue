@@ -29,19 +29,19 @@
 								※必須項目です
 							</p>
 							<template v-if="key.match(/_richtext/)">
-								<edit-richtext :value="{value:value, key:key}"></edit-richtext>
+								<edit-richtext :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-richtext>
 							</template>
 							<template v-else-if="key.match(/_file/)">
-								<edit-file :value="{value:value, key:key}"></edit-file>
+								<edit-file :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-file>
 							</template>
 							<template v-else-if="key.match(/_check/)">
-								<edit-check :value="{value:value, key:key}"></edit-check>
+								<edit-check :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-check>
 							</template>
 							<template v-else-if="key.match(/_radio/)">
-								<edit-radio :value="{value:value, key:key}"></edit-radio>
+								<edit-radio :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-radio>
 							</template>
 							<template v-else-if="key.match(/_at/)">
-								<edit-datetime :value="{value:value, key:key}"></edit-datetime>
+								<edit-datetime :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-datetime>
 							</template>
 							<template v-else>
 								<edit-text :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-text>
@@ -101,7 +101,6 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			return {
 				post: {},//記事データ
 				errors: {},
-				// form_posts: {},//送信するデータ
 			}
 		},
 		created () {
@@ -118,13 +117,6 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					if(res.data && res.status == 200){
 						var data = res.data;
 						this.post = data.post;
-						var self = this;
-
-						// //dataにedit項目追加
-						// Object.keys(this.post).forEach(function (key) {
-						// 	self.form_posts[key] = self.post[key];
-						// });
-						// console.log(this.post);
 
 					}else{
 						this.$router.push('/wow/login')
@@ -150,20 +142,18 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 * 記事保存
 			 */
 			done_edit: function() {
-				console.log(this.post);
-				// axios.post('/api/wow/postEdit', {id: id})
-				// .then(res => {
-				// 	if(res.data && res.status == 200){
-				// 		var data = res.data;
-				// 		this.post = data.post;
-				// 	}else{
-				// 		this.$router.push('/wow/login')
-				// 	}
+				axios.post('/api/wow/postDoneEdit', {rows: this.post})
+				.then(res => {
+					// if(res.data && res.status == 200){
+					// 	this.$router.push('/wow/posts')
+					// }else{
+					// 	this.$router.push('/wow/login')
+					// }
 					
-				// }).catch(error => {
-				// 	this.$router.push('/wow/login')
-				// 	console.log(error);
-				// });
+				}).catch(error => {
+					// this.$router.push('/wow/login')
+					// console.log(error);
+				});
 			},
 		}
 	}
