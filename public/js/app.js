@@ -85009,6 +85009,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -85669,8 +85672,10 @@ var render = function() {
               "div",
               { attrs: { id: "Postlist" } },
               [
+                _vm._m(0),
+                _vm._v(" "),
                 _c("ul", { staticClass: "button_box" }, [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("li", { staticClass: "left" }, [
                     _c(
@@ -85678,14 +85683,14 @@ var render = function() {
                       { staticClass: "button_green" },
                       [
                         _c("router-link", { attrs: { to: "/wow/posts/0" } }, [
-                          _vm._v("\n\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t")
+                          _vm._v("\n\t\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t\t")
                         ])
                       ],
                       1
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _vm._m(2)
                 ]),
                 _vm._v(" "),
                 _c("div", { attrs: { id: "table-content" } }, [
@@ -85697,7 +85702,7 @@ var render = function() {
                         _c(
                           "tr",
                           [
-                            _vm._m(2),
+                            _vm._m(3),
                             _vm._v(" "),
                             _vm._l(_vm.list_columns, function(column) {
                               return [_c("td", [_vm._v(_vm._s(column))])]
@@ -85777,6 +85782,14 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "loading_small enter" }, [
+      _c("div", { staticClass: "loading" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

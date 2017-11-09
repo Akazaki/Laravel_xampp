@@ -169,6 +169,40 @@ ul {
     -webkit-transform: rotate(360deg);
   }
 }
+.loading_small .loading {
+  width: 30px;
+  height: 30px;
+  border-radius: 150px;
+  border: 3px solid #191919;
+  border-top-color: #41b883;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -80px;
+  margin-left: -80px;
+  animation: loading 1.2s linear infinite;
+  -webkit-animation: loading 1.2s linear infinite;
+}
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 .overlay {
   position: absolute;
   background: rgba(220, 220, 220, 0.8);

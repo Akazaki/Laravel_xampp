@@ -6,6 +6,9 @@
 
 			<div id="Main">
 				<div id="Postlist">
+<div class="loading_small enter">
+	<div class="loading"></div>
+</div>
 					<ul class="button_box">
 						<li class="left">
 							<p id="Post_title">投稿</p>
