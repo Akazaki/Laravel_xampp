@@ -119,12 +119,10 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 						this.post = data.post;
 
 					}else{
-						this.$router.push('/wow/login')
 						return false;
 					}
 					
 				}).catch(error => {
-					this.$router.push('/wow/login')
 					console.log(error);
 				});
 			},
@@ -135,20 +133,18 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 */
 			value_update: function(emit_value, emit_key) {
 				if (emit_key in this.post) {
-					this.post[emit_key] = emit_value;//書き換え
+					this.post[emit_key] = emit_value;//更新
 				}
 			},
 			 /**
 			 * 記事保存
 			 */
 			done_edit: function() {
-				axios.post('/api/wow/postDoneEdit', {rows: this.post})
+				axios.post('/api/wow/postDoneEdit', {rows: this.post, id: this.id},)
 				.then(res => {
-					// if(res.data && res.status == 200){
-					// 	this.$router.push('/wow/posts')
-					// }else{
-					// 	this.$router.push('/wow/login')
-					// }
+					if(res.data && res.status == 200){
+						this.$router.push('/wow/posts')
+					}
 					
 				}).catch(error => {
 					// this.$router.push('/wow/login')

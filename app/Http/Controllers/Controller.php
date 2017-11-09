@@ -30,54 +30,54 @@ class Controller extends BaseController
 	{
 		// 配列などを設定する
 
-		/*
-		 * アクセスパーミッション
-		 *
-		 * script : 対象のスクリプト。ドキュメントルートからのフルパス指定
-		 * group : （基本的に）編集できるグループID
-		 * acknowledge : （基本的に）承認できるグループID
-		 * permission : 編集パーミッション[作成者|グループ|承認者][4表示|2編集|1承認]
-		 */
-		$this->ACCESS_PERMISSION = array(
-			// array('script' => '/wow/user.php', 'group' => 1, 'acknowledge' => FALSE, 'permission' => 0600),
-			// array('script' => '/wow/news.php', 'group' => 3 , 'acknowledge' => 2, 'permission' => 0647),
-			// array('script' => '/wow/suspendNews.php', 'group' => 1, 'acknowledge' => 1, 'permission' => 0647),
-			// array('script' => '/wow/column_info.php', 'group' => 1, 'acknowledge' => FALSE, 'permission' => 0700),
-			// array('script' => '/wow/file.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
-			// array('script' => '/wow/filewindow.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
-			// array('script' => '/wow/afile.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
-			// array('script' => '/wow/afilewindow.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
-		);
+		// /*
+		//  * アクセスパーミッション
+		//  *
+		//  * script : 対象のスクリプト。ドキュメントルートからのフルパス指定
+		//  * group : （基本的に）編集できるグループID
+		//  * acknowledge : （基本的に）承認できるグループID
+		//  * permission : 編集パーミッション[作成者|グループ|承認者][4表示|2編集|1承認]
+		//  */
+		// $this->ACCESS_PERMISSION = array(
+		// 	// array('script' => '/wow/user.php', 'group' => 1, 'acknowledge' => FALSE, 'permission' => 0600),
+		// 	// array('script' => '/wow/news.php', 'group' => 3 , 'acknowledge' => 2, 'permission' => 0647),
+		// 	// array('script' => '/wow/suspendNews.php', 'group' => 1, 'acknowledge' => 1, 'permission' => 0647),
+		// 	// array('script' => '/wow/column_info.php', 'group' => 1, 'acknowledge' => FALSE, 'permission' => 0700),
+		// 	// array('script' => '/wow/file.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
+		// 	// array('script' => '/wow/filewindow.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
+		// 	// array('script' => '/wow/afile.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
+		// 	// array('script' => '/wow/afilewindow.php', 'group' => 3, 'acknowledge' => FALSE, 'permission' => 0747),
+		// );
 
-		// フォルダごとのアクセスできるグループＩＤの論理和
-		// 例）group1, group3 のどちらかに所属してるユーザのアクセスを許す => 5
-		$this->ACCESS_FOLDER = array(0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255);
+		// // フォルダごとのアクセスできるグループＩＤの論理和
+		// // 例）group1, group3 のどちらかに所属してるユーザのアクセスを許す => 5
+		// $this->ACCESS_FOLDER = array(0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255);
 
-		// パスの調整
-		$this->_adjustPath($this->WOW_VIEW);
-		$this->_adjustPath($this->WOW_LIB);
-		$this->_adjustPath($this->WOW_SWF);
-		$this->_adjustPath($this->WOW_MODEL);
-		$this->_adjustPath($this->WOW_HTML_ROOT);
+		// // パスの調整
+		// $this->_adjustPath($this->WOW_VIEW);
+		// $this->_adjustPath($this->WOW_LIB);
+		// $this->_adjustPath($this->WOW_SWF);
+		// $this->_adjustPath($this->WOW_MODEL);
+		// $this->_adjustPath($this->WOW_HTML_ROOT);
 
-		$this->_gw_template_class = 'smarty/Smarty.class.php';
-		$this->_gw_template_templates_dir = '../view';
-		/*
-		 * 以下のディレクトリへの書き込みを許可する必要がある
-		 */
-		$this->_gw_template_compile_dir = 'smarty/templates_c';
+		// $this->_gw_template_class = 'smarty/Smarty.class.php';
+		// $this->_gw_template_templates_dir = '../view';
+		// /*
+		//  * 以下のディレクトリへの書き込みを許可する必要がある
+		//  */
+		// $this->_gw_template_compile_dir = 'smarty/templates_c';
 
-		$this->_adjustPath($this->_gw_template_class);
-		$this->_adjustPath($this->_gw_template_templates_dir);
-		$this->_adjustPath($this->_gw_template_compile_dir);
+		// $this->_adjustPath($this->_gw_template_class);
+		// $this->_adjustPath($this->_gw_template_templates_dir);
+		// $this->_adjustPath($this->_gw_template_compile_dir);
 		
-		/*
-		*	mailform controller
-		*/
-		$this->_MAIL_FORM_EMAILS = array(
-			'yasunori.tanochi@gpol.co.jp', 
-		);
-		$this->_REFERER_CODE = $_SERVER['SERVER_NAME'];
+		// /*
+		// *	mailform controller
+		// */
+		// $this->_MAIL_FORM_EMAILS = array(
+		// 	'yasunori.tanochi@gpol.co.jp', 
+		// );
+		// $this->_REFERER_CODE = $_SERVER['SERVER_NAME'];
 		//$this->_REFERER_CODE = '/shinagawa.testing-web.com/';	// テスト用（本番は本番のドメインを記述）
 
 		// $this->SCRIPT_FROM_DOCUMENT_ROOT = str_replace(wowConst('HTTP_DOCUMENT_ROOT') , '', $_SERVER['PHP_SELF']);

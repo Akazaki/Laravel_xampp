@@ -38,9 +38,11 @@
 		created () {
 			this.get_master(this.value.key);
 		},
-		updated (){
-			//変更時、親に渡す
-			this.$emit('ValueUpdate', this.checked_names, this.key)
+		watch: {
+			checked_names: function () {
+				//変更時、親に渡す
+				this.$emit('ValueUpdate', this.checked_names, this.key)
+			}
 		},
 		methods: {
 			/**
@@ -58,10 +60,12 @@
 						for (var i = 0; i < Object.keys(this.checkbox_master).length; i++) {
 							// 2進数判定
 							if((1 << (i) & self.checkbox_num)){
-								var key = i+1;
-								self.checked_names[i] = Number(key);
+								var key_num = i+1;
+								self.checked_names[i] = String(key_num);
 							}
 						}
+						
+						this.$emit('ValueUpdate', this.checked_names, this.key)
 					}else{
 						this.$router.push('/wow/login')
 					}

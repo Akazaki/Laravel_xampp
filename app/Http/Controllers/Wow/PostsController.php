@@ -14,16 +14,17 @@ use Laravel\Posts;// Model
 
 class PostsController extends Controller
 {
-	function __construct(EditController $EditController)
-	{
-		//$EditController->EditController();
-	}
+	// function __construct(EditController $EditController)
+	// {
+	// 	//$EditController->EditController();
+	// }
+	var $_tableName = 'posts';
 
 	// 記事取得
 	public function postList(Request $request)
 	{
 		$_listColumns = ['id', 'label_text', 'create_datetime', 'acknowledge'];
-		$get_postnum = 6;
+		$get_postnum = 10;
 		
 		$query = Posts::query();
 
@@ -34,7 +35,7 @@ class PostsController extends Controller
 	}
 
 	// 記事取得
-	public function postEdit(Request $request)
+	public function postEdit(Request $request, WowEditController $WowEditController)
 	{
 		$this->validate($request,[
 			'id' => 'integer|required'
@@ -50,7 +51,7 @@ class PostsController extends Controller
 			$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
 		}else{
 			// 新規作成
-			$post['post'] = $this->getEmptyData($_editColumns);
+			$post['post'] = $WowEditController->getEmptyData($_editColumns);
 			$post['post'] = $post['post'][0];
 		}
 
@@ -58,59 +59,24 @@ class PostsController extends Controller
 	}
 
 	//記事保存
-	public function postDoneEdit(Request $request){
-		$post = [1];
-		return $post;
-		// $tv = 0;
-		// if(is_array($this->ctrl->{$_column})){
-		// 	foreach($this->ctrl->{$_column} as $tc){
-		// 		$tv += 1 << ($tc - 1);
-		// 	}
-		// }
-		// return $tv;
-	}
+	public function postDoneEdit(PostRequest $request, WowEditController $WowEditController){
 
-	/**
-	 * checkboxを10進数で保存
-	 *
-	 * @param array $arr : 定数名
-	 * @return mixed : 定数
-	 */
-	function _getFormData_check($arr)
-	{
-		$tv = 0;
-		if(is_array($arr)){
-			foreach($arr as $tc){
-				$tv += 1 << ($tc - 1);
-			}
-		}
-		return $tv;
-	}
+		$result = false;
+		if(!empty($request->rows) && isset($request->id)){
+			$rows = $request->rows;
+			$id = (int)$request->id;
 
-	/**
-	 * 空のデータを取得する（新規追加時に使用）
-	 *
-	 * @params array $columns : カラム名配列
-	 */
-	function getEmptyData($columns=array('*'))
-	{
-		$data = array();
-		foreach($columns as $c){
-			if($c == 'id'){
-				$data[$c] = '*****';
+			$result = $WowEditController->doneEdit($rows, $this->_tableName, $id);
+
+			if($result){
+				$res['res'] = true;
 			}else{
-				$data[$c] = '';
+				$res['res'] = false;
 			}
-			// foreach(wowConst('ACCESS_PERMISSION') as $acc){
-			// 	if(strpos($this->ctrl->SCRIPT_FROM_DOCUMENT_ROOT, $acc['script']) === 0){
-			// 		$data['permission'] = $acc['permission'];
-			// 		break;
-			// 	}
-			// }
 		}
-		return array($data);
-	}
 
+		return $res;
+	}
 	
 	 /**
 	 * マスターデータ取得

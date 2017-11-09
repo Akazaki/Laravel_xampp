@@ -34,9 +34,10 @@
 		created () {
 			this.get_master(this.value.key);
 		},
-		updated (){
-			//変更時、親に渡す
-			this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key)
+		watch: {
+			radiobutton_num: function () {
+				this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key)
+			}
 		},
 		computed: {
 		},

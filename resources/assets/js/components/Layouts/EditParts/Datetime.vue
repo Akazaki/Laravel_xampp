@@ -21,9 +21,11 @@
 		},
 		created () {
 		},
-		updated (){
-			//変更時、親に渡す
-			this.$emit('ValueUpdate', this.datetime_value, this.key)
+		watch: {
+			datetime_value: function () {
+				//変更時、親に渡す
+				this.$emit('ValueUpdate', this.datetime_value, this.key)
+			}
 		},
 		methods: {
 		}

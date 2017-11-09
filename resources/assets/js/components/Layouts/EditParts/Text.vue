@@ -16,9 +16,10 @@
 				key: this.value.key,
 			}
 		},
-		updated (){
-			//変更時、親に渡す
-			this.$emit('ValueUpdate', this.text_value, this.key)
+		watch: {
+			text_value: function () {
+				this.$emit('ValueUpdate', this.text_value, this.key)
+			}
 		},
 		created () {
 		},

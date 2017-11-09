@@ -85955,11 +85955,9 @@ Vue.component('edit-datetime', __webpack_require__(364));
 					var data = res.data;
 					_this.post = data.post;
 				} else {
-					_this.$router.push('/wow/login');
 					return false;
 				}
 			}).catch(function (error) {
-				_this.$router.push('/wow/login');
 				console.log(error);
 			});
 		},
@@ -85970,20 +85968,19 @@ Vue.component('edit-datetime', __webpack_require__(364));
   */
 		value_update: function value_update(emit_value, emit_key) {
 			if (emit_key in this.post) {
-				this.post[emit_key] = emit_value; //書き換え
+				this.post[emit_key] = emit_value; //更新
 			}
 		},
 		/**
   * 記事保存
   */
 		done_edit: function done_edit() {
-			axios.post('/api/wow/postDoneEdit', { rows: this.post }).then(function (res) {
-				// if(res.data && res.status == 200){
-				// 	this.$router.push('/wow/posts')
-				// }else{
-				// 	this.$router.push('/wow/login')
-				// }
+			var _this2 = this;
 
+			axios.post('/api/wow/postDoneEdit', { rows: this.post, id: this.id }).then(function (res) {
+				if (res.data && res.status == 200) {
+					_this2.$router.push('/wow/posts');
+				}
 			}).catch(function (error) {
 				// this.$router.push('/wow/login')
 				// console.log(error);
@@ -113823,9 +113820,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			key: this.value.key
 		};
 	},
-	updated: function updated() {
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', this.text_value, this.key);
+
+	watch: {
+		text_value: function text_value() {
+			this.$emit('ValueUpdate', this.text_value, this.key);
+		}
 	},
 	created: function created() {},
 
@@ -113979,11 +113978,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return marked(this.input, { sanitize: true });
 		}
 	},
+	watch: {
+		markdown_value: function markdown_value() {
+			this.$emit('ValueUpdate', this.markdown_value, this.key);
+		}
+	},
 	//markdown
 	update: _.debounce(function (e) {
 		this.input = e.target.value;
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', this.markdown_value, this.key);
 	}, 300),
 	methods: {},
 	components: {
@@ -114127,11 +114129,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	created: function created() {},
-	updated: function updated() {
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', this.image, this.key);
-	},
 
+	watch: {
+		image: function image() {
+			this.$emit('ValueUpdate', this.image, this.key);
+		}
+	},
 	methods: {
 		//fileup
 		onFileChange: function onFileChange(e) {
@@ -114322,11 +114325,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	created: function created() {
 		this.get_master(this.value.key);
 	},
-	updated: function updated() {
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', this.checked_names, this.key);
-	},
 
+	watch: {
+		checked_names: function checked_names() {
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', this.checked_names, this.key);
+		}
+	},
 	methods: {
 		/**
    * マスターデータ取得
@@ -114344,10 +114349,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					for (var i = 0; i < Object.keys(_this.checkbox_master).length; i++) {
 						// 2進数判定
 						if (1 << i & self.checkbox_num) {
-							var key = i + 1;
-							self.checked_names[i] = Number(key);
+							var key_num = i + 1;
+							self.checked_names[i] = String(key_num);
 						}
 					}
+
+					_this.$emit('ValueUpdate', _this.checked_names, _this.key);
 				} else {
 					_this.$router.push('/wow/login');
 				}
@@ -114528,11 +114535,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	created: function created() {
 		this.get_master(this.value.key);
 	},
-	updated: function updated() {
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key);
-	},
 
+	watch: {
+		radiobutton_num: function radiobutton_num() {
+			this.$emit('ValueUpdate', Number(this.radiobutton_num), this.key);
+		}
+	},
 	computed: {},
 	methods: {
 		/**
@@ -114730,11 +114738,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	created: function created() {},
-	updated: function updated() {
-		//変更時、親に渡す
-		this.$emit('ValueUpdate', this.datetime_value, this.key);
-	},
 
+	watch: {
+		datetime_value: function datetime_value() {
+			//変更時、親に渡す
+			this.$emit('ValueUpdate', this.datetime_value, this.key);
+		}
+	},
 	methods: {}
 });
 

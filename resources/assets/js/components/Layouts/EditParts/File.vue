@@ -31,9 +31,10 @@
 		},
 		created () {
 		},
-		updated (){
-			//変更時、親に渡す
-			this.$emit('ValueUpdate', this.image, this.key)
+		watch: {
+			image: function () {
+				this.$emit('ValueUpdate', this.image, this.key)
+			}
 		},
 		methods: {
 			//fileup

@@ -3,13 +3,14 @@ namespace Laravel\Http\Controllers\Wow;
 
 use Illuminate\Http\Request; 
 use Laravel\Http\Requests;
+use DB;
 
 /**
  * エディットコントローラ
  *
  * 一覧＞編集・削除の流れの開発ベースクラス
  */
-class EditController
+class WowEditController
 {
 	var $_gw_default_action = 'list';
 	// テーブル名
@@ -57,7 +58,6 @@ class EditController
 
 	function EditController()
 	{
-		var_dump("expression");die();
 		// // アクションの書き換え。IE7以下対応
 		// if($_POST['hiddenaction']){
 		// 	$_POST['action'] = $_POST['hiddenaction'];
@@ -85,6 +85,122 @@ class EditController
 		// 	$this->_editColumns = $this->_definedColumns;
 		// }
 	}
+
+	/**
+	 * 記事を保存する
+	 *
+	 * @param arr $arr : 保存データ
+	 * @param string $table_name : テーブル名
+	 * @param number $id : 記事id
+	 * @return bool:
+	 */
+	function doneEdit($arr, $table_name, $id){
+
+		foreach ($arr as $key => $value) {
+			//checkboxの場合、10進数に変換
+			if(preg_match('/_check/',$key)){
+				$arr[$key] = $this->getBit_checkbox($value);
+			};
+		};
+
+		//保存
+		$result = false;
+		if((int)$id > 0){
+			$result = DB::table($table_name)->where('id', (int)$id)->update($arr);
+		}else{
+			$result = DB::table($table_name)->insert($arr);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * カラム名を取得する
+	 *
+	 * @param string $arr : カラム名
+	 * @return array :
+	 */
+	function getInputType($arr)
+	{
+		if(preg_match('/^(f\d+_)(\d*)_?(file)$/', $arr, $matches)){
+			return array($matches[1], $matches[2], $matches[3]);
+		}else if(preg_match('/^(f\d+_)(\d*)_?(afile)$/', $arr, $matches)){
+			return array($matches[1], $matches[2], $matches[3]);
+		}else if(preg_match('/^(\D+)(\d*)_(select)$/', $arr, $matches)){
+			return array($matches[1].$matches[2],'', $matches[3]);
+//		}else if(preg_match('/^([^\d]+)([\d]*)_([\w]+)$/', $arr, $matches)){
+		}else if(preg_match('/^(\w*[^\d])([\d]*)_([\w]+)$/', $arr, $matches)){
+			if(count($matches) == 4){
+				return array($matches[1], $matches[2], $matches[3]);
+			}else{
+				return array($matches[1], '', $matches[2]);
+			}
+		}else{
+			return array('', '', $arr);
+		}
+	}
+
+	/**
+	 * checkboxを10進数で保存
+	 *
+	 * @param array $arr : 定数名
+	 * @return mixed : 定数
+	 */
+	function getBit_checkbox($arr)
+	{
+		$tv = 0;
+		if(is_array($arr)){
+			foreach($arr as $tc){
+				if($tc){
+					$tv += 1 << ($tc - 1);
+				}
+			}
+		}
+		return $tv;
+	}
+
+	/**
+	 * 空のデータを取得する（新規追加時に使用）
+	 *
+	 * @params array $columns : カラム名配列
+	 */
+	function getEmptyData($columns=array('*'))
+	{
+		$data = array();
+		foreach($columns as $c){
+			// if($c == 'id'){
+			// 	$data[$c] = '*****';
+			// }else{
+			// 	$data[$c] = '';
+			// }
+			$data[$c] = '';
+			// foreach(wowConst('ACCESS_PERMISSION') as $acc){
+			// 	if(strpos($this->ctrl->SCRIPT_FROM_DOCUMENT_ROOT, $acc['script']) === 0){
+			// 		$data['permission'] = $acc['permission'];
+			// 		break;
+			// 	}
+			// }
+		}
+		return array($data);
+	}
+
+	// /*
+	//  * _check : チェックボックス
+	//  *			項目が32以下の場合
+	//  */
+	// function _getViewItem_check($_labelHead, $_labelIndex, $_labelType)
+	// {
+	// 	$masters = $this->ctrl->model->getMaster($_labelHead);
+	// 	$column = $_labelHead . $_labelIndex . '_' . $_labelType;
+
+	// 	$html = '';
+	// 	for($i=1; $i<=count($masters); $i++){
+	// 		if($this->dataObject[$column] & (1 << ($i-1))){
+	// 			$html .= $masters[$i] . ", ";
+	// 		}
+	// 	}
+	// 	return (strlen($html)) ? htmlspecialchars(substr($html, 0, -2), ENT_QUOTES) : "&nbsp;";
+	// }
 
 // 	function init()
 // 	{
