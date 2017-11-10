@@ -59,7 +59,10 @@ class PostsController extends Controller
 	}
 
 	//記事保存
-	public function postDoneEdit(PostRequest $request, WowEditController $WowEditController){
+	public function postDoneEdit(PostRequest $request, WowEditController $WowEditController)
+	{
+// $post = [0=>"aaa"];
+// return response()->json($post,404);
 
 		$result = false;
 		if(!empty($request->rows) && isset($request->id)){

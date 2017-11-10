@@ -21,49 +21,53 @@
 
 					<div id="Edit_box">
 						
-						<template v-for="(value, key) in post">
-							<p class="form_title required">
-								タイトル
-							</p>
-							<p class="error_text">
-								※必須項目です
-							</p>
-							<template v-if="key.match(/_richtext/)">
-								<edit-richtext :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-richtext>
+						<template v-if="show">
+							<template v-for="(value, key) in post">
+								<p class="form_title required">
+									タイトル
+								</p>
+								<template v-if="post.errors">
+								aaaaaa
+								</template>
+								<template v-if="key.match(/_richtext/)">
+									<edit-richtext :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-richtext>
+								</template>
+								<template v-else-if="key.match(/_file/)">
+									<edit-file :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-file>
+								</template>
+								<template v-else-if="key.match(/_check/)">
+									<edit-check :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-check>
+								</template>
+								<template v-else-if="key.match(/_radio/)">
+									<edit-radio :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-radio>
+								</template>
+								<template v-else-if="key.match(/_at/)">
+									<edit-datetime :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-datetime>
+								</template>
+								<template v-else>
+									<edit-text :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-text>
+								</template>
 							</template>
-							<template v-else-if="key.match(/_file/)">
-								<edit-file :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-file>
-							</template>
-							<template v-else-if="key.match(/_check/)">
-								<edit-check :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-check>
-							</template>
-							<template v-else-if="key.match(/_radio/)">
-								<edit-radio :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-radio>
-							</template>
-							<template v-else-if="key.match(/_at/)">
-								<edit-datetime :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-datetime>
-							</template>
-							<template v-else>
-								<edit-text :value="{value:value, key:key}"　@ValueUpdate="value_update"></edit-text>
-							</template>
+							<ul class="button_box">
+								<li>
+									<div class="button_green">
+										<a href="javascript:void(0);" v-on:click="done_edit">
+											保存
+										</a>
+									</div>
+								</li>
+								<li>
+									<div class="button_green">
+										<router-link to="/wow/posts">
+											キャンセル
+										</router-link>
+									</div>
+								</li>
+							</ul>
 						</template>
-
-						<ul class="button_box">
-							<li>
-								<div class="button_green">
-									<a href="javascript:void(0);" v-on:click="done_edit">
-										保存
-									</a>
-								</div>
-							</li>
-							<li>
-								<div class="button_green">
-									<router-link to="/wow/posts">
-										キャンセル
-									</router-link>
-								</div>
-							</li>
-						</ul>
+						<template v-else>
+							<loadingsmall></loadingsmall>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -74,6 +78,7 @@
 </template>
 
 <script>
+import http from '../../services/http'
 import wow from '../../services/wow'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
@@ -100,7 +105,8 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 		data (){
 			return {
 				post: {},//記事データ
-				errors: {},
+				errors: false,
+				show: false,
 			}
 		},
 		created () {
@@ -117,7 +123,7 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					if(res.data && res.status == 200){
 						var data = res.data;
 						this.post = data.post;
-
+						this.show = true;
 					}else{
 						return false;
 					}
@@ -140,15 +146,37 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 * 記事保存
 			 */
 			done_edit: function() {
+
+				// axios.post('/api/wow/postDoneEdit', {rows: this.post, id: this.id})
+				// .then( 
+				//     (response) => { console.log(response) },
+				//     (error) => { 
+				// 		console.log(error.response.data);
+				// 		console.log(error.response.status);
+				// 		console.log(error.response.headers);
+				//     }
+				// );
+
 				axios.post('/api/wow/postDoneEdit', {rows: this.post, id: this.id},)
 				.then(res => {
 					if(res.data && res.status == 200){
 						this.$router.push('/wow/posts')
+					}else{
+						return false;
 					}
 					
 				}).catch(error => {
+					if(error.response.data){
+						//errortext格納
+						this.errors = error.response.data.errors;
+						this.post.errors = this.errors;
+						this.post = this.post;
+						console.log(this.post)
+						// Object.keys(this.errors).forEach(function (key, i) {
+						// 	self.post.errors = self.errors;
+						// });
+					}
 					// this.$router.push('/wow/login')
-					// console.log(error);
 				});
 			},
 		}

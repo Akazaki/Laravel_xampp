@@ -6,9 +6,6 @@
 
 			<div id="Main">
 				<div id="Postlist">
-<div class="loading_small enter">
-	<div class="loading"></div>
-</div>
 					<ul class="button_box">
 						<li class="left">
 							<p id="Post_title">投稿</p>
@@ -29,36 +26,41 @@
 						</li>
 					</ul>
 
-					<div id="table-content">
-						<table cellspacing="0" cellpadding="0">
-							<thead>
-								<tr>
-									<td class="check-td-tr">
-										<input type="checkbox" id="checkall" />
-										<label for="checkall"></label>
-									</td>
-									<template v-for="column in list_columns">
-										<td>{{column}}</td>
-									</template>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="post in posts">
-									<td class="check-td-tr">
-										<input type="checkbox" v-bind:id="'checkid' + post.id" />
-										<label v-bind:for="'checkid' + post.id"></label>
-									</td>
-									<td class="id-td">{{post.id}}</td>
-									<td class="name-td">
-										<router-link v-bind:to="{ name : 'Posts', params : { id: post.id }}">{{post.label_text}}</router-link>
-									</td>
-									<td class="date-td">{{post.created_at}}</td>
-									<td class="acknowledge-td">{{post.acknowledge}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
+					<template v-if="show">
+						<div id="table-content">
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<td class="check-td-tr">
+											<input type="checkbox" id="checkall" />
+											<label for="checkall"></label>
+										</td>
+										<template v-for="column in list_columns">
+											<td>{{column}}</td>
+										</template>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="post in posts">
+										<td class="check-td-tr">
+											<input type="checkbox" v-bind:id="'checkid' + post.id" />
+											<label v-bind:for="'checkid' + post.id"></label>
+										</td>
+										<td class="id-td">{{post.id}}</td>
+										<td class="name-td">
+											<router-link v-bind:to="{ name : 'Posts', params : { id: post.id }}">{{post.label_text}}</router-link>
+										</td>
+										<td class="date-td">{{post.created_at}}</td>
+										<td class="acknowledge-td">{{post.acknowledge}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</template>
+					<template v-else>
+						<loadingsmall></loadingsmall>
+					</template>
+					
 					<!--ページャー(子からのイベント実行)-->
 					<pager　@getposts="acceptance_posts"></pager>
 					
@@ -84,6 +86,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 			return {
 				posts: {},//記事データ
 				list_columns: '',//カラムリスト
+				show: false,
 			}
 		},
 		created () {
@@ -91,6 +94,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 		methods: {
 			//ページャーコンポーネントから実行されるイベント
 			acceptance_posts　: function () {
+				this.show = true;
 				this.posts = this.$store.getters.posts.posts.data;
 				this.list_columns = this.$store.getters.posts._listColumns;
 			}

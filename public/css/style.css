@@ -169,19 +169,20 @@ ul {
     -webkit-transform: rotate(360deg);
   }
 }
+.loading_small {
+  position: relative;
+  top: 15%;
+}
 .loading_small .loading {
   width: 30px;
   height: 30px;
   border-radius: 150px;
-  border: 3px solid #191919;
+  border: 3px solid #fff;
   border-top-color: #41b883;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -80px;
-  margin-left: -80px;
+  position: absolute;
+  left: 45%;
   animation: loading 1.2s linear infinite;
   -webkit-animation: loading 1.2s linear infinite;
 }
@@ -211,18 +212,16 @@ ul {
   right: 0;
   bottom: 0;
   z-index: 100;
-  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  opacity: 0;
   -webkit-transition: opacity 1s ease .4s;
   transition: opacity 1s ease .4s;
 }
-.overlay.enter {
+.loading_enter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -230,7 +229,7 @@ ul {
   -webkit-animation: router-transition-in 0.4s;
           animation: router-transition-in 0.4s;
 }
-.overlay.leave {
+.loading_leave {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -557,6 +556,8 @@ ul {
 #Postlist #Edit_box .form_field #editor .view-area {
   border: solid 1px #ccc;
   padding: 20px;
+  background: #fff;
+  overflow: auto;
 }
 #Postlist #Edit_box .form_field textarea,
 #Postlist #Edit_box .form_field #editor div {

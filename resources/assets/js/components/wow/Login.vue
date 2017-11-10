@@ -3,6 +3,10 @@
 		<div ID="Header_line">ようこそ、Contents Management Flamework WOWへ</div>
 		<div class="wrapper">
 			<div id="Login">
+				<template v-if="show">
+					<loading></loading>
+				</template>
+				
 				<div id="loginInner" class="loginWidth">
 					<div class="alice clr">
 						<!-- <p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p> -->
@@ -56,6 +60,7 @@ Vue.use(VueRouter)
 				password : '',
 				showAlert: false,
 				alertMessage: '',
+				show: false,
 			}
 		},
 		created() {
@@ -65,30 +70,33 @@ Vue.use(VueRouter)
 			// 	}
 			// })
 		},
-		// updated(){
-		// 	this.showAlert = false
-		// },
 		methods: {
 			wowLogin () {
-				this.showAlert = false
-				var login_param = {email_text: this.email_text, password: this.password}
+				this.show = true;
+				this.showAlert = false;
+				var login_param = {email_text: this.email_text, password: this.password};
 
 				this.$store.dispatch('LOGIN', login_param).then(res => {
+					this.show = false;
+				   	
 				   	//ログイン成功
 					if(res && res.status == 200){
-						this.$router.push('/wow')
+						this.$router.push('/wow');
 					}else{
+						console.log(res)
 						this.errorText();
-						return false
+						return false;
 					}
 				}, error => {
+					this.show = false;
+	
 					this.errorText();
-					return false
+					return false;
 				})
 			},
 			errorText(){
-				this.showAlert = true
-				this.alertMessage = '※メールアドレスまたはパスワードが違います'
+				this.showAlert = true;
+				this.alertMessage = '※メールアドレスまたはパスワードが違います';
 			}
 		}
 	}

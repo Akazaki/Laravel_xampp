@@ -1,5 +1,5 @@
 <template>
-	<div id="Pagination">
+	<div id="Pagination" v-if="show">
 		<ul class="pager-list">
 			<li v-if="1 !== current_page" class="pager-item pager-item-last"><a href="javascript:void(0);" v-on:click="get_posts(1)" v-if="posts">&lt;&lt;</a></li>
 			<li class="pager-item pager-item-first"><a href="javascript:void(0);" v-on:click="get_posts(current_page-1)" v-if="isStartPage">&lt;</a></li>
@@ -37,6 +37,7 @@
 				per_page: 0,//一度の取得数
 				page_length: 0,//全ページ数
 				list_columns: '',//カラムリスト
+				show: false,
 			}
 		},
 		created () {
@@ -74,6 +75,7 @@
 
 						//stateにセット
 						this.$store.commit('setPosts', data)
+						this.show = true;
 
 						//親コンポーネントの関数実行
 						this.$emit('getposts');

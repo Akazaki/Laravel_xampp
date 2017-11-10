@@ -18,7 +18,7 @@ class PostsTable extends Migration
             $table->unsignedInteger('acknowledge_radio');
             $table->string('permission');
             $table->string('label_text');
-            $table->string('detail_richtext');
+            $table->longText('detail_richtext');
             $table->string('main_file');
             $table->unsignedInteger('postscategory_check');//カテゴリ
             $table->timestamps();

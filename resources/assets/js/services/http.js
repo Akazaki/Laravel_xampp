@@ -55,8 +55,22 @@ export default {
 			return response
 		}, error => {
 			// Also, if we receive a Bad Request / Unauthorized error
-			//return Promise.reject(error)
+			return Promise.reject(error)
 		})
+
+	// api.interceptors.response.use(
+  // function (response) {
+  //   // continue sending response to the then() method
+  //   return Promise.resolve(response)
+  // },
+  // function (error) {
+  //   // check if unauthorized error returned
+  //   if (error.response.status === 401) {
+  //     router.replace({ name: 'Signin' })
+  //   }
+  //   // request is rejected and will direct logic to the catch() method
+  //   return Promise.reject(error)
+  // })
 	
 	}
 }

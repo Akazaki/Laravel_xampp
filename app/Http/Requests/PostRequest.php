@@ -36,7 +36,7 @@ class PostRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            // 'name'  => 'required|max:50',
+            'label_text'  => 'required|max:1',
             // 'email' => 'required|email',
             // 'age' => 'required|array|in:1,2,3',
             // 'tel' => 'required|japantel',
@@ -53,28 +53,28 @@ class PostRequest extends FormRequest
         return $rules;
     }
 
-    // public function messages()
-    // {
-    //     $messages = [
-    //         'name.required' => ':attributeを入力してください',
-    //         'email.required'  => ':attributeを入力してください',
-    //         'email.email'  => ':attributeを正しく入力してください',
-    //         'tel.required'  => ':attributeを入力してください',
-    //         'tel.japan_tel'  => ':attributeを正しく入力してください',
-    //         'zip.required'  => ':attributeを入力してください',
-    //         'zip.zip'  => ':attributeを正しく入力してください',
-    //         'prefecture.required'  => ':attributeを選択してください',
-    //         'prefecture.numeric'  => ':attributeを正しく入力してください',
-    //         'prefecture.between'  => ':attributeを正しく入力してください',
-    //         'address.required'  => ':attributeを入力してください',
-    //         'address.max'  => ':attributeは:max文字以内で入力してください',
-    //         'age.required'  => ':attributeを選択してください',
-    //         'hobby.required'  => ':attributeを選択してください',
-    //         'hobby.*.in' => '趣味を正しく選択してください',
-    //         // 'img_name.string' => '無効な形式です',
-    //         'message.max'  => ':attributeは:max文字以内で入力してください',
-    //     ];
+    public function messages()
+    {
+        $messages = [
+            'name.required' => ':attributeを入力してください',
+            'email.required'  => ':attributeを入力してください',
+            'email.email'  => ':attributeを正しく入力してください',
+            'tel.required'  => ':attributeを入力してください',
+            'tel.japan_tel'  => ':attributeを正しく入力してください',
+            'zip.required'  => ':attributeを入力してください',
+            'zip.zip'  => ':attributeを正しく入力してください',
+            'prefecture.required'  => ':attributeを選択してください',
+            'prefecture.numeric'  => ':attributeを正しく入力してください',
+            'prefecture.between'  => ':attributeを正しく入力してください',
+            'address.required'  => ':attributeを入力してください',
+            'address.max'  => ':attributeは:max文字以内で入力してください',
+            'age.required'  => ':attributeを選択してください',
+            'hobby.required'  => ':attributeを選択してください',
+            'hobby.*.in' => '趣味を正しく選択してください',
+            // 'img_name.string' => '無効な形式です',
+            'message.max'  => ':attributeは:max文字以内で入力してください',
+        ];
 
-    //     return $messages;
-    // }
+        return $messages;
+    }
 }

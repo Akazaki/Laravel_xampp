@@ -54,7 +54,7 @@ class WowController extends Controller
 			'password' => 'required|min:4'
         ]);
         if ($validator->fails()) {
-             return response()->json(['error' => $validator->messages()],401);
+             return response()->json(['error' => $validator->messages()],422);
         }
 	 
 		// DBインサート

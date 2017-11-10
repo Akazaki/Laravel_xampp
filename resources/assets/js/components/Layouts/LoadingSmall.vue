@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div id="Loading" class="overlay">
+		<div class="loading_small" :class="state">
 			<div class="loading"></div>
 		</div>
 	</div>

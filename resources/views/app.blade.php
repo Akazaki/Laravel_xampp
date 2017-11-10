@@ -19,10 +19,7 @@
 	<body>
 		<div id="app">
 			<div>
-				<transition name="fade" mode="out-in" @before-leave="$refs.overlay.start()" @enter="$refs.overlay.end()">
-			    	<router-view></router-view>
-				</transition>
-				<loading ref="overlay"></loading>
+			   <router-view></router-view>
 			</div>
 		</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
