@@ -36,18 +36,18 @@ class PostRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'label_text'  => 'required|max:1',
-            // 'email' => 'required|email',
-            // 'age' => 'required|array|in:1,2,3',
+            'rows.label_text'  => 'required|max:100',
+            'rows.detail_richtext' => 'required||max:10000',
+            'rows.main_file' => 'sometimes|string',
             // 'tel' => 'required|japantel',
             // 'zip' => 'required|zip',
             // 'prefecture' => 'required|numeric|between:1,47',
             // 'address' => 'required|max:100',
             // 'hobby.*' => 'in:1,2,3',
-            // 'hobby' => 'required|array',
-            // 'hobby.*' => 'in:1,2,3',
+            'rows.postscategory_check' => 'required|array',
+            'rows.created_at' => 'required|date',
             // // 'img_name' => 'present|string',
-            // 'message' => 'present|max:1000',
+            'rows.acknowledge_radio' => 'required|numeric',
         ];
 
         return $rules;
@@ -56,23 +56,23 @@ class PostRequest extends FormRequest
     public function messages()
     {
         $messages = [
-            'name.required' => ':attributeを入力してください',
-            'email.required'  => ':attributeを入力してください',
-            'email.email'  => ':attributeを正しく入力してください',
-            'tel.required'  => ':attributeを入力してください',
-            'tel.japan_tel'  => ':attributeを正しく入力してください',
-            'zip.required'  => ':attributeを入力してください',
-            'zip.zip'  => ':attributeを正しく入力してください',
-            'prefecture.required'  => ':attributeを選択してください',
-            'prefecture.numeric'  => ':attributeを正しく入力してください',
-            'prefecture.between'  => ':attributeを正しく入力してください',
-            'address.required'  => ':attributeを入力してください',
-            'address.max'  => ':attributeは:max文字以内で入力してください',
-            'age.required'  => ':attributeを選択してください',
-            'hobby.required'  => ':attributeを選択してください',
-            'hobby.*.in' => '趣味を正しく選択してください',
-            // 'img_name.string' => '無効な形式です',
-            'message.max'  => ':attributeは:max文字以内で入力してください',
+            // 'name.required' => ':attributeを入力してください',
+            // 'email.required'  => ':attributeを入力してください',
+            // 'email.email'  => ':attributeを正しく入力してください',
+            // 'tel.required'  => ':attributeを入力してください',
+            // 'tel.japan_tel'  => ':attributeを正しく入力してください',
+            // 'zip.required'  => ':attributeを入力してください',
+            // 'zip.zip'  => ':attributeを正しく入力してください',
+            // 'prefecture.required'  => ':attributeを選択してください',
+            // 'prefecture.numeric'  => ':attributeを正しく入力してください',
+            // 'prefecture.between'  => ':attributeを正しく入力してください',
+            // 'address.required'  => ':attributeを入力してください',
+            // 'address.max'  => ':attributeは:max文字以内で入力してください',
+            // 'age.required'  => ':attributeを選択してください',
+            // 'hobby.required'  => ':attributeを選択してください',
+            // 'hobby.*.in' => '趣味を正しく選択してください',
+            // // 'img_name.string' => '無効な形式です',
+            // 'message.max'  => ':attributeは:max文字以内で入力してください',
         ];
 
         return $messages;

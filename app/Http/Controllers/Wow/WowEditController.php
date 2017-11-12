@@ -89,7 +89,7 @@ class WowEditController
 	/**
 	 * 記事を保存する
 	 *
-	 * @param arr $arr : 保存データ
+	 * @param array $arr : 保存データ
 	 * @param string $table_name : テーブル名
 	 * @param number $id : 記事id
 	 * @return bool:
@@ -102,6 +102,11 @@ class WowEditController
 				$arr[$key] = $this->getBit_checkbox($value);
 			};
 		};
+
+		//idあれば削除
+		// if(!empty($arr['id'])){
+		// 	unset($arr['id']);
+		// }
 
 		//保存
 		$result = false;

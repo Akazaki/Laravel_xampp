@@ -577,25 +577,32 @@ ul {
 		padding: 25px 0;
 		width: 90%;
 		
-		.form_title {
-			font-weight: bold;
-			margin-bottom: 10px;
-			font-size: 12px;
-		}
+		.title_box {
+			overflow: hidden;
 			
-		.required::after {
-			font-size: 12px;
-			content: '*';
-			padding-left: 4px;
-			color: @cautionRed;
-		}
+			.form_title {
+				font-weight: bold;
+				margin-bottom: 10px;
+				font-size: 12px;
+				float: left;
+			}
+				
+			.required::after {
+				font-size: 12px;
+				content: '*';
+				padding-left: 4px;
+				color: @cautionRed;
+			}
 
-		.error_text {
-			color: @cautionRed;
-			-webkit-transition: all 0.2s ease;
-			-moz-transition: all 0.2s ease;
-			-o-transition: all 0.2s ease;
-			transition: all 0.2s ease;
+			.error_text {
+				color: @cautionRed;
+				float: left;
+				margin-left: 10px;
+				-webkit-transition: all 0.2s ease;
+				-moz-transition: all 0.2s ease;
+				-o-transition: all 0.2s ease;
+				transition: all 0.2s ease;
+			}
 		}
 		
 		.form_field {
@@ -611,7 +618,6 @@ ul {
 				}
 			}
 			
-
 			/*------- input[text] -------*/
 			input {
 				outline: none;
@@ -942,6 +948,27 @@ ul {
 
 				span {
 					display: none;
+				}
+			}
+		}
+
+		.error {
+			.error_color {
+				border: 1px solid #f4838c !important;
+				// background-color: #ffefef !important;
+			}
+
+			input {
+				.error_color;
+			}
+
+			textarea {
+				.error_color;
+			}
+
+			label {
+				&:before{
+					.error_color;
 				}
 			}
 		}

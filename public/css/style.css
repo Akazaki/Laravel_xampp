@@ -490,19 +490,25 @@ ul {
   padding: 25px 0;
   width: 90%;
 }
-#Postlist #Edit_box .form_title {
+#Postlist #Edit_box .title_box {
+  overflow: hidden;
+}
+#Postlist #Edit_box .title_box .form_title {
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 12px;
+  float: left;
 }
-#Postlist #Edit_box .required::after {
+#Postlist #Edit_box .title_box .required::after {
   font-size: 12px;
   content: '*';
   padding-left: 4px;
   color: #ea2c00;
 }
-#Postlist #Edit_box .error_text {
+#Postlist #Edit_box .title_box .error_text {
   color: #ea2c00;
+  float: left;
+  margin-left: 10px;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
@@ -762,6 +768,18 @@ ul {
 }
 #Postlist #Edit_box .form_field .datetimepicker span {
   display: none;
+}
+#Postlist #Edit_box .error .error_color {
+  border: 1px solid #f4838c !important;
+}
+#Postlist #Edit_box .error input {
+  border: 1px solid #f4838c !important;
+}
+#Postlist #Edit_box .error textarea {
+  border: 1px solid #f4838c !important;
+}
+#Postlist #Edit_box .error label:before {
+  border: 1px solid #f4838c !important;
 }
 #Postlist #Edit_box .button_box {
   overflow: hidden;

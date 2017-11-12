@@ -55,17 +55,24 @@ class PostsController extends Controller
 			$post['post'] = $post['post'][0];
 		}
 
+		$post = json_decode(json_encode($post), true);
+		foreach ($post['post'] as $key => $value) {
+			$post['post'][$key] = [
+				'title' => 'タイトルタイトル',
+				'data' => $value,
+				'error' => '',
+			];
+		}
+
 		return $post;
 	}
 
 	//記事保存
 	public function postDoneEdit(PostRequest $request, WowEditController $WowEditController)
 	{
-// $post = [0=>"aaa"];
-// return response()->json($post,404);
-
 		$result = false;
-		if(!empty($request->rows) && isset($request->id)){
+		$res['res'] = false;
+		if(!empty($request) && isset($request->id)){
 			$rows = $request->rows;
 			$id = (int)$request->id;
 
@@ -73,8 +80,6 @@ class PostsController extends Controller
 
 			if($result){
 				$res['res'] = true;
-			}else{
-				$res['res'] = false;
 			}
 		}
 
