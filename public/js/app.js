@@ -52748,12 +52748,6 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 		SET_MENU: function SET_MENU(commit) {
 			var _this2 = this;
 
-			// return axios.post('/api/wow/getMenuData', {}, res => {
-			// 	commit('setMenu', res)
-			// }, error => {
-			// 	//console.log(res)
-			// })
-
 			return axios.post('/api/wow/getMenuData', {}).then(function (res) {
 				// ここからコミット 引数の commit を使う
 				if (res && res.data) {
@@ -85724,7 +85718,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}
 			}).catch(function (error) {
 				if (error.response.data) {
-					if (error.response.data.error == 'token_not_provided') {
+					if (error.response.data.error == 'token_not_provided' || error.response.data.error == 'token_expired') {
 						//token切れ
 						_this.$router.push('/wow/login');
 						return false;
@@ -86259,7 +86253,6 @@ Vue.component('edit-datetime', __webpack_require__(367));
 			});
 			//postデータに「id」追加
 			//tmp_postdata2.id = this.id;
-			console.log(tmp_postdata2);
 
 			axios.post('/api/wow/postDoneEdit', { rows: tmp_postdata2, id: this.id }).then(function (res) {
 				if (res.data && res.status == 200) {
@@ -86268,10 +86261,9 @@ Vue.component('edit-datetime', __webpack_require__(367));
 					return false;
 				}
 			}).catch(function (error) {
-				console.log(error.response.data);
 				if (error.response.data) {
 
-					if (error.response.data.error == 'token_not_provided') {
+					if (error.response.data.error == 'token_not_provided' || error.response.data.error == 'token_expired') {
 						//token切れ
 						_this2.$router.push('/wow/login');
 						return false;

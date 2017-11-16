@@ -66,12 +66,6 @@ const store = new Vuex.Store({
 			this.state.authenticated = false;
 		},
 		SET_MENU: function(commit) {
-			// return axios.post('/api/wow/getMenuData', {}, res => {
-			// 	commit('setMenu', res)
-			// }, error => {
-			// 	//console.log(res)
-			// })
-
 			return axios.post('/api/wow/getMenuData', {})
 			.then(res => {
 				// ここからコミット 引数の commit を使う

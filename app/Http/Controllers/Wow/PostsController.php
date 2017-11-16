@@ -24,7 +24,7 @@ class PostsController extends Controller
 	public function postList(Request $request)
 	{
 		$_listColumns = ['id', 'label_text', 'create_datetime', 'acknowledge'];
-		$get_postnum = 10;
+		$get_postnum = 5;
 		
 		$query = Posts::query();
 

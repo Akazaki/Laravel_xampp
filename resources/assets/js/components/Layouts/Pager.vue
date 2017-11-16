@@ -85,7 +85,7 @@
 					
 				}).catch(error => {
 					if(error.response.data){
-						if(error.response.data.error == 'token_not_provided'){
+						if(error.response.data.error == 'token_not_provided' || error.response.data.error == 'token_expired'){
 							//token切れ
 							this.$router.push('/wow/login');
 							return false;

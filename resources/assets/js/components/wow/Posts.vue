@@ -176,7 +176,6 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 				});
 				//postデータに「id」追加
 				//tmp_postdata2.id = this.id;
-				console.log(tmp_postdata2);
 
 				axios.post('/api/wow/postDoneEdit', {rows: tmp_postdata2, id: this.id})
 				.then(res => {
@@ -185,12 +184,11 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					}else{
 						return false;
 					}
-					
+
 				}).catch(error => {
-					console.log(error.response.data)
 					if(error.response.data){
 						
-						if(error.response.data.error == 'token_not_provided'){
+						if(error.response.data.error == 'token_not_provided' || error.response.data.error == 'token_expired'){
 							//token切れ
 							this.$router.push('/wow/login');
 							return false;
