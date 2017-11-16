@@ -25,8 +25,18 @@
 							</div>
 						</li>
 					</ul>
-
+					
 					<template v-if="show">
+						<div id="DropDownEdit">
+							<div class="dropdown hover">
+								<a href="#">一括編集</a>
+								<ul>
+									<li><a href="#">削除</a></li>
+									<li><a href="#">公開</a></li>
+									<li><a href="#">非公開</a></li>
+								</ul>
+							</div>
+						</div>
 						<div id="table-content">
 							<table cellspacing="0" cellpadding="0">
 								<thead>
@@ -68,7 +78,7 @@
 			</div>
 			
 		</div>
-		<footerbar></footerbar>
+		<!-- <footerbar></footerbar> -->
 	</div>
 </template>
 

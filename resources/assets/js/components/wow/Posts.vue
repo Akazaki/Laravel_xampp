@@ -30,9 +30,11 @@
 									<p class="form_title required">
 										{{value.title}}
 									</p>
-									<div class="error_text" v-if="value.error">
-										{{value.error}}
-									</div>
+									<transition name="fade">
+										<div class="error_text" v-if="value.error">
+											{{value.error}}
+										</div>
+									</transition>
 								</div>
 								<div v-bind:class="{error:value.error}">
 									<template v-if="key.match(/_richtext/)">
@@ -80,7 +82,7 @@
 			</div>
 			
 		</div>
-		<footerbar></footerbar>
+		<!-- <footerbar></footerbar> -->
 	</div>
 </template>
 
@@ -136,7 +138,13 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					}
 					
 				}).catch(error => {
-					console.log(error);
+					if(error.response.data){
+						if(error.response.data.error == 'token_not_provided'){
+							//token切れ
+							this.$router.push('/wow/login');
+							return false;
+						}
+					}
 				});
 			},
 			 /**
@@ -168,6 +176,7 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 				});
 				//postデータに「id」追加
 				//tmp_postdata2.id = this.id;
+				console.log(tmp_postdata2);
 
 				axios.post('/api/wow/postDoneEdit', {rows: tmp_postdata2, id: this.id})
 				.then(res => {
@@ -178,7 +187,15 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 					}
 					
 				}).catch(error => {
+					console.log(error.response.data)
 					if(error.response.data){
+						
+						if(error.response.data.error == 'token_not_provided'){
+							//token切れ
+							this.$router.push('/wow/login');
+							return false;
+						};
+
 						//errortext格納
 						this.errors = error.response.data.errors;
 

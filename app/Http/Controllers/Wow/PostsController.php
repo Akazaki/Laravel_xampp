@@ -85,34 +85,4 @@ class PostsController extends Controller
 
 		return $res;
 	}
-	
-	 /**
-	 * マスターデータ取得
-	 * @param {table_name} string - 
-	 */
-	public function getMasterData(Request $request)
-	{
-		// $this->validate($request,[
-		// 	'id' => 'integer|required'
-		// ]);
-
-		//radioとcheckboxのマスターデータ取得
-		if(strpos($request->table_name,'_radio') !== false){
-			$table_name = str_replace('_radio', '', $request->table_name);
-			$master = DB::table($table_name)->get();
-		}else if(strpos($request->table_name,'_check') !== false){
-			$table_name = str_replace('_check', '', $request->table_name);
-			$master = DB::table($table_name)->get();
-		}
-
-		//カテゴリ名のみ摘出
-		$master_data = array();
-		if(!empty($master)){
-			foreach($master as $r){
-				$master_data[$r->id] = $r->label_text;
-			}
-		}
-		
-		return $master_data;
-	}
 }

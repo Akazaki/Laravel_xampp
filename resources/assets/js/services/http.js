@@ -27,7 +27,7 @@ export default {
 	delete (url, data = {}, successCb = null, errorCb = null) {
 		return this.request('delete', url, data, successCb, errorCb)
 	},
-
+	
 	/**
 	 * Init the service.
 	 */

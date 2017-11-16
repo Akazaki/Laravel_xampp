@@ -83,7 +83,6 @@ Vue.use(VueRouter)
 					if(res && res.status == 200){
 						this.$router.push('/wow');
 					}else{
-						console.log(res)
 						this.errorText();
 						return false;
 					}

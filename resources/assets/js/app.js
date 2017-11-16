@@ -9,12 +9,14 @@ require('./bootstrap')
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
+
 //状態管理
 const store = new Vuex.Store({
 	state: {
 		user: {},//ログインユーザー
 		authenticated: false,//ログイン状態
 		posts: {},//記事データ
+		menu: false,//メニューデータ
 	},
 	mutations: {
 		// Userの書き換え
@@ -25,6 +27,10 @@ const store = new Vuex.Store({
 		// Userの書き換え
 		setPosts: function (state, payload) {
 			state.posts = payload
+		},
+		// Menuの書き換え
+		setMenu: function (state, payload) {
+			state.menu = payload
 		}
 	},
 	actions: {
@@ -59,16 +65,30 @@ const store = new Vuex.Store({
 			localStorage.removeItem('jwt-token')
 			this.state.authenticated = false;
 		},
-		// //記事データセット
-		// SET_POSTS: function (commit, posts_data) {
-		// 	commit('setPosts', posts_data)
-		// }
+		SET_MENU: function(commit) {
+			// return axios.post('/api/wow/getMenuData', {}, res => {
+			// 	commit('setMenu', res)
+			// }, error => {
+			// 	//console.log(res)
+			// })
+
+			return axios.post('/api/wow/getMenuData', {})
+			.then(res => {
+				// ここからコミット 引数の commit を使う
+				if(res && res.data){
+					this.commit('setMenu', res.data)
+				}
+			}).catch(error => {
+				//console.log(error);
+			});
+		},
 	},
 	getters: {
 		// User をそのまま使用
 		user: function (state) { return state.user },
 		authenticated: function (state) { return state.authenticated },
 		posts: function (state) { return state.posts },
+		menu: function (state) { return state.menu },
 	}
 })
 

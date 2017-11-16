@@ -54,6 +54,10 @@ ul {
   padding: 0;
 }
 /*hoverアニメ*/
+.box-shadow01 {
+  -webkit-box-shadow: 0 1px 3px rgba(128, 128, 128, 0.2);
+  box-shadow: 0 1px 3px rgba(128, 128, 128, 0.2);
+}
 #Header_line {
   background: #191919;
   padding: 10px;
@@ -99,7 +103,6 @@ ul {
 #Navbar .button a {
   border-radius: 51px;
   background-color: #373737;
-  /* color: #FFF; */
   padding: 10px;
   width: 102px;
   text-align: center;
@@ -257,6 +260,27 @@ ul {
   font-size: 12px;
   z-index: 9999;
 }
+#Sidebar #Auther {
+  margin-top: 10px;
+}
+#Sidebar #Auther .autherImg {
+  height: 110px;
+  width: 110px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+#Sidebar #Auther .autherImg img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+#Sidebar #Auther .autherName {
+  color: #ececec;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
 #Sidebar .sidebar-toggle {
   margin-left: -240px;
 }
@@ -336,11 +360,98 @@ ul {
   margin-right: 10px;
   border-bottom: 3px solid #41b883;
 }
+#Postlist #DropDownEdit {
+  margin-top: 30px;
+}
+#Postlist #DropDownEdit .dropdown {
+  width: 90px;
+  font-size: 11px;
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+}
+#Postlist #DropDownEdit .dropdown.toggle > input {
+  display: none;
+}
+#Postlist #DropDownEdit .dropdown > a::after,
+#Postlist #DropDownEdit .dropdown.toggle > label::after {
+  content: "";
+  float: right;
+  margin: 15px 15px 0 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #fff;
+}
+#Postlist #DropDownEdit .dropdown ul {
+  list-style-type: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  z-index: 9998;
+}
+#Postlist #DropDownEdit .dropdown a,
+#Postlist #DropDownEdit .dropdown.toggle > label {
+  display: block;
+  padding: 0 0 0 10px;
+  text-decoration: none;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #41b883;
+}
+#Postlist #DropDownEdit .dropdown li {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+#Postlist #DropDownEdit .dropdown li a {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+#Postlist #DropDownEdit .dropdown li a:hover {
+  background-color: #63daa5;
+}
+#Postlist #DropDownEdit .dropdown.hover li {
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
+}
+#Postlist #DropDownEdit .dropdown li:first-child a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #41b883;
+  margin: -10px 0 0 30px;
+}
+#Postlist #DropDownEdit .dropdown a:hover,
+#Postlist #DropDownEdit .dropdown.toggle > label:hover,
+#Postlist #DropDownEdit .dropdown.toggle > input:checked ~ label {
+  background-color: #41b883;
+}
+#Postlist #DropDownEdit .dropdown li:first-child a:hover::before {
+  border-bottom-color: #41b883;
+}
+#Postlist #DropDownEdit .dropdown.hover:hover li,
+#Postlist #DropDownEdit .dropdown.toggle > input:checked ~ ul li {
+  height: 40px;
+}
+#Postlist #DropDownEdit .dropdown.hover:hover li:first-child,
+#Postlist #DropDownEdit .dropdown.toggle > input:checked ~ ul li:first-child {
+  margin-top: 15px;
+}
 #Postlist #table-content {
-  background: #fff;
   width: auto;
+  background: #fffdfd;
   height: 90%;
-  margin-top: 20px;
 }
 #Postlist #table-content td a {
   color: #000;
@@ -364,7 +475,7 @@ ul {
 #Postlist #table-content tbody tr td {
   padding: 14px 10px;
   font-size: 12px;
-  border-bottom: 7px solid #ececec;
+  border-bottom: 1px solid #d8d8d8;
 }
 #Postlist #table-content tbody tr:hover {
   -webkit-transition: all 200ms ease-in-out;
@@ -459,7 +570,7 @@ ul {
 }
 #Postlist #Pagination {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 #Postlist #Pagination .pager-list,
 #Postlist #Pagination .pager-item {
@@ -487,8 +598,11 @@ ul {
 }
 #Postlist #Edit_box {
   margin: 0 auto;
-  padding: 25px 0;
-  width: 90%;
+  padding: 25px;
+  margin: 20px 0;
+  -webkit-box-shadow: 0 1px 3px rgba(128, 128, 128, 0.2);
+  box-shadow: 0 1px 3px rgba(128, 128, 128, 0.2);
+  background: #fffdfd;
 }
 #Postlist #Edit_box .title_box {
   overflow: hidden;
@@ -509,8 +623,6 @@ ul {
   color: #ea2c00;
   float: left;
   margin-left: 10px;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
 }
 #Postlist #Edit_box .form_field {
   margin-bottom: 30px;
@@ -768,6 +880,20 @@ ul {
 }
 #Postlist #Edit_box .form_field .datetimepicker span {
   display: none;
+}
+#Postlist #Edit_box #Check ul {
+  overflow: hidden;
+}
+#Postlist #Edit_box #Check ul li {
+  float: left;
+  margin-right: 22px;
+}
+#Postlist #Edit_box #Radio ul {
+  overflow: hidden;
+}
+#Postlist #Edit_box #Radio ul li {
+  float: left;
+  margin-right: 12px;
 }
 #Postlist #Edit_box .error .error_color {
   border: 1px solid #f4838c !important;

@@ -15,6 +15,7 @@ class CreateWowmenuTable extends Migration
     {
         Schema::create('wowmenu', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_select');
             $table->unsignedInteger('acknowledge');
             $table->string('permission');
             $table->string('label_text');
@@ -23,6 +24,8 @@ class CreateWowmenuTable extends Migration
             $table->unsignedInteger('parentmenuid_select');//親階層のID
             $table->string('iconclass_text');//icon
             $table->unsignedInteger('queue');
+            $table->unsignedInteger('group_text');
+            $table->timestamps('deleted_at');
             $table->timestamps();
         });
     }

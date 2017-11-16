@@ -9,9 +9,9 @@
 				</li>
 			</ul>
 			<ul class="navbar-right">
-				<li class="auther">
+				<!-- <li class="auther">
 					<svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>{{ username }}
-				</li>
+				</li> -->
 				<li class="button"><a href="javascript:void(0);" v-on:click="logout()">Logout</a></li>
 			</ul>
 

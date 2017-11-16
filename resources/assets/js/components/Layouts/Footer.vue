@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<div>
 		<div class="footer" id="Footer">
 		</div>
@@ -18,4 +18,4 @@ export default {
 	methods: {
 	}
 }
-</script>
+</script> -->

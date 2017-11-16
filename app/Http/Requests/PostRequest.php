@@ -44,7 +44,7 @@ class PostRequest extends FormRequest
             // 'prefecture' => 'required|numeric|between:1,47',
             // 'address' => 'required|max:100',
             // 'hobby.*' => 'in:1,2,3',
-            'rows.postscategory_check' => 'required|array',
+            'rows.postscategory_check' => 'required|array|Checkbox',
             'rows.created_at' => 'required|date',
             // // 'img_name' => 'present|string',
             'rows.acknowledge_radio' => 'required|numeric',

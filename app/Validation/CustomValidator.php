@@ -42,4 +42,21 @@ class CustomValidator extends \Illuminate\Validation\Validator
                 return true;
         }
     }
+
+    // チェックボックス配列が空で無いか
+	public function validateCheckbox($attribute, $value, $parameters)
+    {
+        if (is_array($value)) {
+        	$flg = false;
+        	foreach ($value as $key2 => $value2) {
+        		if($value2 != false){
+        			$flg = true;
+        		}
+        	}
+            
+            if($flg){
+	            return true;
+    		}
+        }
+    }
 }

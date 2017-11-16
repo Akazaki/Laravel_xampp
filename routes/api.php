@@ -43,6 +43,9 @@ use Illuminate\Http\Request;
 		Route::post('/wow/fileup/', 'FileupController@index');
 
 		// マスターデータ取得
-		Route::post('/wow/getMasterData/', 'Wow\PostsController@getMasterData');
+		Route::post('/wow/getMasterData/', 'Wow\WowController@getMasterData');
+
+		// メニューデータ取得
+		Route::post('/wow/getMenuData/', 'Wow\WowController@getMenuData');
 	});
 //});
