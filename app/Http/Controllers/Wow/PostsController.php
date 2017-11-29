@@ -14,11 +14,13 @@ use Laravel\Posts;// Model
 
 class PostsController extends Controller
 {
-	// function __construct(EditController $EditController)
-	// {
-	// 	//$EditController->EditController();
-	// }
 	var $_tableName = 'posts';
+	var $WowEdit;
+
+	function __construct()
+	{
+		$this->WowEdit = app('wowedit');
+	}
 
 	// 記事取得
 	public function postList(Request $request)
@@ -35,7 +37,7 @@ class PostsController extends Controller
 	}
 
 	// 記事取得
-	public function postEdit(Request $request, WowEditController $WowEditController)
+	public function postEdit(Request $request)
 	{
 		$this->validate($request,[
 			'id' => 'integer|required'
@@ -51,7 +53,7 @@ class PostsController extends Controller
 			$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
 		}else{
 			// 新規作成
-			$post['post'] = $WowEditController->getEmptyData($_editColumns);
+			$post['post'] = $this->WowEdit->getEmptyData($_editColumns);
 			$post['post'] = $post['post'][0];
 		}
 
@@ -68,7 +70,7 @@ class PostsController extends Controller
 	}
 
 	//記事保存
-	public function postDoneEdit(PostRequest $request, WowEditController $WowEditController)
+	public function postDoneEdit(PostRequest $request)
 	{
 		$result = false;
 		$res['res'] = false;
@@ -76,7 +78,7 @@ class PostsController extends Controller
 			$rows = $request->rows;
 			$id = (int)$request->id;
 
-			$result = $WowEditController->doneEdit($rows, $this->_tableName, $id);
+			$result = $this->WowEdit->doneEdit($rows, $this->_tableName, $id);
 
 			if($result){
 				$res['res'] = true;

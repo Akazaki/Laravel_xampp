@@ -181,6 +181,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
+        Laravel\Providers\WowEditServiceProvider::class,
     ],
 
     /*
