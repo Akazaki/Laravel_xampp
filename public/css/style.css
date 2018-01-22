@@ -626,7 +626,7 @@ ul {
 }
 #Postlist #Edit_box .form_field {
   margin-bottom: 30px;
-  /*------- input[text] -------*/
+  /*------- input[text], input[password] -------*/
   /*------- textarea -------*/
   /*------- file -------*/
   /*------- checkbox -------*/
@@ -641,7 +641,8 @@ ul {
 #Postlist #Edit_box .form_field input {
   outline: none;
 }
-#Postlist #Edit_box .form_field input[type=text] {
+#Postlist #Edit_box .form_field input[type=text],
+#Postlist #Edit_box .form_field input[type=password] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   font-family: inherit;
@@ -652,18 +653,23 @@ ul {
 #Postlist #Edit_box .form_field input::-webkit-text-cancel-button {
   display: none;
 }
-#Postlist #Edit_box .form_field input[type=text] {
+#Postlist #Edit_box .form_field input[type=text],
+#Postlist #Edit_box .form_field input[type=password] {
   border: solid 1px #ccc;
   padding: 10px 20px;
   border-radius: 10em;
   -webkit-transition: all .5s;
   transition: all .5s;
 }
-#Postlist #Edit_box .form_field input[type=text]:focus {
+#Postlist #Edit_box .form_field input[type=text]:focus,
+#Postlist #Edit_box .form_field input[type=password]:focus {
   background-color: #fff;
   border-color: #41b883;
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
+}
+#Postlist #Edit_box .form_field input[type=password] {
+  width: 20%;
 }
 #Postlist #Edit_box .form_field input:-moz-placeholder {
   color: #999;

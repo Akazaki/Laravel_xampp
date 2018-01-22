@@ -81,7 +81,7 @@ Vue.use(VueRouter)
 				   	
 				   	//ログイン成功
 					if(res && res.status == 200){
-						this.$router.push('/wow');
+						this.$router.push('/wow/list/post');
 					}else{
 						this.errorText();
 						return false;

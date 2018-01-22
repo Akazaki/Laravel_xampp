@@ -13,7 +13,7 @@
 				<ul class="nano-content nav">
 					<template v-for="(value, key) in menu">
 						<li>
-							<router-link v-bind:to="'/wow/' + value.label_text"><i class="fa fa-dashboard"></i><span>{{ value.menuname_text }}</span></router-link>
+							<router-link v-bind:to="'/wow/list/' + value.label_text"><i class="fa fa-dashboard"></i><span>{{ value.menuname_text }}</span></router-link>
 						</li>
 						<!-- <li>
 							<router-link to="/wow/"><i class="fa fa-dashboard"></i><span>記事一覧</span></router-link>

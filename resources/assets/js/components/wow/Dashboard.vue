@@ -12,7 +12,7 @@
 						</li>
 						<li class="left">
 							<div class="button_green">
-								<router-link to="/wow/posts/0">
+								<router-link v-bind:to="{ path: '/wow/edit/'+dataName+'/0'}">
 									新規追加
 								</router-link>
 							</div>
@@ -25,7 +25,7 @@
 							</div>
 						</li>
 					</ul>
-					
+
 					<template v-if="show">
 						<div id="DropDownEdit">
 							<div class="dropdown hover">
@@ -58,7 +58,7 @@
 										</td>
 										<td class="id-td">{{post.id}}</td>
 										<td class="name-td">
-											<router-link v-bind:to="{ name : 'Posts', params : { id: post.id }}">{{post.label_text}}</router-link>
+											<router-link v-bind:to="{ path: '/wow/edit/'+dataName+'/'+post.id}">{{post.label_text}}</router-link>
 										</td>
 										<td class="date-td">{{post.created_at}}</td>
 										<td class="acknowledge-td">{{post.acknowledge}}</td>
@@ -72,7 +72,7 @@
 					</template>
 					
 					<!--ページャー(子からのイベント実行)-->
-					<pager　@getposts="acceptance_posts"></pager>
+					<pager v-bind:dataName="dataName" @getposts="acceptance_posts"></pager>
 					
 				</div>
 			</div>
@@ -92,6 +92,7 @@ Vue.component('footerbar', require('../../components/Layouts/Footer.vue'))
 Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 
 	export default {
+		props: ['dataName'],
 		data (){
 			return {
 				posts: {},//記事データ
@@ -100,6 +101,12 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 			}
 		},
 		created () {
+		},
+		watch: {
+			//ページ遷移時
+			dataName: function () {
+				this.show = false;
+			}
 		},
 		methods: {
 			//ページャーコンポーネントから実行されるイベント

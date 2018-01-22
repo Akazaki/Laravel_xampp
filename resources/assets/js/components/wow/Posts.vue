@@ -52,6 +52,9 @@
 									<template v-else-if="key.match(/_at/)">
 										<edit-datetime :value="{value:value.data, key:key}"　@ValueUpdate="value_update"></edit-datetime>
 									</template>
+									<template v-else-if="key.match(/password/)">
+										<edit-password :value="{value:value.data, key:key}"　@ValueUpdate="value_update"></edit-password>
+									</template>
 									<template v-else>
 										<edit-text :value="{value:value.data, key:key}"　@ValueUpdate="value_update"></edit-text>
 									</template>
@@ -67,7 +70,7 @@
 								</li>
 								<li>
 									<div class="button_green">
-										<router-link to="/wow/posts">
+										<router-link v-bind:to="{ path: '/wow/list/'+dataName }">
 											キャンセル
 										</router-link>
 									</div>
@@ -80,7 +83,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		<!-- <footerbar></footerbar> -->
 	</div>
@@ -108,9 +110,10 @@ Vue.component('edit-file', require('../../components/Layouts/EditParts/File.vue'
 Vue.component('edit-check', require('../../components/Layouts/EditParts/Check.vue'))
 Vue.component('edit-radio', require('../../components/Layouts/EditParts/Radio.vue'))
 Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datetime.vue'))
+Vue.component('edit-password', require('../../components/Layouts/EditParts/Password.vue'))
 
 	export default {
-		props: ['id'],
+		props: ['id', 'dataName'],
 		data (){
 			return {
 				post: {},//記事データ
@@ -120,6 +123,13 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 		},
 		created () {
 			this.get_post(this.id);
+
+			if(this.dataName === 'post' || this.dataName === 'admin'){
+
+			}else{
+				this.$router.push('/wow/login');
+				return false;
+			}
 		},
 		methods: {
 			 /**
@@ -127,7 +137,7 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 * @param {id} num - 記事id
 			 */
 			get_post: function(id){
-				axios.post('/api/wow/postEdit', {id: id})
+				axios.post('/api/wow/'+this.dataName+'Edit', {id: id})
 				.then(res => {
 					if(res.data && res.status == 200){
 						var data = res.data;
@@ -161,12 +171,12 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 			 * 記事保存
 			 */
 			done_edit: function() {
-
 				// this.errors = false;//エラーテキスト初期化
 				var self = this;
 
 				var tmp_postdata = this.post;//tmp変数に代入
 				var tmp_postdata2 = {};
+
 				//postデータに代入
 				Object.keys(tmp_postdata).forEach(function (key, i) {
 					if(tmp_postdata[key].data){
@@ -177,10 +187,10 @@ Vue.component('edit-datetime', require('../../components/Layouts/EditParts/Datet
 				//postデータに「id」追加
 				//tmp_postdata2.id = this.id;
 
-				axios.post('/api/wow/postDoneEdit', {rows: tmp_postdata2, id: this.id})
+				axios.post('/api/wow/'+this.dataName+'DoneEdit', {rows: tmp_postdata2, id: this.id})
 				.then(res => {
 					if(res.data && res.status == 200){
-						this.$router.push('/wow/posts')
+						this.$router.push('/wow/list/'+this.dataName);
 					}else{
 						return false;
 					}

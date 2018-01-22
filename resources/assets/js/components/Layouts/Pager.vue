@@ -27,6 +27,7 @@
 // import userStore from '../../stores/userStore'
 
 	export default {
+		props: ['dataName'],
 		data (){
 			return {
 				posts: {},//記事データ
@@ -40,13 +41,27 @@
 				show: false,
 			}
 		},
+		watch: {
+			//ページ遷移時
+			dataName: function () {
+				this.current_page = 1;
+				this.get_posts(this.current_page);
+			}
+		},
 		created () {
+			if(this.dataName === 'post' || this.dataName === 'admin'){
+				
+			}else{
+				this.$router.push('/wow/login');
+				return false;
+			}
+
 			this.get_posts(this.current_page);
 		},
 		methods: {
 			//ページング処理
 			get_posts(page){
-				axios.post('/api/wow/postList', {page: page})
+				axios.post('/api/wow/'+this.dataName+'List', {page: page})
 				.then(res => {
 
 					if(res.data !== undefined && res.status == 200){

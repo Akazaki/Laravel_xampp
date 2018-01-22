@@ -739,11 +739,12 @@ ul {
 				}
 			}
 			
-			/*------- input[text] -------*/
+			/*------- input[text], input[password] -------*/
 			input {
 				outline: none;
 			}
-			input[type=text] {
+			input[type=text],
+			input[type=password], {
 				-webkit-appearance: textfield;
 				-webkit-box-sizing: content-box;
 				font-family: inherit;
@@ -755,7 +756,8 @@ ul {
 				display: none; 
 			}
 
-			input[type=text] {
+			input[type=text],
+			input[type=password], {
 				border: solid 1px #ccc;
 				padding: 10px 20px;
 				
@@ -767,13 +769,18 @@ ul {
 				-moz-transition: all .5s;
 				transition: all .5s;
 			}
-			input[type=text]:focus {
+			input[type=text]:focus,
+			input[type=password]:focus, {
 				background-color: #fff;
 				border-color: @vueGreen;
 				
 				-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
 				-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
 				box-shadow: 0 0 5px rgba(109,207,246,.5);
+			}
+
+			input[type=password] {
+				width: 20%;
 			}
 
 			input:-moz-placeholder {

@@ -94,10 +94,10 @@ const router = new VueRouter({
 		{ path: '/wow/login', component: require('./components/wow/Login.vue') },
 		{ path: '/wow/signup', component: require('./components/wow/Signup.vue') },
 		//↓ログインチェック有無をmetaに追加
-		{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
-		{ path: '/wow/posts/', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
-		{ path: '/wow/posts/:id', name: 'Posts', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
-		{ path: '/wow/posts/0', component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
+		//{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
+		{ path: '/wow/list/:dataName', props: true, component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
+		{ path: '/wow/edit/:dataName/:id', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
+		{ path: '/wow/edit/:dataName/0', props: true, component: require('./components/wow/Posts.vue'), meta: { requiresAuth: true }},
 	]
 })
 

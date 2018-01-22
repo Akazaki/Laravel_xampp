@@ -40,6 +40,14 @@ use Illuminate\Http\Request;
 		//記事保存
 		Route::post('/wow/postDoneEdit/', 'Wow\PostsController@postDoneEdit');
 
+		//ユーザ-一覧
+		Route::post('/wow/adminList/', 'Wow\AdminsController@postList');
+		//ユーザ-編集
+		Route::post('/wow/adminEdit/', 'Wow\AdminsController@postEdit');
+		//ユーザ-保存
+		Route::post('/wow/adminDoneEdit/', 'Wow\AdminsController@postDoneEdit');
+
+		//ファイルアップロード
 		Route::post('/wow/fileup/', 'FileupController@index');
 
 		// マスターデータ取得

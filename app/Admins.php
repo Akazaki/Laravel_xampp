@@ -29,6 +29,6 @@ class Admins extends \Eloquent implements Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 }

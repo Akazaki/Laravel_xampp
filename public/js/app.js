@@ -52780,7 +52780,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 	mode: 'history',
 	routes: [{ path: '/', component: __webpack_require__(152) }, { path: '/wow/login', component: __webpack_require__(156) }, { path: '/wow/signup', component: __webpack_require__(159) },
 	//↓ログインチェック有無をmetaに追加
-	{ path: '/wow', component: __webpack_require__(74), meta: { requiresAuth: true } }, { path: '/wow/posts/', component: __webpack_require__(74), meta: { requiresAuth: true } }, { path: '/wow/posts/:id', name: 'Posts', props: true, component: __webpack_require__(79), meta: { requiresAuth: true } }, { path: '/wow/posts/0', component: __webpack_require__(79), meta: { requiresAuth: true } }]
+	//{ path: '/wow', component: require('./components/wow/Dashboard.vue'), meta: { requiresAuth: true }},
+	{ path: '/wow/list/:dataName', props: true, component: __webpack_require__(74), meta: { requiresAuth: true } }, { path: '/wow/edit/:dataName/:id', props: true, component: __webpack_require__(79), meta: { requiresAuth: true } }, { path: '/wow/edit/:dataName/0', props: true, component: __webpack_require__(79), meta: { requiresAuth: true } }]
 });
 
 //ログインチェック
@@ -84382,7 +84383,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 				//ログイン成功
 				if (res && res.status == 200) {
-					_this.$router.push('/wow');
+					_this.$router.push('/wow/list/post');
 				} else {
 					_this.errorText();
 					return false;
@@ -85251,6 +85252,7 @@ Vue.component('footerbar', __webpack_require__(78));
 Vue.component('pager', __webpack_require__(167));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['dataName'],
 	data: function data() {
 		return {
 			posts: {}, //記事データ
@@ -85260,6 +85262,12 @@ Vue.component('pager', __webpack_require__(167));
 	},
 	created: function created() {},
 
+	watch: {
+		//ページ遷移時
+		dataName: function dataName() {
+			this.show = false;
+		}
+	},
 	methods: {
 		//ページャーコンポーネントから実行されるイベント
 		acceptance_posts: function acceptance_posts() {
@@ -85539,7 +85547,7 @@ var render = function() {
                       [
                         _c(
                           "router-link",
-                          { attrs: { to: "/wow/" + value.label_text } },
+                          { attrs: { to: "/wow/list/" + value.label_text } },
                           [
                             _c("i", { staticClass: "fa fa-dashboard" }),
                             _c("span", [_vm._v(_vm._s(value.menuname_text))])
@@ -85659,6 +85667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import userStore from '../../stores/userStore'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['dataName'],
 	data: function data() {
 		return {
 			posts: {}, //記事データ
@@ -85672,7 +85681,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			show: false
 		};
 	},
+
+	watch: {
+		//ページ遷移時
+		dataName: function dataName() {
+			this.current_page = 1;
+			this.get_posts(this.current_page);
+		}
+	},
 	created: function created() {
+		if (this.dataName === 'post' || this.dataName === 'admin') {} else {
+			this.$router.push('/wow/login');
+			return false;
+		}
+
 		this.get_posts(this.current_page);
 	},
 
@@ -85681,7 +85703,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		get_posts: function get_posts(page) {
 			var _this = this;
 
-			axios.post('/api/wow/postList', { page: page }).then(function (res) {
+			axios.post('/api/wow/' + this.dataName + 'List', { page: page }).then(function (res) {
 
 				if (res.data !== undefined && res.status == 200) {
 					var data = res.data;
@@ -85896,9 +85918,15 @@ var render = function() {
                     "div",
                     { staticClass: "button_green" },
                     [
-                      _c("router-link", { attrs: { to: "/wow/posts/0" } }, [
-                        _vm._v("\n\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t")
-                      ])
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: { path: "/wow/edit/" + _vm.dataName + "/0" }
+                          }
+                        },
+                        [_vm._v("\n\t\t\t\t\t\t\t\t新規追加\n\t\t\t\t\t\t\t")]
+                      )
                     ],
                     1
                   )
@@ -85960,8 +85988,11 @@ var render = function() {
                                       {
                                         attrs: {
                                           to: {
-                                            name: "Posts",
-                                            params: { id: post.id }
+                                            path:
+                                              "/wow/edit/" +
+                                              _vm.dataName +
+                                              "/" +
+                                              post.id
                                           }
                                         }
                                       },
@@ -85987,7 +86018,10 @@ var render = function() {
                   ]
                 : [_c("loadingsmall")],
               _vm._v(" "),
-              _c("pager", { on: { getposts: _vm.acceptance_posts } })
+              _c("pager", {
+                attrs: { dataName: _vm.dataName },
+                on: { getposts: _vm.acceptance_posts }
+              })
             ],
             2
           )
@@ -86161,6 +86195,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -86183,9 +86219,10 @@ Vue.component('edit-file', __webpack_require__(358));
 Vue.component('edit-check', __webpack_require__(361));
 Vue.component('edit-radio', __webpack_require__(364));
 Vue.component('edit-datetime', __webpack_require__(367));
+Vue.component('edit-password', __webpack_require__(373));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['id'],
+	props: ['id', 'dataName'],
 	data: function data() {
 		return {
 			post: {}, //記事データ
@@ -86195,6 +86232,11 @@ Vue.component('edit-datetime', __webpack_require__(367));
 	},
 	created: function created() {
 		this.get_post(this.id);
+
+		if (this.dataName === 'post' || this.dataName === 'admin') {} else {
+			this.$router.push('/wow/login');
+			return false;
+		}
 	},
 
 	methods: {
@@ -86205,7 +86247,7 @@ Vue.component('edit-datetime', __webpack_require__(367));
 		get_post: function get_post(id) {
 			var _this = this;
 
-			axios.post('/api/wow/postEdit', { id: id }).then(function (res) {
+			axios.post('/api/wow/' + this.dataName + 'Edit', { id: id }).then(function (res) {
 				if (res.data && res.status == 200) {
 					var data = res.data;
 					_this.post = data.post;
@@ -86244,6 +86286,7 @@ Vue.component('edit-datetime', __webpack_require__(367));
 
 			var tmp_postdata = this.post; //tmp変数に代入
 			var tmp_postdata2 = {};
+
 			//postデータに代入
 			Object.keys(tmp_postdata).forEach(function (key, i) {
 				if (tmp_postdata[key].data) {
@@ -86254,9 +86297,9 @@ Vue.component('edit-datetime', __webpack_require__(367));
 			//postデータに「id」追加
 			//tmp_postdata2.id = this.id;
 
-			axios.post('/api/wow/postDoneEdit', { rows: tmp_postdata2, id: this.id }).then(function (res) {
+			axios.post('/api/wow/' + this.dataName + 'DoneEdit', { rows: tmp_postdata2, id: this.id }).then(function (res) {
 				if (res.data && res.status == 200) {
-					_this2.$router.push('/wow/posts');
+					_this2.$router.push('/wow/list/' + _this2.dataName);
 				} else {
 					return false;
 				}
@@ -115219,19 +115262,33 @@ var render = function() {
                                               }
                                             })
                                           ]
-                                        : [
-                                            _c("edit-text", {
-                                              attrs: {
-                                                value: {
-                                                  value: value.data,
-                                                  key: key
+                                        : key.match(/password/)
+                                          ? [
+                                              _c("edit-password", {
+                                                attrs: {
+                                                  value: {
+                                                    value: value.data,
+                                                    key: key
+                                                  }
+                                                },
+                                                on: {
+                                                  ValueUpdate: _vm.value_update
                                                 }
-                                              },
-                                              on: {
-                                                ValueUpdate: _vm.value_update
-                                              }
-                                            })
-                                          ]
+                                              })
+                                            ]
+                                          : [
+                                              _c("edit-text", {
+                                                attrs: {
+                                                  value: {
+                                                    value: value.data,
+                                                    key: key
+                                                  }
+                                                },
+                                                on: {
+                                                  ValueUpdate: _vm.value_update
+                                                }
+                                              })
+                                            ]
                             ],
                             2
                           )
@@ -115263,7 +115320,11 @@ var render = function() {
                             [
                               _c(
                                 "router-link",
-                                { attrs: { to: "/wow/posts" } },
+                                {
+                                  attrs: {
+                                    to: { path: "/wow/list/" + _vm.dataName }
+                                  }
+                                },
                                 [
                                   _vm._v(
                                     "\n\t\t\t\t\t\t\t\t\t\tキャンセル\n\t\t\t\t\t\t\t\t\t"
@@ -115311,6 +115372,134 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 372 */,
+/* 373 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(374)
+/* template */
+var __vue_template__ = __webpack_require__(375)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Layouts\\EditParts\\Password.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Password.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4ad5729b", Component.options)
+  } else {
+    hotAPI.reload("data-v-4ad5729b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 374 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value'],
+	data: function data() {
+		return {
+			password_value: '',
+			key: this.value.key
+		};
+	},
+
+	watch: {
+		password_value: function password_value() {
+			this.$emit('ValueUpdate', this.password_value, this.key);
+		}
+	},
+	created: function created() {
+		this.password_value = '';
+		this.$emit('ValueUpdate', this.password_value, this.key);
+	},
+
+	methods: {}
+});
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "Password" } }, [
+    _c("div", { staticClass: "form_field" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.password_value,
+            expression: "password_value"
+          }
+        ],
+        staticClass: "form__input",
+        attrs: { type: "password", name: "password", required: "" },
+        domProps: { value: _vm.password_value },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.password_value = $event.target.value
+          }
+        }
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4ad5729b", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

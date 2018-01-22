@@ -97,10 +97,13 @@ class WowEditController
 	function doneEdit($arr, $table_name, $id){
 
 		foreach ($arr as $key => $value) {
-			//checkboxの場合、10進数に変換
 			if(preg_match('/_check/',$key)){
+				//checkboxの場合、10進数に変換
 				$arr[$key] = $this->getBit_checkbox($value);
-			};
+			}else if(preg_match('/password/',$key)){
+				//ハッシュ化
+				$arr[$key] = bcrypt($value);
+			}
 		};
 
 		//idあれば削除

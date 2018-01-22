@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use Laravel\Http\Requests;
 use Laravel\Http\Controllers\Controller;
 use Laravel\Http\Controllers\Wow\WowEditController;
-use Laravel\Http\Requests\PostRequest;// バリデート
+use Laravel\Http\Requests\AdminRequest;// バリデート
 use Auth;
 use JWTAuth;
 use DB;
-use Laravel\Posts;// Model
+use Laravel\Admins;// Model
 
-class PostsController extends Controller
+class AdminsController extends Controller
 {
-	var $_tableName = 'posts';
+	var $_tableName = 'admins';
 	var $WowEdit;
 
 	function __construct()
@@ -28,7 +28,7 @@ class PostsController extends Controller
 		$_listColumns = ['id', 'タイトル', '公開時刻', '公開状態'];
 		$get_postnum = 5;
 		
-		$query = Posts::query();
+		$query = Admins::query();
 
 		$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
 		$posts['_listColumns'] = $_listColumns;
@@ -44,10 +44,10 @@ class PostsController extends Controller
 		]);
 
 		// 編集項目
-		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'postscategory_check', 'created_at', 'acknowledge_radio'];
-		$_editColumnsName = ['label_text'=>'タイトル', 'detail_richtext'=>'詳細', 'main_file'=>'画像', 'postscategory_check'=>'カテゴリ', 'created_at'=>'公開時刻', 'acknowledge_radio'=>'公開状態'];
+		$_editColumns = ['label_text', 'email_text', 'password', 'created_at'];
+		$_editColumnsName = ['label_text'=>'タイトル', 'email_text'=>'メールアドレス', 'password'=>'パスワード', 'created_at'=>'公開時刻'];
 
-		$query = Posts::query();
+		$query = Admins::query();
 
 		if((INT)$request->id > 0){
 			// データ取得
@@ -71,7 +71,7 @@ class PostsController extends Controller
 	}
 
 	//記事保存
-	public function postDoneEdit(PostRequest $request)
+	public function postDoneEdit(AdminRequest $request)
 	{
 		$result = false;
 		$res['res'] = false;
