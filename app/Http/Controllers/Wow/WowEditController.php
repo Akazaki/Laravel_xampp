@@ -100,6 +100,9 @@ class WowEditController
 			if(preg_match('/_check/',$key)){
 				//checkboxの場合、10進数に変換
 				$arr[$key] = $this->getBit_checkbox($value);
+			}else if(preg_match('/password_confirmation/', $key)){
+				//パスワード確認は除外
+				unset($arr[$key]);
 			}else if(preg_match('/password/',$key)){
 				//ハッシュ化
 				$arr[$key] = bcrypt($value);
@@ -117,6 +120,33 @@ class WowEditController
 			$result = DB::table($table_name)->where('id', (int)$id)->update($arr);
 		}else{
 			$result = DB::table($table_name)->insert($arr);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * 一括処理
+	 *
+	 * @param number $id : id
+	 * @param object $model : 
+	 * @return bool:
+	 */
+	function doneMultiAction($request, $model){
+		$validatedData = $request->validate([
+			'id' => 'required|array',
+		]);
+		
+		$result = false;
+		if($request->action === 'delete'){
+			//削除
+			$result = $model->whereIn('id', $request->id)->delete();
+		}else if($request->action == 'private'){
+			//非公開
+			$result = $model->whereIn('id', $request->id)->update(['acknowledge_radio'=>2]);
+		}else if($request->action == 'publish'){
+			//公開
+			$result = $model->whereIn('id', $request->id)->update(['acknowledge_radio'=>1]);
 		}
 
 		return $result;

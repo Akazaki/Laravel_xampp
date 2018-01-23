@@ -88,4 +88,17 @@ class PostsController extends Controller
 
 		return $res;
 	}
+
+	//記事一括処理
+	public function postMultiAction(Request $request)
+	{
+		$result = false;
+		$query = Posts::query();
+
+		if(!empty($request)){
+			$result = $this->WowEdit->doneMultiAction($request, $query);
+		}
+
+		return $result;
+	}
 }

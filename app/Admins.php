@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admins extends \Eloquent implements Authenticatable
 {
     use AuthenticableTrait;
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +22,10 @@ class Admins extends \Eloquent implements Authenticatable
      */
 
     protected $fillable = [
-        'label_text', 'email_text', 'password',
+        'label_text',
+        'email_text',
+        'password',
+        'deleted_at',
     ];
 
     /**

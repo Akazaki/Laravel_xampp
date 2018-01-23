@@ -4,8 +4,10 @@ namespace Laravel;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class posts extends Model{
+    use SoftDeletes;
     //laravelでは必要
     // const CREATED_AT = null;
     // const UPDATED_AT = null;
@@ -29,5 +31,6 @@ class posts extends Model{
         'detail_richtext',
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 }

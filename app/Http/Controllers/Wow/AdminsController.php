@@ -58,16 +58,26 @@ class AdminsController extends Controller
 			$post['post'] = $post['post'][0];
 		}
 
+		$tmpArray = [];
 		$post = json_decode(json_encode($post), true);
 		foreach ($post['post'] as $key => $value) {
-			$post['post'][$key] = [
+			$tmpArray['post'][$key] = [
 				'title' => $_editColumnsName[$key],
 				'data' => $value,
 				'error' => '',
 			];
+
+			// パスワードあれば確認追加
+			if($key === 'password'){
+				$tmpArray['post']['password_confirmation'] = [
+					'title' => 'パスワード確認',
+					'data' => '',
+					'error' => '',
+				];
+			}
 		}
 
-		return $post;
+		return $tmpArray;
 	}
 
 	//記事保存

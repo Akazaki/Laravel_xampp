@@ -6,7 +6,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Vue TODO</title>
+		<title>Vue CMS</title>
 
 		<link rel="stylesheet" href="/public/css/app.css">
 		<link rel="stylesheet" href="/public/css/style.css">
@@ -22,7 +22,7 @@
 			   <router-view></router-view>
 			</div>
 		</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
 		<script src="/public/js/app.js"></script>
 	</body>
 </html>

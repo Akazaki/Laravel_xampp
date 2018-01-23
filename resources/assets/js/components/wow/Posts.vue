@@ -8,15 +8,15 @@
 				<div id="Postlist">
 					<ul class="button_box">
 						<li class="left">
-							<p id="Post_title">記事編集</p>
+							<p id="Post_title">編集</p>
 						</li>
-						<li class="left">
+						<!-- <li class="left">
 							<div class="button_green">
 								<router-link to="/">
 									プレビュー
 								</router-link>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 
 					<div id="Edit_box">

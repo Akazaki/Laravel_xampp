@@ -27,7 +27,7 @@
 // import userStore from '../../stores/userStore'
 
 	export default {
-		props: ['dataName'],
+		props: ['dataName', 'postReloadFlg'],
 		data (){
 			return {
 				posts: {},//記事データ
@@ -44,11 +44,19 @@
 		watch: {
 			//ページ遷移時
 			dataName: function () {
+				this.show = false;
 				this.current_page = 1;
 				this.get_posts(this.current_page);
+			},
+			//親で記事数変更処理があった場合、記事再読み込み
+			postReloadFlg: function() {
+				if(this.postReloadFlg === true){
+					this.get_posts(this.current_page);
+				}
 			}
 		},
 		created () {
+
 			if(this.dataName === 'post' || this.dataName === 'admin'){
 				
 			}else{
@@ -63,8 +71,7 @@
 			get_posts(page){
 				axios.post('/api/wow/'+this.dataName+'List', {page: page})
 				.then(res => {
-
-					if(res.data !== undefined && res.status == 200){
+					if(res.data !== undefined && res.status == 200 && res.data.posts.data.length > 0){
 						var data = res.data;
 						var postsdata = data.posts;
 
@@ -73,7 +80,7 @@
 						this.current_page = postsdata.current_page
 						this.last_page = postsdata.last_page
 						this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
-						
+
 						//前のページがあるか
 						if(postsdata.prev_page_url){
 							this.isStartPage = true
@@ -94,12 +101,17 @@
 
 						//親コンポーネントの関数実行
 						this.$emit('getposts');
+					}else if(res.data.posts.data.length == 0 && res.status == 200 && this.current_page > 1){
+						//記事無い場合ページング繰り下げ
+						var page = this.current_page-1;
+						this.get_posts(page);
+						return false;
 					}else{
-						this.$router.push('/wow/login')
+						//this.$router.push('/wow/login')
 					}
 					
 				}).catch(error => {
-					if(error.response.data){
+					if(error.response && error.response.data){
 						if(error.response.data.error == 'token_not_provided' || error.response.data.error == 'token_expired'){
 							//token切れ
 							this.$router.push('/wow/login');

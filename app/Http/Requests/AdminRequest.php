@@ -38,8 +38,9 @@ class AdminRequest extends FormRequest
         $rules = [
             'rows.label_text'  => 'required|max:100',
             'rows.email_text' => 'required|email',
-            //'rows.password' => 'required|confirmed|min:6',
-            'rows.password' => 'required|min:6',
+            'rows.password' => 'required|confirmed|min:6',
+            'rows.password_confirmation' => 'required|min:6',
+            //'rows.password' => 'required|min:6',
             // 'rows.main_file' => 'sometimes|string',
             // 'tel' => 'required|japantel',
             // 'zip' => 'required|zip',

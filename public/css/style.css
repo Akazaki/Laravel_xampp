@@ -360,9 +360,6 @@ ul {
   margin-right: 10px;
   border-bottom: 3px solid #41b883;
 }
-#Postlist #DropDownEdit {
-  margin-top: 30px;
-}
 #Postlist #DropDownEdit .dropdown {
   width: 90px;
   font-size: 11px;
@@ -455,6 +452,7 @@ ul {
 }
 #Postlist #table-content td a {
   color: #000;
+  display: block;
 }
 #Postlist #table-content table {
   width: 100%;
@@ -462,9 +460,6 @@ ul {
 #Postlist #table-content thead {
   background: #191919;
   color: #FFF;
-}
-#Postlist #table-content thead tr {
-  text-align: center;
 }
 #Postlist #table-content thead tr td {
   color: #ececec;
@@ -546,17 +541,14 @@ ul {
 }
 #Postlist .id-td {
   width: 3%;
-  text-align: center;
 }
 #Postlist .name-td {
   width: 40%;
 }
 #Postlist .date-td {
-  text-align: center;
   width: 8%;
 }
 #Postlist .acknowledge-td {
-  text-align: center;
   width: 8%;
 }
 #Postlist .checked {
@@ -927,6 +919,7 @@ ul {
 }
 .button_box {
   overflow: hidden;
+  margin-bottom: 30px;
 }
 .button_box .left {
   float: left;

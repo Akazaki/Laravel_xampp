@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div ID="Header_line">ようこそ、Contents Management Flamework WOWへ</div>
+		<div ID="Header_line">ようこそ、Contents Management Flamework へ</div>
 		<div class="wrapper">
 			<div id="Login">
 				<template v-if="show">
@@ -10,7 +10,7 @@
 				<div id="loginInner" class="loginWidth">
 					<div class="alice clr">
 						<!-- <p class="wowLogo"><img src="/public/wow/img/logo_wow.png" alt="WOW" width="84" height="84"></p> -->
-						<h3 class="logo_gp"><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" height="79" class="png"></h3>
+						<h3 class="logo_gp"><img src="/public/wow/img/logo.png" alt="ロゴ" width="171" class="png"></h3>
 
 						<div class="form login">
 

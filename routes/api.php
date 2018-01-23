@@ -39,6 +39,8 @@ use Illuminate\Http\Request;
 		Route::post('/wow/postEdit/', 'Wow\PostsController@postEdit');
 		//記事保存
 		Route::post('/wow/postDoneEdit/', 'Wow\PostsController@postDoneEdit');
+		//記事削除
+		Route::post('/wow/postMultiAction/', 'Wow\PostsController@postMultiAction');
 
 		//ユーザ-一覧
 		Route::post('/wow/adminList/', 'Wow\AdminsController@postList');
