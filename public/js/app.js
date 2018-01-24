@@ -84309,8 +84309,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			email_text: '',
-			password: '',
+			email_text: 'aaa@aaa.aaa',
+			password: '111111',
 			showAlert: false,
 			alertMessage: '',
 			show: false
@@ -85238,8 +85238,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -85259,7 +85257,8 @@ Vue.component('pager', __webpack_require__(167));
 			checkMulti: false,
 			checkid: [],
 			postReloadFlg: false,
-			acknowledgeMaster: { 1: '公開', 2: '非公開', 3: '下書き' }
+			acknowledgeMaster: { 1: '公開', 2: '非公開', 3: '下書き' },
+			searchValue: ''
 		};
 	},
 	created: function created() {
@@ -85275,6 +85274,7 @@ Vue.component('pager', __webpack_require__(167));
 			this.show = false;
 			this.checkMulti = false;
 			this.checkid = [];
+			this.searchValue = '';
 		},
 		//一括チェック
 		checkMulti: function checkMulti() {
@@ -85304,6 +85304,7 @@ Vue.component('pager', __webpack_require__(167));
 		doneMultiAction: function doneMultiAction(action) {
 			var _this = this;
 
+			this.searchValue = '';
 			if (this.checkid.length > 0 && (action === 'delete' || action === 'publish' || action === 'private')) {
 				axios.post('/api/wow/' + this.dataName + 'MultiAction', { id: this.checkid, action: action }).then(function (res) {
 					if (res.data !== undefined && res.status == 200) {
@@ -85324,9 +85325,6 @@ Vue.component('pager', __webpack_require__(167));
 			} else {
 				return false;
 			}
-		},
-		multiCheck: function multiCheck() {
-			console.log(this.checkid);
 		}
 	}
 });
@@ -85720,7 +85718,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import userStore from '../../stores/userStore'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['dataName', 'postReloadFlg'],
+	props: ['dataName', 'postReloadFlg', 'searchValue'],
 	data: function data() {
 		return {
 			posts: {}, //記事データ
@@ -85740,13 +85738,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		dataName: function dataName() {
 			this.show = false;
 			this.current_page = 1;
-			this.get_posts(this.current_page);
+			this.get_posts(this.current_page, this.searchValue);
 		},
 		//親で記事数変更処理があった場合、記事再読み込み
 		postReloadFlg: function postReloadFlg() {
 			if (this.postReloadFlg === true) {
-				this.get_posts(this.current_page);
+				this.get_posts(this.current_page, this.searchValue);
 			}
+		},
+		//検索
+		searchValue: function searchValue() {
+			this.get_posts(this.current_page, this.searchValue);
 		}
 	},
 	created: function created() {
@@ -85756,15 +85758,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return false;
 		}
 
-		this.get_posts(this.current_page);
+		this.get_posts(this.current_page, this.searchValue);
 	},
 
 	methods: {
 		//ページング処理
-		get_posts: function get_posts(page) {
+		get_posts: function get_posts(page, searchValue) {
 			var _this = this;
 
-			axios.post('/api/wow/' + this.dataName + 'List', { page: page }).then(function (res) {
+			axios.post('/api/wow/' + this.dataName + 'List', { page: page, searchValue: searchValue }).then(function (res) {
 				if (res.data !== undefined && res.status == 200 && res.data.posts.data.length > 0) {
 					var data = res.data;
 					var postsdata = data.posts;
@@ -85798,7 +85800,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				} else if (res.data.posts.data.length == 0 && res.status == 200 && _this.current_page > 1) {
 					//記事無い場合ページング繰り下げ
 					var page = _this.current_page - 1;
-					_this.get_posts(page);
+					_this.get_posts(page, _this.searchValue);
 					return false;
 				} else {
 					//this.$router.push('/wow/login')
@@ -85841,7 +85843,7 @@ var render = function() {
                           attrs: { href: "javascript:void(0);" },
                           on: {
                             click: function($event) {
-                              _vm.get_posts(1)
+                              _vm.get_posts(1, _vm.searchValue)
                             }
                           }
                         },
@@ -85859,7 +85861,7 @@ var render = function() {
                       attrs: { href: "javascript:void(0);" },
                       on: {
                         click: function($event) {
-                          _vm.get_posts(_vm.current_page - 1)
+                          _vm.get_posts(_vm.current_page - 1, _vm.searchValue)
                         }
                       }
                     },
@@ -85876,7 +85878,7 @@ var render = function() {
                     staticClass: "pager-item pager-item-active",
                     on: {
                       click: function($event) {
-                        _vm.get_posts(num)
+                        _vm.get_posts(num, _vm.searchValue)
                       }
                     }
                   },
@@ -85910,7 +85912,7 @@ var render = function() {
                       attrs: { href: "javascript:void(0);" },
                       on: {
                         click: function($event) {
-                          _vm.get_posts(_vm.current_page + 1)
+                          _vm.get_posts(_vm.current_page + 1, _vm.searchValue)
                         }
                       }
                     },
@@ -85928,7 +85930,7 @@ var render = function() {
                           attrs: { href: "javascript:void(0);" },
                           on: {
                             click: function($event) {
-                              _vm.get_posts(_vm.last_page)
+                              _vm.get_posts(_vm.last_page, _vm.searchValue)
                             }
                           }
                         },
@@ -85997,7 +85999,30 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _c("li", { staticClass: "right" }, [
+                  _c("div", { staticClass: "search_button" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.searchValue,
+                          expression: "searchValue"
+                        }
+                      ],
+                      attrs: { type: "search", placeholder: "検索" },
+                      domProps: { value: _vm.searchValue },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.searchValue = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _vm.show
@@ -86231,6 +86256,7 @@ var render = function() {
                 _c("pager", {
                   attrs: {
                     dataName: _vm.dataName,
+                    searchValue: _vm.searchValue,
                     postReloadFlg: _vm.postReloadFlg
                   },
                   on: { getposts: _vm.acceptance_posts }
@@ -86252,18 +86278,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "left" }, [
       _c("p", { attrs: { id: "Post_title" } }, [_vm._v("一覧")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "right" }, [
-      _c("div", { staticClass: "search_button" }, [
-        _c("form", [
-          _c("input", { attrs: { type: "search", placeholder: "検索" } })
-        ])
-      ])
     ])
   }
 ]

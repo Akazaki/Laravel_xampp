@@ -19,9 +19,7 @@
 						</li>
 						<li class="right">
 							<div class="search_button">
-								<form>
-									<input type="search" placeholder="検索">
-								</form>
+								<input type="search" placeholder="検索" v-model="searchValue">
 							</div>
 						</li>
 					</ul>
@@ -74,7 +72,7 @@
 					</template>
 					<template v-show="show">
 						<!--ページャー(子からのイベント実行)-->
-						<pager v-bind:dataName="dataName" v-bind:postReloadFlg="postReloadFlg" @getposts="acceptance_posts"></pager>
+						<pager v-bind:dataName="dataName" v-bind:searchValue="searchValue" v-bind:postReloadFlg="postReloadFlg" @getposts="acceptance_posts"></pager>
 					</template>
 					
 				</div>
@@ -105,6 +103,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 				checkid: [],
 				postReloadFlg: false,
 				acknowledgeMaster: {1:'公開', 2:'非公開', 3:'下書き'},
+				searchValue: '',
 			}
 		},
 		created () {
@@ -121,6 +120,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 				this.show = false;
 				this.checkMulti = false;
 				this.checkid = [];
+				this.searchValue = '';
 			},
 			//一括チェック
 			checkMulti: function(){
@@ -148,6 +148,7 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 			},
 			// 記事一括変更
 			doneMultiAction: function (action) {
+				this.searchValue = '';
 				if(this.checkid.length > 0 && (action === 'delete' || action === 'publish' || action === 'private')){
 					axios.post('/api/wow/'+this.dataName+'MultiAction', {id: this.checkid, action: action})
 					.then(res => {
@@ -170,9 +171,6 @@ Vue.component('pager', require('../../components/Layouts/Pager.vue'))
 				}else{
 					return false;
 				}
-			},
-			multiCheck: function(){
-				console.log(this.checkid);
 			}
 		},
 	}

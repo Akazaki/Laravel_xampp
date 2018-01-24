@@ -56,8 +56,8 @@ Vue.use(VueRouter)
 	export default {
 		data() {
 			return {
-				email_text : '',
-				password : '',
+				email_text : 'aaa@aaa.aaa',
+				password : '111111',
 				showAlert: false,
 				alertMessage: '',
 				show: false,

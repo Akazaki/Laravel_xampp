@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 	Route::group(['middleware' => 'jwt.auth'], function(){// ログインチェックMiddleware
 		// Route::get('/wow', 'Wow\WowController@index');// トップ
 		// Route::get('/wow/dashboard', 'Wow\WowController@dashboard');// トップ
-		Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
+		//Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
 		//記事一覧
 		Route::post('/wow/postList/', 'Wow\PostsController@postList');
 		//記事編集

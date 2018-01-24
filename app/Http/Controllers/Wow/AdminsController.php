@@ -30,7 +30,12 @@ class AdminsController extends Controller
 		
 		$query = Admins::query();
 
-		$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
+		if(!empty($request->searchValue)){
+			// 検索
+			$posts['posts'] = $query->orderBy('id','desc')->where('label_text', 'like', '%'.$request->searchValue.'%')->paginate($get_postnum);
+		}else{
+			$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
+		}
 		$posts['_listColumns'] = $_listColumns;
 
 		return $posts;

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class posts extends Model{
+class Posts extends Model{
     use SoftDeletes;
     //laravelでは必要
     // const CREATED_AT = null;
