@@ -29,13 +29,21 @@ class AdminsController extends Controller
 		$get_postnum = 5;
 		
 		$query = Admins::query();
+		$search = $request->searchValue;
+		$acknowledge = $request->acknowledge;
 
-		if(!empty($request->searchValue)){
-			// 検索
-			$posts['posts'] = $query->orderBy('id','desc')->where('label_text', 'like', '%'.$request->searchValue.'%')->paginate($get_postnum);
-		}else{
-			$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
-		}
+		// 検索
+		$posts['posts'] = $query->orderBy('id','desc')
+						//検索あれば
+						->when($search, function ($query) use ($search) {
+							return $query->where('label_text', 'like', '%'.$request->searchValue.'%');
+        				})
+        				//公開されている記事のみ
+						->when($acknowledge, function ($query) use ($acknowledge) {
+							return $query->where('acknowledge_radio', $acknowledge);
+        				})
+        				->paginate($get_postnum);
+        				
 		$posts['_listColumns'] = $_listColumns;
 
 		return $posts;

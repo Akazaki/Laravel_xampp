@@ -29,19 +29,27 @@ class PostsController extends Controller
 		$get_postnum = 5;
 		
 		$query = Posts::query();
+		$search = $request->searchValue;
+		$acknowledge = $request->acknowledge;
 
-		if(!empty($request->searchValue)){
-			// 検索
-			$posts['posts'] = $query->orderBy('id','desc')->where('label_text', 'like', '%'.$request->searchValue.'%')->paginate($get_postnum);
-		}else{
-			$posts['posts'] = $query->orderBy('id','desc')->paginate($get_postnum);
-		}
+		// 検索
+		$posts['posts'] = $query->orderBy('id','desc')
+						//検索あれば
+						->when($search, function ($query) use ($search) {
+							return $query->where('label_text', 'like', '%'.$request->searchValue.'%');
+        				})
+        				//acknowledgeあれば
+						->when($acknowledge, function ($query) use ($acknowledge) {
+							return $query->where('acknowledge_radio', $acknowledge);
+        				})
+        				->paginate($get_postnum);
+
 		$posts['_listColumns'] = $_listColumns;
 
 		return $posts;
 	}
 
-	// 記事取得
+	// 個別記事取得
 	public function postEdit(Request $request)
 	{
 		$this->validate($request,[
@@ -105,5 +113,45 @@ class PostsController extends Controller
 		}
 
 		return $result;
+	}
+
+	/*--------- publish --------*/
+
+	// 公開記事取得
+	public function publishPostList(Request $request)
+	{
+		$get_postnum = 5;
+		
+		$query = Posts::query();
+		$search = $request->searchValue;
+		$acknowledge = $request->acknowledge;
+
+		// 検索
+		$posts['posts'] = $query->orderBy('id','desc')
+						//検索あれば
+						->when($search, function ($query) use ($search) {
+							return $query->where('label_text', 'like', '%'.$request->searchValue.'%');
+        				})
+        				->where('acknowledge_radio', 1)
+        				->paginate($get_postnum);
+
+		return $posts;
+	}
+
+	// 個別記事取得
+	public function publishPostEdit(Request $request)
+	{
+		$this->validate($request,[
+			'id' => 'integer|required'
+		]);
+
+		// 編集項目
+		$_editColumns = ['label_text', 'detail_richtext', 'main_file', 'postscategory_check', 'created_at'];
+
+		$query = Posts::query();
+
+		$post['post'] = $query->where('id', (INT)$request->id)->get($_editColumns)->first();
+
+		return $post;
 	}
 }

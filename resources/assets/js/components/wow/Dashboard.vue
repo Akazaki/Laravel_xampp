@@ -84,9 +84,6 @@
 </template>
 
 <script>
-import wow from '../../services/wow'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
 Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 Vue.component('footerbar', require('../../components/Layouts/Footer.vue'))

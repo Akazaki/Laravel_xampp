@@ -128,6 +128,16 @@ ul {
 	
 	.header_logo {
 		width: 240px;
+		margin-left: 10px;
+	    font-size: 113%;
+		
+		span {
+			font-family: Impact;
+			font-style: italic;
+			color: @offWhite;
+			margin-left: 10px;
+			font-size: 200%;
+		}
 		
 		img {
 			max-width: 100%;
@@ -1459,6 +1469,123 @@ ul {
 /*-------------------WOWここまで--------------------------*/
 
 
+/*-------------------ブログページ--------------------------*/
+
+#BlogBox {
+	header {
+	    background: @white;
+		position: relative;
+		top: 0;
+		width: 100%;
+		height: 80px;
+		.box-shadow01;
+		
+		#Logo {
+			text-align: center;
+			font-weight: bold;
+		    font-family: Impact;
+		    font-style: italic;
+		    font-size: 400%;
+		    position: absolute;
+		    top: 2px;
+		    left: 0;
+		    right: 0;
+		    
+		    a {
+		    	text-decoration: none;
+		    	color: #000;
+		    }
+		}
+
+		.button_green a{
+			position: absolute;
+			right: 17px;
+			top: 0px;
+			//margin: 17px 21px 0;
+		}
+	}
+
+	.button_green a{
+	    font-family: Impact;
+	    font-style: italic;
+		font-size: 120%;
+	    margin: 20px auto 0;
+	}
+
+	.postContent {
+		margin: 0 auto;
+		padding: 25px;
+		margin: 20px;
+		.box-shadow01;
+	    background: @white;
+	    
+		//記事一覧
+	    .posts {
+	    	margin-bottom: 10px;
+	    	padding: 10px 0;
+	        border-bottom: 1px solid #d8d8d8;
+	        overflow: hidden;
+	        
+	        &:last-child {
+	        	margin-bottom: 0;
+	        	border-bottom: none;
+	        }
+
+			.title_box {
+				font-size: 110%;
+			    float: left;
+			    width: 85%;
+			    
+			    a{
+					display: block;
+			    }
+			}
+
+			.time_box {
+				float: right;
+			}
+	    }
+
+		//個別記事
+	    .post {
+	    	overflow: hidden;
+	    	
+			.title_box {
+				font-size: 230%;
+	        	border-bottom: 1px solid #d8d8d8;
+				margin-bottom: 20px;
+				padding-bottom: 10px;
+			}
+
+			.time_box {
+				overflow: hidden;
+				display: block;
+				margin-bottom: 20px;
+				
+				p {
+					float: right;
+				}
+			}
+
+			.img_box {
+				margin-bottom: 20px;
+				
+				img {
+					display: block;
+					max-width: 50%;
+					margin: 0 auto;
+				}
+			}
+
+			.text_box{
+				margin: 0 auto;
+				margin-bottom: 10px;
+				font-size: 140%;
+				width: 95%;
+			}
+	    }
+	}
+}
 
 
 /*-------------------お問い合わせフォーム--------------------------*/

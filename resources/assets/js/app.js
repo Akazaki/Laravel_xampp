@@ -36,22 +36,27 @@ const store = new Vuex.Store({
 	actions: {
 		// User情報をAPIから取得
 		GET_USER: function (commit) {
-			// return axios.get('/api/wow/getcurrentuser', res => {
-			// 	// ここからコミット 引数の commit を使う
-			// 	console.log(res)
-			// 	commit('setUser', res.data.user)
-			// }, error => {
-			// })
-
 			return axios.get('/api/wow/getcurrentuser', {})
 			.then(res => {
 				// ここからコミット 引数の commit を使う
 				if(res && res.data.user){
 					this.commit('setUser', res.data.user)
+					return res;
 				}
 			}).catch(error => {
 				console.log(error);
-			});
+			})
+
+			// return axios.get('/api/wow/getcurrentuser', {}, res => {
+			// 	// // ここからコミット 引数の commit を使う
+			// 	console.log(res)
+			// 	if(res && res.data.user){
+			// 		console.log(res.data.user)
+			// 		commit('setUser', res.data.user)
+			// 	}
+			// }, error => {
+			// 	//console.log(res)
+			// })
 		},
 		//ログイン成功するとstateに保持
 		LOGIN: function(commit, login_param) {
@@ -91,6 +96,7 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{ path: '/', component: require('./components/Index.vue') },
+		{ path: '/post/:id', props: true, component: require('./components/Posts.vue') },
 		{ path: '/wow/login', component: require('./components/wow/Login.vue') },
 		{ path: '/wow/signup', component: require('./components/wow/Signup.vue') },
 		//↓ログインチェック有無をmetaに追加

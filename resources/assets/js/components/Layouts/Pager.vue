@@ -24,8 +24,6 @@
 </template>
 
 <script>
-// import userStore from '../../stores/userStore'
-
 	export default {
 		props: ['dataName', 'postReloadFlg', 'searchValue'],
 		data (){
@@ -60,7 +58,6 @@
 			}
 		},
 		created () {
-
 			if(this.dataName === 'post' || this.dataName === 'admin'){
 				
 			}else{
@@ -73,7 +70,7 @@
 		methods: {
 			//ページング処理
 			get_posts(page, searchValue){
-				axios.post('/api/wow/'+this.dataName+'List', {page: page, searchValue: searchValue})
+				axios.post('/api/wow/'+this.dataName+'List', {page: page, searchValue: searchValue, status: 'publish'})
 				.then(res => {
 					if(res.data !== undefined && res.status == 200 && res.data.posts.data.length > 0){
 						var data = res.data;
@@ -86,21 +83,13 @@
 						this.page_length = Math.ceil(postsdata.total / postsdata.per_page);
 
 						//前のページがあるか
-						if(postsdata.prev_page_url){
-							this.isStartPage = true
-						}else{
-							this.isStartPage = false
-						}
+						this.isStartPage = postsdata.prev_page_url ? true : false;
 
 						//次のページがあるか
-						if(postsdata.next_page_url){
-							this.isEndPage = true
-						}else{
-							this.isEndPage = false
-						}
+						this.isEndPage = postsdata.next_page_url ? true : false;
 
 						//stateにセット
-						this.$store.commit('setPosts', data)
+						this.$store.commit('setPosts', data);
 						this.show = true;
 
 						//親コンポーネントの関数実行

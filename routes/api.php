@@ -29,10 +29,17 @@ use Illuminate\Http\Request;
 	Route::post('/wow/signup', 'Wow\WowController@signUp');// ユーザー登録
 	Route::get('/wow/getcurrentuser',  'Wow\WowController@getCurrentUser');// ユーザー情報取得
 
+	//公開記事一覧
+	Route::post('/wow/publishPostList/', 'Wow\PostsController@publishPostList');
+
+	//個別記事取得
+	Route::post('/wow/publishPostEdit/', 'Wow\PostsController@publishPostEdit');
+
 	Route::group(['middleware' => 'jwt.auth'], function(){// ログインチェックMiddleware
 		// Route::get('/wow', 'Wow\WowController@index');// トップ
 		// Route::get('/wow/dashboard', 'Wow\WowController@dashboard');// トップ
 		//Route::get('/wow/signout',  'AuthenticateController@signOut')->middleware('jwt.refresh');
+	
 		//記事一覧
 		Route::post('/wow/postList/', 'Wow\PostsController@postList');
 		//記事編集

@@ -89,16 +89,12 @@
 </template>
 
 <script>
-import http from '../../services/http'
-import wow from '../../services/wow'
-import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
 import VueMarkdown from 'vue-markdown'
 
 Vue.use(ElementUI, { locale })
-Vue.use(VueRouter)
 Vue.component('navbar', require('../../components/Layouts/Navbar.vue'))
 Vue.component('sidenav', require('../../components/Layouts/Sidenav.vue'))
 Vue.component('footerbar', require('../../components/Layouts/Footer.vue'))

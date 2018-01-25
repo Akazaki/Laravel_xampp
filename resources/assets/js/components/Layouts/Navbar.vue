@@ -4,7 +4,10 @@
 			<ul class="navbar-nav navbar-left">
 				<li>
 					<div class="header_logo">
-						<!-- <router-link to="/wow"><img src="/public/wow/common/img/logo_wow.png" alt="Contents Management Flamework WOW"></router-link> -->
+						<router-link to="/">
+							◀  <span>Vue BLOG</span>
+							<!-- <img src="/public/wow/common/img/logo_wow.png" alt="Contents Management Flamework WOW"> -->
+						</router-link>
 					</div>
 				</li>
 			</ul>

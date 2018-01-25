@@ -73,11 +73,6 @@
 </template>
 
 <script>
-// import userStore from '../../stores/userStore'
-import http from '../../services/http'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
 	export default {
 		data() {
 			return {

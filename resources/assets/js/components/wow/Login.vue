@@ -48,11 +48,6 @@
 </template>
 
 <script>
-// import userStore from '../../stores/userStore'
-import http from '../../services/http'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
 	export default {
 		data() {
 			return {
@@ -64,11 +59,14 @@ Vue.use(VueRouter)
 			}
 		},
 		created() {
-			// this.$store.dispatch('GET_USER').then(res => {
-			// 	if(res.status == 200){
-			// 		this.$router.push('/wow')
-			// 	}
-			// })
+			this.$store.dispatch('GET_USER').then(res => {
+				if(res && res.status == 200){
+					this.$router.push('/wow/list/post');
+				}
+			}, error => {
+				console.log(error)
+				return false;
+			});
 		},
 		methods: {
 			wowLogin () {
