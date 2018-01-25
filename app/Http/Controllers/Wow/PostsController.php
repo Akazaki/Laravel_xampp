@@ -36,7 +36,7 @@ class PostsController extends Controller
 		$posts['posts'] = $query->orderBy('id','desc')
 						//検索あれば
 						->when($search, function ($query) use ($search) {
-							return $query->where('label_text', 'like', '%'.$request->searchValue.'%');
+							return $query->where('label_text', 'like', '%'.$search.'%');
         				})
         				//acknowledgeあれば
 						->when($acknowledge, function ($query) use ($acknowledge) {
